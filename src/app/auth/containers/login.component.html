@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <mat-card class="col">
+            <mat-card-content>
+                <form [formGroup]="formLogin" (ngSubmit)="login(formLogin)">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-5">
+                            <div class="row justify-content-center marginBottom_60">
+                                <h2>Welcome</h2>
+                            </div>
+                            <mat-form-field class="col marginBottom">
+                                <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email">
+                                <mat-error *ngIf="formLogin.get('email').hasError('required')">
+                                    E-mail is required
+                                </mat-error>
+                                <mat-error *ngIf="formLogin.get('email').invalid && !formLogin.get('email').hasError('required')">
+                                    E-mail is not valid
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col marginBottom_60">
+                                <input matInput placeholder="Password" aria-label="Password" type="password"
+                                    formControlName="password">
+                                <mat-hint>Minimum 8 characters</mat-hint>
+                                <mat-error *ngIf="formLogin.get('password').hasError('required')">
+                                    Password is required
+                                </mat-error>
+                                <mat-error *ngIf="formLogin.get('password').hasError('minlength')">
+                                    Password is at least 8 characters long
+                                </mat-error>
+                                <mat-error *ngIf="formLogin.get('password').hasError('maxlength')">
+                                    Password cannot be longer than 50 characters
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="row justify-content-center">
+                                <!-- [disabled]="!formLogin.valid" -->
+                                <button mat-raised-button color="primary" class="big" type="submit" [disabled]="!formLogin.valid">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+mat-sidenav-container {
+    height: 100%;
+    width: 100%;
+
+    .wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+
+        > .toolbar {
+            position: fixed;
+            width: 100%;
+            display: flex;
+            z-index: 10;
+        }
+        
+        .example-spacer {
+            flex: 1 1 auto;
+         }
+
+        > .content {
+            flex: auto;
+            margin-top: 55px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: url('../assets/images/background/home-dishes-img.jpg') no-repeat center top;
+            background-size: cover;    
+            content: '';
+            z-index: 0;
+        }
+    }    
+}

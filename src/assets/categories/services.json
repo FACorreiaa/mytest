@@ -1,0 +1,22 @@
+{
+    "services":[
+        "accessible",
+        "airConditioning",
+        "animals",
+        "buffet",
+        "catering",
+        "delivery",
+        "freeWifi",
+        "heatedTerrace",
+        "kidsCorner",
+        "outsideService",
+        "paidWifi",
+        "parking",
+        "privateEvent",
+        "roomService",
+        "smokingArea",
+        "takeaway",
+        "valetParking",
+        "weddingService"
+    ]
+}

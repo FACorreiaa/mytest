@@ -1,0 +1,26 @@
+@import '../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../node_modules/bootstrap/scss/bootstrap-grid';
+
+@import '~@angular/material/theming';
+
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Roboto, monospace',
+//   $headline: mat-typography-level(32px, 48px, 700),
+//   $body-1: mat-typography-level(16px, 24px, 500)
+// );
+
+// @include mat-core($custom-typography);
+
+@include mat-core();
+
+$cs-primary: mat-palette($mat-brown, 700, 300, 900);
+$cs-accent: mat-palette($mat-deep-purple, 300);
+$cs-warn: mat-palette($mat-red, 600);
+
+$cs-theme: mat-light-theme(
+  $cs-primary,
+  $cs-accent,
+  $cs-warn
+);
+
+@include angular-material-theme($cs-theme);

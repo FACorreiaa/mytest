@@ -1,0 +1,18 @@
+{
+    "payments":[
+        "amex",
+        "carteTicket",
+        "cash",
+        "cheque",
+        "contactless",
+        "debitCard",
+        "erzsebetUtalvany",
+        "holidayCheque",
+        "mastercard",
+        "mir",
+        "paypal",
+        "szepKartya",
+        "ticket",
+        "visa"
+    ]
+}
