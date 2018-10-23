@@ -35,9 +35,15 @@ export class CsStepperComponent implements OnInit, OnChanges {
   isRegister = false
   showTermConditiValidation = false
   emailAux = ''
+  category = ''
+  selectedOffering: string[] = []
+  selectedServices: string[] = []
+  selectedPayments: string[] = []
 
   @Input() authorized: any
   @Input() offerings: Observable<any>
+  @Input() services: Observable<any>
+  @Input() payments: Observable<any>
   @Output() private registerEvent = new EventEmitter()
   @Output() private offeringsEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
@@ -66,7 +72,6 @@ export class CsStepperComponent implements OnInit, OnChanges {
         ]),
       ],
       openHours: this.formBuilder.array(this.buildOpenHoursArray()),
-      interests: this.formBuilder.array([]),
     })
 
     this.formConclusion = this.formBuilder.group(
@@ -122,8 +127,6 @@ export class CsStepperComponent implements OnInit, OnChanges {
   }
 
   async onChange(event, item) {
-    const interests = (<FormArray>this.firstFormGroup.get('interests')) as FormArray
-
     this.categories.map(x => {
       x.selected = false
       if (x.name === item.name) {
@@ -132,15 +135,43 @@ export class CsStepperComponent implements OnInit, OnChanges {
     })
 
     if (event.checked) {
-      interests.removeAt(0)
-      interests.push(new FormControl(event.source.value))
+      this.category = event.source.value
 
       this.offeringsEvent.emit(event.source.value)
     } else {
       this.offerings = null
+      this.services = null
+      this.payments = null
     }
 
     this.myPanels.open()
+  }
+
+  onOfferingsChange(event, item) {
+    if (event.checked) {
+      this.selectedOffering.push(item)
+    } else {
+      const i = this.selectedOffering.indexOf(item)
+      this.selectedOffering.splice(i)
+    }
+  }
+
+  onServicesChange(event, item) {
+    if (event.checked) {
+      this.selectedServices.push(item)
+    } else {
+      const i = this.selectedServices.indexOf(item)
+      this.selectedServices.splice(i)
+    }
+  }
+
+  onPaymentsChange(event, item) {
+    if (event.checked) {
+      this.selectedPayments.push(item)
+    } else {
+      const i = this.selectedPayments.indexOf(item)
+      this.selectedPayments.splice(i)
+    }
   }
 
   goToProfile() {
@@ -161,6 +192,8 @@ export class CsStepperComponent implements OnInit, OnChanges {
     }
 
     const claim = this.createClaimToSave(form.value, formConclusion.value)
+
+    console.log('claim', claim)
 
     this.registerEvent.emit(claim)
   }
@@ -189,12 +222,12 @@ export class CsStepperComponent implements OnInit, OnChanges {
       contactPhoneNumber: form.phone,
       openingTimes: this.buildOpenHoursModel(form.openHours),
       specialOpeningTimes: null,
-      offerTypes: [],
+      offerTypes: this.selectedOffering,
       description: '',
       imprint: null,
-      category: '',
-      services: [],
-      paymentMethods: [],
+      category: this.category,
+      services: this.selectedServices,
+      paymentMethods: this.selectedPayments,
       reservationUri: '',
       menuUri: '',
       profileImageUri: '',

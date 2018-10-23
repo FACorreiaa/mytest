@@ -26,7 +26,8 @@
                     </div>
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col-sm-6">
-                            <input matInput placeholder="Enter your postal code" formControlName="postal" required>
+                            <input matInput placeholder="Enter your postal code" maxlength="5" formControlName="postal"
+                                required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-hint>Must be 5 characters</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('postal').invalid">
@@ -185,8 +186,40 @@
                         Please select a category!
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let offerings of this.offerings; let i = index">
-                        <mat-checkbox name="categoryCusine" color="primary" [value]="offerings">{{offerings}}</mat-checkbox>
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.offerings; let i = index">
+                        <mat-checkbox color="primary" [value]="item" (change)="onOfferingsChange($event, item)">{{item}}</mat-checkbox>
+                    </div>
+                </mat-expansion-panel>
+                <br />
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                        <mat-panel-title>
+                            Services
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div *ngIf="!this.services">
+                        Please select a category!
+                    </div>
+
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.services; let i = index">
+                        <mat-checkbox color="primary" [value]="item" (change)="onServicesChange($event, item)">{{item}}</mat-checkbox>
+                    </div>
+                </mat-expansion-panel>
+                <br />
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                        <mat-panel-title>
+                            Payment methods
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div *ngIf="!this.payments">
+                        Please select a category!
+                    </div>
+
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let payment of this.payments; let i = index">
+                        <mat-checkbox color="primary" [value]="payment" (change)="onPaymentsChange($event, payment)">{{payment}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -207,8 +240,8 @@
                             <h2>Register</h2>
                         </div>
                         <mat-form-field class="col marginBottom">
-                            <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email"
-                                [(ngModel)]="this.emailAux">
+                            <input matInput placeholder="E-mail" autocomplete="email" aria-label="E-mail"
+                                formControlName="email" [(ngModel)]="this.emailAux">
                             <mat-error *ngIf="formConclusion.get('email').hasError('required')">
                                 E-mail is required
                             </mat-error>
@@ -217,8 +250,8 @@
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col marginBottom">
-                            <input matInput placeholder="Password" aria-label="Password" type="password"
-                                formControlName="password">
+                            <input matInput placeholder="Password" autocomplete="current-password" aria-label="Password"
+                                type="password" formControlName="password">
                             <mat-hint>Minimum 8 characters</mat-hint>
                             <mat-error *ngIf="formConclusion.get('password').hasError('required')">
                                 Password is required
@@ -232,8 +265,8 @@
                         </mat-form-field>
 
                         <mat-form-field class="col marginBottom_40">
-                            <input matInput placeholder="Confirm password" aria-label="confirm password" type="password"
-                                formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                            <input matInput placeholder="Confirm password" autocomplete="new-password" aria-label="confirm password"
+                                type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher">
                             <mat-hint>Minimum 8 characters</mat-hint>
                             <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('required')">
                                 Password is required

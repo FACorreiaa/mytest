@@ -3,8 +3,9 @@
         <div class="container">
             <mat-sidenav-container class="app-sidenav-container">
                 <mat-sidenav-content>
-                    <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" (registerEvent)="register($event)"
-                        (offeringsEvent)="getOfferings($event)" (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+                    <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" [services]="services"
+                        [payments]="payments" (registerEvent)="register($event)" (offeringsEvent)="getOfferings($event)"
+                        (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                 </mat-sidenav-content>
             </mat-sidenav-container>
         </div>

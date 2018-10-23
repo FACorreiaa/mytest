@@ -18,6 +18,8 @@ export class WizardComponent implements OnInit, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
   offerings: Observable<any>
+  services: Observable<any>
+  payments: Observable<any>
 
   constructor(private router: Router, private store: Store<fromApp.AppState>, private appStore: Store<fromModule.AppState>, private categoriesService: CategoriesService) {
     this.userSubscription$ = this.store.select(fromModule.userAuthorized).subscribe(authorized => {
@@ -34,7 +36,6 @@ export class WizardComponent implements OnInit, OnDestroy {
   }
 
   register(object): void {
-    // console.log('userrrr', object)
     this.store.dispatch(new AuthActions.RegisterAttempt(object))
   }
 
@@ -45,6 +46,14 @@ export class WizardComponent implements OnInit, OnDestroy {
       } else {
         this.offerings = off.filter(x => x.name === category)[0].offering
       }
+    })
+
+    this.categoriesService.getServices().subscribe(services => {
+      this.services = services
+    })
+
+    this.categoriesService.getPayments().subscribe(payments => {
+      this.payments = payments
     })
   }
 
