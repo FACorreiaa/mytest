@@ -36,7 +36,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   showTermConditiValidation = false
   emailAux = ''
 
-  @Input() authorized
+  @Input() authorized: any
   @Input() offerings: Observable<any>
   @Output() private registerEvent = new EventEmitter()
   @Output() private offeringsEvent = new EventEmitter()
@@ -121,18 +121,6 @@ export class CsStepperComponent implements OnInit, OnChanges {
     })
   }
 
-  private buildOpenDaysFormControl(day: string, hours: Day[]) {
-    return this.formBuilder.group({
-      name: [day],
-      isSelected: hours.length > 0,
-      from: [hours[0].startTime],
-      to: [hours[0].endTime],
-      isSplitService: hours.length > 1,
-      splitedFrom: [hours[1].startTime],
-      splitedTo: [hours[1].endTime],
-    })
-  }
-
   async onChange(event, item) {
     const interests = (<FormArray>this.firstFormGroup.get('interests')) as FormArray
 
@@ -148,12 +136,14 @@ export class CsStepperComponent implements OnInit, OnChanges {
       interests.push(new FormControl(event.source.value))
 
       this.offeringsEvent.emit(event.source.value)
+    } else {
+      this.offerings = null
     }
 
     this.myPanels.open()
   }
 
-  GoToProfile() {
+  goToProfile() {
     this.goToProfileEvent.emit()
   }
 
@@ -161,8 +151,8 @@ export class CsStepperComponent implements OnInit, OnChanges {
    * This method save the claim and registration information.
    */
   save(form: FormGroup, formConclusion: FormGroup) {
-    console.log('Form data', form.value)
-    console.log('User register', formConclusion.value)
+    // console.log('Form data', form.value)
+    // console.log('User register', formConclusion.value)
 
     if (!formConclusion.get('termsConditions').value) {
       this.showTermConditiValidation = true
@@ -197,7 +187,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
       url: form.website,
       contactEmail: form.email,
       contactPhoneNumber: form.phone,
-      openingTimes: form.openingTimes,
+      openingTimes: this.buildOpenHoursModel(form.openHours),
       specialOpeningTimes: null,
       offerTypes: [],
       description: '',
@@ -218,6 +208,71 @@ export class CsStepperComponent implements OnInit, OnChanges {
     }
 
     return claimObject
+  }
+
+  buildOpenHoursModel(openHours: any): OpeningTimes {
+    let monday: Day[] = []
+    let tuesday: Day[] = []
+    let wednesday: Day[] = []
+    let thursday: Day[] = []
+    let friday: Day[] = []
+    let saturday: Day[] = []
+    let sunday: Day[] = []
+
+    openHours.filter(x => x.isSelected).forEach(element => {
+      switch (element.name) {
+        case 'monday':
+          monday = this.buildDayModel(element)
+          break
+        case 'tuesday':
+          tuesday = this.buildDayModel(element)
+          break
+        case 'wednesday':
+          wednesday = this.buildDayModel(element)
+          break
+        case 'thursday':
+          thursday = this.buildDayModel(element)
+          break
+        case 'friday':
+          friday = this.buildDayModel(element)
+          break
+        case 'saturday':
+          saturday = this.buildDayModel(element)
+          break
+        case 'sunday':
+          sunday = this.buildDayModel(element)
+          break
+        default:
+          break
+      }
+    })
+
+    const openingTimes: OpeningTimes = {
+      monday: monday,
+      tuesday: tuesday,
+      wednesday: wednesday,
+      thursday: thursday,
+      friday: friday,
+      saturday: saturday,
+      sunday: sunday,
+    }
+
+    return openingTimes
+  }
+
+  buildDayModel(element: any): Day[] {
+    const dayArray: Day[] = []
+
+    let item: Day
+    item = Object.assign({}, item, { startTime: element.from, endTime: element.to })
+    dayArray.push(item)
+    if (element.splitedFrom && element.splitedTo) {
+      let splitedItem: Day
+      splitedItem = Object.assign({}, splitedItem, { startTime: element.splitedFrom, endTime: element.splitedTo })
+      dayArray.push(splitedItem)
+    }
+
+    return dayArray
   }
 
   openDialog(): void {

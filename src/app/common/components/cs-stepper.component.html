@@ -89,7 +89,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-8 marginBottom">
-                        <div class="col-8 col-sm-1" style="display: inline-block">
+                        <div class="col-8 col-sm-1 label_site">
                             <h3>www.</h3>
                         </div>
                         <mat-form-field class="col-8 col-sm-8">
@@ -202,7 +202,7 @@
         <div class="container">
             <form [formGroup]="formConclusion" (ngSubmit)="save(firstFormGroup, formConclusion)" *ngIf="!authorized">
                 <div class="row justify-content-center">
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
                         <div class="row justify-content-center marginBottom_40">
                             <h2>Register</h2>
                         </div>
@@ -294,7 +294,7 @@
                         Success
                     </div>
                     <div class="row justify-content-center marginBottom_40">
-                        <button mat-raised-button color="primary" class="big" (click)="GoToProfile()">Go to Profile</button>
+                        <button mat-raised-button color="primary" class="big" (click)="goToProfile()">Go to Profile</button>
                     </div>
                 </div>
             </div>
