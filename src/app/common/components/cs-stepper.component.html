@@ -31,7 +31,7 @@
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-hint>Must be 5 characters</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('postal').invalid">
-                                A valid Zip Code is required
+                                A valid postal code is required
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-sm-6">
@@ -53,9 +53,9 @@
                     </div>
                     <div class="col-12 col-sm-8 marginBottom">
                         <mat-form-field class="col-2 col-sm-1" style="min-width: 70px">
-                            <input matInput formControlName="area" style="text-align: right;">
+                            <input matInput formControlName="area" maxlength="4" style="text-align: right;">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
-                                Please enter a value
+                                Wrong prefix
                             </mat-error>
                         </mat-form-field>
                         <span>&ndash;</span>
@@ -63,7 +63,7 @@
                             <input matInput placeholder="Enter your phone" formControlName="phone" required>
                             <mat-icon matSuffix>phone</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('phone').invalid">
-                                Please enter a value
+                                Please enter a correct phone number
                             </mat-error>
                         </mat-form-field>
                     </div>

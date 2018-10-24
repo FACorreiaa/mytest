@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
-import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation } from '@app/common/validations'
+import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/common/validations'
 import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, UserLoginDto, Data } from '@app/api/models/api-models'
 
 import { CategoriesService } from '../services/categories.service'
@@ -58,8 +58,8 @@ export class CsStepperComponent implements OnInit, OnChanges {
       address: ['', Validators.required],
       postal: new FormControl('', ZipCodeValidation),
       city: ['', Validators.required],
-      phone: ['', Validators.required],
-      area: ['+49', Validators.required],
+      phone: ['', PhoneNumberValidation],
+      area: ['+49', PhoneNumberPrefixValidation],
       country: ['Germany', Validators.required],
       email: [this.emailAux, EmailValidation],
       website: [
