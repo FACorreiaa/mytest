@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 import { AppRoutes } from '../app.routing'
+import { AuthGuard } from './auth.guard'
 
 // COMPONENTS
 import { AuthComponent } from './auth.component'
@@ -23,14 +24,14 @@ const AuthRoutingModule = RouterModule.forChild([
   { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
   { path: AppRoutes.WIZARD, component: WizardComponent },
   { path: AppRoutes.LOGIN, component: LoginComponent },
-  { path: 'main', loadChildren: '../main/main.module#MainModule' },
+  { path: 'main', canActivate: [AuthGuard], loadChildren: '../main/main.module#MainModule' },
 ])
 
 @NgModule({
   imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, MaterialModule, CsStepperModule, EffectsModule.forFeature([AuthEffects])],
   declarations: [AuthComponent, WizardComponent, LoginComponent],
   entryComponents: [ModalTermsConditionsComponent],
-  providers: [],
+  providers: [AuthGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}

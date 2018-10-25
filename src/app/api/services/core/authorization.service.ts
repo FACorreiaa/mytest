@@ -6,7 +6,7 @@ import { IAuthorizationService } from '../../interfaces/i.authorization.service'
 
 @Injectable()
 export class AuthorizationService extends BaseApi implements IAuthorizationService {
-  private controllerRoute = 'auth'
+  private controllerRoute = 'user'
   constructor(injector: Injector) {
     super(injector)
   }
@@ -16,5 +16,13 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
    */
   public login(credentials: UserLoginDto): Observable<any> {
     return this.getObjectsPOST(credentials, `${this.controllerRoute}/login`)
+  }
+
+  /** Method to do the registration.
+   * @param credentials - The credentials for the user to register.
+   */
+  public register(credentials: UserLoginDto): Observable<any> {
+    console.log('service', credentials)
+    return this.getObjectsPOST(credentials, `${this.controllerRoute}/register`)
   }
 }

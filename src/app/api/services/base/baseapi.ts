@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
 import {} from '@app/api/models/api-models'
-import { map, catchError } from 'rxjs/operators'
+import { map, catchError, tap } from 'rxjs/operators'
 
 export abstract class BaseApi {
   private apiUrl: string
@@ -42,7 +42,7 @@ export abstract class BaseApi {
 
   /**
    * Using POST.
-   * Method to get a object with search value using a object from database and sending a request of type form. POST
+   * Method to send a request of type form. POST
    * @param obj - The object value.
    * @param path - The path from resource.
    */
@@ -52,6 +52,9 @@ export abstract class BaseApi {
     Object.keys(obj).forEach(key => {
       body.append(key, obj[key])
     })
+
+    console.log('baseapi', this.apiUrl, path, obj)
+
     return this.basehttp.post(`${this.apiUrl}/${path}`, body).pipe(
       map((res: Response) => {
         const responseObject = res.json() as any
@@ -65,26 +68,25 @@ export abstract class BaseApi {
     )
   }
 
+  /**
+   * Set Headers for each request.
+   * Method to set headers for every type of request.
+   * @param type - Type of request.
+   */
   private setHeaderForRequest(type: string): void {
     switch (type) {
       case 'POST':
       case 'PUT':
       case 'DELETE':
-        {
-          const headers = new Headers({ 'Content-Type': 'application/json' })
-          this.defOptions = new RequestOptions({ headers: headers })
-        }
-        break
       case 'GET':
-      case 'FORM':
-      default:
         {
           const headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
           })
           this.defOptions = new RequestOptions({ headers: headers })
         }
-
+        break
+      default:
         break
     }
   }

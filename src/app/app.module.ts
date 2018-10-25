@@ -20,6 +20,8 @@ import { localStorageSync } from 'ngrx-store-localstorage'
 import { HttpModule } from '@angular/http'
 import { EffectsModule } from '@ngrx/effects'
 import { GlobalEnvironmentService } from './global.environment.service'
+import { environment } from '@env/environment'
+import { debug } from '@app/debug.reducer'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -27,6 +29,8 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
+
+metaReducers.unshift(debug)
 
 @NgModule({
   imports: [

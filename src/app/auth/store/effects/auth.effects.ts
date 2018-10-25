@@ -33,31 +33,26 @@ export class AuthEffects {
     this.tokenIndexInLocalStorage = this.settings.getTokenPath()
   }
 
+  // ----------------- LOGIN -----------------
   @Effect()
   public loginUser$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGIN_ATTEMPT),
-    map(() => {
-      return new AuthActions.LoginSuccess({})
-    })
+    switchMap((payload: any) =>
+      this.auth
+        .login(payload.payload)
+        .map(user => {
+          return user == null ? new AuthActions.LoginFailure({}) : new AuthActions.LoginSuccess(user)
+        })
+        .catch(() => of(new AuthActions.LoginFailure({})))
+    )
   )
-
-  // TODO - Replace when we have services available
-  // .ofType(AuthActions.AuthActionTypes.LOGIN_ATTEMPT)
-  // .switchMap((payload: any) =>
-  //   this.auth
-  //     .login(payload)
-  //     .map(user => {
-  //       return user == null ? new AuthActions.LoginFailure({}) : new AuthActions.LoginSuccess(user)
-  //     })
-  //     .catch(() => of(new AuthActions.LoginFailure({})))
-  // )
 
   @Effect({ dispatch: false })
   loginFailure$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGIN_FAILURE),
     tap(() => {
       // Temporary - should redirect to error page
-      this.router.navigate([AuthRoutes.MAIN])
+      console.log('login failure - effect')
     })
   )
 
@@ -70,19 +65,22 @@ export class AuthEffects {
     }),
     tap((payload: fromModule.AuthState) => {
       localStorage.setItem(reducerName, JSON.stringify(payload))
-      localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(payload.loggedUser.Token))
+      localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(payload.loggedUser))
 
-      // console.log('successs')
+      console.log('login success - effect', payload)
       this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
+  // ----------------- REGISTER -----------------
   @Effect()
-  public registerUser$ = this.actions$.pipe(
-    ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT),
-    map(() => {
-      return new AuthActions.RegisterSuccess({})
-    })
+  public registerUser$ = this.actions$.ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT).switchMap((payload: any) =>
+    this.auth
+      .register(payload)
+      .map(user => {
+        return user == null ? new AuthActions.RegisterFailure({}) : new AuthActions.RegisterSuccess(user)
+      })
+      .catch(() => of(new AuthActions.RegisterFailure({})))
   )
 
   @Effect({ dispatch: false })
@@ -90,7 +88,6 @@ export class AuthEffects {
     ofType(AuthActions.AuthActionTypes.REGISTER_FAILURE),
     tap(() => {
       // Temporary - should redirect to error page
-      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -103,10 +100,12 @@ export class AuthEffects {
     }),
     tap((payload: fromModule.AuthState) => {
       localStorage.setItem(reducerName, JSON.stringify(payload))
-      localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(payload.loggedUser.Token))
+      localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(payload))
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
+  // ----------------- LOGOUT -----------------
   @Effect()
   logout$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGOUT),

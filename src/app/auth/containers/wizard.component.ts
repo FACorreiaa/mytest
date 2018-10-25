@@ -8,6 +8,7 @@ import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import * as fromModule from '../../app.reducers'
 import { CategoriesService } from '@app/common/services/categories.service'
+import { UserRegisterDto } from '@app/api/models/api-models'
 
 @Component({
   selector: 'app-wizard',
@@ -35,8 +36,8 @@ export class WizardComponent implements OnInit, OnDestroy {
     this.userSubscription$.unsubscribe()
   }
 
-  register(object): void {
-    this.store.dispatch(new AuthActions.RegisterAttempt(object))
+  register(object: UserRegisterDto): void {
+    this.store.dispatch(new AuthActions.RegisterAttempt(object.user))
   }
 
   getOfferings(category: string) {

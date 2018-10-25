@@ -32,7 +32,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.LOGIN_SUCCESS: {
       const auth = {
         authorized: true,
-        loggedUser: Object.assign({}, action.payload),
+        // loggedUser: Object.assign({}, action.payload),
         loading: false,
         hasLoginError: false,
       }
@@ -41,7 +41,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.REGISTER_ATTEMPT: {
       return Object.assign({}, state, {
         loading: true,
-        loggedUser: action.payload.user,
+        loggedUser: action.payload,
       })
     }
 

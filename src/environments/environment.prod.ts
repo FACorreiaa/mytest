@@ -3,6 +3,6 @@ export const environment = {
   envName: 'PROD',
   production: true,
   test: false,
-  API_URL: 'http://localhost:3000',
+  API_URL: 'https://backend-dot-claimingservice-218915.appspot.com/api/v1',
   TOKEN_PATH: 'CSA_Token',
 }

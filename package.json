@@ -15,7 +15,11 @@
     "standardize": "prettier **/*.ts --write",
     "start": "npm run standardize && ng serve --port 5500",
     "build": "npm run standardize && ng build",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build:prod": "ng build --prod --vendor-chunk",
+    "clean": "rimraf ./dist/",
+    "server": "cd dist && http-server",
+    "prod": "npm run clean && npm run build:prod"
   },
   "private": true,
   "dependencies": {
