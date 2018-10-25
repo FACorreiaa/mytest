@@ -9,12 +9,14 @@ import { CategoriesService } from '@app/common/services/categories.service'
 import { HttpModule } from '@angular/http'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
 import { DisableControlDirective } from '@app/common/directives/disable-control.directive'
+import { LoadingRequestComponent } from './loading.component'
+import { SideNavComponent } from './side-nav.component'
 
 @NgModule({
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule],
-  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule],
-  declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective],
-  providers: [CsStepperComponent, ModalTermsConditionsComponent, CategoriesService],
-  entryComponents: [ModalTermsConditionsComponent],
+  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
+  declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent],
+  providers: [CsStepperComponent, ModalTermsConditionsComponent, LoadingRequestComponent, CategoriesService],
+  entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent],
 })
 export class CsStepperModule {}

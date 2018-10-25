@@ -48,21 +48,10 @@ export abstract class BaseApi {
    */
   public getObjectsPOST<T>(obj: Object, path: string): Observable<T> {
     this.setHeaderForRequest('POST')
-    const body = new FormData()
-    Object.keys(obj).forEach(key => {
-      body.append(key, obj[key])
-    })
-
-    console.log('baseapi', this.apiUrl, path, obj)
-
-    return this.basehttp.post(`${this.apiUrl}/${path}`, body).pipe(
+    return this.basehttp.post(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
       map((res: Response) => {
         const responseObject = res.json() as any
-        if (responseObject.Success) {
-          return responseObject.Result
-        } else {
-          throw new Error('Could not process the request')
-        }
+        return responseObject
       }),
       catchError((error: any) => Observable.throw(error))
     )
@@ -76,6 +65,13 @@ export abstract class BaseApi {
   private setHeaderForRequest(type: string): void {
     switch (type) {
       case 'POST':
+        {
+          const headers = new Headers({
+            'content-type': 'application/json',
+          })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
       case 'PUT':
       case 'DELETE':
       case 'GET':

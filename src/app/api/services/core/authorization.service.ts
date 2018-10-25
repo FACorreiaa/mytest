@@ -22,7 +22,6 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
    * @param credentials - The credentials for the user to register.
    */
   public register(credentials: UserLoginDto): Observable<any> {
-    console.log('service', credentials)
     return this.getObjectsPOST(credentials, `${this.controllerRoute}/register`)
   }
 }

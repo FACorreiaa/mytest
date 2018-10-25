@@ -6,5 +6,18 @@
       position: relative;
       max-width: none ;
       background-color: white !important;
+
+      .sidenav-container {
+        flex: 1;
+        background: blue($color: #000000);
+        .sidenav {
+          padding: 12px;
+          width: 250px;
+          background: white;
+        }
+        .main-container {
+          padding: 16px;
+        }
+    }
     }
   }

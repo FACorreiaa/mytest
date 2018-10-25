@@ -2,14 +2,18 @@ import { AuthActions, AuthActionTypes } from '../actions/auth.action'
 
 export interface AuthState {
   authorized: boolean
+  isRegister: boolean
   loggedUser: any
+  userToken: string
   loading: boolean
   hasLoginError: boolean
 }
 
 const initialState: AuthState = {
   authorized: false,
+  isRegister: false,
   loggedUser: null,
+  userToken: null,
   loading: false,
   hasLoginError: false,
 }
@@ -51,8 +55,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
 
     case AuthActionTypes.REGISTER_SUCCESS: {
       const auth = {
-        authorized: true,
-        loggedUser: Object.assign({}, action.payload),
+        isRegister: true,
         loading: false,
         hasLoginError: false,
       }

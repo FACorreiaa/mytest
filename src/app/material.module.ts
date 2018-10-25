@@ -16,6 +16,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatStepperModule,
+  MatProgressSpinnerModule,
 } from '@angular/material'
 
 import { NgModule } from '@angular/core'
@@ -40,6 +41,7 @@ import { NgModule } from '@angular/core'
     MatDatepickerModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatExpansionModule,
@@ -60,6 +62,7 @@ import { NgModule } from '@angular/core'
     MatDatepickerModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {}

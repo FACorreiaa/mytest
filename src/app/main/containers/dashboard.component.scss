@@ -1,0 +1,14 @@
+.mat-nav-list {
+  width: 100%;
+  a {
+      .mat-icon {
+          margin-right: 15px;
+      }
+      display: block;
+  }
+}
+.nested-menu {
+  .nested {
+      list-style-type: none;
+  }
+}

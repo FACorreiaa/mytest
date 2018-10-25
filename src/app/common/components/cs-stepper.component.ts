@@ -182,9 +182,6 @@ export class CsStepperComponent implements OnInit, OnChanges {
    * This method save the claim and registration information.
    */
   save(form: FormGroup, formConclusion: FormGroup) {
-    // console.log('Form data', form.value)
-    // console.log('User register', formConclusion.value)
-
     if (!formConclusion.get('termsConditions').value) {
       this.showTermConditiValidation = true
 
@@ -192,8 +189,6 @@ export class CsStepperComponent implements OnInit, OnChanges {
     }
 
     const claim = this.createClaimToSave(form.value, formConclusion.value)
-
-    console.log('claim', claim)
 
     this.registerEvent.emit(claim)
   }

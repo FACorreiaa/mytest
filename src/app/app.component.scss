@@ -17,7 +17,7 @@ mat-sidenav-container {
             display: flex;
             z-index: 10;
         }
-        
+
         .example-spacer {
             flex: 1 1 auto;
          }
@@ -28,9 +28,9 @@ mat-sidenav-container {
             overflow-y: auto;
             overflow-x: hidden;
             background: url('../assets/images/background/home-dishes-img.jpg') no-repeat center top;
-            background-size: cover;    
+            background-size: cover;
             content: '';
             z-index: 0;
         }
-    }    
+    }
 }
