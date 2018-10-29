@@ -40,7 +40,7 @@ export class WizardComponent implements OnInit, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
-    this.store.dispatch(new AuthActions.RegisterAttempt(object.user))
+    this.store.dispatch(new AuthActions.RegisterAttempt(object))
   }
 
   getOfferings(category: string) {

@@ -1,10 +1,11 @@
 import { AuthActions, AuthActionTypes } from '../actions/auth.action'
+import { ManageBusinessData } from '@app/api/models/api-models'
 
 export interface AuthState {
   authorized: boolean
   isRegister: boolean
   loggedUser: any
-  businessData: any
+  claimData: ManageBusinessData
   userToken: string
   loading: boolean
   hasLoginError: boolean
@@ -14,7 +15,7 @@ const initialState: AuthState = {
   authorized: false,
   isRegister: false,
   loggedUser: null,
-  businessData: null,
+  claimData: null,
   userToken: null,
   loading: false,
   hasLoginError: false,
@@ -50,7 +51,8 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       return {
         ...state,
         loading: true,
-        loggedUser: action.payload,
+        loggedUser: action.payload.user,
+        claimData: action.payload.claim,
       }
     }
 
@@ -71,7 +73,6 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.MANAGE_BUSINESS_ATTEMPT: {
       return Object.assign({}, state, {
         loading: true,
-        businessData: action.payload,
       })
     }
 

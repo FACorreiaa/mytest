@@ -1,6 +1,6 @@
 import { Inject, Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
-import { UserLoginDto, ManageBusinessObject } from '../../models/api-models'
+import { UserLoginDto, ManageBusinessData } from '../../models/api-models'
 import { BaseApi } from '../base/baseapi'
 import { IAuthorizationService } from '../../interfaces/i.authorization.service'
 import { HttpClient } from '@angular/common/http'
@@ -33,7 +33,7 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
     // return this.getObjectsPOST(credentials, `${this.controllerRoute}/register`)
   }
 
-  public manageBusiness(manageData: ManageBusinessObject): Observable<any> {
+  public manageBusiness(manageData: ManageBusinessData): Observable<any> {
     return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage`)
   }
 }

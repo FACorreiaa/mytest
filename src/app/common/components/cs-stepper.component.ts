@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/common/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, UserLoginDto, Data } from '@app/api/models/api-models'
+import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, UserLoginDto, Data, ManageBusinessData } from '@app/api/models/api-models'
 
 import { CategoriesService } from '../services/categories.service'
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
@@ -202,24 +202,23 @@ export class CsStepperComponent implements OnInit, OnChanges {
       password: formConclusion.password,
     }
 
-    const claim: Data = {
-      businessUnitId: '',
+    const claimData: Data = {
       userFirstName: '',
       userLastName: '',
       name: '',
-      additional: form.address,
-      street: form.street,
-      zipCode: form.postal,
+      additional: '',
+      street: form.address,
+      streetNumber: '',
+      zip: form.postal,
       city: form.city,
-      countryCode: '',
+      countryCode: '+49',
       url: form.website,
+      languageCode: 'DE',
       contactEmail: form.email,
       contactPhoneNumber: form.phone,
       openingTimes: this.buildOpenHoursModel(form.openHours),
-      specialOpeningTimes: null,
-      offerTypes: this.selectedOffering,
+      offers: this.selectedOffering,
       description: '',
-      imprint: null,
       category: this.category,
       services: this.selectedServices,
       paymentMethods: this.selectedPayments,
@@ -227,12 +226,16 @@ export class CsStepperComponent implements OnInit, OnChanges {
       menuUri: '',
       profileImageUri: '',
       titleImageUri: '',
-      stories: null,
+    }
+
+    const manageBusinessData: ManageBusinessData = {
+      data: claimData,
+      channels: ['GOOGLE_MY_BUSINESS'],
     }
 
     const claimObject: UserRegisterDto = {
       user: user,
-      claim: claim,
+      claim: manageBusinessData,
     }
 
     return claimObject

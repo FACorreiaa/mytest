@@ -46,6 +46,7 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjectsPOST<T>(obj: Object, path: string): Observable<T> {
+    this.setHeaderForRequest('POST')
     return this.basehttp.post(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
       map((res: Response) => {
         const responseObject = res.json() as any
@@ -53,5 +54,20 @@ export abstract class BaseApi {
       }),
       catchError((error: any) => Observable.throw(error))
     )
+  }
+
+  private setHeaderForRequest(type: string): void {
+    switch (type) {
+      case 'POST':
+        {
+          const headers = new Headers({ 'Content-Type': 'application/json' })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
+      case 'GET':
+      case 'FORM':
+      default:
+        break
+    }
   }
 }

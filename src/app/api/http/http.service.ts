@@ -28,14 +28,14 @@ export class ApiHttpService extends Http {
       if (!this.defOptions) {
         options = { headers: new Headers() }
       }
-      this.defOptions.headers.set('Authorization', ` ${token}`)
-      this.defOptions.headers.set('Content-Type', 'application/json')
-    } else {
-      url.headers.set('Authorization', ` ${token}`)
-      url.headers.set('Content-Type', 'application/json')
 
-      // check the headers
-      // console.log('request: ', url.headers, this.defOptions)
+      if (token) {
+        this.defOptions.headers.set('Authorization', token)
+      }
+    } else {
+      if (token) {
+        url.headers.set('Authorization', token)
+      }
     }
 
     return super.request(url, this.defOptions).pipe(

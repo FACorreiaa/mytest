@@ -2,7 +2,7 @@ import { Action as StoreAction } from '@ngrx/store'
 
 export interface UserRegisterDto {
   user: UserLoginDto
-  claim: Data
+  claim: ManageBusinessData
 }
 
 export interface UserLoginDto {
@@ -14,37 +14,35 @@ export interface Action extends StoreAction {
   payload: any
 }
 
-export interface Welcome {
-  channels: string[]
+export interface ManageBusinessData {
   data: Data
+  channels: string[]
 }
 
 export interface Data {
-  businessUnitId: string
+  zip: string
+  city: string
+  street: string
+  streetNumber: string
+  additional: string
+  category: string
+  name: string
+  description: string
   userFirstName: string
   userLastName: string
-  name: string
-  additional: string
-  street: string
-  zipCode: number
-  city: string
   countryCode: string
+  languageCode: string
   url: string
   contactEmail: string
   contactPhoneNumber: string
-  openingTimes: OpeningTimes
-  specialOpeningTimes: SpecialOpeningTime[]
-  offerTypes: string[]
-  description: string
-  imprint: { [key: string]: null | string }
-  category: string
-  services: string[]
-  paymentMethods: string[]
   reservationUri: string
   menuUri: string
   profileImageUri: string
   titleImageUri: string
-  stories: Story[]
+  openingTimes: OpeningTimes
+  offers: string[]
+  services: string[]
+  paymentMethods: string[]
 }
 
 export interface OpeningTimes {
@@ -147,44 +145,3 @@ const Cuisines = [
   { name: 'restaurant', selected: false },
   { name: 'shishaBar', selected: false },
 ]
-
-// KAI Back-End Data
-
-export interface Address {
-  zip: string
-  city: string
-  street: string
-  streetNumber: string
-  additional: string
-}
-
-export interface OpeningTimes {
-  monday: Day[]
-  tuesday: Day[]
-  wednesday: Day[]
-  thursday: Day[]
-  sunday: Day[]
-}
-
-export interface ManageBusinessObject {
-  address: Address
-  category: string
-  name: string
-  description: string
-  userFirstName: string
-  userLastName: string
-  countryCode: string
-  languageCode: string
-  url: string
-  contactEmail: string
-  contactPhoneNumber: string
-  reservationUri: string
-  menuUri: string
-  profileImageUri: string
-  titleImageUri: string
-  openingTimes: OpeningTimes
-  offers: string[]
-  services: string[]
-  paymentMethods: string[]
-  channels: string[]
-}

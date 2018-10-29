@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { ManageBusinessObject } from '@app/api/models/api-models'
+import { UserRegisterDto, ManageBusinessData } from '@app/api/models/api-models'
 
 export const AuthActionTypes = {
   LOGIN_SUCCESS: '[Auth] Login Success',
@@ -48,7 +48,7 @@ export class LogoutFailure implements Action {
 
 export class RegisterAttempt implements Action {
   public type = AuthActionTypes.REGISTER_ATTEMPT
-  constructor(public payload: { email: string; password: string }) {}
+  constructor(public payload: UserRegisterDto) {}
 }
 
 export class RegisterSuccess implements Action {
@@ -63,7 +63,7 @@ export class RegisterFailure implements Action {
 
 export class ManageBusinessAttempt implements Action {
   public type = AuthActionTypes.MANAGE_BUSINESS_ATTEMPT
-  constructor(public payload: any) {}
+  constructor(public payload: ManageBusinessData) {}
 }
 
 export class ManageBusinessSuccess implements Action {

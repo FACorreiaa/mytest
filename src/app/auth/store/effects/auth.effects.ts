@@ -9,7 +9,7 @@ import * as AuthActions from '../actions/auth.action'
 import * as fromModule from '../../auth.reducer'
 import { AuthState } from '../../auth.reducer'
 import { reducerName } from '../../auth.reducer'
-import { Action as ActionDispatched, UserLoginDto } from '../../../api/models/api-models'
+import { Action as ActionDispatched, UserLoginDto, Data } from '../../../api/models/api-models'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { GlobalEnvironmentService } from '../../../global.environment.service'
 import { IAuthorizationService } from '../../../api/interfaces/i.authorization.service'
@@ -25,28 +25,6 @@ export class AuthEffects {
 
   // Temporary properties, just for development reasons
   private userAux: UserLoginDto = { email: 'test3@cocus.com', password: '12345678' }
-  private manageData: any = {
-    address: null,
-    category: '',
-    name: '',
-    description: '',
-    userFirstName: '',
-    userLastName: '',
-    countryCode: '',
-    languageCode: '',
-    url: '',
-    contactEmail: '',
-    contactPhoneNumber: '',
-    reservationUri: '',
-    menuUri: '',
-    profileImageUri: '',
-    titleImageUri: '',
-    openingTimes: null,
-    offers: [],
-    services: [],
-    paymentMethods: [],
-    channels: [],
-  }
 
   constructor(
     private actions$: Actions,
@@ -86,27 +64,18 @@ export class AuthEffects {
     ofType(AuthActions.AuthActionTypes.LOGIN_SUCCESS),
     withLatestFrom(this.store$.select(x => x[reducerName])),
     map(([action, storelogin]: [ActionDispatched, AuthState]) => {
-      localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(action.payload.token))
-      // return Object.assign({}, storelogin, { authorized: true, userToken: action.payload.token })
-      return new AuthActions.ManageBusinessAttempt(this.manageData)
+      localStorage.setItem(this.tokenIndexInLocalStorage, action.payload.token)
+
+      return new AuthActions.ManageBusinessAttempt(storelogin.claimData)
     }),
     catchError(() => of(new AuthActions.LoginFailure({})))
-    // tap((payload: fromModule.AuthState) => {
-    //   // localStorage.setItem(reducerName, JSON.stringify(payload))
-    //   localStorage.setItem(this.tokenIndexInLocalStorage, JSON.stringify(payload.userToken))
-    //   // this.router.navigate([AuthRoutes.MAIN])
-
-    //   console.log('Login sucesss')
-
-    //   return new AuthActions.ManageBusinessAttempt(this.manageData)
-    // })
   )
 
   // ----------------- REGISTER -----------------
   @Effect()
-  public registerUser$ = this.actions$.ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT).switchMap((payload: any) =>
+  public registerUser$ = this.actions$.ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT).switchMap((action: any) =>
     this.auth
-      .register(payload.payload)
+      .register(action.payload.user)
       .map(user => {
         return user == null ? new AuthActions.RegisterFailure({}) : new AuthActions.RegisterSuccess(user)
       })
@@ -129,10 +98,7 @@ export class AuthEffects {
     withLatestFrom(this.store$.select(x => x[reducerName])),
     map(([action, storeRegister]: [ActionDispatched, AuthState]) => {
       return new AuthActions.LoginAttempt(storeRegister.loggedUser)
-
-      // return Object.assign({}, store, { isRegister: true })
     })
-
     // ,
     // tap((payload: fromModule.AuthState) => {
     //   this.router.navigate([AuthRoutes.LOGIN])
@@ -146,7 +112,7 @@ export class AuthEffects {
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_ATTEMPT),
     switchMap((payload: any) =>
       this.auth
-        .manageBusiness(payload)
+        .manageBusiness(payload.payload)
         .map(res => {
           return res == null ? new AuthActions.ManageBusinessFailure({}) : new AuthActions.ManageBusinessSuccess(res)
         })
@@ -161,17 +127,14 @@ export class AuthEffects {
       // Temporary - should redirect to error page
       console.log('manage business failure - effect')
 
-      // this.router.navigate([AuthRoutes.MAIN])
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
-  @Effect()
+  @Effect({ dispatch: false })
   manageBusinessSuccess$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_SUCCESS),
     tap(() => {
-      // Temporary
-      console.log('manage business success - effect')
-
       this.router.navigate([AuthRoutes.MAIN])
     })
   )
