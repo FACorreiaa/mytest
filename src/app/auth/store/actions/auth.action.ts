@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store'
+import { ManageBusinessObject } from '@app/api/models/api-models'
 
 export const AuthActionTypes = {
   LOGIN_SUCCESS: '[Auth] Login Success',
@@ -10,6 +11,9 @@ export const AuthActionTypes = {
   REGISTER_SUCCESS: '[Auth] Register Success',
   REGISTER_FAILURE: '[Auth] Register Failure',
   REGISTER_ATTEMPT: '[Auth] Register Attempt',
+  MANAGE_BUSINESS_ATTEMPT: '[Auth] Manaege Business Attempt',
+  MANAGE_BUSINESS_FAILURE: '[Auth] Manaege Business Failure',
+  MANAGE_BUSINESS_SUCCESS: '[Auth] Manaege Business Success',
 }
 
 export class LoginAttempt implements Action {
@@ -57,4 +61,31 @@ export class RegisterFailure implements Action {
   constructor(public payload: any) {}
 }
 
-export type AuthActions = LoginAttempt | LoginSuccess | LoginFailure | Logout | LogoutSuccess | LogoutFailure | RegisterAttempt | RegisterSuccess | RegisterFailure
+export class ManageBusinessAttempt implements Action {
+  public type = AuthActionTypes.MANAGE_BUSINESS_ATTEMPT
+  constructor(public payload: any) {}
+}
+
+export class ManageBusinessSuccess implements Action {
+  public type = AuthActionTypes.MANAGE_BUSINESS_SUCCESS
+  constructor(public payload: any) {}
+}
+
+export class ManageBusinessFailure implements Action {
+  public type = AuthActionTypes.MANAGE_BUSINESS_FAILURE
+  constructor(public payload: any) {}
+}
+
+export type AuthActions =
+  | LoginAttempt
+  | LoginSuccess
+  | LoginFailure
+  | Logout
+  | LogoutSuccess
+  | LogoutFailure
+  | RegisterAttempt
+  | RegisterSuccess
+  | RegisterFailure
+  | ManageBusinessAttempt
+  | ManageBusinessSuccess
+  | ManageBusinessFailure

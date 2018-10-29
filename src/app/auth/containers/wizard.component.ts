@@ -18,6 +18,7 @@ import { UserRegisterDto } from '@app/api/models/api-models'
 export class WizardComponent implements OnInit, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
+  loading$: Observable<boolean>
   offerings: Observable<any>
   services: Observable<any>
   payments: Observable<any>
@@ -26,6 +27,8 @@ export class WizardComponent implements OnInit, OnDestroy {
     this.userSubscription$ = this.store.select(fromModule.userAuthorized).subscribe(authorized => {
       this.authorized = authorized
     })
+
+    this.loading$ = this.store.select(fromApp.loginLoading)
   }
 
   ngOnInit() {

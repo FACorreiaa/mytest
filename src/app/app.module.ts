@@ -22,6 +22,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
+import { HttpClientModule } from '@angular/common/http'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -30,13 +31,16 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
 
-metaReducers.unshift(debug)
+if (!environment.production) {
+  metaReducers.unshift(debug)
+}
 
 @NgModule({
   imports: [
     ApiModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     CommonModule,
     HttpModule,
     FormsModule,

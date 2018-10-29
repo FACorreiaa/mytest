@@ -147,3 +147,44 @@ const Cuisines = [
   { name: 'restaurant', selected: false },
   { name: 'shishaBar', selected: false },
 ]
+
+// KAI Back-End Data
+
+export interface Address {
+  zip: string
+  city: string
+  street: string
+  streetNumber: string
+  additional: string
+}
+
+export interface OpeningTimes {
+  monday: Day[]
+  tuesday: Day[]
+  wednesday: Day[]
+  thursday: Day[]
+  sunday: Day[]
+}
+
+export interface ManageBusinessObject {
+  address: Address
+  category: string
+  name: string
+  description: string
+  userFirstName: string
+  userLastName: string
+  countryCode: string
+  languageCode: string
+  url: string
+  contactEmail: string
+  contactPhoneNumber: string
+  reservationUri: string
+  menuUri: string
+  profileImageUri: string
+  titleImageUri: string
+  openingTimes: OpeningTimes
+  offers: string[]
+  services: string[]
+  paymentMethods: string[]
+  channels: string[]
+}

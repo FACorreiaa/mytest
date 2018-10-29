@@ -3,9 +3,20 @@
         <div class="container">
             <mat-sidenav-container class="app-sidenav-container">
                 <mat-sidenav-content>
-                    <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" [services]="services"
-                        [payments]="payments" (registerEvent)="register($event)" (offeringsEvent)="getOfferings($event)"
-                        (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+                    <div *ngIf="!(this.loading$ | async)">
+                        <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" [services]="services"
+                            [payments]="payments" (registerEvent)="register($event)" (offeringsEvent)="getOfferings($event)"
+                            (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+                    </div>
+                    <div *ngIf="(this.loading$ | async)" style="display: flex">
+                        <mat-card class="col">
+                            <mat-card-content>
+                                <div class="row justify-content-center">
+                                    <cs-loading [show]="true"></cs-loading>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
                 </mat-sidenav-content>
             </mat-sidenav-container>
         </div>

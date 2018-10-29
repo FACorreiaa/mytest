@@ -4,6 +4,7 @@ export interface AuthState {
   authorized: boolean
   isRegister: boolean
   loggedUser: any
+  businessData: any
   userToken: string
   loading: boolean
   hasLoginError: boolean
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   authorized: false,
   isRegister: false,
   loggedUser: null,
+  businessData: null,
   userToken: null,
   loading: false,
   hasLoginError: false,
@@ -25,7 +27,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.LOGIN_ATTEMPT: {
       return Object.assign({}, state, {
         loading: true,
-        loggedUser: action.payload.user,
+        loggedUser: action.payload,
       })
     }
 
@@ -34,19 +36,22 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.LOGIN_SUCCESS: {
-      const auth = {
+      return {
+        ...state,
         authorized: true,
-        // loggedUser: Object.assign({}, action.payload),
+        userToken: action.payload.token,
+        loggedUser: null,
         loading: false,
         hasLoginError: false,
       }
-      return Object.assign({}, state, auth)
     }
+
     case AuthActionTypes.REGISTER_ATTEMPT: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: true,
         loggedUser: action.payload,
-      })
+      }
     }
 
     case AuthActionTypes.REGISTER_FAILURE: {
@@ -57,9 +62,34 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       const auth = {
         isRegister: true,
         loading: false,
+        loggedUser: action.payload,
         hasLoginError: false,
       }
       return Object.assign({}, state, auth)
+    }
+
+    case AuthActionTypes.MANAGE_BUSINESS_ATTEMPT: {
+      return Object.assign({}, state, {
+        loading: true,
+        businessData: action.payload,
+      })
+    }
+
+    case AuthActionTypes.MANAGE_BUSINESS_SUCCESS: {
+      return Object.assign({}, state, {
+        loading: false,
+        isRegister: false,
+        loggedUser: null,
+        hasLoginError: false,
+        userToken: null,
+      })
+    }
+
+    case AuthActionTypes.MANAGE_BUSINESS_FAILURE: {
+      return Object.assign({}, state, {
+        hasLoginError: true,
+        loading: false,
+      })
     }
 
     case AuthActionTypes.LOGOUT_FAILURE:

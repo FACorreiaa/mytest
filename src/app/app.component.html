@@ -4,7 +4,8 @@
             <mat-toolbar color="primary">
                 <a><span class="mat-h2" style="font-size: 30px">Claiming service</span></a>
                 <span class="example-spacer"></span>
-                <button mat-button mat-stroked-button color="secondary" style="background-color: darkgray" (click)="onLoginClick($event)">
+                <button *ngIf="!authorized" mat-button mat-stroked-button color="secondary" style="background-color: darkgray"
+                    (click)="onLoginClick($event)">
                     Login
                 </button>
             </mat-toolbar>
