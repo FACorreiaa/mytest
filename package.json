@@ -19,7 +19,8 @@
     "build:prod": "ng build --prod --vendor-chunk",
     "clean": "rimraf ./dist/",
     "server": "cd dist && http-server",
-    "prod": "npm run clean && npm run build:prod"
+    "prod": "npm run clean && npm run build:prod",
+    "analyze": "npm run clean && npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/stats.json"
   },
   "private": true,
   "dependencies": {

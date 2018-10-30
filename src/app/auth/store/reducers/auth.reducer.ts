@@ -47,6 +47,13 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       }
     }
 
+    case AuthActionTypes.LOGIN_NO_REGISTER: {
+      return {
+        ...state,
+        userToken: null,
+      }
+    }
+
     case AuthActionTypes.REGISTER_ATTEMPT: {
       return {
         ...state,
@@ -64,7 +71,6 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       const auth = {
         isRegister: true,
         loading: false,
-        loggedUser: action.payload,
         hasLoginError: false,
       }
       return Object.assign({}, state, auth)

@@ -16,7 +16,7 @@ import { SideNavComponent } from './side-nav.component'
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule],
   exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
   declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent],
-  providers: [CsStepperComponent, ModalTermsConditionsComponent, LoadingRequestComponent, CategoriesService],
-  entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent],
+  providers: [CsStepperComponent, ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent, CategoriesService],
+  entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent],
 })
 export class CsStepperModule {}

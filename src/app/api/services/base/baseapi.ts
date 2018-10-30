@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
 import {} from '@app/api/models/api-models'
-import { map, catchError, tap } from 'rxjs/operators'
+import { map, catchError } from 'rxjs/operators'
 
 export abstract class BaseApi {
   private apiUrl: string
@@ -26,14 +26,12 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjects<T>(path: string): Observable<T> {
+    this.setHeaderForRequest('GET')
+
     return this.basehttp.get(`${this.apiUrl}/${path}`, this.defOptions).pipe(
       map((res: Response) => {
         const responseObject = res.json() as any
-        if (responseObject.Success) {
-          return responseObject.Result
-        } else {
-          throw new Error('Could not process the request')
-        }
+        return responseObject
       }),
       catchError((error: any) => Observable.throw(error))
     )
@@ -65,6 +63,11 @@ export abstract class BaseApi {
         }
         break
       case 'GET':
+        {
+          const headers = new Headers({ 'Content-Type': 'application/json' })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
       case 'FORM':
       default:
         break

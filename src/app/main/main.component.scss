@@ -1,23 +1,29 @@
-.mainBackground {
-    padding: 10px 0 40px 0;
-    position: relative;
-  
-    .mainContainer {
-      position: relative;
-      max-width: none ;
-      background-color: white !important;
+.layout-container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-top: 50px;
 
-      .sidenav-container {
-        flex: 1;
-        background: blue($color: #000000);
-        .sidenav {
-          padding: 12px;
-          width: 250px;
+
+        .sidenav-container {
+          flex: 1;
           background: white;
+
+          .sidenav {
+            padding: 12px;
+            padding-top: 40px;
+            width: 250px;
+            background: white;
+          }
+
+          .main-container {
+            padding: 16px;
+            background-color: beige;
+            height: 100%;
+          }
         }
-        .main-container {
-          padding: 16px;
-        }
-    }
-    }
-  }
+}

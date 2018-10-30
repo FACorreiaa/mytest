@@ -5,6 +5,8 @@ import { HttpModule, RequestOptions, Http, Headers, XHRBackend } from '@angular/
 import { ApiHttpService } from './http/http.service'
 import { AuthorizationService } from '../api/services/core/authorization.service'
 import { IAuthorizationService } from '../api/interfaces/i.authorization.service'
+import { IDashBoardService } from './interfaces/i.dashboard.service'
+import { DashBoardService } from './services/core/dashboard.service'
 
 export function ApiHttpServiceFactory(backend: XHRBackend, options: RequestOptions) {
   return new ApiHttpService(backend, options)
@@ -24,7 +26,7 @@ export class ApiModule {
   public static forRoot(): ModuleWithProviders {
     return {
       ngModule: ApiModule,
-      providers: [{ provide: IAuthorizationService, useClass: AuthorizationService }],
+      providers: [{ provide: IAuthorizationService, useClass: AuthorizationService }, { provide: IDashBoardService, useClass: DashBoardService }],
     }
   }
 

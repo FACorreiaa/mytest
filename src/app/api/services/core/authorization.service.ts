@@ -13,7 +13,7 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
   constructor(injector: Injector) {
     super(injector)
   }
-  s
+
   /** Method to do the login.
    * @param credentials - The credentials for the user to login.
    */
@@ -26,11 +26,12 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
    */
   public register(credentials: UserLoginDto): Observable<any> {
     // Temporary- just for development reasons
-    return Observable.create(observer => {
-      observer.next({ email: 'testing@cocus.com', password: '12345678' })
-      observer.complete()
-    })
-    // return this.getObjectsPOST(credentials, `${this.controllerRoute}/register`)
+    // return Observable.create(observer => {
+    //   observer.next({ email: 'testing@cocus.com', password: '12345678' })
+    //   observer.complete()
+    // })
+
+    return this.getObjectsPOST(credentials, `${this.controllerRoute}/register`)
   }
 
   public manageBusiness(manageData: ManageBusinessData): Observable<any> {

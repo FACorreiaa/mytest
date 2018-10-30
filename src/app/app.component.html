@@ -8,6 +8,10 @@
                     (click)="onLoginClick($event)">
                     Login
                 </button>
+                <button *ngIf="authorized" mat-button mat-stroked-button color="secondary" style="background-color: darkgray"
+                    (click)="onLogOutClick($event)">
+                    LogOut
+                </button>
             </mat-toolbar>
         </div>
 

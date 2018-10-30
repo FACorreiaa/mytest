@@ -292,7 +292,8 @@
 
                         <div class="row justify-content-center">
                             <!-- [disabled]="!formConclusion.valid" -->
-                            <button mat-raised-button color="primary" class="big" type="submit">Register</button>
+                            <button mat-raised-button color="primary" class="big" [disabled]="!formConclusion.valid"
+                                type="submit">Register</button>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,13 @@
+<mat-card ngClass="warn" *ngFor="let item of buninessData$">
+    <mat-card-header>
+        <div mat-card-avatar>
+            <mat-icon class="icon-lg"></mat-icon>
+        </div>
+        <mat-card-title>{{item.contactEmail}}</mat-card-title>
+        <mat-card-subtitle>{{item.contactPhoneNumber}}</mat-card-subtitle>
+        <mat-card-subtitle>{{item.url}}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <mat-card-actions>
+        <button mat-button class="float-right">View Details</button>
+    </mat-card-actions> -->
+</mat-card>

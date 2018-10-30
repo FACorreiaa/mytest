@@ -1,18 +1,12 @@
-<div class="mainBackground">
-    <div class="mainGradient">
-        <div class="mainContainer">
-            <mat-sidenav-container class="sidenav-container">
-                <!-- <mat-sidenav #snav class="sidenav">
-                    <mat-nav-list>
-
-                        sdsdasdashboard
-
-                    </mat-nav-list>
-                </mat-sidenav> -->
-                <mat-sidenav-content>
-                    <router-outlet></router-outlet>
-                </mat-sidenav-content>
-            </mat-sidenav-container>
-        </div>
-    </div>
+<div class="layout-container">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #snav class="sidenav mat-elevation-z10" [(mode)]="sideNavMode" [(opened)]="sideNavOpened">
+            <app-side-nav></app-side-nav>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <main class="main-container">
+                <router-outlet></router-outlet>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

@@ -24,7 +24,7 @@ export class AuthEffects {
   private tokenIndexInLocalStorage: string
 
   // Temporary properties, just for development reasons
-  private userAux: UserLoginDto = { email: 'test3@cocus.com', password: '12345678' }
+  // private userAux: UserLoginDto = { email: 'test3@cocus.com', password: '12345678' }
 
   constructor(
     private actions$: Actions,
@@ -40,9 +40,9 @@ export class AuthEffects {
   @Effect()
   public loginUser$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGIN_ATTEMPT),
-    switchMap((payload: any) =>
+    switchMap((action: any) =>
       this.auth
-        .login(this.userAux)
+        .login(action.payload)
         .map(user => {
           return user == null ? new AuthActions.LoginFailure({}) : new AuthActions.LoginSuccess(user)
         })
@@ -66,9 +66,21 @@ export class AuthEffects {
     map(([action, storelogin]: [ActionDispatched, AuthState]) => {
       localStorage.setItem(this.tokenIndexInLocalStorage, action.payload.token)
 
-      return new AuthActions.ManageBusinessAttempt(storelogin.claimData)
+      if (storelogin.isRegister) {
+        return new AuthActions.ManageBusinessAttempt(storelogin.claimData)
+      }
+
+      return new AuthActions.LoginSuccessNoRegister({})
     }),
     catchError(() => of(new AuthActions.LoginFailure({})))
+  )
+
+  @Effect({ dispatch: false })
+  loginSuccessNoRegister$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.LOGIN_NO_REGISTER),
+    tap(() => {
+      this.router.navigate([AuthRoutes.MAIN])
+    })
   )
 
   // ----------------- REGISTER -----------------
@@ -127,7 +139,7 @@ export class AuthEffects {
       // Temporary - should redirect to error page
       console.log('manage business failure - effect')
 
-      this.router.navigate([AuthRoutes.MAIN])
+      // this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -135,7 +147,7 @@ export class AuthEffects {
   manageBusinessSuccess$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_SUCCESS),
     tap(() => {
-      this.router.navigate([AuthRoutes.MAIN])
+      // this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -146,7 +158,17 @@ export class AuthEffects {
     map(() => {
       localStorage.removeItem(reducerName)
       localStorage.removeItem(this.tokenIndexInLocalStorage)
-      return new AuthActions.LogoutSuccess({})
+      return new AuthActions.LogoutFailure({})
+    })
+  )
+
+  @Effect({ dispatch: false })
+  public logoutStatus$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.LOGOUT_SUCCESS),
+    map(() => {
+      localStorage.removeItem(reducerName)
+      localStorage.removeItem(this.tokenIndexInLocalStorage)
+      this.router.navigate([AuthRoutes.LOGIN])
     })
   )
 }

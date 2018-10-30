@@ -5,6 +5,7 @@ import { Subject } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 
 import * as fromApp from './app.reducers'
+import * as AuthActions from './auth/store/actions/auth.action'
 import { takeUntil, delay } from 'rxjs/operators'
 
 /**
@@ -32,5 +33,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLoginClick(event) {
     this.router.navigate([AuthRoutes.LOGIN])
+  }
+
+  onLogOutClick(event) {
+    this.store.dispatch(new AuthActions.LogoutSuccess({}))
   }
 }

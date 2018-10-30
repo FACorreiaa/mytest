@@ -5,6 +5,7 @@ export const AuthActionTypes = {
   LOGIN_SUCCESS: '[Auth] Login Success',
   LOGIN_FAILURE: '[Auth] Login Failure',
   LOGIN_ATTEMPT: '[Auth] Login Attempt',
+  LOGIN_NO_REGISTER: '[Auth] Login Without Registration',
   LOGOUT: '[Auth] Logout',
   LOGOUT_SUCCESS: '[Auth] Logout Success',
   LOGOUT_FAILURE: '[Auth] Logout Failure',
@@ -23,6 +24,11 @@ export class LoginAttempt implements Action {
 
 export class LoginSuccess implements Action {
   public type = AuthActionTypes.LOGIN_SUCCESS
+  constructor(public payload: any) {}
+}
+
+export class LoginSuccessNoRegister implements Action {
+  public type = AuthActionTypes.LOGIN_NO_REGISTER
   constructor(public payload: any) {}
 }
 
@@ -80,6 +86,7 @@ export type AuthActions =
   | LoginAttempt
   | LoginSuccess
   | LoginFailure
+  | LoginSuccessNoRegister
   | Logout
   | LogoutSuccess
   | LogoutFailure
