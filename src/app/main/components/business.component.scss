@@ -8,7 +8,7 @@
   }
   
   .mat-card {
-    color: #fff;
+    color: black;
     margin-bottom: 20px;
     
     .mat-card-header {
@@ -18,20 +18,13 @@
       font-size: 40px !important;
     }
     .mat-card-subtitle {
-      color: #fff;
+      color: black;
       white-space: nowrap;
     }
-    &.danger {
-      background: linear-gradient(60deg, #ec407a, #d81b60);
-    }
+    
     &.warn {
-      background: linear-gradient(60deg, #ffa726, #fb8c00);
+      background: whitesmoke;
     }
-    &.success {
-      background: linear-gradient(60deg, #66bb6a, #43a047);
-    }
-    &.info {
-      background: linear-gradient(60deg, #26c6da, #00acc1);
-    }
+    
   }
   

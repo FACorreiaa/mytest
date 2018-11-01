@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Subscription, Observable } from 'rxjs'
@@ -8,22 +8,30 @@ import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import * as fromModule from '../../app.reducers'
 import { CategoriesService } from '@app/common/services/categories.service'
-import { UserRegisterDto } from '@app/api/models/api-models'
+import { UserRegisterDto, Countries } from '@app/api/models/api-models'
+import { CountriesService } from '@app/common/services/countries.service'
 
 @Component({
   selector: 'app-wizard',
   templateUrl: 'wizard.component.html',
   styleUrls: ['wizard.component.scss'],
 })
-export class WizardComponent implements OnInit, OnDestroy {
+export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
   loading$: Observable<boolean>
   offerings: Observable<any>
   services: Observable<any>
   payments: Observable<any>
+  countries$: Countries[]
 
-  constructor(private router: Router, private store: Store<fromApp.AppState>, private appStore: Store<fromModule.AppState>, private categoriesService: CategoriesService) {
+  constructor(
+    private router: Router,
+    private store: Store<fromApp.AppState>,
+    private appStore: Store<fromModule.AppState>,
+    private categoriesService: CategoriesService,
+    private countriesService: CountriesService
+  ) {
     this.userSubscription$ = this.store.select(fromModule.userAuthorized).subscribe(authorized => {
       this.authorized = authorized
     })
@@ -32,8 +40,14 @@ export class WizardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.countriesService.getCountries().subscribe(countries => {
+      this.countries$ = countries
+    })
+
     this.appStore.dispatch(new AuthActions.Logout({}))
   }
+
+  ngOnChanges(changes: SimpleChanges): void {}
 
   public ngOnDestroy() {
     this.userSubscription$.unsubscribe()

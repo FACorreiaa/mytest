@@ -1,7 +1,19 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, Input, EventEmitter, Output, OnChanges, SimpleChanges, ElementRef } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/common/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, UserLoginDto, Data, ManageBusinessData } from '@app/api/models/api-models'
+import {
+  OpeningTimes,
+  Day,
+  IHours,
+  OpenHoursArray,
+  CategoriesArray,
+  ICategory,
+  UserRegisterDto,
+  UserLoginDto,
+  Data,
+  ManageBusinessData,
+  Countries,
+} from '@app/api/models/api-models'
 
 import { CategoriesService } from '../services/categories.service'
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
@@ -44,11 +56,13 @@ export class CsStepperComponent implements OnInit, OnChanges {
   @Input() offerings: Observable<any>
   @Input() services: Observable<any>
   @Input() payments: Observable<any>
+  @Input() countries: Countries[]
   @Output() private registerEvent = new EventEmitter()
   @Output() private offeringsEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
 
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel
+  @ViewChild('address') addressInput: ElementRef
 
   constructor(private formBuilder: FormBuilder, private categoriesService: CategoriesService, public dialog: MatDialog) {}
 
@@ -61,6 +75,9 @@ export class CsStepperComponent implements OnInit, OnChanges {
       phone: ['', PhoneNumberValidation],
       area: ['+49', PhoneNumberPrefixValidation],
       country: ['Germany', Validators.required],
+    })
+
+    this.secondFormGroup = this.formBuilder.group({
       email: [this.emailAux, EmailValidation],
       website: [
         '',
@@ -91,11 +108,11 @@ export class CsStepperComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log('On changes')
+    console.log('Countriesss', this.countries)
   }
 
   get openHoursArray(): FormArray {
-    return <FormArray>this.firstFormGroup.get('openHours')
+    return <FormArray>this.secondFormGroup.get('openHours')
   }
 
   private buildOpenHoursArray(days?: OpeningTimes) {
@@ -181,14 +198,14 @@ export class CsStepperComponent implements OnInit, OnChanges {
   /**
    * This method save the claim and registration information.
    */
-  save(form: FormGroup, formConclusion: FormGroup) {
+  save(form: FormGroup, secondFormGroup: FormGroup, formConclusion: FormGroup) {
     if (!formConclusion.get('termsConditions').value) {
       this.showTermConditiValidation = true
 
       return null
     }
 
-    const claim = this.createClaimToSave(form.value, formConclusion.value)
+    const claim = this.createClaimToSave(form.value, secondFormGroup.value, formConclusion.value)
 
     this.registerEvent.emit(claim)
   }
@@ -196,7 +213,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   /**
    * This method creates the objects for the middlware
    */
-  private createClaimToSave(form: any, formConclusion: any) {
+  private createClaimToSave(form: any, secondFormGroup: any, formConclusion: any) {
     const user: UserLoginDto = {
       email: formConclusion.email,
       password: formConclusion.password,
@@ -206,17 +223,17 @@ export class CsStepperComponent implements OnInit, OnChanges {
       userFirstName: '',
       userLastName: '',
       name: '',
-      additional: '',
+      additional: form.location,
       street: form.address,
       streetNumber: '',
       zip: form.postal,
       city: form.city,
       countryCode: '+49',
-      url: form.website,
+      url: secondFormGroup.website,
       languageCode: 'DE',
-      contactEmail: form.email,
+      contactEmail: secondFormGroup.email,
       contactPhoneNumber: form.phone,
-      openingTimes: this.buildOpenHoursModel(form.openHours),
+      openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
       offers: this.selectedOffering,
       description: '',
       category: this.category,
@@ -310,6 +327,17 @@ export class CsStepperComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(ModalTermsConditionsComponent, {
       width: '550px',
     })
+  }
+
+  setAddress(addrObj) {
+    this.firstFormGroup.get('address').setValue(addrObj.address)
+    this.firstFormGroup.get('postal').setValue(addrObj.postal_code)
+    this.firstFormGroup.get('city').setValue(addrObj.locality)
+    this.firstFormGroup.get('country').setValue(addrObj.country)
+    this.firstFormGroup.get('phone').setValue(addrObj.phone_number)
+    this.secondFormGroup.get('website').setValue(addrObj.website)
+
+    this.addressInput.nativeElement.focus()
   }
 }
 

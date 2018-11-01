@@ -5,8 +5,8 @@
                 <mat-sidenav-content>
                     <div *ngIf="!(this.loading$ | async)">
                         <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" [services]="services"
-                            [payments]="payments" (registerEvent)="register($event)" (offeringsEvent)="getOfferings($event)"
-                            (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+                            [payments]="payments" [countries]="this.countries$" (registerEvent)="register($event)"
+                            (offeringsEvent)="getOfferings($event)" (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>
                     <div *ngIf="(this.loading$ | async)" style="display: flex">
                         <mat-card class="col">

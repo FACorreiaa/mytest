@@ -60,12 +60,6 @@ export interface Day {
   endTime: string
 }
 
-export interface OpeningDays {
-  day: string
-  startTime: string
-  endTime: string
-}
-
 export interface SpecialOpeningTime {
   startDate: string
   openTime?: string
@@ -145,3 +139,8 @@ const Cuisines = [
   { name: 'restaurant', selected: false },
   { name: 'shishaBar', selected: false },
 ]
+
+export interface Countries {
+  code: string
+  name: string
+}

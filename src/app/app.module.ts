@@ -23,6 +23,7 @@ import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
 import { HttpClientModule } from '@angular/common/http'
+import { GooglePlacesDirective } from './common/directives/google-places.directive'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -31,9 +32,9 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
 
-if (!environment.production) {
-  metaReducers.unshift(debug)
-}
+// if (!environment.production) {
+//   metaReducers.unshift(debug)
+// }
 
 @NgModule({
   imports: [
