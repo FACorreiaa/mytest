@@ -13,6 +13,6 @@ export class BusinnessComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('business', this.buninessData$)
+    // console.log('business', this.buninessData$)
   }
 }

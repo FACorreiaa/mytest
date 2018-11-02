@@ -108,7 +108,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Countriesss', this.countries)
+    // console.log('Countriesss', this.countries)
   }
 
   get openHoursArray(): FormArray {
@@ -330,6 +330,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   }
 
   setAddress(addrObj) {
+    this.firstFormGroup.get('location').setValue(addrObj.location)
     this.firstFormGroup.get('address').setValue(addrObj.address)
     this.firstFormGroup.get('postal').setValue(addrObj.postal_code)
     this.firstFormGroup.get('city').setValue(addrObj.locality)
@@ -337,7 +338,22 @@ export class CsStepperComponent implements OnInit, OnChanges {
     this.firstFormGroup.get('phone').setValue(addrObj.phone_number)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
+    this.setAreaCode(addrObj.country)
+
     this.addressInput.nativeElement.focus()
+  }
+
+  changeCountry(event) {
+    this.setAreaCode(event.value)
+  }
+
+  private setAreaCode(countryName: string) {
+    if (!countryName) {
+      return
+    }
+
+    const newAreaValue = this.countries.find(c => c.name === countryName).code
+    this.firstFormGroup.get('area').setValue(newAreaValue)
   }
 }
 

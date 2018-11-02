@@ -1,6 +1,6 @@
 <mat-horizontal-stepper linear #stepper="matHorizontalStepper" *ngIf="!authorized">
     <mat-step [stepControl]="firstFormGroup">
-        <ng-template matStepLabel>Address</ng-template>
+        <ng-template matStepLabel>Your Restaurant</ng-template>
         <div class="container">
             <form [formGroup]="firstFormGroup">
                 <div class="row justify-content-center">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col">
-                            <mat-select placeholder="Country" formControlName="country">
+                            <mat-select placeholder="Country" formControlName="country" (selectionChange)="changeCountry($event)">
                                 <mat-option *ngFor="let state of countries" [value]="state.name">{{state.name}}</mat-option>
                             </mat-select>
                             <!-- <input matInput placeholder="Enter your country" formControlName="country" required> -->
@@ -60,8 +60,8 @@
                         </mat-form-field>
                     </div>
                     <div class="col-12 col-sm-8 marginBottom">
-                        <mat-form-field class="col-2 col-sm-1" style="min-width: 70px">
-                            <input matInput formControlName="area" maxlength="4" style="text-align: right;">
+                        <mat-form-field class="col-3 col-sm-2" style="min-width: 70px">
+                            <input matInput formControlName="area" maxlength="6" style="text-align: right;">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
                                 Wrong prefix
                             </mat-error>
@@ -83,7 +83,7 @@
         </div>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Informations</ng-template>
+        <ng-template matStepLabel>Contact Information</ng-template>
         <div class="container">
             <form [formGroup]="secondFormGroup">
                 <div class="row justify-content-center">
@@ -168,7 +168,7 @@
         </div>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Categories</ng-template>
+        <ng-template matStepLabel>Your offer</ng-template>
         <div class="container">
             <mat-accordion [multi]="true" color="primary">
                 <mat-expansion-panel [expanded]="true">
@@ -239,7 +239,7 @@
         </div>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Conclusion</ng-template>
+        <ng-template matStepLabel>Overview</ng-template>
         <div class="container">
             <form [formGroup]="formConclusion" (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
                 <div class="row justify-content-center">

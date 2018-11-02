@@ -24,10 +24,10 @@ export class GooglePlacesDirective implements AfterViewInit {
 
   private getFormattedAddress(place: any) {
     let location = []
-
     location = this.buildAddress(place.address_components)
 
-    location['address'] = place.formatted_address
+    location['location'] = place.name
+    location['address'] = place.formatted_address.split(',').splice(0, 1)
     location['phone_number'] = place.formatted_phone_number ? place.formatted_phone_number.replace(/ /g, '') : ''
     location['website'] = place.website
       ? place.website
