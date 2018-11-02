@@ -1,4 +1,18 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, Input, EventEmitter, Output, OnChanges, SimpleChanges, ElementRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ViewChild,
+  Input,
+  EventEmitter,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  ElementRef,
+  AfterViewChecked,
+  ChangeDetectorRef,
+} from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/common/validations'
 import {
@@ -15,7 +29,6 @@ import {
   Countries,
 } from '@app/api/models/api-models'
 
-import { CategoriesService } from '../services/categories.service'
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
 import { Observable } from 'rxjs'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
@@ -36,7 +49,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CsStepperComponent implements OnInit, OnChanges {
+export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   firstFormGroup: FormGroup
   secondFormGroup: FormGroup
   formConclusion: FormGroup
@@ -51,6 +64,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   selectedOffering: string[] = []
   selectedServices: string[] = []
   selectedPayments: string[] = []
+  addressFocus = false
 
   @Input() authorized: any
   @Input() offerings: Observable<any>
@@ -64,7 +78,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel
   @ViewChild('address') addressInput: ElementRef
 
-  constructor(private formBuilder: FormBuilder, private categoriesService: CategoriesService, public dialog: MatDialog) {}
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private change: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
@@ -109,6 +123,15 @@ export class CsStepperComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     // console.log('Countriesss', this.countries)
+  }
+
+  ngAfterViewChecked() {
+    if (this.addressFocus) {
+      this.addressInput.nativeElement.focus()
+      this.addressFocus = false
+    }
+
+    this.change.detectChanges()
   }
 
   get openHoursArray(): FormArray {
@@ -324,7 +347,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalTermsConditionsComponent, {
+    this.dialog.open(ModalTermsConditionsComponent, {
       width: '550px',
     })
   }
@@ -339,6 +362,7 @@ export class CsStepperComponent implements OnInit, OnChanges {
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
     this.setAreaCode(addrObj.country)
+    this.addressFocus = true
 
     this.addressInput.nativeElement.focus()
   }

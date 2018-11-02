@@ -130,7 +130,7 @@ const Cuisines = [
   { name: 'confectionery', selected: false },
   { name: 'cookingSchool', selected: false },
   { name: 'creperie', selected: false },
-  { name: 'diner', selected: false },
+  { name: 'dinner', selected: false },
   { name: 'foodtruck', selected: false },
   { name: 'heuriger', selected: false },
   { name: 'hotel', selected: false },
