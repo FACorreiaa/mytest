@@ -354,17 +354,17 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
   setAddress(addrObj) {
     this.firstFormGroup.get('location').setValue(addrObj.location)
-    this.firstFormGroup.get('address').setValue(addrObj.address)
+    this.firstFormGroup.get('address').setValue(addrObj.address[0])
     this.firstFormGroup.get('postal').setValue(addrObj.postal_code)
     this.firstFormGroup.get('city').setValue(addrObj.locality)
     this.firstFormGroup.get('country').setValue(addrObj.country)
     this.firstFormGroup.get('phone').setValue(addrObj.phone_number)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
-    this.setAreaCode(addrObj.country)
     this.addressFocus = true
-
     this.addressInput.nativeElement.focus()
+
+    this.setAreaCode(addrObj.country)
   }
 
   changeCountry(event) {
