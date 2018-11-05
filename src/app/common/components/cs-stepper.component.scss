@@ -6,6 +6,10 @@
     margin-bottom: 40px;
 }
 
+.marginTop_20 {
+    margin-top: 20px;
+}
+
 .minWidthFormField {
     min-width: 100px
 }
@@ -31,4 +35,26 @@
 .label_site {
     display: inline-block;
     min-width: 55px;
+}
+
+.labelTitle{
+    font-size: xx-large;
+    color: #055f66;
+    text-align: center;
+}
+
+.labelTitle_xlarge{
+    font-size: x-large;
+    color: #055f66;
+    text-align: center;
+}
+
+.labelTitle_unset{
+    font-size: unset;
+    color: #055f66;
+    text-align: center;
+}
+
+.textAlign_Center{
+    text-align: center;
 }

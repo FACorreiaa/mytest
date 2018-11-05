@@ -245,7 +245,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     const claimData: Data = {
       userFirstName: '',
       userLastName: '',
-      name: '',
+      name: form.location,
       additional: form.location,
       street: form.address,
       streetNumber: '',

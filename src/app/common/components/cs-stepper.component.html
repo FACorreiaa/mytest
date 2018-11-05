@@ -4,6 +4,10 @@
         <div class="container">
             <form [formGroup]="firstFormGroup">
                 <div class="row justify-content-center">
+                    <div class="row justify-content-center marginBottom_40 marginTop_20">
+                        <span class="col-sm-8 labelTitle">Your Restaurant</span>
+                        <span class="col-sm-8 textAlign_Center">Tell us more about your location</span>
+                    </div>
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col">
                             <input matInput placeholder="Enter your location" google-place formControlName="location"
@@ -87,6 +91,10 @@
         <div class="container">
             <form [formGroup]="secondFormGroup">
                 <div class="row justify-content-center">
+                    <div class="row justify-content-center marginBottom_40 marginTop_20">
+                        <span class="col-sm-8 labelTitle">Contact Information</span>
+                        <span class="col-sm-8 textAlign_Center">How can we contact your restaurant?</span>
+                    </div>
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col">
                             <input matInput placeholder="Enter your email" formControlName="email" [(ngModel)]="this.emailAux"
@@ -170,6 +178,10 @@
     <mat-step>
         <ng-template matStepLabel>Your offer</ng-template>
         <div class="container">
+            <div class="row justify-content-center marginBottom_40 marginTop_20">
+                <span class="col-sm-8 labelTitle">Your offer</span>
+                <span class="col-sm-8 textAlign_Center">What can your customers expect?</span>
+            </div>
             <mat-accordion [multi]="true" color="primary">
                 <mat-expansion-panel [expanded]="true">
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
@@ -244,8 +256,8 @@
             <form [formGroup]="formConclusion" (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
                 <div class="row justify-content-center">
                     <div class="col-sm-6">
-                        <div class="row justify-content-center marginBottom_40">
-                            <h2>Register</h2>
+                        <div class="row justify-content-center marginBottom_40 marginTop_20">
+                            <span class="col-sm-8 labelTitle">Register</span>
                         </div>
                         <mat-form-field class="col marginBottom">
                             <input matInput placeholder="E-mail" autocomplete="email" aria-label="E-mail"
@@ -314,7 +326,7 @@
     <mat-card class="col">
         <mat-card-content>
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-sm-4">
                     <div class="row justify-content-center marginBottom_20">
                         <svg width="159px" height="159px" viewBox="0 0 159 159" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -339,8 +351,11 @@
                             </g>
                         </svg>
                     </div>
-                    <div class="row justify-content-center marginBottom_40">
-                        Success
+                    <div class="row justify-content-center marginBottom_40 marginTop_20">
+                        <span class="labelTitle_xlarge">CONGRATULATIONS!</span>
+                        <span class="labelTitle_unset marginTop_20">Your restaurant will be now claimed on Google
+                            Business.
+                            We will inform you via mail as soon as it is online.</span>
                     </div>
                     <div class="row justify-content-center marginBottom_40">
                         <button mat-raised-button color="primary" class="big" (click)="goToProfile()">Go to Profile</button>
