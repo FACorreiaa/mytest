@@ -353,12 +353,20 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   setAddress(addrObj) {
+    if (!addrObj) {
+      return null
+    }
+
     this.firstFormGroup.get('location').setValue(addrObj.location)
     this.firstFormGroup.get('address').setValue(addrObj.address[0])
     this.firstFormGroup.get('postal').setValue(addrObj.postal_code)
     this.firstFormGroup.get('city').setValue(addrObj.locality)
     this.firstFormGroup.get('country').setValue(addrObj.country)
-    this.firstFormGroup.get('phone').setValue(addrObj.phone_number)
+
+    const regexPhone = addrObj.phone_number.replace(/^(049|0+)?/g, '')
+    console.log('regexxx', regexPhone, addrObj.phone_number)
+
+    this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
     this.addressFocus = true

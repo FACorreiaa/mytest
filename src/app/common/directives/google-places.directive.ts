@@ -24,6 +24,10 @@ export class GooglePlacesDirective implements AfterViewInit {
 
   private getFormattedAddress(place: any) {
     let location = []
+    if (!place.address_components) {
+      return null
+    }
+
     location = this.buildAddress(place.address_components)
 
     location['location'] = place.name
