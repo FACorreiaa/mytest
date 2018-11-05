@@ -61,6 +61,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   showTermConditiValidation = false
   emailAux = ''
   category = ''
+  streetNumber = ''
   selectedOffering: string[] = []
   selectedServices: string[] = []
   selectedPayments: string[] = []
@@ -248,10 +249,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       name: form.location,
       additional: form.location,
       street: form.address,
-      streetNumber: '',
+      streetNumber: this.streetNumber,
       zip: form.postal,
       city: form.city,
-      countryCode: '+49',
+      countryCode: form.area,
       url: secondFormGroup.website,
       languageCode: 'DE',
       contactEmail: secondFormGroup.email,
@@ -362,9 +363,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.firstFormGroup.get('postal').setValue(addrObj.postal_code)
     this.firstFormGroup.get('city').setValue(addrObj.locality)
     this.firstFormGroup.get('country').setValue(addrObj.country)
+    this.streetNumber = addrObj.street_number ? addrObj.street_number : ''
 
     const regexPhone = addrObj.phone_number.replace(/^(049|0+)?/g, '')
-    console.log('regexxx', regexPhone, addrObj.phone_number)
 
     this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
