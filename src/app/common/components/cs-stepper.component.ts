@@ -56,10 +56,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   matcher = new MyErrorStateMatcher()
   hours: IHours[]
   categories: ICategory[]
+
   OpenOfferings: boolean
   isRegister = false
   showTermConditiValidation = false
-  emailAux = ''
+  businessEmail = ''
   category = ''
   streetNumber = ''
   selectedOffering: string[] = []
@@ -68,9 +69,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   addressFocus = false
 
   @Input() authorized: any
-  @Input() offerings: Observable<any>
-  @Input() services: Observable<any>
-  @Input() payments: Observable<any>
+  @Input() editForm: false
+  @Input() businessToEdit: Data
+  @Input() offerings: Observable<ICategory>
+  @Input() services: Observable<ICategory>
+  @Input() payments: Observable<ICategory>
   @Input() countries: Countries[]
   @Output() private registerEvent = new EventEmitter()
   @Output() private offeringsEvent = new EventEmitter()
@@ -79,9 +82,75 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel
   @ViewChild('address') addressInput: ElementRef
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private change: ChangeDetectorRef) {}
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private change: ChangeDetectorRef) {
+    this.buildInitalFormGroup()
+  }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.businessToEdit) {
+      this.firstFormGroup = this.formBuilder.group({
+        location: [this.businessToEdit.name, Validators.required],
+        address: [this.businessToEdit.street, Validators.required],
+        postal: new FormControl(this.businessToEdit.zipCode, ZipCodeValidation),
+        city: [this.businessToEdit.city, Validators.required],
+        phone: [this.businessToEdit.contactPhoneNumber, PhoneNumberValidation],
+        area: [this.businessToEdit.countryCode, PhoneNumberPrefixValidation],
+        country: ['Germany', Validators.required],
+      })
+
+      this.businessEmail = this.businessToEdit.contactEmail
+      this.secondFormGroup = this.formBuilder.group({
+        email: [this.businessEmail, EmailValidation],
+        website: [
+          this.businessToEdit.url,
+          Validators.compose([
+            Validators.required,
+            CustomValidators.patternValidator({
+              invalidSite: true,
+            }),
+          ]),
+        ],
+        openHours: this.formBuilder.array(this.buildOpenHoursArray()),
+      })
+
+      this.categories = CategoriesArray()
+      this.hours = OpenHoursArray()
+
+      this.categories.map(x => {
+        x.selected = false
+        if (x.name === this.businessToEdit.category) {
+          x.selected = true
+        }
+      })
+
+      // console.log('init stepper: ', this.offerings, this.payments, this.services)
+    }
+
+    // if (changes.offerings) {
+    //   // this.offerings.map(x => {
+    //   //   if (this.businessToEdit.offers.includes(x.name)) {
+    //   //     x.selected = true
+    //   //   }
+    //   // })
+    // }
+  }
+
+  ngAfterViewChecked() {
+    if (this.addressFocus) {
+      this.addressInput.nativeElement.focus()
+      this.addressFocus = false
+    }
+
+    this.change.detectChanges()
+  }
+
+  get openHoursArray(): FormArray {
+    return <FormArray>this.secondFormGroup.get('openHours')
+  }
+
+  private buildInitalFormGroup() {
     this.firstFormGroup = this.formBuilder.group({
       location: ['', Validators.required],
       address: ['', Validators.required],
@@ -93,7 +162,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
 
     this.secondFormGroup = this.formBuilder.group({
-      email: [this.emailAux, EmailValidation],
+      email: [this.businessEmail, EmailValidation],
       website: [
         '',
         Validators.compose([
@@ -108,7 +177,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
     this.formConclusion = this.formBuilder.group(
       {
-        email: [this.emailAux, EmailValidation],
+        email: [this.businessEmail, EmailValidation],
         password: ['', PasswordValidation],
         confirmPassword: ['', PasswordValidation],
         termsConditions: [''],
@@ -120,23 +189,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
     this.categories = CategoriesArray()
     this.hours = OpenHoursArray()
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    // console.log('Countriesss', this.countries)
-  }
-
-  ngAfterViewChecked() {
-    if (this.addressFocus) {
-      this.addressInput.nativeElement.focus()
-      this.addressFocus = false
-    }
-
-    this.change.detectChanges()
-  }
-
-  get openHoursArray(): FormArray {
-    return <FormArray>this.secondFormGroup.get('openHours')
   }
 
   private buildOpenHoursArray(days?: OpeningTimes) {
@@ -177,7 +229,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
     if (event.checked) {
       this.category = event.source.value
-
       this.offeringsEvent.emit(event.source.value)
     } else {
       this.offerings = null
@@ -215,6 +266,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
+  onclickContactStep() {
+    console.log('Entreiii')
+  }
+
   goToProfile() {
     this.goToProfileEvent.emit()
   }
@@ -250,6 +305,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       additional: form.location,
       street: form.address,
       streetNumber: this.streetNumber,
+      zipCode: form.postal,
       zip: form.postal,
       city: form.city,
       countryCode: form.area,
@@ -282,7 +338,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return claimObject
   }
 
-  buildOpenHoursModel(openHours: any): OpeningTimes {
+  private buildOpenHoursModel(openHours: any): OpeningTimes {
     let monday: Day[] = []
     let tuesday: Day[] = []
     let wednesday: Day[] = []
@@ -332,7 +388,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return openingTimes
   }
 
-  buildDayModel(element: any): Day[] {
+  private buildDayModel(element: any): Day[] {
     const dayArray: Day[] = []
 
     let item: Day

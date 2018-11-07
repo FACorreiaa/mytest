@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule, ErrorHandler } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { ApiModule } from './api/api.module'
 import { AppRoutingModule } from './app.routing'
@@ -50,6 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     AppRoutingModule,
     MaterialModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   declarations: [AppComponent],
   exports: [MaterialModule],

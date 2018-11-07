@@ -54,6 +54,7 @@
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col">
                             <mat-select placeholder="Country" formControlName="country" (selectionChange)="changeCountry($event)">
+                                <mat-option>--None--</mat-option>
                                 <mat-option *ngFor="let state of countries" [value]="state.name">{{state.name}}</mat-option>
                             </mat-select>
                             <!-- <input matInput placeholder="Enter your country" formControlName="country" required> -->
@@ -97,7 +98,7 @@
                     </div>
                     <div class="col-sm-8 marginBottom">
                         <mat-form-field class="col">
-                            <input matInput placeholder="Enter your email" formControlName="email" [(ngModel)]="this.emailAux"
+                            <input matInput placeholder="Enter your email" formControlName="email" [(ngModel)]="this.businessEmail"
                                 required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="secondFormGroup.get('email').invalid">
@@ -169,7 +170,7 @@
                 </div>
                 <div class="row buttons d-flex justify-content-between pad">
                     <button mat-raised-button matStepperPrevious color="secondary">Back</button>
-                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                    <button mat-raised-button matStepperNext color="primary" (click)="onclickContactStep()">Next</button>
                 </div>
             </form>
 
@@ -202,12 +203,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!this.offerings">
+                    <div *ngIf="!(this.offerings.length > 0)">
                         Please select a category!
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.offerings; let i = index">
-                        <mat-checkbox color="primary" [value]="item" (change)="onOfferingsChange($event, item)">{{item}}</mat-checkbox>
+                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onOfferingsChange($event, item.name)">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -218,12 +219,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!this.services">
+                    <div *ngIf="!(this.services.length > 0)">
                         Please select a category!
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.services; let i = index">
-                        <mat-checkbox color="primary" [value]="item" (change)="onServicesChange($event, item)">{{item}}</mat-checkbox>
+                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onServicesChange($event, item.name)">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -234,12 +235,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!this.payments">
+                    <div *ngIf="!(this.payments.length > 0)">
                         Please select a category!
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let payment of this.payments; let i = index">
-                        <mat-checkbox color="primary" [value]="payment" (change)="onPaymentsChange($event, payment)">{{payment}}</mat-checkbox>
+                        <mat-checkbox color="primary" [value]="payment" [checked]="payment.selected" (change)="onPaymentsChange($event, payment.name)">{{payment.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -254,14 +255,14 @@
         <ng-template matStepLabel>Overview</ng-template>
         <div class="container">
             <form [formGroup]="formConclusion" (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
-                <div class="row justify-content-center">
+                <div *ngIf="!authorized && !editForm" class="row justify-content-center">
                     <div class="col-sm-6">
                         <div class="row justify-content-center marginBottom_40 marginTop_20">
                             <span class="col-sm-8 labelTitle">Register</span>
                         </div>
                         <mat-form-field class="col marginBottom">
                             <input matInput placeholder="E-mail" autocomplete="email" aria-label="E-mail"
-                                formControlName="email" [(ngModel)]="this.emailAux">
+                                formControlName="email" [(ngModel)]="this.businessEmail">
                             <mat-error *ngIf="formConclusion.get('email').hasError('required')">
                                 E-mail is required
                             </mat-error>

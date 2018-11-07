@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 // COMPONENTS
 import { MainComponent } from './main.component'
 import { DashboardComponent } from './containers/dashboard.component'
+import { BusinessDetailComponent } from './containers/business-detail.component'
 
 const MainRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -14,6 +15,10 @@ const MainRoutes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'business-detail/detail/:objId',
+        component: BusinessDetailComponent,
       },
     ],
   },

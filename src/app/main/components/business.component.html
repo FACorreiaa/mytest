@@ -1,4 +1,4 @@
-<mat-card ngClass="warn" *ngFor="let item of buninessData$">
+<mat-card ngClass="warn" *ngFor="let item of buninessData$ | async">
     <mat-card-header>
         <mat-card-title>{{item.additional}}</mat-card-title>
         <mat-card-subtitle><b>Category: </b>{{item.category}}</mat-card-subtitle>
@@ -7,4 +7,8 @@
         <mat-card-subtitle><b>WebSite: </b><a href="javascript:void(0);">{{item.url}}</a></mat-card-subtitle>
         <mat-card-subtitle><b>Street: </b>{{item.street}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-actions style="text-align: right">
+        <button mat-button (click)="EditBusiness($event, item.id)">Edit</button>
+        <button mat-button (click)="RemoveBusiness($event, item.id)">Remove</button>
+    </mat-card-actions>
 </mat-card>

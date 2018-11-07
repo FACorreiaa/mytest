@@ -1,0 +1,6 @@
+<div style="padding: 80px">
+    <h1 style="color: white">Edit your business - {{this.businessToEdit.additional}}</h1>
+    <br />
+    <app-cs-stepper [authorized]="false" [offerings]="this.offerings" [services]="this.services$" [payments]="this.payments$"
+        [countries]="this.countries$ | async" [businessToEdit]="this.businessToEdit" [editForm]="true"></app-cs-stepper>
+</div>

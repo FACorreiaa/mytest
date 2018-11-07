@@ -2,12 +2,14 @@ import { Action } from '@ngrx/store'
 import * as Actions from '../actions/dashboard.actions'
 
 export interface DashBoardState {
+  selectedBusiness: any
   isLoading: boolean
   business: any[]
 }
 
 const initialState: DashBoardState = {
   isLoading: false,
+  selectedBusiness: null,
   business: [],
 }
 
@@ -18,6 +20,9 @@ export function UserLoggedReducer(state = initialState, action: Actions.DashBoar
     }
     case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
       return { ...state, isLoading: false, business: action.payload }
+    }
+    case Actions.ActionTypes.SELECT_ONE_BUSINESS: {
+      return { ...state, isLoading: false, selectedBusiness: action.payload }
     }
     default:
       return state

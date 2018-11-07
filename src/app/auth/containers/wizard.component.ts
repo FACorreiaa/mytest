@@ -8,7 +8,7 @@ import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import * as fromModule from '../../app.reducers'
 import { CategoriesService } from '@app/common/services/categories.service'
-import { UserRegisterDto, Countries } from '@app/api/models/api-models'
+import { UserRegisterDto, Countries, ICategory } from '@app/api/models/api-models'
 import { CountriesService } from '@app/common/services/countries.service'
 
 @Component({
@@ -20,9 +20,9 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
   loading$: Observable<boolean>
-  offerings: Observable<any>
-  services: Observable<any>
-  payments: Observable<any>
+  offerings: ICategory[] = []
+  services: ICategory[] = []
+  payments: ICategory[] = []
   countries$: Countries[]
 
   constructor(
@@ -62,16 +62,16 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
       if (!off) {
         this.offerings = null
       } else {
-        this.offerings = off.filter(x => x.name === category)[0].offering
+        off.filter(x => x.name === category)[0].offering.map(x => this.offerings.push({ name: x, selected: false }))
       }
     })
 
     this.categoriesService.getServices().subscribe(services => {
-      this.services = services
+      services.map(x => this.services.push({ name: x, selected: false }))
     })
 
     this.categoriesService.getPayments().subscribe(payments => {
-      this.payments = payments
+      payments.map(x => this.payments.push({ name: x, selected: false }))
     })
   }
 

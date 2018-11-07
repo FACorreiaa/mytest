@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { Store } from '@ngrx/store'
 
 import * as fromModule from '../../app.reducers'
@@ -15,11 +15,17 @@ import { Observable } from 'rxjs'
 export class DashboardComponent implements OnInit {
   business$: Observable<any[]>
 
-  constructor(private router: Router, private store: Store<fromMain.MainState>, private appStore: Store<fromModule.AppState>) {
-    this.store.dispatch(new Actions.GetAllBusinessAction())
+  constructor(private router: Router, private route: ActivatedRoute, private store: Store<fromMain.MainState>, private appStore: Store<fromModule.AppState>) {
+    this.business$ = this.store.select(fromMain.getBusiness)
   }
 
   ngOnInit(): void {
-    this.business$ = this.store.select(fromMain.getBusiness)
+    this.store.dispatch(new Actions.GetAllBusinessAction())
+  }
+
+  editBusiness(objId: any) {
+    // this.store.dispatch(new Actions.SelectBusinessAction(event))
+
+    this.router.navigate(['../business-detail/detail', objId], { relativeTo: this.route })
   }
 }
