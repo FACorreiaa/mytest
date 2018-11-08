@@ -1,10 +1,11 @@
 import { Action } from '@ngrx/store'
 import * as Actions from '../actions/dashboard.actions'
+import { Data } from '@app/api/models/api-models'
 
 export interface DashBoardState {
   selectedBusiness: any
   isLoading: boolean
-  business: any[]
+  business: Data[]
 }
 
 const initialState: DashBoardState = {

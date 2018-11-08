@@ -20,11 +20,12 @@ export interface ManageBusinessData {
 }
 
 export interface Data {
+  id?: number
   zipCode: string
-  zip: string
+  // zip: string
   city: string
   street: string
-  streetNumber: string
+  // streetNumber: string
   additional: string
   category: string
   name: string

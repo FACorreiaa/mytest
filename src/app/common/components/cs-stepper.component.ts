@@ -30,7 +30,7 @@ import {
 } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -71,13 +71,17 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() authorized: any
   @Input() editForm: false
   @Input() businessToEdit: Data
-  @Input() offerings: Observable<ICategory>
-  @Input() services: Observable<ICategory>
-  @Input() payments: Observable<ICategory>
+  @Input() businessToEditId: number
+  @Input() business: Data[]
+  @Input() offerings: ICategory[]
+  @Input() services: ICategory[]
+  @Input() payments: ICategory[]
   @Input() countries: Countries[]
   @Output() private registerEvent = new EventEmitter()
+  @Output() private editionEvent = new EventEmitter()
   @Output() private offeringsEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
+  @Output() private getAllOffersEvent = new EventEmitter()
 
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel
   @ViewChild('address') addressInput: ElementRef
@@ -89,52 +93,50 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.businessToEdit) {
-      this.firstFormGroup = this.formBuilder.group({
-        location: [this.businessToEdit.name, Validators.required],
-        address: [this.businessToEdit.street, Validators.required],
-        postal: new FormControl(this.businessToEdit.zipCode, ZipCodeValidation),
-        city: [this.businessToEdit.city, Validators.required],
-        phone: [this.businessToEdit.contactPhoneNumber, PhoneNumberValidation],
-        area: [this.businessToEdit.countryCode, PhoneNumberPrefixValidation],
-        country: ['Germany', Validators.required],
-      })
+    if (changes.business) {
+      this.businessToEdit = this.business.find(bs => bs.id === this.businessToEditId)
 
-      this.businessEmail = this.businessToEdit.contactEmail
-      this.secondFormGroup = this.formBuilder.group({
-        email: [this.businessEmail, EmailValidation],
-        website: [
-          this.businessToEdit.url,
-          Validators.compose([
-            Validators.required,
-            CustomValidators.patternValidator({
-              invalidSite: true,
-            }),
-          ]),
-        ],
-        openHours: this.formBuilder.array(this.buildOpenHoursArray()),
-      })
+      // console.log('Changes stepper', this.businessToEditId, 'array:', this.business, '+ map +', this.business.find(bs => bs.id === this.businessToEditId))
 
-      this.categories = CategoriesArray()
-      this.hours = OpenHoursArray()
+      if (this.businessToEdit) {
+        this.firstFormGroup = this.formBuilder.group({
+          location: [this.businessToEdit.name, Validators.required],
+          address: [this.businessToEdit.street, Validators.required],
+          postal: new FormControl(this.businessToEdit.zipCode, ZipCodeValidation),
+          city: [this.businessToEdit.city, Validators.required],
+          phone: [this.businessToEdit.contactPhoneNumber, PhoneNumberValidation],
+          area: ['+49', PhoneNumberPrefixValidation],
+          country: ['Germany', Validators.required],
+        })
 
-      this.categories.map(x => {
-        x.selected = false
-        if (x.name === this.businessToEdit.category) {
-          x.selected = true
-        }
-      })
+        this.businessEmail = this.businessToEdit.contactEmail
+        this.secondFormGroup = this.formBuilder.group({
+          email: [this.businessEmail, EmailValidation],
+          website: [
+            this.businessToEdit.url,
+            Validators.compose([
+              Validators.required,
+              CustomValidators.patternValidator({
+                invalidSite: true,
+              }),
+            ]),
+          ],
+          openHours: this.formBuilder.array(this.buildOpenHoursArray()),
+        })
 
-      // console.log('init stepper: ', this.offerings, this.payments, this.services)
+        this.categories = CategoriesArray()
+        this.hours = OpenHoursArray()
+
+        this.categories.map(x => {
+          x.selected = false
+          if (x.name === this.businessToEdit.category) {
+            x.selected = true
+          }
+        })
+
+        this.getAllOffersEvent.emit(this.businessToEdit)
+      }
     }
-
-    // if (changes.offerings) {
-    //   // this.offerings.map(x => {
-    //   //   if (this.businessToEdit.offers.includes(x.name)) {
-    //   //     x.selected = true
-    //   //   }
-    //   // })
-    // }
   }
 
   ngAfterViewChecked() {
@@ -278,21 +280,84 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    * This method save the claim and registration information.
    */
   save(form: FormGroup, secondFormGroup: FormGroup, formConclusion: FormGroup) {
-    if (!formConclusion.get('termsConditions').value) {
-      this.showTermConditiValidation = true
+    if (this.editForm) {
+      const businessToEdit = this.editionData(form.value, secondFormGroup.value, formConclusion.value)
 
-      return null
+      this.editionEvent.emit(businessToEdit)
+    } else {
+      if (!formConclusion.get('termsConditions').value) {
+        this.showTermConditiValidation = true
+
+        return null
+      }
+
+      const claim = this.createClaimToSave(form.value, secondFormGroup.value, formConclusion.value)
+
+      this.registerEvent.emit(claim)
+    }
+  }
+
+  /**
+   * This method save the business edition.
+   */
+  private editionData(firstForm: any, secondFormGroup: any, formConclusion: any) {
+    this.offerings.map(off => {
+      if (off.selected) {
+        this.selectedOffering.push(off.name)
+      }
+    })
+
+    this.services.map(off => {
+      if (off.selected) {
+        this.selectedServices.push(off.name)
+      }
+    })
+
+    this.payments.map(off => {
+      if (off.selected) {
+        this.selectedPayments.push(off.name)
+      }
+    })
+
+    const claimData: Data = {
+      userFirstName: '',
+      userLastName: '',
+      name: firstForm.location,
+      additional: firstForm.location,
+      street: firstForm.address,
+      // streetNumber: this.streetNumber,
+      zipCode: firstForm.postal,
+      // zip: firstForm.postal,
+      city: firstForm.city,
+      countryCode: 'DE', // firstForm.area,
+      url: secondFormGroup.website,
+      languageCode: 'DE',
+      contactEmail: secondFormGroup.email,
+      contactPhoneNumber: firstForm.phone,
+      openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
+      offers: this.selectedOffering,
+      description: '',
+      category: this.categories.find(x => x.selected).name,
+      services: this.selectedServices,
+      paymentMethods: this.selectedPayments,
+      reservationUri: '',
+      menuUri: '',
+      profileImageUri: '',
+      titleImageUri: '',
     }
 
-    const claim = this.createClaimToSave(form.value, secondFormGroup.value, formConclusion.value)
+    const manageBusinessData: ManageBusinessData = {
+      data: claimData,
+      channels: ['GOOGLE_MY_BUSINESS'],
+    }
 
-    this.registerEvent.emit(claim)
+    return manageBusinessData
   }
 
   /**
    * This method creates the objects for the middlware
    */
-  private createClaimToSave(form: any, secondFormGroup: any, formConclusion: any) {
+  private createClaimToSave(firstForm: any, secondFormGroup: any, formConclusion: any) {
     const user: UserLoginDto = {
       email: formConclusion.email,
       password: formConclusion.password,
@@ -301,18 +366,18 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     const claimData: Data = {
       userFirstName: '',
       userLastName: '',
-      name: form.location,
-      additional: form.location,
-      street: form.address,
-      streetNumber: this.streetNumber,
-      zipCode: form.postal,
-      zip: form.postal,
-      city: form.city,
-      countryCode: form.area,
+      name: firstForm.location,
+      additional: firstForm.location,
+      street: firstForm.address,
+      // streetNumber: this.streetNumber,
+      zipCode: firstForm.postal,
+      // zip: firstForm.postal,
+      city: firstForm.city,
+      countryCode: 'DE', // firstForm.area,
       url: secondFormGroup.website,
       languageCode: 'DE',
       contactEmail: secondFormGroup.email,
-      contactPhoneNumber: form.phone,
+      contactPhoneNumber: firstForm.phone,
       openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
       offers: this.selectedOffering,
       description: '',

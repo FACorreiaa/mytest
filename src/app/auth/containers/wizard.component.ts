@@ -54,6 +54,8 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
+    console.log('object', object)
+
     this.store.dispatch(new AuthActions.RegisterAttempt(object))
   }
 
@@ -62,7 +64,9 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
       if (!off) {
         this.offerings = null
       } else {
-        off.filter(x => x.name === category)[0].offering.map(x => this.offerings.push({ name: x, selected: false }))
+        const aux = []
+        off.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
+        this.offerings = aux
       }
     })
 
