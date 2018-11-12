@@ -126,7 +126,7 @@
                         <mat-list class="col" formArrayName="openHours">
                             <h2 mat-header>Choose your open days and hours, you can split the service hours</h2>
                             <mat-list-item *ngFor="let position of this.openHoursArray.controls let ph=index"
-                                [formGroupName]="ph" style="margin-top: 40px;">
+                                [formGroupName]="ph" style="margin-top: 40px; border-bottom: lightgray 1px solid; padding-bottom: 70px">
 
                                 <mat-checkbox [checked]="position.value.isSelected" formControlName="isSelected" color="primary"
                                     (change)="position.disable = !position.disable" class="col-12 col-sm-3">{{position.value.name}}</mat-checkbox>

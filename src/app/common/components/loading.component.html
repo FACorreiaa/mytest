@@ -1,7 +1,17 @@
-<div *ngIf="show">
-    <div>
+<!-- <div *ngIf="show" class="overlay">
+    <div class="loading">
         <h2>Loading...</h2>
         <p>{{message}}</p>
-        <mat-progress-spinner aria-label="spiner" mode="indeterminate"></mat-progress-spinner>
+        <div style="padding-top: 25px">
+            <mat-progress-spinner aria-label="spiner" mode="indeterminate"></mat-progress-spinner>
+        </div>
     </div>
+</div> -->
+
+<div *ngIf="show">
+        <div>
+            <h2>Loading...</h2>
+            <p>{{message}}</p>
+            <mat-progress-spinner aria-label="spiner" mode="indeterminate"></mat-progress-spinner>
+        </div>
 </div>

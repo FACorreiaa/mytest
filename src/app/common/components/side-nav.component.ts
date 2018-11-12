@@ -10,7 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router'
 export class SideNavComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  GoToDashboard() {
+  goToDashboard() {
     this.router.navigate(['../main/dashboard'], { relativeTo: this.route })
+  }
+
+  addBusiness() {
+    this.router.navigate(['../main/new'], { relativeTo: this.route })
   }
 }

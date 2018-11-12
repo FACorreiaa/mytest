@@ -6,22 +6,46 @@ export interface DashBoardState {
   selectedBusiness: any
   isLoading: boolean
   business: Data[]
+  errorMessage: string
 }
 
 const initialState: DashBoardState = {
   isLoading: false,
   selectedBusiness: null,
   business: [],
+  errorMessage: null,
 }
 
 export function UserLoggedReducer(state = initialState, action: Actions.DashBoardAction): DashBoardState {
   switch (action.type) {
-    case Actions.ActionTypes.GET_BUSINESS_UNITS: {
+    case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
+      return { ...state, business: action.payload }
+    }
+
+    case Actions.ActionTypes.ADD_BUSINESS: {
       return { ...state, isLoading: true }
     }
-    case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
-      return { ...state, isLoading: false, business: action.payload }
+
+    case Actions.ActionTypes.ADD_BUSINESS_SUCCESS: {
+      return { ...state, isLoading: true }
     }
+
+    case Actions.ActionTypes.ADD_BUSINESS_FAILURE: {
+      return { ...state, isLoading: true }
+    }
+
+    case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
+      return {
+        ...state,
+        errorMessage: action.payload.payload.error._body,
+        isLoading: false,
+      }
+    }
+
+    case Actions.ActionTypes.ERROR_LAYOUT_HIDE: {
+      return { ...state, errorMessage: '' }
+    }
+
     case Actions.ActionTypes.SELECT_ONE_BUSINESS: {
       return { ...state, isLoading: false, selectedBusiness: action.payload }
     }

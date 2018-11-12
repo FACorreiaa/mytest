@@ -9,6 +9,7 @@ import { MainComponent } from './main.component'
 import { DashboardComponent } from './containers/dashboard.component'
 import { BusinnessComponent } from './components/business.component'
 import { BusinessDetailComponent } from './containers/business-detail.component'
+import { AddBusinessComponent } from './containers/add-business.component'
 
 // EFFECTS
 
@@ -29,7 +30,7 @@ import { CsStepperModule } from '@app/common/components/cs-stepper.module'
     CsStepperModule,
     EffectsModule.forFeature([DashBoardEffects]),
   ],
-  declarations: [MainComponent, DashboardComponent, BusinnessComponent, BusinessDetailComponent],
+  declarations: [MainComponent, DashboardComponent, BusinnessComponent, BusinessDetailComponent, AddBusinessComponent],
   exports: [MainComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

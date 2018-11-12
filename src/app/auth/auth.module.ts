@@ -10,6 +10,9 @@ import { AuthGuard } from './auth.guard'
 import { AuthComponent } from './auth.component'
 import { WizardComponent } from './containers/wizard.component'
 import { LoginComponent } from './containers/login.component'
+import { ErrorComponent } from './containers/error.component'
+
+// Modules
 import { CsStepperModule } from '@app/common/components/cs-stepper.module'
 
 // Material
@@ -24,12 +27,13 @@ const AuthRoutingModule = RouterModule.forChild([
   { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
   { path: AppRoutes.WIZARD, component: WizardComponent },
   { path: AppRoutes.LOGIN, component: LoginComponent },
+  { path: AppRoutes.ERROR, component: ErrorComponent },
   { path: 'main', canActivate: [AuthGuard], loadChildren: '../main/main.module#MainModule' },
 ])
 
 @NgModule({
   imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, MaterialModule, CsStepperModule, EffectsModule.forFeature([AuthEffects])],
-  declarations: [AuthComponent, WizardComponent, LoginComponent],
+  declarations: [AuthComponent, WizardComponent, LoginComponent, ErrorComponent],
   entryComponents: [ModalTermsConditionsComponent],
   providers: [AuthGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

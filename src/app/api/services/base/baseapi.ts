@@ -1,7 +1,7 @@
 import { GlobalEnvironmentService } from '@app/global.environment.service'
 import { ApiHttpService } from '@app/api/http/http.service'
 import { Injector } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, throwError } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
 import {} from '@app/api/models/api-models'
@@ -33,7 +33,7 @@ export abstract class BaseApi {
         const responseObject = res.json() as any
         return responseObject
       }),
-      catchError((error: any) => Observable.throw(error))
+      catchError((error: any) => throwError(error))
     )
   }
 
@@ -50,7 +50,7 @@ export abstract class BaseApi {
         const responseObject = res.json() as any
         return responseObject
       }),
-      catchError((error: any) => Observable.throw(error))
+      catchError((error: any) => throwError(error))
     )
   }
 

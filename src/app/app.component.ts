@@ -24,7 +24,13 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.store.pipe(delay(0), select(fromApp.userAuthorized), takeUntil(this.userSubscription$)).subscribe(authorized => (this.authorized = authorized))
+    this.store
+      .pipe(
+        delay(0),
+        select(fromApp.userAuthorized),
+        takeUntil(this.userSubscription$)
+      )
+      .subscribe(authorized => (this.authorized = authorized))
   }
 
   public ngOnDestroy() {

@@ -24,8 +24,10 @@ export class DashboardComponent implements OnInit {
   }
 
   editBusiness(objId: any) {
-    // this.store.dispatch(new Actions.SelectBusinessAction(event))
-
     this.router.navigate(['../business-detail/detail', objId], { relativeTo: this.route })
+  }
+
+  deleteBusiness(objId: any) {
+    console.log('deleteBusiness container')
   }
 }

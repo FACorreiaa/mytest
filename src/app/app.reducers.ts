@@ -32,6 +32,8 @@ export const hasLoginError = createSelector(getAuthState, fromAuth.hasLoginError
 
 export const loginLoading = createSelector(getAuthState, fromAuth.getLoading)
 
+export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)
+
 export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser)
 
 export const getLoggedUserRoles = createSelector(getLoggedUser, loggedUser => {

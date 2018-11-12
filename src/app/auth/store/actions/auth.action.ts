@@ -15,6 +15,8 @@ export const AuthActionTypes = {
   MANAGE_BUSINESS_ATTEMPT: '[Auth] Manaege Business Attempt',
   MANAGE_BUSINESS_FAILURE: '[Auth] Manaege Business Failure',
   MANAGE_BUSINESS_SUCCESS: '[Auth] Manaege Business Success',
+  ERROR_LAYOUT_SHOW: '[Error] show',
+  ERROR_LAYOUT_HIDE: '[Error] hide',
 }
 
 export class LoginAttempt implements Action {
@@ -82,6 +84,16 @@ export class ManageBusinessFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class ErrorLayoutShow implements Action {
+  public type = AuthActionTypes.ERROR_LAYOUT_SHOW
+  constructor(public payload: any) {}
+}
+
+export class ErrorLayoutHide implements Action {
+  public type = AuthActionTypes.ERROR_LAYOUT_HIDE
+  constructor(public payload: any) {}
+}
+
 export type AuthActions =
   | LoginAttempt
   | LoginSuccess
@@ -96,3 +108,5 @@ export type AuthActions =
   | ManageBusinessAttempt
   | ManageBusinessSuccess
   | ManageBusinessFailure
+  | ErrorLayoutShow
+  | ErrorLayoutHide

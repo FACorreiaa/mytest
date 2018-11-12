@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { tap, switchMap, map, withLatestFrom, catchError } from 'rxjs/operators'
-import { of } from 'rxjs'
+import { of, throwError } from 'rxjs'
 import { Router } from '@angular/router'
 
 import * as AuthActions from '../actions/auth.action'
+
 import * as fromModule from '../../auth.reducer'
 import { AuthState } from '../../auth.reducer'
 import { reducerName } from '../../auth.reducer'
-import { Action as ActionDispatched, UserLoginDto, Data } from '../../../api/models/api-models'
+import { Action as ActionDispatched } from '../../../api/models/api-models'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { GlobalEnvironmentService } from '../../../global.environment.service'
 import { IAuthorizationService } from '../../../api/interfaces/i.authorization.service'
@@ -22,9 +23,6 @@ import 'rxjs/add/operator/catch'
 @Injectable()
 export class AuthEffects {
   private tokenIndexInLocalStorage: string
-
-  // Temporary properties, just for development reasons
-  // private userAux: UserLoginDto = { email: 'test3@cocus.com', password: '12345678' }
 
   constructor(
     private actions$: Actions,
@@ -41,21 +39,21 @@ export class AuthEffects {
   public loginUser$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGIN_ATTEMPT),
     switchMap((action: any) =>
-      this.auth
-        .login(action.payload)
-        .map(user => {
+      this.auth.login(action.payload).pipe(
+        map(user => {
           return user == null ? new AuthActions.LoginFailure({}) : new AuthActions.LoginSuccess(user)
-        })
-        .catch(() => of(new AuthActions.LoginFailure({})))
+        }),
+        catchError(error => of(new AuthActions.LoginFailure({ error })))
+      )
     )
   )
 
   @Effect({ dispatch: false })
   loginFailure$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.LOGIN_FAILURE),
-    tap(() => {
-      // Temporary - should redirect to error page
-      console.log('login failure - effect')
+    tap(payload => {
+      this.store$.dispatch(new AuthActions.ErrorLayoutShow(payload))
+      this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -85,22 +83,24 @@ export class AuthEffects {
 
   // ----------------- REGISTER -----------------
   @Effect()
-  public registerUser$ = this.actions$.ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT).switchMap((action: any) =>
-    this.auth
-      .register(action.payload.user)
-      .map(user => {
-        return user == null ? new AuthActions.RegisterFailure({}) : new AuthActions.RegisterSuccess(user)
-      })
-      .catch(() => of(new AuthActions.RegisterFailure({})))
+  public registerUser$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.REGISTER_ATTEMPT),
+    switchMap((action: any) =>
+      this.auth.register(action.payload.user).pipe(
+        map(user => {
+          return user == null ? new AuthActions.RegisterFailure({}) : new AuthActions.RegisterSuccess(user)
+        }),
+        catchError(error => of(new AuthActions.RegisterFailure({ error })))
+      )
+    )
   )
 
   @Effect({ dispatch: false })
   registerFailure$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.REGISTER_FAILURE),
-    tap(() => {
-      // Temporary - should redirect to error page
-      console.log('registration failure - effect')
-      this.router.navigate([AuthRoutes.WIZARD])
+    tap(payload => {
+      this.store$.dispatch(new AuthActions.ErrorLayoutShow(payload))
+      this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -111,10 +111,6 @@ export class AuthEffects {
     map(([action, storeRegister]: [ActionDispatched, AuthState]) => {
       return new AuthActions.LoginAttempt(storeRegister.loggedUser)
     })
-    // ,
-    // tap((payload: fromModule.AuthState) => {
-    //   this.router.navigate([AuthRoutes.LOGIN])
-    // })
   )
 
   // ----------------- Manage Business -----------------
@@ -122,24 +118,22 @@ export class AuthEffects {
   @Effect()
   public manageBusiness$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_ATTEMPT),
-    switchMap((payload: any) =>
-      this.auth
-        .manageBusiness(payload.payload)
-        .map(res => {
-          return res == null ? new AuthActions.ManageBusinessFailure({}) : new AuthActions.ManageBusinessSuccess(res)
-        })
-        .catch(() => of(new AuthActions.ManageBusinessFailure({})))
+    switchMap((action: any) =>
+      this.auth.manageBusiness(action.payload).pipe(
+        map(response => {
+          return response == null ? new AuthActions.ManageBusinessFailure({}) : new AuthActions.ManageBusinessSuccess(response)
+        }),
+        catchError(error => of(new AuthActions.ManageBusinessFailure({ error })))
+      )
     )
   )
 
   @Effect({ dispatch: false })
   manageBusinessFailure$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_FAILURE),
-    tap(() => {
-      // Temporary - should redirect to error page
-      console.log('manage business failure - effect')
-
-      // this.router.navigate([AuthRoutes.MAIN])
+    tap(payload => {
+      this.store$.dispatch(new AuthActions.ErrorLayoutShow(payload))
+      this.router.navigate([AuthRoutes.ERROR])
     })
   )
 

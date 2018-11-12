@@ -1,0 +1,13 @@
+<div style="padding: 80px">
+        <h1 style="color: white">Add a business</h1>
+        <br />
+                <app-cs-stepper [authorized]="false" 
+                [offerings]="this.offerings" 
+                [services]="services"
+                [payments]="payments" 
+                [countries]="this.countries$"
+                [editForm]="true"
+                (offeringsEvent)="getOfferings($event)"
+                (editionEvent)="addBusiness($event)"
+                (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+</div>

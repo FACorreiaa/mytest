@@ -1,5 +1,5 @@
 import { Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers, RequestMethod } from '@angular/http'
-import { Observable } from 'rxjs'
+import { Observable, throwError } from 'rxjs'
 import { retryWhen } from 'rxjs/operators'
 
 export class ApiHttpService extends Http {
@@ -38,11 +38,13 @@ export class ApiHttpService extends Http {
       }
     }
 
-    return super.request(url, this.defOptions).pipe(
-      retryWhen(errors => {
-        throw Observable.throw(errors)
-      })
-    )
+    return super.request(url, this.defOptions).catch(this.catchError(this))
+
+    // .pipe(
+    //   retryWhen(errors => {
+    //     throw Observable.throw(errors)
+    //   })
+    // )
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -60,9 +62,18 @@ export class ApiHttpService extends Http {
     headers.forEach((header: Object) => {
       const key: string = Object.keys(header)[0]
       const headerValue: string = (header as any)[key]
-      /* tslint:disable */
+        /* tslint:disable */
       ;(request.headers as Headers).set(key, headerValue)
     })
+  }
+
+  private catchError(self: ApiHttpService) {
+    return (res: Response) => {
+      if (res.status === 401 || res.status === 403 || res.status === 400) {
+        // console.log('httpServiceError: ', res)
+      }
+      return throwError(res)
+    }
   }
 
   private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {

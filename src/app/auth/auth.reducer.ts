@@ -13,3 +13,5 @@ export const hasLoginError = (state: AuthState) => state.hasLoginError
 export const getLoading = (state: AuthState) => state.loading
 
 export const getLoggedUser = (state: AuthState) => state.loggedUser
+
+export const getErrorMessage = (state: AuthState) => state.errorMessage

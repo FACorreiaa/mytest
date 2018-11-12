@@ -412,33 +412,35 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     let saturday: Day[] = []
     let sunday: Day[] = []
 
-    openHours.filter(x => x.isSelected).forEach(element => {
-      switch (element.name) {
-        case 'monday':
-          monday = this.buildDayModel(element)
-          break
-        case 'tuesday':
-          tuesday = this.buildDayModel(element)
-          break
-        case 'wednesday':
-          wednesday = this.buildDayModel(element)
-          break
-        case 'thursday':
-          thursday = this.buildDayModel(element)
-          break
-        case 'friday':
-          friday = this.buildDayModel(element)
-          break
-        case 'saturday':
-          saturday = this.buildDayModel(element)
-          break
-        case 'sunday':
-          sunday = this.buildDayModel(element)
-          break
-        default:
-          break
-      }
-    })
+    openHours
+      .filter(x => x.isSelected)
+      .forEach(element => {
+        switch (element.name) {
+          case 'monday':
+            monday = this.buildDayModel(element)
+            break
+          case 'tuesday':
+            tuesday = this.buildDayModel(element)
+            break
+          case 'wednesday':
+            wednesday = this.buildDayModel(element)
+            break
+          case 'thursday':
+            thursday = this.buildDayModel(element)
+            break
+          case 'friday':
+            friday = this.buildDayModel(element)
+            break
+          case 'saturday':
+            saturday = this.buildDayModel(element)
+            break
+          case 'sunday':
+            sunday = this.buildDayModel(element)
+            break
+          default:
+            break
+        }
+      })
 
     const openingTimes: OpeningTimes = {
       monday: monday,

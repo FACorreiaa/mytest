@@ -9,6 +9,9 @@ export interface AuthState {
   userToken: string
   loading: boolean
   hasLoginError: boolean
+  hasRegisterError: boolean
+  hasManageError: boolean
+  errorMessage: string
 }
 
 const initialState: AuthState = {
@@ -19,9 +22,10 @@ const initialState: AuthState = {
   userToken: null,
   loading: false,
   hasLoginError: false,
+  hasRegisterError: false,
+  hasManageError: false,
+  errorMessage: null,
 }
-
-export const reducerName = 'auth'
 
 export function AuthReducer(state = initialState, action: AuthActions): AuthState {
   switch (action.type) {
@@ -96,6 +100,21 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       return Object.assign({}, state, {
         hasLoginError: true,
         loading: false,
+      })
+    }
+
+    case AuthActionTypes.ERROR_LAYOUT_SHOW: {
+      return {
+        ...state,
+        errorMessage: action.payload.payload.error._body,
+      }
+    }
+
+    case AuthActionTypes.ERROR_LAYOUT_HIDE: {
+      return Object.assign({}, state, {
+        errorOpened: false,
+        errorStatus: 0,
+        errorLabel: '',
       })
     }
 

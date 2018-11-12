@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Router, ActivatedRoute } from '@angular/router'
+import { MatDialog } from '@angular/material'
+import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
 
 @Component({
   selector: 'business-card',
@@ -10,8 +12,9 @@ import { Router, ActivatedRoute } from '@angular/router'
 export class BusinnessComponent implements OnInit, OnChanges {
   @Input() buninessData$: Observable<any[]>
   @Output() private editBusinessEvent = new EventEmitter()
+  @Output() private deleteBusinessEvent = new EventEmitter()
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {}
 
   ngOnInit() {}
 
@@ -21,12 +24,13 @@ export class BusinnessComponent implements OnInit, OnChanges {
 
   EditBusiness(event, businessId) {
     this.editBusinessEvent.emit(businessId)
-
-    // console.log('Edit', event, businessId)
-    // this.router.navigate(['../business-detail/detail'], { relativeTo: this.route })
   }
 
-  RemoveBusiness(event, business) {
-    console.log('Remove', event, business)
+  RemoveBusiness(event, businessId) {
+    const ref = this.dialog.open(ModalTermsConditionsComponent, { data: { isDelete: true }, width: '550px' })
+    const sub = ref.componentInstance.onDelete.subscribe(() => {
+      console.log('delete')
+      this.deleteBusinessEvent.emit(businessId)
+    })
   }
 }

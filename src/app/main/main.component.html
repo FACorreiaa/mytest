@@ -4,7 +4,16 @@
             <app-side-nav></app-side-nav>
         </mat-sidenav>
         <mat-sidenav-content>
-            <main class="main-container">
+            <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
+                <mat-card class="col">
+                    <mat-card-content>
+                        <div class="row justify-content-center">
+                            <cs-loading [show]="true"></cs-loading>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <main class="main-container" *ngIf="!(this.loading$ | async)">
                 <router-outlet></router-outlet>
             </main>
         </mat-sidenav-content>
