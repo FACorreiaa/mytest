@@ -71,7 +71,7 @@ export class ApiHttpService extends Http {
       const key: string = Object.keys(header)[0]
       const headerValue: string = (header as any)[key]
         /* tslint:disable */
-        ; (request.headers as Headers).set(key, headerValue)
+      ;(request.headers as Headers).set(key, headerValue)
     })
   }
 

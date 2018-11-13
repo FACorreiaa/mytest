@@ -586,9 +586,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
   steperchange(event: any) {
     if (this.thirdFormGroup.get('hasSelection').invalid) {
-      this.dialog.open(ModalTermsConditionsComponent, {
-        width: '550px',
-      })
+      this.dialog.open(ModalTermsConditionsComponent, { data: { isOffersValidation: true }, width: '550px' })
     }
 
     console.log('eventt stepper', event)

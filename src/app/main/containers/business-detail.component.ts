@@ -66,7 +66,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void { }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   getOfferings(category: string) {
     const aux = []
