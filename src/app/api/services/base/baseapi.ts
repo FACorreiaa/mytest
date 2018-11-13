@@ -4,7 +4,7 @@ import { Injector } from '@angular/core'
 import { Observable, throwError } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
-import {} from '@app/api/models/api-models'
+import { } from '@app/api/models/api-models'
 import { map, catchError } from 'rxjs/operators'
 
 export abstract class BaseApi {
@@ -71,6 +71,23 @@ export abstract class BaseApi {
     )
   }
 
+  /**
+   * Using PUT.
+   * Method to send a request of type form. DELETE
+   * @param obj - The object value.
+   * @param path - The path from resource.
+   */
+  public getObjectsPUT<T>(obj: Object, path: string): Observable<T> {
+    this.setHeaderForRequest('PUT')
+    return this.basehttp.put(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+      map((res: Response) => {
+        const responseObject = res.json() as any
+        return responseObject
+      }),
+      catchError((error: any) => throwError(error))
+    )
+  }
+
   private setHeaderForRequest(type: string): void {
     switch (type) {
       case 'POST':
@@ -86,6 +103,12 @@ export abstract class BaseApi {
         }
         break
       case 'DELETE':
+        {
+          const headers = new Headers({ 'Content-Type': 'application/json' })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
+      case 'PUT':
         {
           const headers = new Headers({ 'Content-Type': 'application/json' })
           this.defOptions = new RequestOptions({ headers: headers })

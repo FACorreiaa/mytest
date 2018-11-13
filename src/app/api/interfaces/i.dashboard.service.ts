@@ -4,7 +4,7 @@ import { Data, ManageBusinessData, DeleteBusinessData } from '../models/api-mode
 export abstract class IDashBoardService {
   public abstract businessData(): Observable<Data>
 
-  public abstract editBusinessData(): Observable<any>
+  public abstract editBusinessData(manageData: ManageBusinessData): Observable<any>
 
   public abstract removeBusinessData(deleteData: DeleteBusinessData): Observable<any>
 
