@@ -14,9 +14,9 @@ export class BusinnessComponent implements OnInit, OnChanges {
   @Output() private editBusinessEvent = new EventEmitter()
   @Output() private deleteBusinessEvent = new EventEmitter()
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('business', this.buninessData$)
@@ -26,11 +26,11 @@ export class BusinnessComponent implements OnInit, OnChanges {
     this.editBusinessEvent.emit(businessId)
   }
 
-  RemoveBusiness(event, businessId) {
+  RemoveBusiness(event, business) {
     const ref = this.dialog.open(ModalTermsConditionsComponent, { data: { isDelete: true }, width: '550px' })
     const sub = ref.componentInstance.onDelete.subscribe(() => {
       console.log('delete')
-      this.deleteBusinessEvent.emit(businessId)
+      this.deleteBusinessEvent.emit(business)
     })
   }
 }

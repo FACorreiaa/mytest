@@ -34,6 +34,18 @@ export function UserLoggedReducer(state = initialState, action: Actions.DashBoar
       return { ...state, isLoading: true }
     }
 
+    case Actions.ActionTypes.DELETE_BUSINESS: {
+      return { ...state, isLoading: true }
+    }
+
+    case Actions.ActionTypes.DELETE_BUSINESS_SUCCESS: {
+      return { ...state, isLoading: false }
+    }
+
+    case Actions.ActionTypes.DELETE_BUSINESS_FAILURE: {
+      return { ...state, isLoading: false }
+    }
+
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
       return {
         ...state,

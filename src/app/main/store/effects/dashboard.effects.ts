@@ -114,7 +114,7 @@ export class DashBoardEffects {
     ofType(dashBoardActions.ActionTypes.DELETE_BUSINESS),
     switchMap((payload: any) =>
       this.dashBoardService
-        .editBusinessData()
+        .removeBusinessData(payload)
         .map((response: any) => new dashBoardActions.DeleteBusinessSuccessAction(response))
         .catch(error => of(new dashBoardActions.DeleteBusinessFailureAction({ error })))
     )
@@ -137,5 +137,5 @@ export class DashBoardEffects {
     })
   )
 
-  constructor(private actions$: Actions, private router: Router, private store$: Store<fromModule.MainState>, private dashBoardService: IDashBoardService) {}
+  constructor(private actions$: Actions, private router: Router, private store$: Store<fromModule.MainState>, private dashBoardService: IDashBoardService) { }
 }

@@ -19,6 +19,12 @@ export interface ManageBusinessData {
   channels: string[]
 }
 
+export interface DeleteBusinessData {
+  id: number
+  data: Data
+  channels: string[]
+}
+
 export interface Data {
   id?: number
   zipCode: string
