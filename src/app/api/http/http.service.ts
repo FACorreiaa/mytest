@@ -59,6 +59,10 @@ export class ApiHttpService extends Http {
     return this.requestHelper({ body: body, method: RequestMethod.Delete, url: url }, options)
   }
 
+  public put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    return this.requestHelper({ body: body, method: RequestMethod.Put, url: url }, options)
+  }
+
   private setGlobalHeaders(headers: Array<Object>, request: Request | RequestOptionsArgs) {
     if (!request.headers) {
       request.headers = new Headers()
@@ -67,7 +71,7 @@ export class ApiHttpService extends Http {
       const key: string = Object.keys(header)[0]
       const headerValue: string = (header as any)[key]
         /* tslint:disable */
-      ;(request.headers as Headers).set(key, headerValue)
+        ; (request.headers as Headers).set(key, headerValue)
     })
   }
 

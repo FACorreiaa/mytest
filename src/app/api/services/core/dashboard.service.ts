@@ -16,31 +16,16 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
     return this.getObjects(`${this.businessControllerRoute}/getAll`)
   }
 
-  public editBusinessData(): Observable<any> {
-    // Temporary- just for development reasons
-    return Observable.create(observer => {
-      observer.next({ success: 'true' })
-      observer.complete()
-    })
+  public editBusinessData(manageData: ManageBusinessData): Observable<any> {
+    return this.getObjectsPUT(manageData, `${this.businessControllerRoute}/manage/${manageData.data.id}`)
   }
 
   // TODO - Fix parameter type
   public removeBusinessData(deleteData: any): Observable<any> {
     return this.getObjectsDELETE(deleteData.payload, `${this.businessControllerRoute}/manage/${deleteData.payload.id}`)
-    // Temporary- just for development reasons
-    /* return Observable.create(observer => {
-      observer.next({ success: 'true' })
-      observer.complete()
-    }) */
   }
 
   public addBusinessData(manageData: ManageBusinessData): Observable<any> {
     return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage`)
-
-    // Temporary- just for development reasons
-    // return Observable.create(observer => {
-    //   observer.next({ success: 'true' })
-    //   observer.complete()
-    // })
   }
 }

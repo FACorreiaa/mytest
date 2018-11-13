@@ -66,7 +66,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void { }
 
   getOfferings(category: string) {
     const aux = []
@@ -76,6 +76,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
 
   editBusiness(object: ManageBusinessData) {
     console.log('object', object)
-    return null
+    object.data.id = this.businessObjectId
+    this.store.dispatch(new Actions.EditBusinessAction(object))
   }
 }

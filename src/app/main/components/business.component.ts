@@ -22,8 +22,8 @@ export class BusinnessComponent implements OnInit, OnChanges {
     // console.log('business', this.buninessData$)
   }
 
-  EditBusiness(event, businessId) {
-    this.editBusinessEvent.emit(businessId)
+  EditBusiness(event, business) {
+    this.editBusinessEvent.emit(business)
   }
 
   RemoveBusiness(event, business) {

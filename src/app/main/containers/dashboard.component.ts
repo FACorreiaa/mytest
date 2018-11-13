@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new Actions.GetAllBusinessAction())
   }
 
-  editBusiness(objId: any) {
-    this.router.navigate(['../business-detail/detail', objId], { relativeTo: this.route })
+  editBusiness(obj: any) {
+    this.router.navigate(['../business-detail/detail', obj.id], { relativeTo: this.route })
   }
 
   deleteBusiness(obj: any) {
@@ -38,6 +38,5 @@ export class DashboardComponent implements OnInit {
       },
     }
     this.store.dispatch(new Actions.DeleteBusinessAction(deleteObject))
-    this.store.dispatch(new Actions.GetAllBusinessAction())
   }
 }
