@@ -3,8 +3,8 @@
     <br />
     <app-cs-stepper [authorized]="false" 
             [offerings]="this.offerings" 
-            [services]="this.services" 
-            [payments]="this.payments"
+            [services]="this.services$ | async" 
+            [payments]="this.payments$ | async"
             [countries]="this.countries$ | async" 
             [business]="this.business$ | async"
             [businessToEditId]="this.businessObjectId" 

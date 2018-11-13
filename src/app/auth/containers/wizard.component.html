@@ -4,9 +4,14 @@
             <mat-sidenav-container class="app-sidenav-container">
                 <mat-sidenav-content>
                     <div *ngIf="!(this.loading$ | async)">
-                        <app-cs-stepper [authorized]="this.authorized" [offerings]="this.offerings" [services]="services"
-                            [payments]="payments" [countries]="this.countries$" (registerEvent)="register($event)"
-                            (offeringsEvent)="getOfferings($event)" (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
+                        <app-cs-stepper [authorized]="this.authorized" 
+                        [offerings]="offerings" 
+                        [services]="this.services$ | async"
+                        [payments]="this.payments$ | async"
+                        [countries]="this.countries$ | async" 
+                        (registerEvent)="register($event)"
+                        (offeringsEvent)="getOfferings($event)"
+                        (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>
                     <div *ngIf="(this.loading$ | async)" style="display: flex">
                         <mat-card class="col">

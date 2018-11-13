@@ -14,9 +14,9 @@ export class BusinnessComponent implements OnInit, OnChanges {
   @Output() private editBusinessEvent = new EventEmitter()
   @Output() private deleteBusinessEvent = new EventEmitter()
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('business', this.buninessData$)

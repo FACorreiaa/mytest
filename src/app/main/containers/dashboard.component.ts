@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   deleteBusiness(obj: any) {
     console.log(obj)
 
-    let deleteObject = {
+    const deleteObject = {
       id: obj.id,
       channels: [obj.channels[0].channel],
       data: {

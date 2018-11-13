@@ -1,4 +1,4 @@
-<mat-horizontal-stepper linear #stepper="matHorizontalStepper" *ngIf="!authorized">
+<mat-horizontal-stepper linear #stepper="matHorizontalStepper" *ngIf="!authorized" >
     <mat-step [stepControl]="firstFormGroup">
         <ng-template matStepLabel>Your Restaurant</ng-template>
         <div class="container">
@@ -170,19 +170,22 @@
                 </div>
                 <div class="row buttons d-flex justify-content-between pad">
                     <button mat-raised-button matStepperPrevious color="secondary">Back</button>
-                    <button mat-raised-button matStepperNext color="primary" (click)="onclickContactStep()">Next</button>
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
                 </div>
             </form>
 
         </div>
     </mat-step>
-    <mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
         <ng-template matStepLabel>Your offer</ng-template>
         <div class="container">
             <div class="row justify-content-center marginBottom_40 marginTop_20">
                 <span class="col-sm-8 labelTitle">Your offer</span>
                 <span class="col-sm-8 textAlign_Center">What can your customers expect?</span>
             </div>
+            <form [formGroup]="thirdFormGroup">
+                <input matInput formControlName="hasSelection" type="text" required style="display: none">
+            </form>
             <mat-accordion [multi]="true" color="primary">
                 <mat-expansion-panel [expanded]="true">
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
@@ -208,7 +211,7 @@
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.offerings; let i = index">
-                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onOfferingsChange($event, item.name)">{{item.name}}</mat-checkbox>
+                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onOfferingsChange($event, item)">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -219,12 +222,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!(this.services && this.services.length > 0)">
+                    <div *ngIf="!(this.servicesArray && this.servicesArray.length > 0)">
                         Please select a category!
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.services; let i = index">
-                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onServicesChange($event, item.name)">{{item.name}}</mat-checkbox>
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.servicesArray; let i = index">
+                        <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onServicesChange($event, item)">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -235,19 +238,19 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!(this.payments && this.payments.length > 0)">
+                    <div *ngIf="!(this.paymentsArray && this.paymentsArray.length > 0)">
                         Please select a category!
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let payment of this.payments; let i = index">
-                        <mat-checkbox color="primary" [value]="payment" [checked]="payment.selected" (change)="onPaymentsChange($event, payment.name)">{{payment.name}}</mat-checkbox>
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let payment of this.paymentsArray; let i = index">
+                        <mat-checkbox color="primary" [value]="payment" [checked]="payment.selected" (change)="onPaymentsChange($event, payment)">{{payment.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
 
             <div class="row buttons d-flex justify-content-between pad" style="padding-top: 20px;">
                 <button mat-raised-button matStepperPrevious color="secondary">Back</button>
-                <button mat-raised-button matStepperNext color="primary" type="submit">Next</button>
+                <button mat-raised-button matStepperNext color="primary" type="submit" (click)="steperchange($event)">Next</button>
             </div>
         </div>
     </mat-step>

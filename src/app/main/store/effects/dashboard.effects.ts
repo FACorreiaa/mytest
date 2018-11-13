@@ -137,5 +137,5 @@ export class DashBoardEffects {
     })
   )
 
-  constructor(private actions$: Actions, private router: Router, private store$: Store<fromModule.MainState>, private dashBoardService: IDashBoardService) { }
+  constructor(private actions$: Actions, private router: Router, private store$: Store<fromModule.MainState>, private dashBoardService: IDashBoardService) {}
 }
