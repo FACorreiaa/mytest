@@ -14,7 +14,7 @@ export const AppRoutes = {
 const Paths: Routes = [{ path: '', redirectTo: 'wizard', pathMatch: 'full' }, { path: '', loadChildren: './auth/auth.module#AuthModule' }]
 
 @NgModule({
-  imports: [RouterModule.forRoot(Paths)],
+  imports: [RouterModule.forRoot(Paths, {useHash: true})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
