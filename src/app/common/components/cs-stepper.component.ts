@@ -261,8 +261,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.offeringsEvent.emit(event.source.value)
     } else {
       this.offerings = null
-      this.services = null
-      this.payments = null
     }
 
     this.validateCategoriesSelection()
@@ -272,36 +270,18 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
   onOfferingsChange(event, item) {
     item.selected = !item.selected
-    if (event.checked) {
-      this.selectedOffering.push(item)
-    } else {
-      const i = this.selectedOffering.indexOf(item)
-      this.selectedOffering.splice(i)
-    }
 
     this.validateCategoriesSelection()
   }
 
   onServicesChange(event, item) {
     item.selected = !item.selected
-    if (event.checked) {
-      this.selectedServices.push(item)
-    } else {
-      const i = this.selectedServices.indexOf(item)
-      this.selectedServices.splice(i)
-    }
 
     this.validateCategoriesSelection()
   }
 
   onPaymentsChange(event, item) {
     item.selected = !item.selected
-    if (event.checked) {
-      this.selectedPayments.push(item)
-    } else {
-      const i = this.selectedPayments.indexOf(item)
-      this.selectedPayments.splice(i)
-    }
 
     this.validateCategoriesSelection()
   }
@@ -341,13 +321,13 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       }
     })
 
-    this.services.map(off => {
+    this.servicesArray.map(off => {
       if (off.selected) {
         this.selectedServices.push(off.name)
       }
     })
 
-    this.payments.map(off => {
+    this.paymentsArray.map(off => {
       if (off.selected) {
         this.selectedPayments.push(off.name)
       }
@@ -396,6 +376,24 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       email: formConclusion.email,
       password: formConclusion.password,
     }
+
+    this.offerings.map(off => {
+      if (off.selected) {
+        this.selectedOffering.push(off.name)
+      }
+    })
+
+    this.servicesArray.map(off => {
+      if (off.selected) {
+        this.selectedServices.push(off.name)
+      }
+    })
+
+    this.paymentsArray.map(off => {
+      if (off.selected) {
+        this.selectedPayments.push(off.name)
+      }
+    })
 
     const claimData: Data = {
       userFirstName: '',
@@ -572,14 +570,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
 
     const invalid = !isOfferingsValid || !isPaymentsValid || !isServicesValid
-
-    console.log('3', isOfferingsValid, isPaymentsValid, isServicesValid)
-
     if (invalid) {
       this.thirdFormGroup.get('hasSelection').setValue('')
     } else {
-      console.log('2', this.selectedOffering, this.selectedPayments, this.selectedServices)
-
       this.thirdFormGroup.get('hasSelection').setValue('checked')
     }
   }
@@ -588,8 +581,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     if (this.thirdFormGroup.get('hasSelection').invalid) {
       this.dialog.open(ModalTermsConditionsComponent, { data: { isOffersValidation: true }, width: '550px' })
     }
-
-    console.log('eventt stepper', event)
 
     return null
   }
