@@ -29,4 +29,8 @@ export class ErrorComponent implements OnInit {
       this.router.navigate([AuthRoutes.LOGIN])
     }
   }
+
+  GoToMainPage() {
+    this.router.navigate([AuthRoutes.MAIN])
+  }
 }

@@ -112,9 +112,9 @@ export class DashBoardEffects {
   @Effect()
   removeBusiness$: Observable<Action> = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.DELETE_BUSINESS),
-    switchMap((payload: any) =>
+    switchMap((action: any) =>
       this.dashBoardService
-        .removeBusinessData(payload)
+        .removeBusinessData(action.payload)
         .map((response: any) => new dashBoardActions.DeleteBusinessSuccessAction(response))
         .catch(error => of(new dashBoardActions.DeleteBusinessFailureAction({ error })))
     )

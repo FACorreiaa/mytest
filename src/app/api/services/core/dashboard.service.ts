@@ -20,9 +20,8 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
     return this.getObjectsPUT(manageData, `${this.businessControllerRoute}/manage/${manageData.data.id}`)
   }
 
-  // TODO - Fix parameter type
-  public removeBusinessData(deleteData: any): Observable<any> {
-    return this.getObjectsDELETE(deleteData.payload, `${this.businessControllerRoute}/manage/${deleteData.payload.id}`)
+  public removeBusinessData(deleteData: DeleteBusinessData): Observable<any> {
+    return this.getObjectsDELETE(deleteData, `${this.businessControllerRoute}/manage/${deleteData.id}`)
   }
 
   public addBusinessData(manageData: ManageBusinessData): Observable<any> {
