@@ -5,12 +5,12 @@
                 <mat-sidenav-content>
                     <div *ngIf="!(this.loading$ | async)">
                         <app-cs-stepper [authorized]="this.authorized" 
-                        [offerings]="offerings" 
+                        [offerings]="this.offerings$ | async" 
                         [services]="this.services$ | async"
                         [payments]="this.payments$ | async"
                         [countries]="this.countries$ | async" 
+                        [newBusiness]="true"
                         (registerEvent)="register($event)"
-                        (offeringsEvent)="getOfferings($event)"
                         (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>
                     <div *ngIf="(this.loading$ | async)" style="display: flex">
