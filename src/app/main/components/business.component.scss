@@ -1,13 +1,13 @@
 :host ::ng-deep .mat-card-header-text {
     width: 100%;
     text-align: left;
-  }
+}
   
-  .icon-lg {
+.icon-lg {
     font-size: 40px;
-  }
+}
   
-  .mat-card {
+.mat-card {
     color: black;
     margin-bottom: 20px;
     
@@ -19,12 +19,16 @@
     }
     .mat-card-subtitle {
       color: black;
-      white-space: nowrap;
+      white-space: nowrap;     
     }
     
     &.warn {
       background: whitesmoke;
     }
     
-  }
-  
+}
+
+.mat-card-subtitle-overflow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

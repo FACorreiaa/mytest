@@ -3,13 +3,17 @@
         <mat-card-title>{{item.name}}</mat-card-title>
         <mat-card-subtitle><b>Category: </b>{{item.category}}</mat-card-subtitle>
         <mat-card-subtitle><b>Email: </b>{{item.contactEmail}}</mat-card-subtitle>
-        <mat-card-subtitle><b>Phone: </b>{{item.countryCode}} {{item.contactPhoneNumber}}</mat-card-subtitle>
-        <mat-card-subtitle><b>WebSite: </b><a href="javascript:void(0);">{{item.url}}</a></mat-card-subtitle>
+        <mat-card-subtitle><b>Phone: </b>+49 {{item.contactPhoneNumber}}</mat-card-subtitle>
+        <mat-card-subtitle><b>WebSite: </b><a href="http://{{item.url}}" target="_blank">{{item.url}}</a></mat-card-subtitle>
         <mat-card-subtitle><b>Street: </b>{{item.street}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="!item.channels[0].callbackUrl && !item.channels[0].errorCode"><b>Status: </b> <span style="color: red">Pending</span></mat-card-subtitle>        
+        <mat-card-subtitle *ngIf="!item.channels[0].callbackUrl && !item.channels[0].errorCode"><b>Status: </b> <span
+                style="color: goldenrod">Pending</span></mat-card-subtitle>
+        <mat-card-subtitle *ngIf="item.channels[0].callbackUrl"><b>Status: </b> <span style="color: green">Successfull</span></mat-card-subtitle>
+        <mat-card-subtitle *ngIf="item.channels[0].errorCode"><b>Status: </b> <span style="color: red">Error</span></mat-card-subtitle>
+        <mat-card-subtitle class="mat-card-subtitle-overflow" *ngIf="item.channels[0].callbackUrl"><b>Url: </b> <a href="{{item.channels[0].callbackUrl}}" target="_blank">{{item.channels[0].callbackUrl}}</a></mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions style="text-align: right">
-        <button mat-raised-button color="secondary" (click)="EditBusiness($event, item.id)">Edit</button>
-        <button mat-raised-button color="secondary" (click)="RemoveBusiness($event, item.id)">Remove</button>
+        <button mat-raised-button color="secondary" (click)="EditBusiness($event, item)">Edit</button>
+        <button mat-raised-button color="secondary" (click)="RemoveBusiness($event, item)">Remove</button>
     </mat-card-actions>
 </mat-card>

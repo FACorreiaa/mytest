@@ -20,9 +20,9 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
   authorized: boolean
   loading$: Observable<boolean>
   offerings: ICategory[] = []
-  services: ICategory[] = []
-  payments: ICategory[] = []
-  countries$: Countries[]
+  services$: Observable<ICategory[]>
+  payments$: Observable<ICategory[]>
+  countries$: Observable<Countries[]>
   allCategoryOfferings: any[]
 
   constructor(
@@ -40,8 +40,17 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.countriesService.getCountries().subscribe(countries => {
-      this.countries$ = countries
+    this.countries$ = this.countriesService.getCountries()
+
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
+
+    this.categoriesService.getOfferings('').subscribe(off => {
+      if (!off) {
+        this.offerings = null
+      } else {
+        this.allCategoryOfferings = off
+      }
     })
   }
 
@@ -52,23 +61,9 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getOfferings(category: string) {
-    this.categoriesService.getOfferings(category).subscribe(off => {
-      if (!off) {
-        this.offerings = null
-      } else {
-        const aux = []
-        off.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
-        this.offerings = aux
-      }
-    })
-
-    this.categoriesService.getServices().subscribe(services => {
-      services.map(x => this.services.push({ name: x, selected: false }))
-    })
-
-    this.categoriesService.getPayments().subscribe(payments => {
-      payments.map(x => this.payments.push({ name: x, selected: false }))
-    })
+    const aux = []
+    this.allCategoryOfferings.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
+    this.offerings = aux
   }
 
   GoToMainPage() {

@@ -54,6 +54,40 @@ export abstract class BaseApi {
     )
   }
 
+  /**
+   * Using DELETE.
+   * Method to send a request of type form. DELETE
+   * @param obj - The object value.
+   * @param path - The path from resource.
+   */
+  public getObjectsDELETE<T>(obj: Object, path: string): Observable<T> {
+    this.setHeaderForRequest('DELETE')
+    return this.basehttp.delete(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+      map((res: Response) => {
+        const responseObject = res.json() as any
+        return responseObject
+      }),
+      catchError((error: any) => throwError(error))
+    )
+  }
+
+  /**
+   * Using PUT.
+   * Method to send a request of type form. DELETE
+   * @param obj - The object value.
+   * @param path - The path from resource.
+   */
+  public getObjectsPUT<T>(obj: Object, path: string): Observable<T> {
+    this.setHeaderForRequest('PUT')
+    return this.basehttp.put(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+      map((res: Response) => {
+        const responseObject = res.json() as any
+        return responseObject
+      }),
+      catchError((error: any) => throwError(error))
+    )
+  }
+
   private setHeaderForRequest(type: string): void {
     switch (type) {
       case 'POST':
@@ -63,6 +97,18 @@ export abstract class BaseApi {
         }
         break
       case 'GET':
+        {
+          const headers = new Headers({ 'Content-Type': 'application/json' })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
+      case 'DELETE':
+        {
+          const headers = new Headers({ 'Content-Type': 'application/json' })
+          this.defOptions = new RequestOptions({ headers: headers })
+        }
+        break
+      case 'PUT':
         {
           const headers = new Headers({ 'Content-Type': 'application/json' })
           this.defOptions = new RequestOptions({ headers: headers })

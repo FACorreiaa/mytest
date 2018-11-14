@@ -3,9 +3,9 @@
         <br />
                 <app-cs-stepper [authorized]="false" 
                 [offerings]="this.offerings" 
-                [services]="services"
-                [payments]="payments" 
-                [countries]="this.countries$"
+                [services]="this.services$ | async" 
+                [payments]="this.payments$ | async"
+                [countries]="this.countries$ | async" 
                 [editForm]="true"
                 (offeringsEvent)="getOfferings($event)"
                 (editionEvent)="addBusiness($event)"

@@ -8,6 +8,7 @@ import { Component, Inject, EventEmitter } from '@angular/core'
 })
 export class ModalTermsConditionsComponent {
   isDelete = false
+  isOffersValidation = false
   onDelete = new EventEmitter()
 
   constructor(public dialogRef: MatDialogRef<ModalTermsConditionsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}

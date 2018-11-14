@@ -21,9 +21,9 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   authorized: boolean
   loading$: Observable<boolean>
   offerings: ICategory[] = []
-  services: ICategory[] = []
-  payments: ICategory[] = []
-  countries$: Countries[]
+  services$: Observable<ICategory[]>
+  payments$: Observable<ICategory[]>
+  countries$: Observable<Countries[]>
 
   constructor(
     private router: Router,
@@ -40,9 +40,9 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.countriesService.getCountries().subscribe(countries => {
-      this.countries$ = countries
-    })
+    this.countries$ = this.countriesService.getCountries()
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
 
     this.appStore.dispatch(new AuthActions.Logout({}))
   }
@@ -54,8 +54,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
-    console.log('object', object)
-
     this.store.dispatch(new AuthActions.RegisterAttempt(object))
   }
 
@@ -68,14 +66,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
         off.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
         this.offerings = aux
       }
-    })
-
-    this.categoriesService.getServices().subscribe(services => {
-      services.map(x => this.services.push({ name: x, selected: false }))
-    })
-
-    this.categoriesService.getPayments().subscribe(payments => {
-      payments.map(x => this.payments.push({ name: x, selected: false }))
     })
   }
 

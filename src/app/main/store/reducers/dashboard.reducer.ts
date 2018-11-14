@@ -27,11 +27,35 @@ export function UserLoggedReducer(state = initialState, action: Actions.DashBoar
     }
 
     case Actions.ActionTypes.ADD_BUSINESS_SUCCESS: {
-      return { ...state, isLoading: true }
+      return { ...state, isLoading: false }
     }
 
     case Actions.ActionTypes.ADD_BUSINESS_FAILURE: {
+      return { ...state, isLoading: false }
+    }
+
+    case Actions.ActionTypes.DELETE_BUSINESS: {
       return { ...state, isLoading: true }
+    }
+
+    case Actions.ActionTypes.DELETE_BUSINESS_SUCCESS: {
+      return { ...state, isLoading: false }
+    }
+
+    case Actions.ActionTypes.DELETE_BUSINESS_FAILURE: {
+      return { ...state, isLoading: false }
+    }
+
+    case Actions.ActionTypes.EDIT_BUSINESS: {
+      return { ...state, isLoading: true }
+    }
+
+    case Actions.ActionTypes.EDIT_BUSINESS_SUCCESS: {
+      return { ...state, isLoading: false }
+    }
+
+    case Actions.ActionTypes.EDIT_BUSINESS_FAILURE: {
+      return { ...state, isLoading: false }
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {

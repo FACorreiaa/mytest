@@ -50,9 +50,9 @@ export class DashBoardEffects {
   @Effect()
   editBusiness$: Observable<Action> = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.EDIT_BUSINESS),
-    switchMap((payload: any) =>
+    switchMap((action: any) =>
       this.dashBoardService
-        .editBusinessData()
+        .editBusinessData(action.payload)
         .map((response: any) => new dashBoardActions.EditBusinessSuccessAction(response))
         .catch(error => of(new dashBoardActions.EditBusinessFailureAction(error)))
     )
@@ -71,7 +71,7 @@ export class DashBoardEffects {
   editBusinessSuccess$ = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.EDIT_BUSINESS_SUCCESS),
     tap(() => {
-      // this.router.navigate([AuthRoutes.MAIN])
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -112,9 +112,9 @@ export class DashBoardEffects {
   @Effect()
   removeBusiness$: Observable<Action> = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.DELETE_BUSINESS),
-    switchMap((payload: any) =>
+    switchMap((action: any) =>
       this.dashBoardService
-        .editBusinessData()
+        .removeBusinessData(action.payload)
         .map((response: any) => new dashBoardActions.DeleteBusinessSuccessAction(response))
         .catch(error => of(new dashBoardActions.DeleteBusinessFailureAction({ error })))
     )
@@ -133,7 +133,7 @@ export class DashBoardEffects {
   removeBusinessSuccess$ = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.DELETE_BUSINESS_SUCCESS),
     tap(() => {
-      // this.router.navigate([AuthRoutes.MAIN])
+      this.store$.dispatch(new dashBoardActions.GetAllBusinessAction())
     })
   )
 

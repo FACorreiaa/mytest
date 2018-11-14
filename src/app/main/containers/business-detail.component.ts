@@ -22,8 +22,8 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
   business$: Observable<any[]>
   countries$: Observable<Countries[]>
   offerings: ICategory[] = []
-  services: ICategory[] = []
-  payments: ICategory[] = []
+  services$: Observable<ICategory[]>
+  payments$: Observable<ICategory[]>
   allCategoryOfferings: any[]
 
   constructor(
@@ -35,6 +35,8 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
   ) {
     this.business$ = this.store.select(fromMain.getBusiness)
     this.countries$ = this.countriesService.getCountries()
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
   }
 
   ngOnInit(): void {
@@ -61,24 +63,6 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
         }
       }
     })
-
-    this.categoriesService.getServices().subscribe(services => {
-      services.map(x => this.services.push({ name: x, selected: false }))
-      this.services.map(x => {
-        if (business.services && business.services.includes(x.name)) {
-          x.selected = true
-        }
-      })
-    })
-
-    this.categoriesService.getPayments().subscribe(payments => {
-      payments.map(x => this.payments.push({ name: x, selected: false }))
-      this.payments.map(x => {
-        if (business.paymentMethods && business.paymentMethods.includes(x.name)) {
-          x.selected = true
-        }
-      })
-    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -91,6 +75,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
 
   editBusiness(object: ManageBusinessData) {
     console.log('object', object)
-    return null
+    object.data.id = this.businessObjectId
+    this.store.dispatch(new Actions.EditBusinessAction(object))
   }
 }

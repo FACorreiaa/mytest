@@ -23,11 +23,20 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new Actions.GetAllBusinessAction())
   }
 
-  editBusiness(objId: any) {
-    this.router.navigate(['../business-detail/detail', objId], { relativeTo: this.route })
+  editBusiness(obj: any) {
+    this.router.navigate(['../business-detail/detail', obj.id], { relativeTo: this.route })
   }
 
-  deleteBusiness(objId: any) {
-    console.log('deleteBusiness container')
+  deleteBusiness(obj: any) {
+    console.log(obj)
+
+    const deleteObject = {
+      id: obj.id,
+      channels: [obj.channels[0].channel],
+      data: {
+        countryCode: obj.countryCode,
+      },
+    }
+    this.store.dispatch(new Actions.DeleteBusinessAction(deleteObject))
   }
 }

@@ -22,15 +22,15 @@ export class BusinnessComponent implements OnInit, OnChanges {
     // console.log('business', this.buninessData$)
   }
 
-  EditBusiness(event, businessId) {
-    this.editBusinessEvent.emit(businessId)
+  EditBusiness(event, business) {
+    this.editBusinessEvent.emit(business)
   }
 
-  RemoveBusiness(event, businessId) {
+  RemoveBusiness(event, business) {
     const ref = this.dialog.open(ModalTermsConditionsComponent, { data: { isDelete: true }, width: '550px' })
     const sub = ref.componentInstance.onDelete.subscribe(() => {
       console.log('delete')
-      this.deleteBusinessEvent.emit(businessId)
+      this.deleteBusinessEvent.emit(business)
     })
   }
 }
