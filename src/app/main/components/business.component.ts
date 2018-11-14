@@ -29,7 +29,7 @@ export class BusinnessComponent implements OnInit, OnChanges {
   RemoveBusiness(event, business) {
     const ref = this.dialog.open(ModalTermsConditionsComponent, { data: { isDelete: true }, width: '550px' })
     const sub = ref.componentInstance.onDelete.subscribe(() => {
-      console.log('delete')
+      // console.log('delete')
       this.deleteBusinessEvent.emit(business)
     })
   }

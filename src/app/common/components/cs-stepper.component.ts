@@ -68,14 +68,16 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   selectedPayments: string[] = []
   servicesArray: ICategory[] = []
   paymentsArray: ICategory[] = []
+  offeringsArray: ICategory[] = []
   addressFocus = false
 
   @Input() authorized: any
   @Input() editForm: false
+  @Input() newBusiness: false
   @Input() businessToEdit: Data
   @Input() businessToEditId: number
   @Input() business: Data[]
-  @Input() offerings: ICategory[]
+  @Input() offerings: any[]
   @Input() services: any[]
   @Input() payments: any[]
   @Input() countries: Countries[]
@@ -95,15 +97,15 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.services && this.services) {
+    if (changes.services && this.services && this.newBusiness) {
       this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
     }
 
-    if (changes.payments && this.payments) {
+    if (changes.payments && this.payments && this.newBusiness) {
       this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
     }
 
-    if (changes.business) {
+    if (changes.business && this.editForm) {
       this.businessToEdit = this.business.find(bs => bs.id === this.businessToEditId)
 
       if (this.businessToEdit) {
@@ -142,20 +144,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
           }
         })
 
-        this.servicesArray.map(x => {
-          if (this.businessToEdit.services && this.businessToEdit.services.includes(x.name)) {
-            x.selected = true
-          }
-        })
-
-        this.paymentsArray.map(x => {
-          if (this.businessToEdit.paymentMethods && this.businessToEdit.paymentMethods.includes(x.name)) {
-            x.selected = true
-          }
-        })
-
-        this.validateCategoriesSelection()
-
         this.getAllOffersEvent.emit(this.businessToEdit)
       }
     }
@@ -166,6 +154,35 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.addressInput.nativeElement.focus()
       this.addressFocus = false
     }
+
+    if (this.editForm && this.businessToEdit && this.offerings && this.offeringsArray.length === 0) {
+      this.offerings.filter(x => x.name === this.businessToEdit.category)[0].offering.map(x => this.offeringsArray.push({ name: x, selected: false }))
+      this.offeringsArray.map(x => {
+        if (this.businessToEdit.offers && this.businessToEdit.offers.includes(x.name)) {
+          x.selected = true
+        }
+      })
+    }
+
+    if (this.editForm && this.businessToEdit && this.services && this.servicesArray.length === 0) {
+      this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
+      this.servicesArray.map(x => {
+        if (this.businessToEdit.services && this.businessToEdit.services.includes(x.name)) {
+          x.selected = true
+        }
+      })
+    }
+
+    if (this.editForm && this.businessToEdit && this.payments && this.paymentsArray.length === 0) {
+      this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
+      this.paymentsArray.map(x => {
+        if (this.businessToEdit.paymentMethods && this.businessToEdit.paymentMethods.includes(x.name)) {
+          x.selected = true
+        }
+      })
+    }
+
+    this.validateCategoriesSelection()
 
     this.change.detectChanges()
   }
@@ -216,6 +233,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     )
 
     this.categories = CategoriesArray()
+    this.categories.map(x => {
+      x.selected = false
+    })
+
     this.hours = OpenHoursArray()
   }
 
@@ -247,7 +268,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
   }
 
-  async onChange(event, item) {
+  async onChangeCategory(event, item) {
     this.categories.map(x => {
       x.selected = false
       if (x.name === item.name) {
@@ -255,11 +276,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       }
     })
 
+    this.offeringsArray = []
     if (event.checked) {
       this.category = event.source.value
-      this.offeringsEvent.emit(event.source.value)
-    } else {
-      this.offerings = null
+      this.offerings.filter(x => x.name === item.name)[0].offering.map(x => this.offeringsArray.push({ name: x, selected: false }))
     }
 
     this.validateCategoriesSelection()
@@ -314,7 +334,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    * This method save the business edition.
    */
   private editionData(firstForm: any, secondFormGroup: any, formConclusion: any) {
-    this.offerings.map(off => {
+    this.offeringsArray.map(off => {
       if (off.selected) {
         this.selectedOffering.push(off.name)
       }
@@ -372,7 +392,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       password: formConclusion.password,
     }
 
-    this.offerings.map(off => {
+    this.offeringsArray.map(off => {
       if (off.selected) {
         this.selectedOffering.push(off.name)
       }
@@ -540,8 +560,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     let isPaymentsValid = false
     let isServicesValid = false
 
-    if (this.offerings) {
-      this.offerings.map(off => {
+    if (this.offeringsArray) {
+      this.offeringsArray.map(off => {
         if (off.selected) {
           isOfferingsValid = true
         }

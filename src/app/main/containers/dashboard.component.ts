@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteBusiness(obj: any) {
-    console.log(obj)
+    // console.log(obj)
 
     const deleteObject = {
       id: obj.id,
