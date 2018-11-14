@@ -2,12 +2,12 @@
         <h1 style="color: white">Add a business</h1>
         <br />
                 <app-cs-stepper [authorized]="false" 
-                [offerings]="this.offerings" 
+                [offerings]="this.offerings$ | async" 
                 [services]="this.services$ | async" 
                 [payments]="this.payments$ | async"
                 [countries]="this.countries$ | async" 
                 [editForm]="true"
-                (offeringsEvent)="getOfferings($event)"
+                [newBusiness]="true"
                 (editionEvent)="addBusiness($event)"
                 (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
 </div>

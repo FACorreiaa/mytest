@@ -4,8 +4,7 @@ import { Store, select } from '@ngrx/store'
 
 import * as fromModule from '../../app.reducers'
 import * as fromMain from '../main.reducers'
-import { Subject, Observable } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 import { CountriesService } from '@app/common/services/countries.service'
 import { Countries, ICategory, Data, ManageBusinessData } from '@app/api/models/api-models'
 import * as Actions from '../store/actions/dashboard.actions'
@@ -21,7 +20,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
   businessObjectId?: any
   business$: Observable<any[]>
   countries$: Observable<Countries[]>
-  offerings: ICategory[] = []
+  offerings$: Observable<any[]>
   services$: Observable<ICategory[]>
   payments$: Observable<ICategory[]>
   allCategoryOfferings: any[]
@@ -34,9 +33,11 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
     private countriesService: CountriesService
   ) {
     this.business$ = this.store.select(fromMain.getBusiness)
+
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
+    this.offerings$ = this.categoriesService.getOfferings('')
   }
 
   ngOnInit(): void {
@@ -44,37 +45,10 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
     this.store.dispatch(new Actions.GetAllBusinessAction())
   }
 
-  setAllOfferings(business) {
-    this.categoriesService.getOfferings(business.category).subscribe(off => {
-      if (!off) {
-        this.offerings = null
-        this.allCategoryOfferings = []
-      } else {
-        this.allCategoryOfferings = off
-        if (off.filter(x => x.name === business.category)[0]) {
-          off.filter(x => x.name === business.category)[0].offering.map(x => this.offerings.push({ name: x, selected: false }))
-          this.offerings.map(x => {
-            if (business.offers.includes(x.name)) {
-              x.selected = true
-            }
-          })
-        } else {
-          return null
-        }
-      }
-    })
-  }
-
   ngOnChanges(changes: SimpleChanges): void {}
 
-  getOfferings(category: string) {
-    const aux = []
-    this.allCategoryOfferings.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
-    this.offerings = aux
-  }
-
   editBusiness(object: ManageBusinessData) {
-    console.log('object', object)
+    // console.log('object', object)
     object.data.id = this.businessObjectId
     this.store.dispatch(new Actions.EditBusinessAction(object))
   }

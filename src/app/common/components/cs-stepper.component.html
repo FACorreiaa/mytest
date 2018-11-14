@@ -147,7 +147,7 @@
                                     </mat-select>
                                 </mat-form-field>
 
-                                <mat-label class="col-12 col-sm-1">And</mat-label>
+                                <mat-label class="col-12 col-sm-1"><b>and</b></mat-label>
 
                                 <mat-form-field class="col-6 col-sm-2">
                                     <mat-select placeholder="from" formControlName="splitedFrom" [value]="position.value.splitedFrom"
@@ -194,7 +194,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.categories; let i = index">
-                        <mat-checkbox name="categoryCusine" color="primary" [checked]="item.selected" (change)="onChange($event, item)"
+                        <mat-checkbox name="categoryCusine" color="primary" [checked]="item.selected" (change)="onChangeCategory($event, item)"
                             [value]="item.name">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
@@ -206,11 +206,11 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div *ngIf="!(this.offerings && this.offerings.length > 0)">
+                    <div *ngIf="!(this.offeringsArray && this.offeringsArray.length > 0)">
                         Please select a category!
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.offerings; let i = index">
+                    <div class="col-sm-3 checkBoxDisplayInline" *ngFor="let item of this.offeringsArray; let i = index">
                         <mat-checkbox color="primary" [value]="item" [checked]="item.selected" (change)="onOfferingsChange($event, item)">{{item.name}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>

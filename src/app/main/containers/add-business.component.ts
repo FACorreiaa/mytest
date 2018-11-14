@@ -19,7 +19,7 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
   loading$: Observable<boolean>
-  offerings: ICategory[] = []
+  offerings$: Observable<ICategory[]>
   services$: Observable<ICategory[]>
   payments$: Observable<ICategory[]>
   countries$: Observable<Countries[]>
@@ -44,14 +44,7 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
 
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
-
-    this.categoriesService.getOfferings('').subscribe(off => {
-      if (!off) {
-        this.offerings = null
-      } else {
-        this.allCategoryOfferings = off
-      }
-    })
+    this.offerings$ = this.categoriesService.getOfferings('')
   }
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -60,18 +53,12 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
     this.userSubscription$.unsubscribe()
   }
 
-  getOfferings(category: string) {
-    const aux = []
-    this.allCategoryOfferings.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
-    this.offerings = aux
-  }
-
   GoToMainPage() {
     this.router.navigate([AuthRoutes.MAIN])
   }
 
   addBusiness(object: ManageBusinessData) {
-    console.log('object', object)
+    // console.log('object', object)
 
     this.store.dispatch(new MainActions.AddBusinessAction(object))
   }

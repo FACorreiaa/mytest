@@ -2,14 +2,13 @@
     <h1 style="color: white">Edit your business</h1>
     <br />
     <app-cs-stepper [authorized]="false" 
-            [offerings]="this.offerings" 
+            [offerings]="(this.offerings$ | async)"
             [services]="(this.services$ | async)" 
             [payments]="(this.payments$ | async)"
             [countries]="(this.countries$ | async)" 
             [business]="(this.business$ | async)"
             [businessToEditId]="this.businessObjectId" 
             [editForm]="true" 
-            (editionEvent)="editBusiness($event)" 
-            (offeringsEvent)="getOfferings($event)"
-            (getAllOffersEvent)="setAllOfferings($event)"></app-cs-stepper>
+            (editionEvent)="editBusiness($event)"
+            ></app-cs-stepper>
 </div>

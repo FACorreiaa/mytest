@@ -44,4 +44,8 @@ export class AppComponent implements OnInit, OnDestroy {
   onLogOutClick(event) {
     this.store.dispatch(new AuthActions.LogoutSuccess({}))
   }
+
+  GoToMainPage() {
+    this.router.navigate([AuthRoutes.MAIN])
+  }
 }
