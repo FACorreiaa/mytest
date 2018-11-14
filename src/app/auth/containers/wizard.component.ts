@@ -20,7 +20,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   private userSubscription$: Subscription
   authorized: boolean
   loading$: Observable<boolean>
-  offerings: ICategory[] = []
+  offerings$: Observable<ICategory[]>
   services$: Observable<ICategory[]>
   payments$: Observable<ICategory[]>
   countries$: Observable<Countries[]>
@@ -43,6 +43,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
+    this.offerings$ = this.categoriesService.getOfferings('')
 
     this.appStore.dispatch(new AuthActions.Logout({}))
   }
@@ -55,18 +56,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
 
   register(object: UserRegisterDto): void {
     this.store.dispatch(new AuthActions.RegisterAttempt(object))
-  }
-
-  getOfferings(category: string) {
-    this.categoriesService.getOfferings(category).subscribe(off => {
-      if (!off) {
-        this.offerings = null
-      } else {
-        const aux = []
-        off.filter(x => x.name === category)[0].offering.map(x => aux.push({ name: x, selected: false }))
-        this.offerings = aux
-      }
-    })
   }
 
   GoToMainPage() {
