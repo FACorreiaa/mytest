@@ -54,8 +54,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
-    console.log('object', object)
-
     this.store.dispatch(new AuthActions.RegisterAttempt(object))
   }
 

@@ -30,7 +30,6 @@ import {
 } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
-import { Observable, of } from 'rxjs'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -150,7 +149,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         })
 
         this.paymentsArray.map(x => {
-          if (this.businessToEdit.services && this.businessToEdit.services.includes(x.name)) {
+          if (this.businessToEdit.paymentMethods && this.businessToEdit.paymentMethods.includes(x.name)) {
             x.selected = true
           }
         })
@@ -240,8 +239,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return this.formBuilder.group({
       name: [day],
       isSelected: [true],
-      from: new FormControl({ value: '9', disabled: false }, Validators.required),
-      to: ['17'],
+      from: new FormControl({ value: '9:00', disabled: false }, Validators.required),
+      to: ['17:00'],
       isSplitService: false,
       splitedFrom: [''],
       splitedTo: [''],
@@ -337,7 +336,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       userFirstName: '',
       userLastName: '',
       name: firstForm.location,
-      additional: firstForm.location,
+      additional: '',
       street: firstForm.address,
       // streetNumber: this.streetNumber,
       zipCode: firstForm.postal,
@@ -347,17 +346,13 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       url: secondFormGroup.website,
       languageCode: 'de',
       contactEmail: secondFormGroup.email,
-      contactPhoneNumber: firstForm.area + firstForm.phone,
+      contactPhoneNumber: firstForm.phone,
       openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
       offers: this.selectedOffering,
       description: '',
       category: this.categories.find(x => x.selected).name,
       services: this.selectedServices,
       paymentMethods: this.selectedPayments,
-      reservationUri: '',
-      menuUri: '',
-      profileImageUri: '',
-      titleImageUri: '',
     }
 
     const manageBusinessData: ManageBusinessData = {
@@ -399,7 +394,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       userFirstName: '',
       userLastName: '',
       name: firstForm.location,
-      additional: firstForm.location,
+      additional: '',
       street: firstForm.address,
       // streetNumber: this.streetNumber,
       zipCode: firstForm.postal,
@@ -416,10 +411,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       category: this.category,
       services: this.selectedServices,
       paymentMethods: this.selectedPayments,
-      reservationUri: '',
-      menuUri: '',
-      profileImageUri: '',
-      titleImageUri: '',
     }
 
     const manageBusinessData: ManageBusinessData = {

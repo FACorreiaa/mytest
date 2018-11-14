@@ -35,14 +35,13 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
   ) {
     this.business$ = this.store.select(fromMain.getBusiness)
     this.countries$ = this.countriesService.getCountries()
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
   }
 
   ngOnInit(): void {
     this.businessObjectId = Number(this.route.snapshot.params.objId)
     this.store.dispatch(new Actions.GetAllBusinessAction())
-
-    this.services$ = this.categoriesService.getServices()
-    this.payments$ = this.categoriesService.getPayments()
   }
 
   setAllOfferings(business) {
