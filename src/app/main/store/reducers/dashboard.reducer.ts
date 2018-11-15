@@ -61,7 +61,7 @@ export function UserLoggedReducer(state = initialState, action: Actions.DashBoar
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
       return {
         ...state,
-        errorMessage: action.payload.payload.error._body,
+        errorMessage: action.payload.payload.error ? action.payload.payload.error._body : '',
         isLoading: false,
       }
     }

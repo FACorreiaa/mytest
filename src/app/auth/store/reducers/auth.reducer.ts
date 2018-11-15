@@ -106,7 +106,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.ERROR_LAYOUT_SHOW: {
       return {
         ...state,
-        errorMessage: action.payload.payload.error._body,
+        errorMessage: action.payload.payload.error ? action.payload.payload.error._body : '',
       }
     }
 

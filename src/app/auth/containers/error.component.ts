@@ -25,9 +25,10 @@ export class ErrorComponent implements OnInit {
       }
     })
 
-    if (!this.error) {
-      this.router.navigate([AuthRoutes.LOGIN])
-    }
+    // if (!this.error) {
+    //   console.log('entreiiii')
+    //   this.router.navigate([AuthRoutes.MAIN])
+    // }
   }
 
   GoToMainPage() {
