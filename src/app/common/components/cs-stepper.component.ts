@@ -94,7 +94,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.buildInitalFormGroup()
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services && this.newBusiness) {
@@ -131,7 +131,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
               }),
             ]),
           ],
-          openHours: this.formBuilder.array(this.buildOpenHoursArray()),
+          openHours: this.formBuilder.array(this.buildOpenHoursArray(this.businessToEdit.openingTimes)),
         })
 
         this.categories = CategoriesArray()
@@ -251,6 +251,14 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       groups.push(this.buildOpenDaysInitalFormControl('friday'))
       groups.push(this.buildOpenDaysInitalFormControl('saturday'))
       groups.push(this.buildOpenDaysInitalFormControl('sunday'))
+    } else {
+      groups.push(this.buildOpenDaysFormControl(days.monday, 'monday'))
+      groups.push(this.buildOpenDaysFormControl(days.tuesday, 'tuesday'))
+      groups.push(this.buildOpenDaysFormControl(days.wednesday, 'wednesday'))
+      groups.push(this.buildOpenDaysFormControl(days.thursday, 'thursday'))
+      groups.push(this.buildOpenDaysFormControl(days.friday, 'friday'))
+      groups.push(this.buildOpenDaysFormControl(days.saturday, 'saturday'))
+      groups.push(this.buildOpenDaysFormControl(days.sunday, 'sunday'))
     }
 
     return groups
@@ -266,6 +274,40 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       splitedFrom: [''],
       splitedTo: [''],
     })
+  }
+
+  private buildOpenDaysFormControl(day: Day[], dayName: string) {
+    if (!day) {
+      return this.formBuilder.group({
+        name: [dayName],
+        isSelected: [false],
+        from: new FormControl({ value: '', disabled: true }, Validators.required),
+        to: '',
+        isSplitService: false,
+        splitedFrom: [''],
+        splitedTo: [''],
+      })
+    } else if (day.length == 1) {
+      return this.formBuilder.group({
+        name: [dayName],
+        isSelected: [true],
+        from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
+        to: day[0].endTime,
+        isSplitService: false,
+        splitedFrom: [''],
+        splitedTo: [''],
+      })
+    } else if (day.length == 2) {
+      return this.formBuilder.group({
+        name: [dayName],
+        isSelected: [true],
+        from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
+        to: day[0].endTime,
+        isSplitService: true,
+        splitedFrom: [day[1].startTime],
+        splitedTo: [day[1].endTime],
+      })
+    }
   }
 
   async onChangeCategory(event, item) {
