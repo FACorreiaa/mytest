@@ -94,7 +94,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.buildInitalFormGroup()
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services && this.newBusiness) {
@@ -287,27 +287,28 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         splitedFrom: [''],
         splitedTo: [''],
       })
-    } else if (day.length == 1) {
+    } else if (day.length > 0) {
       return this.formBuilder.group({
         name: [dayName],
         isSelected: [true],
         from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
-        to: day[0].endTime,
-        isSplitService: false,
-        splitedFrom: [''],
-        splitedTo: [''],
-      })
-    } else if (day.length == 2) {
-      return this.formBuilder.group({
-        name: [dayName],
-        isSelected: [true],
-        from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
-        to: day[0].endTime,
-        isSplitService: true,
-        splitedFrom: [day[1].startTime],
-        splitedTo: [day[1].endTime],
+        to: new FormControl({ value: day[0].endTime, disabled: false }, Validators.required),
+        isSplitService: day.length > 1 ? true : false,
+        splitedFrom: day.length > 1 ? [day[1].startTime] : [''],
+        splitedTo: day.length > 1 ? [day[1].endTime] : [''],
       })
     }
+    // else if (day.length === 2) {
+    //   return this.formBuilder.group({
+    //     name: [dayName],
+    //     isSelected: [true],
+    //     from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
+    //     to: day[0].endTime,
+    //     isSplitService: true,
+    //     splitedFrom: [day[1].startTime],
+    //     splitedTo: [day[1].endTime],
+    //   })
+    // }
   }
 
   async onChangeCategory(event, item) {

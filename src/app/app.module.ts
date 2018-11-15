@@ -50,11 +50,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     AppRoutingModule,
     MaterialModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
-    //StoreDevtoolsModule.instrument({ maxAge: 15 }),
+    // StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   declarations: [AppComponent],
   exports: [MaterialModule],
   providers: [GlobalEnvironmentService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

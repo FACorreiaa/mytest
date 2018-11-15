@@ -129,11 +129,11 @@
                                 [formGroupName]="ph" style="margin-top: 40px; border-bottom: lightgray 1px solid; padding-bottom: 70px">
 
                                 <mat-checkbox [checked]="position.value.isSelected" formControlName="isSelected" color="primary"
-                                    (change)="position.disable = !position.disable" class="col-12 col-sm-3">{{position.value.name}}</mat-checkbox>
+                                    class="col-12 col-sm-3">{{position.value.name}}</mat-checkbox>
 
                                 <mat-form-field class="col-6 col-sm-2">
                                     <mat-select placeholder="from" formControlName="from" [value]="position.value.from"
-                                        [disableControl]="!position.disable">
+                                        [disableControl]="!position.value.isSelected">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let hour of this.hours" [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
@@ -141,7 +141,7 @@
 
                                 <mat-form-field class="col-6 col-sm-2">
                                     <mat-select placeholder="to" formControlName="to" [value]="position.value.to"
-                                        [disableControl]="!position.disable">
+                                        [disableControl]="!position.value.isSelected">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let hour of this.hours" [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
@@ -151,7 +151,7 @@
 
                                 <mat-form-field class="col-6 col-sm-2">
                                     <mat-select placeholder="from" formControlName="splitedFrom" [value]="position.value.splitedFrom"
-                                        [disableControl]="!position.disable">
+                                        [disableControl]="!position.value.isSelected">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let hour of this.hours" [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
@@ -159,7 +159,7 @@
 
                                 <mat-form-field class="col-6 col-sm-2">
                                     <mat-select placeholder="to" formControlName="splitedTo" [value]="position.value.splitedTo"
-                                        [disableControl]="!position.disable">
+                                        [disableControl]="!position.value.isSelected">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let hour of this.hours" [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
