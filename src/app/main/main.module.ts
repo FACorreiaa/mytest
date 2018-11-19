@@ -7,9 +7,11 @@ import { StoreModule } from '@ngrx/store'
 // CONTAINERS
 import { MainComponent } from './main.component'
 import { DashboardComponent } from './containers/dashboard.component'
-import { BusinnessComponent } from './components/business.component'
 import { BusinessDetailComponent } from './containers/business-detail.component'
 import { AddBusinessComponent } from './containers/add-business.component'
+
+// COMPONENTS
+import { BusinnessComponent } from './components/business.component'
 
 // EFFECTS
 

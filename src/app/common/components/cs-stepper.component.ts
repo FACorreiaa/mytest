@@ -83,7 +83,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() countries: Countries[]
   @Output() private registerEvent = new EventEmitter()
   @Output() private editionEvent = new EventEmitter()
-  @Output() private offeringsEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
   @Output() private getAllOffersEvent = new EventEmitter()
 
@@ -298,17 +297,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         splitedTo: day.length > 1 ? [day[1].endTime] : [''],
       })
     }
-    // else if (day.length === 2) {
-    //   return this.formBuilder.group({
-    //     name: [dayName],
-    //     isSelected: [true],
-    //     from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
-    //     to: day[0].endTime,
-    //     isSplitService: true,
-    //     splitedFrom: [day[1].startTime],
-    //     splitedTo: [day[1].endTime],
-    //   })
-    // }
   }
 
   async onChangeCategory(event, item) {

@@ -16,6 +16,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatStepperModule,
+  MatTabsModule,
   MatProgressSpinnerModule,
 } from '@angular/material'
 
@@ -35,6 +36,7 @@ import { NgModule } from '@angular/core'
     MatSidenavModule,
     MatListModule,
     MatStepperModule,
+    MatTabsModule,
     MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,
@@ -55,6 +57,7 @@ import { NgModule } from '@angular/core'
     MatSidenavModule,
     MatListModule,
     MatStepperModule,
+    MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
     MatSelectModule,

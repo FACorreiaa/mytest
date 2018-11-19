@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
 
 import * as fromModule from '../../app.reducers'
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs'
 import { CountriesService } from '@app/common/services/countries.service'
 import { Countries, ICategory, Data, ManageBusinessData } from '@app/api/models/api-models'
 import * as Actions from '../store/actions/dashboard.actions'
+import { AppRoutes as AuthRoutes } from '../../app.routing'
 import { CategoriesService } from '@app/common/services/categories.service'
 
 @Component({
@@ -27,6 +28,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private store: Store<fromMain.MainState>,
     private appStore: Store<fromModule.AppState>,
     private categoriesService: CategoriesService,
@@ -48,8 +50,11 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {}
 
   editBusiness(object: ManageBusinessData) {
-    // console.log('object', object)
     object.data.id = this.businessObjectId
     this.store.dispatch(new Actions.EditBusinessAction(object))
+  }
+
+  GoToMainPage(event) {
+    this.router.navigate([AuthRoutes.MAIN])
   }
 }

@@ -10,7 +10,7 @@
                 style="color: goldenrod">Pending</span></mat-card-subtitle>
         <mat-card-subtitle *ngIf="item.channels[0].callbackUrl"><b>Status: </b> <span style="color: green">Successfull</span></mat-card-subtitle>
         <mat-card-subtitle *ngIf="item.channels[0].errorCode"><b>Status: </b> <span style="color: red">Error</span></mat-card-subtitle>
-        <mat-card-subtitle class="mat-card-subtitle-overflow" *ngIf="item.channels[0].callbackUrl"><b>Url: </b> <a href="{{item.channels[0].callbackUrl}}" target="_blank">{{item.channels[0].callbackUrl}}</a></mat-card-subtitle>
+        <mat-card-subtitle class="mat-card-subtitle-overflow" *ngIf="item.channels[0].callbackUrl"><b>Url: </b> <a href="{{item.channels[0].callbackUrl}}" target="_blank">Google page</a></mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions style="text-align: right">
         <button mat-raised-button color="secondary" (click)="EditBusiness($event, item)">Edit</button>

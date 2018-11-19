@@ -15,13 +15,14 @@ import { ModalTermsConditionsComponent } from '@app/common/components/model-term
 import { DisableControlDirective } from '@app/common/directives/disable-control.directive'
 import { LoadingRequestComponent } from './loading.component'
 import { SideNavComponent } from './side-nav.component'
+import { EditTabsComponent } from './edit-tabs.component'
 import { GooglePlacesDirective } from '../directives/google-places.directive'
 
 @NgModule({
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule],
-  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
-  declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
-  providers: [CsStepperComponent, ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent, CategoriesService, CountriesService],
+  exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
+  declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
+  providers: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent, CategoriesService, CountriesService],
   entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent],
 })
 export class CsStepperModule {}
