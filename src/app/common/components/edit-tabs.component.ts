@@ -61,7 +61,7 @@ export class EditTabsComponent implements OnInit, OnChanges, AfterViewChecked {
     this.buildInitalFormGroup()
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.business) {
@@ -191,6 +191,7 @@ export class EditTabsComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     this.validateCategoriesSelection()
+    this.thirdFormGroup.markAsPristine()
 
     this.myPanels.open()
   }
@@ -199,12 +200,14 @@ export class EditTabsComponent implements OnInit, OnChanges, AfterViewChecked {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
+    this.thirdFormGroup.markAsDirty()
   }
 
   onServicesChange(event, item) {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
+    this.thirdFormGroup.markAsDirty()
   }
 
   onPaymentsChange(event, item) {
