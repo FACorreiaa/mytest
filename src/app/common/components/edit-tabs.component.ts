@@ -214,6 +214,7 @@ export class EditTabsComponent implements OnInit, OnChanges, AfterViewChecked {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
+    this.thirdFormGroup.markAsDirty()
   }
 
   backToDashboard(event: any) {
