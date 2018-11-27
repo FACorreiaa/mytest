@@ -49,7 +49,7 @@ export class GooglePlacesDirective implements AfterViewInit {
       const item = addressComponents[i]
 
       if (item['types'].indexOf('locality') > -1) {
-        obj['locality'] = item['short_name']
+        obj['locality'] = item['long_name']
       } else if (item['types'].indexOf('street_number') > -1) {
         obj['street_number'] = item['short_name']
       } else if (item['types'].indexOf('country') > -1) {
