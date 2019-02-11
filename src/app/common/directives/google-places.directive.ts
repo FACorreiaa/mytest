@@ -1,4 +1,6 @@
 import { Directive, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core'
+import { OpeningTimes, Day, DaysCodes } from '@app/api/models/api-models'
+import { WeekDay } from '@angular/common'
 
 declare var google: any
 
@@ -28,10 +30,12 @@ export class GooglePlacesDirective implements AfterViewInit {
       return null
     }
 
+    const openingHours = this.buildOpeningHours(place.opening_hours.periods)
     location = this.buildAddress(place.address_components)
 
     location['location'] = place.name
     location['address'] = place.formatted_address.split(',').splice(0, 1)
+    location['openingHours'] = openingHours
     location['phone_number'] = place.formatted_phone_number ? place.formatted_phone_number.replace(/ /g, '') : ''
     location['website'] = place.website
       ? place.website
@@ -60,5 +64,74 @@ export class GooglePlacesDirective implements AfterViewInit {
     }
 
     return obj
+  }
+
+  private buildOpeningHours(openingHours: Array<any>): OpeningTimes {
+    const openingTimes: OpeningTimes = {
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+    }
+
+    for (let index = 0; index <= 6; index++) {
+      const days = openingHours.filter((x: any) => x.open.day === index && x.close.day === index)
+
+      switch (index) {
+        case DaysCodes.sunday:
+          if (days.length === 0) {
+            break
+          }
+
+          openingTimes.sunday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.sunday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.monday:
+          openingTimes.monday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.monday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.tuesday:
+          openingTimes.tuesday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.tuesday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.wednesday:
+          openingTimes.wednesday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.wednesday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.thursday:
+          openingTimes.thursday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.thursday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.friday:
+          openingTimes.friday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.friday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        case DaysCodes.saturday:
+          openingTimes.saturday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
+          if (days.length > 1) {
+            openingTimes.saturday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
+          }
+          break
+        default:
+          break
+      }
+    }
+
+    return openingTimes
   }
 }

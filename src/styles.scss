@@ -1,9 +1,10 @@
+@import 'styles-variables';
+
 @import '../node_modules/bootstrap/scss/bootstrap-reboot';
 @import '../node_modules/bootstrap/scss/bootstrap-grid';
 @import '~@angular/material/theming';
 $custom-typography: mat-typography-config( $font-family: 'Montserrat, sans-serif');
 @include mat-core($custom-typography);
-// @include mat-core();
 
 $cs-primary: mat-palette($mat-cyan, 800, 300, 900);
 $cs-accent: mat-palette($mat-deep-purple, 300);

@@ -276,11 +276,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   private buildOpenDaysFormControl(day: Day[], dayName: string) {
-    if (!day) {
+    if (day.length <= 0) {
       return this.formBuilder.group({
         name: [dayName],
         isSelected: [false],
-        from: new FormControl({ value: '', disabled: true }, Validators.required),
+        from: '',
         to: '',
         isSplitService: false,
         splitedFrom: [''],
@@ -487,8 +487,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     let sunday: Day[] = []
 
     openHours
-      .filter(x => x.isSelected)
-      .forEach(element => {
+      .filter((x: any) => x.isSelected)
+      .forEach((element: any) => {
         switch (element.name) {
           case 'monday':
             monday = this.buildDayModel(element)
@@ -550,7 +550,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
   }
 
-  setAddress(addrObj) {
+  setAddress(addrObj: any) {
     if (!addrObj) {
       return null
     }
@@ -567,13 +567,16 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
+    const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
+    this.secondFormGroup.get('openHours').setValue(formBuilder)
+
     this.addressFocus = true
     this.addressInput.nativeElement.focus()
 
     this.setAreaCode(addrObj.country)
   }
 
-  changeCountry(event) {
+  changeCountry(event: any) {
     this.setAreaCode(event.value)
   }
 

@@ -1,3 +1,22 @@
+.mat-horizontal-content-container{
+    padding: 0px;
+}
+
+.matDaylist {
+    margin-top: 40px;
+    height: auto !important;
+
+    .mat-list-item-content{
+        display: block !important;
+    }
+}
+
+.divBorderLine {
+    border-bottom: #1f1b1be8 1px solid;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
 .marginBottom {
     margin-bottom: 20px;
 }

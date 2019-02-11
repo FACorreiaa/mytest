@@ -20,5 +20,5 @@ export const EmailValidation = [Validators.required, Validators.pattern(emailReg
 export const PasswordValidation = [Validators.required, Validators.minLength(8), Validators.maxLength(50)]
 
 export const ZipCodeValidation = [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]
-export const PhoneNumberValidation = [Validators.required, Validators.pattern(/^[0-9]*$/)]
+export const PhoneNumberValidation = [Validators.required, Validators.minLength(7), Validators.pattern(/^[0-9]*$/)]
 export const PhoneNumberPrefixValidation = [Validators.required, Validators.pattern(/^\+?\d+$/)]

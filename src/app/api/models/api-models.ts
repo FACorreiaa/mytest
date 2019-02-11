@@ -83,6 +83,16 @@ export interface Story {
   mediaUri: null
 }
 
+export enum DaysCodes {
+  sunday = 0,
+  monday = 1,
+  tuesday = 2,
+  wednesday = 3,
+  thursday = 4,
+  friday = 5,
+  saturday = 6,
+}
+
 export function OpenHoursArray(): IHours[] {
   return Hours
 }
