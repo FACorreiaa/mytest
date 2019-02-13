@@ -1,9 +1,8 @@
 import { Inject, Injectable, Injector } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, of, observable } from 'rxjs'
 import { UserLoginDto, ManageBusinessData } from '../../models/api-models'
 import { BaseApi } from '../base/baseapi'
 import { IAuthorizationService } from '../../interfaces/i.authorization.service'
-import { HttpClient } from '@angular/common/http'
 
 @Injectable()
 export class AuthorizationService extends BaseApi implements IAuthorizationService {

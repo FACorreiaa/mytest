@@ -1,13 +1,15 @@
-import { Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers, RequestMethod } from '@angular/http'
 import { Observable, throwError } from 'rxjs'
-import { retryWhen } from 'rxjs/operators'
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http'
+import { IRequestOptions } from '../models/api-models'
 
-export class ApiHttpService extends Http {
+export function applicationHttpClientCreator(http: HttpClient) {
+  return new ApiHttpService(http)
+}
+
+export class ApiHttpService {
   private tokenField: string
 
-  constructor(private backend: XHRBackend, private defOptions: RequestOptions) {
-    super(backend, defOptions)
-  }
+  public constructor(public http: HttpClient) {}
 
   public setTokenField(tokenField: string) {
     this.tokenField = tokenField
@@ -21,82 +23,78 @@ export class ApiHttpService extends Http {
     }
   }
 
-  public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
+  /**
+   * GET request
+   * @param {string} endPoint it doesn't need / in front of the end point
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @param {string} api use if there is needed to send request to different back-end than the default one.
+   * @returns {Observable<T>}
+   */
+  public Get<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
     const token = localStorage.getItem(this.getTokenField())
 
-    if (typeof url === 'string') {
-      if (!this.defOptions) {
-        options = { headers: new Headers() }
-      }
-
-      if (token) {
-        this.defOptions.headers.set('Authorization', token)
-      }
-    } else {
-      if (token) {
-        url.headers.set('Authorization', token)
-      }
+    if (token) {
+      const headers = new HttpHeaders()
+      options = {}
+      options.headers = headers.set('Authorization', token)
     }
 
-    return super.request(url, this.defOptions).catch(this.catchError(this))
-
-    // .pipe(
-    //   retryWhen(errors => {
-    //     throw Observable.throw(errors)
-    //   })
-    // )
+    return this.http.get<T>(endPoint, options)
   }
 
-  public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: '', method: RequestMethod.Get, url: url }, options)
-  }
+  /**
+   * POST request
+   * @param {string} endPoint end point of the api
+   * @param {Object} params body of the request.
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  public Post<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
+    const token = localStorage.getItem(this.getTokenField())
 
-  public post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Post, url: url }, options)
-  }
-
-  public delete(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Delete, url: url }, options)
-  }
-
-  public put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Put, url: url }, options)
-  }
-
-  private setGlobalHeaders(headers: Array<Object>, request: Request | RequestOptionsArgs) {
-    if (!request.headers) {
-      request.headers = new Headers()
+    if (token) {
+      const headers = new HttpHeaders()
+      options = {}
+      options.headers = headers.set('Authorization', token)
     }
-    headers.forEach((header: Object) => {
-      const key: string = Object.keys(header)[0]
-      const headerValue: string = (header as any)[key]
-        /* tslint:disable */
-      ;(request.headers as Headers).set(key, headerValue)
-    })
+
+    return this.http.post<T>(endPoint, params, options)
   }
 
-  private catchError(self: ApiHttpService) {
-    return (res: Response) => {
-      if (res.status === 401 || res.status === 403 || res.status === 400) {
-        // console.log('httpServiceError: ', res)
-      }
-      return throwError(res)
+  /**
+   * PUT request
+   * @param {string} endPoint end point of the api
+   * @param {Object} params body of the request.
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  public Put<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
+    const token = localStorage.getItem(this.getTokenField())
+
+    if (token) {
+      const headers = new HttpHeaders()
+      options = {}
+      options.headers = headers.set('Authorization', token)
     }
+
+    return this.http.put<T>(endPoint, params, options)
   }
 
-  private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {
-    let newOptions = defaultOpts || new RequestOptions()
-    this.setGlobalHeaders([], providedOpts)
-    newOptions = newOptions.merge(new RequestOptions(providedOpts))
+  /**
+   * DELETE request
+   * @param {string} endPoint end point of the api
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  public Delete<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
+    const token = localStorage.getItem(this.getTokenField())
 
-    return newOptions
-  }
-
-  private requestHelper(requestArgs: RequestOptionsArgs, additionalOptions?: RequestOptionsArgs): Observable<Response> {
-    let options = new RequestOptions(requestArgs)
-    if (additionalOptions) {
-      options = options.merge(additionalOptions)
+    if (token) {
+      const headers = new HttpHeaders()
+      options = {}
+      options.headers = headers.set('Authorization', token)
     }
-    return this.request(new Request(this.mergeOptions(options, this.defOptions)))
+
+    return this.http.delete<T>(endPoint, options)
   }
 }

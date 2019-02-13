@@ -11,7 +11,6 @@ export abstract class BaseApi {
   private apiUrl: string
   private basehttp: ApiHttpService
   private serverSettings: GlobalEnvironmentService
-  private defOptions?: RequestOptionsArgs
 
   constructor(injector: Injector) {
     this.basehttp = injector.get(ApiHttpService)
@@ -26,11 +25,9 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjects<T>(path: string): Observable<T> {
-    this.setHeaderForRequest('GET')
-
-    return this.basehttp.get(`${this.apiUrl}/${path}`, this.defOptions).pipe(
+    return this.basehttp.Get(`${this.apiUrl}/${path}`).pipe(
       map((res: Response) => {
-        const responseObject = res.json() as any
+        const responseObject = res as any
         return responseObject
       }),
       catchError((error: any) => throwError(error))
@@ -44,10 +41,9 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjectsPOST<T>(obj: Object, path: string): Observable<T> {
-    this.setHeaderForRequest('POST')
-    return this.basehttp.post(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+    return this.basehttp.Post(`${this.apiUrl}/${path}`, obj).pipe(
       map((res: Response) => {
-        const responseObject = res.json() as any
+        const responseObject = res as any
         return responseObject
       }),
       catchError((error: any) => throwError(error))
@@ -61,10 +57,9 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjectsDELETE<T>(obj: Object, path: string): Observable<T> {
-    this.setHeaderForRequest('DELETE')
-    return this.basehttp.delete(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+    return this.basehttp.Delete(`${this.apiUrl}/${path}`, obj).pipe(
       map((res: Response) => {
-        const responseObject = res.json() as any
+        const responseObject = res as any
         return responseObject
       }),
       catchError((error: any) => throwError(error))
@@ -78,45 +73,12 @@ export abstract class BaseApi {
    * @param path - The path from resource.
    */
   public getObjectsPUT<T>(obj: Object, path: string): Observable<T> {
-    this.setHeaderForRequest('PUT')
-    return this.basehttp.put(`${this.apiUrl}/${path}`, obj, this.defOptions).pipe(
+    return this.basehttp.Put(`${this.apiUrl}/${path}`, obj).pipe(
       map((res: Response) => {
-        const responseObject = res.json() as any
+        const responseObject = res as any
         return responseObject
       }),
       catchError((error: any) => throwError(error))
     )
-  }
-
-  private setHeaderForRequest(type: string): void {
-    switch (type) {
-      case 'POST':
-        {
-          const headers = new Headers({ 'Content-Type': 'application/json' })
-          this.defOptions = new RequestOptions({ headers: headers })
-        }
-        break
-      case 'GET':
-        {
-          const headers = new Headers({ 'Content-Type': 'application/json' })
-          this.defOptions = new RequestOptions({ headers: headers })
-        }
-        break
-      case 'DELETE':
-        {
-          const headers = new Headers({ 'Content-Type': 'application/json' })
-          this.defOptions = new RequestOptions({ headers: headers })
-        }
-        break
-      case 'PUT':
-        {
-          const headers = new Headers({ 'Content-Type': 'application/json' })
-          this.defOptions = new RequestOptions({ headers: headers })
-        }
-        break
-      case 'FORM':
-      default:
-        break
-    }
   }
 }
