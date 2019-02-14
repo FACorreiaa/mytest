@@ -17,6 +17,7 @@ export const AuthActionTypes = {
   MANAGE_BUSINESS_SUCCESS: '[Auth] Manaege Business Success',
   ERROR_LAYOUT_SHOW: '[Error] show',
   ERROR_LAYOUT_HIDE: '[Error] hide',
+  CHANGE_LANGUAGE: '[Auth] Change Language',
 }
 
 export class LoginAttempt implements Action {
@@ -94,6 +95,11 @@ export class ErrorLayoutHide implements Action {
   constructor(public payload: any) {}
 }
 
+export class ChangeLanguage implements Action {
+  public type = AuthActionTypes.CHANGE_LANGUAGE
+  constructor(public payload: any) {}
+}
+
 export type AuthActions =
   | LoginAttempt
   | LoginSuccess
@@ -110,3 +116,4 @@ export type AuthActions =
   | ManageBusinessFailure
   | ErrorLayoutShow
   | ErrorLayoutHide
+  | ChangeLanguage

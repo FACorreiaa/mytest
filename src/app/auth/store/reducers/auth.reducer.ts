@@ -12,6 +12,7 @@ export interface AuthState {
   hasRegisterError: boolean
   hasManageError: boolean
   errorMessage: string
+  language: string
 }
 
 const initialState: AuthState = {
@@ -25,6 +26,7 @@ const initialState: AuthState = {
   hasRegisterError: false,
   hasManageError: false,
   errorMessage: null,
+  language: 'en',
 }
 
 export function AuthReducer(state = initialState, action: AuthActions): AuthState {
@@ -121,6 +123,10 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     case AuthActionTypes.LOGOUT_FAILURE:
     case AuthActionTypes.LOGOUT_SUCCESS: {
       return initialState
+    }
+
+    case AuthActionTypes.CHANGE_LANGUAGE: {
+      return { ...state, language: action.payload.language }
     }
 
     default:

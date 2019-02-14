@@ -28,6 +28,8 @@ export const getAuthState = (state: AppState) => state.auth
 
 export const userAuthorized = createSelector(getAuthState, fromAuth.getUserAuthorization)
 
+export const language = createSelector(getAuthState, fromAuth.getLanguage)
+
 export const hasLoginError = createSelector(getAuthState, fromAuth.hasLoginError)
 
 export const loginLoading = createSelector(getAuthState, fromAuth.getLoading)

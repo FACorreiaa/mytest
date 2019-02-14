@@ -1,23 +1,43 @@
 <mat-sidenav-container>
-    <div class="wrapper">
-        <div class="toolbar">
-            <mat-toolbar color="primary">
-                <a (click)="GoToMainPage()" style="cursor: pointer"><span style="font-size: 30px">Claim your business</span></a>
-                <span class="example-spacer"></span>
-                <button *ngIf="!authorized" mat-button mat-stroked-button color="secondary" style="background-color: darkgray"
-                    (click)="onLoginClick($event)">
-                    Login
-                </button>
-                <button *ngIf="authorized" mat-button mat-stroked-button color="secondary" style="background-color: darkgray"
-                    (click)="onLogOutClick($event)">
-                    Log out
-                </button>
-            </mat-toolbar>
-        </div>
+  <div class="wrapper">
+    <div class="toolbar">
+      <mat-toolbar color="primary">
+        <a (click)="GoToMainPage()"
+           style="cursor: pointer"><span style="font-size: 30px">{{'csa.title.short' | translate}}</span></a>
+        <span class="example-spacer"></span>
 
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
+
+        <mat-form-field class="col-3 col-md-1">
+        <mat-select (selectionChange)="onLanguageSelect($event)"
+                    [value]="this.selectedLang">
+          <mat-option *ngFor="let l of languages"
+                      [value]="l">
+            {{ l.toUpperCase() }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+        <button *ngIf="!authorized"
+                mat-button
+                mat-stroked-button
+                color="secondary"
+                style="background-color: darkgray"
+                (click)="onLoginClick($event)">
+          {{'csa.login' | translate}}
+        </button>
+        <button *ngIf="authorized"
+                mat-button
+                mat-stroked-button
+                color="secondary"
+                style="background-color: darkgray"
+                (click)="onLogOutClick($event)">
+          {{'csa.logout' | translate}}
+        </button>
+      </mat-toolbar>
     </div>
 
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </mat-sidenav-container>

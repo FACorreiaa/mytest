@@ -3,6 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule, ErrorHandler } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { ApiModule } from './api/api.module'
@@ -23,7 +26,8 @@ import { EffectsModule } from '@ngrx/effects'
 import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { CsStepperModule } from './common/components/cs-stepper.module'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -46,6 +50,14 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    CsStepperModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     EffectsModule.forRoot([]),
     AppRoutingModule,
     MaterialModule,
@@ -58,3 +70,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/`, '.json')
+}

@@ -17,9 +17,10 @@ import { LoadingRequestComponent } from './loading.component'
 import { SideNavComponent } from './side-nav.component'
 import { EditTabsComponent } from './edit-tabs.component'
 import { GooglePlacesDirective } from '../directives/google-places.directive'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 
 @NgModule({
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule],
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule],
   exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
   declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
   providers: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent, CategoriesService, CountriesService],

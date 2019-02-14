@@ -21,6 +21,10 @@ import { MaterialModule } from '../material.module'
 import { EffectsModule } from '@ngrx/effects'
 import { AuthEffects } from './store/effects/auth.effects'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '@env/environment'
 
 // Routing
 const AuthRoutingModule = RouterModule.forChild([
@@ -32,10 +36,26 @@ const AuthRoutingModule = RouterModule.forChild([
 ])
 
 @NgModule({
-  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, MaterialModule, CsStepperModule, EffectsModule.forFeature([AuthEffects])],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    CsStepperModule,
+    EffectsModule.forFeature([AuthEffects]),
+    TranslateModule.forChild({
+      loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
+      isolate: true,
+    }),
+  ],
   declarations: [AuthComponent, WizardComponent, LoginComponent, ErrorComponent],
   entryComponents: [ModalTermsConditionsComponent],
   providers: [AuthGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/auth/`, '.json')
+}

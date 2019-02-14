@@ -8,6 +8,8 @@ export const getAuthState = (state: AuthState) => state
 
 export const getUserAuthorization = (state: AuthState) => state.authorized
 
+export const getLanguage = (state: AuthState) => state.language
+
 export const hasLoginError = (state: AuthState) => state.hasLoginError
 
 export const getLoading = (state: AuthState) => state.loading

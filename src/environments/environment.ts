@@ -3,6 +3,7 @@ export const environment = {
   envName: 'DEV',
   production: false,
   test: false,
+  i18nPrefix: '',
   API_URL: 'https://backend-dot-hd-claimingfe-dev.appspot.com/api/v1',
   TOKEN_PATH: 'CSA_Token',
 }

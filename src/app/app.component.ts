@@ -7,6 +7,7 @@ import { Store, select } from '@ngrx/store'
 import * as fromApp from './app.reducers'
 import * as AuthActions from './auth/store/actions/auth.action'
 import { takeUntil, delay } from 'rxjs/operators'
+import { TranslateService } from '@ngx-translate/core'
 
 /**
  * The app component.
@@ -18,12 +19,16 @@ import { takeUntil, delay } from 'rxjs/operators'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private userSubscription$: Subject<void> = new Subject<void>()
-
   authorized: boolean
+  selectedLanguage: string
+  selectedLang: string
+  languages = ['en', 'de', 'pt']
 
-  constructor(private router: Router, private store: Store<fromApp.AppState>) {}
+  constructor(private router: Router, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.translate.setDefaultLang('en')
+
     this.store
       .pipe(
         delay(0),
@@ -31,21 +36,38 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.userSubscription$)
       )
       .subscribe(authorized => (this.authorized = authorized))
+
+    this.store
+      .pipe(
+        delay(0),
+        select(fromApp.language),
+        takeUntil(this.userSubscription$)
+      )
+      .subscribe(lang => {
+        // console.log('lang', lang)
+
+        this.translate.use(lang)
+        this.selectedLang = lang
+      })
   }
 
   public ngOnDestroy() {
     this.userSubscription$.unsubscribe()
   }
 
-  onLoginClick(event) {
+  onLoginClick() {
     this.router.navigate([AuthRoutes.LOGIN])
   }
 
-  onLogOutClick(event) {
+  onLogOutClick() {
     this.store.dispatch(new AuthActions.LogoutSuccess({}))
   }
 
   GoToMainPage() {
     this.router.navigate([AuthRoutes.MAIN])
+  }
+
+  onLanguageSelect({ value: language }) {
+    this.store.dispatch(new AuthActions.ChangeLanguage({ language }))
   }
 }

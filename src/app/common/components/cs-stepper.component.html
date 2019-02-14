@@ -2,26 +2,26 @@
                         #stepper="matHorizontalStepper"
                         *ngIf="!authorized">
     <mat-step [stepControl]="firstFormGroup">
-        <ng-template matStepLabel>Your Restaurant</ng-template>
+        <ng-template matStepLabel>{{'csa.your-restaurante' | translate}}</ng-template>
         <div class="container">
             <form [formGroup]="firstFormGroup">
                 <div class="row justify-content-center">
                     <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="col-sm-8 labelTitle">Your Restaurant</span>
-                        <span class="col-sm-8 textAlign_Center">Tell us more about your location</span>
+                        <span class="col-sm-8 labelTitle">{{'csa.your-restaurante' | translate}}</span>
+                        <span class="col-sm-8 textAlign_Center">{{'csa.tells-more' | translate}}</span>
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
                             <input matInput
-                                   placeholder="Enter your business name"
+                                   placeholder="{{'csa.enter-business' | translate}}"
                                    google-place
                                    formControlName="location"
                                    required
                                    (onSelect)="setAddress($event)">
                             <mat-icon matSuffix>mode_edit</mat-icon>
-                            <mat-hint>Start typing to show locations</mat-hint>
+                            <mat-hint>{{'csa.start-typing' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('location').invalid">
-                                Please enter a value
+                                {{'csa.enter-value' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -29,52 +29,50 @@
                         <mat-form-field class="col">
                             <input matInput
                                    #address
-                                   placeholder="Enter your address"
+                                   placeholder="{{'csa.enter-address' | translate}}"
                                    formControlName="address"
                                    required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('address').invalid">
-                                Please enter a value
+                                {{'csa.enter-value' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col-sm-6">
                             <input matInput
-                                   placeholder="Enter your postal code"
+                                   placeholder="{{'csa.enter-postal-code' | translate}}"
                                    maxlength="5"
                                    formControlName="postal"
                                    required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
-                            <mat-hint>Must be 5 characters</mat-hint>
+                            <mat-hint>{{'csa.enter-5characters' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('postal').invalid">
-                                A valid postal code is required
+                                {{'csa.enter-valid-postal' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-sm-6">
                             <input matInput
-                                   placeholder="Enter your city"
+                                   placeholder="{{'csa.enter-city' | translate}}"
                                    formControlName="city"
                                    required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('city').invalid">
-                                Please enter a value
+                                {{'csa.enter-value' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <mat-select placeholder="Country"
+                            <mat-select placeholder="{{'csa.country' | translate}}"
                                         formControlName="country"
                                         (selectionChange)="changeCountry($event)">
-                                <mat-option>--None--</mat-option>
+                                <mat-option>--{{'csa.None' | translate}}--</mat-option>
                                 <mat-option *ngFor="let state of countries"
                                             [value]="state.name">{{state.name}}</mat-option>
                             </mat-select>
-                            <!-- <input matInput placeholder="Enter your country" formControlName="country" required> -->
-                            <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
                             <mat-error *ngIf="firstFormGroup.get('country').invalid">
-                                Please enter a value
+                                {{'csa.enter-value' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -86,18 +84,18 @@
                                    maxlength="6"
                                    style="text-align: right;">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
-                                Wrong prefix
+                                {{'csa.wrong-prefix' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <span>&ndash;</span>
                         <mat-form-field class="col-8 col-sm-8">
                             <input matInput
-                                   placeholder="Enter your phone"
+                                   placeholder="{{'csa.enter-phone' | translate}}"
                                    formControlName="phone"
                                    required>
                             <mat-icon matSuffix>phone</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('phone').invalid">
-                                Please enter a correct phone number
+                                {{'csa.enter-phone' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -106,29 +104,29 @@
             <div class="row buttons d-flex justify-content-end pad">
                 <button mat-raised-button
                         matStepperNext
-                        color="primary">Next</button>
+                        color="primary">{{'csa.next' | translate}}</button>
             </div>
         </div>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Contact Information</ng-template>
+        <ng-template matStepLabel>{{'csa.contact-info' | translate}}</ng-template>
         <div class="container">
             <form [formGroup]="secondFormGroup">
                 <div class="row justify-content-center">
                     <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="col-sm-8 labelTitle">Contact Information</span>
-                        <span class="col-sm-8 textAlign_Center">How can we contact your restaurant?</span>
+                        <span class="col-sm-8 labelTitle">{{'csa.contact-info' | translate}}</span>
+                        <span class="col-sm-8 textAlign_Center">{{'csa.contact-info-second' | translate}}</span>
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
                             <input matInput
-                                   placeholder="Enter your email"
+                                   placeholder="{{'csa.enter-email' | translate}}"
                                    formControlName="email"
                                    [(ngModel)]="this.businessEmail"
                                    required>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="secondFormGroup.get('email').invalid">
-                                Please enter a valid email
+                                {{'csa.enter-email' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -139,22 +137,22 @@
                         <mat-form-field class="col-9 col-md-10"
                                         style="padding: 0px 18px;">
                             <input matInput
-                                   placeholder="Enter your site"
+                                   placeholder="{{'csa.enter-site' | translate}}"
                                    formControlName="website"
                                    required>
-                            <mat-hint>Example: www.yoursite.com</mat-hint>
+                            <mat-hint>{{'csa.example' | translate}}: www.yoursite.com</mat-hint>
                             <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="secondFormGroup.get('website').hasError('required')">
-                                Please enter a value
+                                {{'csa.enter-value' | translate}}
                             </mat-error>
                             <mat-error *ngIf="secondFormGroup.get('website').hasError('invalidSite')">
-                                Please enter a valid site
+                                {{'csa.enter-valid-site' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-md-12 marginBottom">
                         <mat-list formArrayName="openHours">
-                            <h2 mat-header>Choose your open days and hours, you can split the service hours</h2>
+                            <h2 mat-header>{{'csa.openhours-title' | translate}}</h2>
                             <mat-list-item *ngFor="let position of this.openHoursArray.controls let ph=index"
                                            [formGroupName]="ph"
                                            class="matDaylist">
@@ -165,22 +163,22 @@
                                               color="primary">{{position.value.name}}</mat-checkbox>
 
                                 <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="from"
+                                    <mat-select placeholder="{{'csa.from' | translate}}"
                                                 formControlName="from"
                                                 [value]="position.value.from"
                                                 [disableControl]="!position.value.isSelected">
-                                        <mat-option>None</mat-option>
+                                        <mat-option>{{'csa.None' | translate}}</mat-option>
                                         <mat-option *ngFor="let hour of this.hours"
                                                     [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
                                 <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="to"
+                                    <mat-select placeholder="{{'csa.to' | translate}}"
                                                 formControlName="to"
                                                 [value]="position.value.to"
                                                 [disableControl]="!position.value.isSelected">
-                                        <mat-option>None</mat-option>
+                                        <mat-option>{{'csa.None' | translate}}</mat-option>
                                         <mat-option *ngFor="let hour of this.hours"
                                                     [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
@@ -189,22 +187,22 @@
                                 <mat-label class="col-md-1 d-sm-inline-block"><b>and</b></mat-label>
 
                                 <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="from"
+                                    <mat-select placeholder="{{'csa.from' | translate}}"
                                                 formControlName="splitedFrom"
                                                 [value]="position.value.splitedFrom"
                                                 [disableControl]="!position.value.isSelected">
-                                        <mat-option>None</mat-option>
+                                        <mat-option>{{'csa.None' | translate}}</mat-option>
                                         <mat-option *ngFor="let hour of this.hours"
                                                     [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
                                 <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="to"
+                                    <mat-select placeholder="{{'csa.to' | translate}}"
                                                 formControlName="splitedTo"
                                                 [value]="position.value.splitedTo"
                                                 [disableControl]="!position.value.isSelected">
-                                        <mat-option>None</mat-option>
+                                        <mat-option>{{'csa.None' | translate}}</mat-option>
                                         <mat-option *ngFor="let hour of this.hours"
                                                     [value]="hour.key">{{hour.value}}</mat-option>
                                     </mat-select>
@@ -218,21 +216,21 @@
                 <div class="row buttons d-flex justify-content-between pad">
                     <button mat-raised-button
                             matStepperPrevious
-                            color="secondary">Back</button>
+                            color="secondary">{{'csa.back' | translate}}</button>
                     <button mat-raised-button
                             matStepperNext
-                            color="primary">Next</button>
+                            color="primary">{{'csa.next' | translate}}</button>
                 </div>
             </form>
 
         </div>
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
-        <ng-template matStepLabel>Your offer</ng-template>
+        <ng-template matStepLabel>{{'csa.your-offer-title' | translate}}</ng-template>
         <div class="container">
             <div class="row justify-content-center marginBottom_40 marginTop_20">
-                <span class="col-sm-8 labelTitle">Your offer</span>
-                <span class="col-sm-8 textAlign_Center">What can your customers expect?</span>
+                <span class="col-sm-8 labelTitle">{{'csa.your-offer-title' | translate}}</span>
+                <span class="col-sm-8 textAlign_Center">{{'csa.your-offer-title-second' | translate}}</span>
             </div>
             <form [formGroup]="thirdFormGroup">
                 <input matInput
@@ -246,7 +244,7 @@
                 <mat-expansion-panel [expanded]="true">
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
                         <mat-panel-title>
-                            Category
+                            {{'csa.category' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="col-sm-3 checkBoxDisplayInline"
@@ -263,12 +261,12 @@
                                      [expanded]="this.OpenOfferings">
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
                         <mat-panel-title>
-                            Offerings
+                            {{'csa.offerings' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div *ngIf="!(this.offeringsArray && this.offeringsArray.length > 0)">
-                        Please select a category!
+                        {{'csa.enter-category' | translate}}
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline"
@@ -283,12 +281,12 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
                         <mat-panel-title>
-                            Services
+                            {{'csa.services' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div *ngIf="!(this.servicesArray && this.servicesArray.length > 0)">
-                        Please select a category!
+                        {{'csa.enter-category' | translate}}
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline"
@@ -303,12 +301,12 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
                         <mat-panel-title>
-                            Payment methods
+                            {{'csa.payments' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div *ngIf="!(this.paymentsArray && this.paymentsArray.length > 0)">
-                        Please select a category!
+                        {{'csa.enter-category' | translate}}
                     </div>
 
                     <div class="col-sm-3 checkBoxDisplayInline"
@@ -325,7 +323,7 @@
                  style="padding-top: 20px;">
                 <button mat-raised-button
                         matStepperPrevious
-                        color="secondary">Back</button>
+                        color="secondary">{{'csa.enter-category' | translate}}</button>
                 <button mat-raised-button
                         matStepperNext
                         color="primary"
@@ -335,7 +333,7 @@
         </div>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Overview</ng-template>
+        <ng-template matStepLabel>{{'csa.overview' | translate}}</ng-template>
         <div class="container">
             <form [formGroup]="formConclusion"
                   (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
@@ -343,7 +341,7 @@
                      class="row justify-content-center">
                     <div class="col-sm-6">
                         <div class="row justify-content-center marginBottom_40 marginTop_20">
-                            <span class="col-sm-8 labelTitle">Register</span>
+                            <span class="col-sm-8 labelTitle">{{'csa.register' | translate}}</span>
                         </div>
                         <mat-form-field class="col marginBottom">
                             <input matInput
@@ -353,51 +351,51 @@
                                    formControlName="email"
                                    [(ngModel)]="this.businessEmail">
                             <mat-error *ngIf="formConclusion.get('email').hasError('required')">
-                                E-mail is required
+                                {{'csa.email-required' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.get('email').invalid && !formConclusion.get('email').hasError('required')">
-                                E-mail is not valid
+                                {{'csa.email-not-valid' | translate}}                                
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col marginBottom">
                             <input matInput
-                                   placeholder="Password"
+                                   placeholder="{{'csa.password' | translate}}"
                                    autocomplete="current-password"
                                    aria-label="Password"
                                    type="password"
                                    formControlName="password">
-                            <mat-hint>Minimum 8 characters</mat-hint>
+                            <mat-hint>{{'csa.password-min' | translate}}</mat-hint>
                             <mat-error *ngIf="formConclusion.get('password').hasError('required')">
-                                Password is required
+                                {{'csa.password-required' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.get('password').hasError('minlength')">
-                                Password is at least 8 characters long
+                                {{'csa.password-at-least-8' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.get('password').hasError('maxlength')">
-                                Password cannot be longer than 50 characters
+                                {{'csa.password-can-not-be-long' | translate}}
                             </mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="col marginBottom_40">
                             <input matInput
-                                   placeholder="Confirm password"
+                                   placeholder="{{'csa.confirm-password' | translate}}"
                                    autocomplete="new-password"
                                    aria-label="confirm password"
                                    type="password"
                                    formControlName="confirmPassword"
                                    [errorStateMatcher]="matcher">
-                            <mat-hint>Minimum 8 characters</mat-hint>
+                            <mat-hint>{{'csa.password-min' | translate}}</mat-hint>
                             <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('required')">
-                                Password is required
+                                {{'csa.password-required' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('minlength')">
-                                Password is at least 8 characters long
+                                {{'csa.password-at-least-8' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('maxlength')">
-                                Password cannot be longer than 50 characters
+                                {{'csa.password-can-not-be-long' | translate}}
                             </mat-error>
                             <mat-error *ngIf="formConclusion.hasError('mismatch')">
-                                Passwords doesn't match...
+                                {{'csa.password-dont-match' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <div class="col marginBottom_40">
@@ -408,7 +406,8 @@
                             <span class="label_underline"
                                   (click)="openDialog()">I accept terms and conditions</span>
                             <mat-error *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
-                                You need to accept terms and conditions to go forward.
+                                    {{'csa.accept-terms' | translate}}
+                                <!-- You need to accept terms and conditions to go forward. -->
                             </mat-error>
                         </div>
 
@@ -418,7 +417,7 @@
                                     color="primary"
                                     class="big"
                                     [disabled]="!formConclusion.valid"
-                                    type="submit">Register</button>
+                                    type="submit">{{'csa.register' | translate}}</button>
                         </div>
                     </div>
                 </div>
@@ -449,14 +448,14 @@
                         </div>
                         <div class="row justify-content-center marginBottom_40 marginTop_20">
                             <!-- style="color: #F9AE00" -->
-                            <span class="labelTitle_xlarge">CONFIRM!</span>
-                            <span class="labelTitle_unset marginTop_20">Confirm if you want to submit your business
-                                information.</span>
+                            <span class="labelTitle_xlarge">{{'csa.confirm' | translate}}</span>
+                            <span class="labelTitle_unset marginTop_20">{{'csa.confirm-information' | translate}}
+                                </span>
                         </div>
                         <div class="row justify-content-center marginBottom_40">
                             <button mat-raised-button
                                     color="primary"
-                                    class="big">Submit</button>
+                                    class="big">{{'csa.submit' | translate}</button>
                         </div>
                     </div>
                 </div>
@@ -510,16 +509,14 @@
                         </svg>
                     </div>
                     <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="labelTitle_xlarge">CONGRATULATIONS!</span>
-                        <span class="labelTitle_unset marginTop_20">Your restaurant will be now claimed on Google
-                            Business.
-                            We will inform you via mail as soon as it is online.</span>
+                        <span class="labelTitle_xlarge">{{'csa.congratulations' | translate}</span>
+                        <span class="labelTitle_unset marginTop_20">Y{{'csa.congratulations-message' | translate}</span>
                     </div>
                     <div class="row justify-content-center marginBottom_40">
                         <button mat-raised-button
                                 color="primary"
                                 class="big"
-                                (click)="goToProfile()">Go to Profile</button>
+                                (click)="goToProfile()">{{'csa.go-to-profile' | translate}</button>
                     </div>
                 </div>
             </div>
