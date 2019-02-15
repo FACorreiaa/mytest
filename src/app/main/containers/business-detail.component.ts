@@ -17,7 +17,6 @@ import { CategoriesService } from '@app/common/services/categories.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BusinessDetailComponent implements OnInit, OnChanges {
-  businessToEdit: Data
   businessObjectId?: any
   business$: Observable<any[]>
   countries$: Observable<Countries[]>

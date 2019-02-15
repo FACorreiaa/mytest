@@ -92,36 +92,60 @@ export class GooglePlacesDirective implements AfterViewInit {
           }
           break
         case DaysCodes.monday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.monday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.monday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
           }
           break
         case DaysCodes.tuesday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.tuesday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.tuesday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
           }
           break
         case DaysCodes.wednesday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.wednesday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.wednesday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
           }
           break
         case DaysCodes.thursday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.thursday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.thursday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
           }
           break
         case DaysCodes.friday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.friday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.friday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })
           }
           break
         case DaysCodes.saturday:
+          if (days.length === 0) {
+            break
+          }
+
           openingTimes.saturday.push({ startTime: days[0].open.hours + ':00', endTime: days[0].close.hours + ':00' })
           if (days.length > 1) {
             openingTimes.saturday.push({ startTime: days[1].open.hours + ':00', endTime: days[1].close.hours + ':00' })

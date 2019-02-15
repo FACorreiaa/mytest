@@ -1,4 +1,5 @@
 {
+	"csa.login": "",
 	"csa.your-restaurante": "",
 	"csa.tells-more": "",
 	"csa.enter-business": "",
@@ -43,11 +44,11 @@
 	"csa.confirm-password": "",
 	"csa.password-dont-match": "",
 	"csa.accept-terms": "",
+	"csa.accept-terms.valid": "",
 	"csa.confirm": "",
 	"csa.confirm-information": "",
 	"csa.submit": "",
 	"csa.congratulations": "",
 	"csa.congratulations-message": "",
-	"csa.go-to-profile": "",
-	"csa.login": ""
+	"csa.go-to-profile": ""
 }

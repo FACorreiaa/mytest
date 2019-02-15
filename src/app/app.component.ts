@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   authorized: boolean
   selectedLanguage: string
   selectedLang: string
-  languages = ['en', 'de', 'pt']
+  languages = ['en', 'pt']
 
   constructor(private router: Router, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
 

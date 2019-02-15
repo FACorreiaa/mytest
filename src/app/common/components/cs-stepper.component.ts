@@ -103,49 +103,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     if (changes.payments && this.payments && this.newBusiness) {
       this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
     }
-
-    if (changes.business && this.editForm) {
-      this.businessToEdit = this.business.find(bs => bs.id === this.businessToEditId)
-
-      if (this.businessToEdit) {
-        this.firstFormGroup = this.formBuilder.group({
-          location: [this.businessToEdit.name, Validators.required],
-          address: [this.businessToEdit.street, Validators.required],
-          postal: new FormControl(this.businessToEdit.zipCode, ZipCodeValidation),
-          city: [this.businessToEdit.city, Validators.required],
-          phone: [this.businessToEdit.contactPhoneNumber, PhoneNumberValidation],
-          area: ['+49', PhoneNumberPrefixValidation],
-          country: ['Germany', Validators.required],
-        })
-
-        this.businessEmail = this.businessToEdit.contactEmail
-        this.secondFormGroup = this.formBuilder.group({
-          email: [this.businessEmail, EmailValidation],
-          website: [
-            this.businessToEdit.url,
-            Validators.compose([
-              Validators.required,
-              CustomValidators.patternValidator({
-                invalidSite: true,
-              }),
-            ]),
-          ],
-          openHours: this.formBuilder.array(this.buildOpenHoursArray(this.businessToEdit.openingTimes)),
-        })
-
-        this.categories = CategoriesArray()
-        this.hours = OpenHoursArray()
-
-        this.categories.map(x => {
-          x.selected = false
-          if (x.name === this.businessToEdit.category) {
-            x.selected = true
-          }
-        })
-
-        this.getAllOffersEvent.emit(this.businessToEdit)
-      }
-    }
   }
 
   ngAfterViewChecked() {
@@ -154,34 +111,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.addressFocus = false
     }
 
-    if (this.editForm && this.businessToEdit && this.offerings && this.offeringsArray.length === 0) {
-      this.offerings.filter(x => x.name === this.businessToEdit.category)[0].offering.map(x => this.offeringsArray.push({ name: x, selected: false }))
-      this.offeringsArray.map(x => {
-        if (this.businessToEdit.offers && this.businessToEdit.offers.includes(x.name)) {
-          x.selected = true
-        }
-      })
-    }
-
-    if (this.editForm && this.businessToEdit && this.services && this.servicesArray.length === 0) {
-      this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
-      this.servicesArray.map(x => {
-        if (this.businessToEdit.services && this.businessToEdit.services.includes(x.name)) {
-          x.selected = true
-        }
-      })
-    }
-
-    if (this.editForm && this.businessToEdit && this.payments && this.paymentsArray.length === 0) {
-      this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
-      this.paymentsArray.map(x => {
-        if (this.businessToEdit.paymentMethods && this.businessToEdit.paymentMethods.includes(x.name)) {
-          x.selected = true
-        }
-      })
-    }
-
-    this.validateCategoriesSelection()
+    // this.validateCategoriesSelection()
 
     this.change.detectChanges()
   }

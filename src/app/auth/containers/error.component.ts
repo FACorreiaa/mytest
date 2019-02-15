@@ -24,11 +24,6 @@ export class ErrorComponent implements OnInit {
         this.error = error instanceof ProgressEvent && error ? 'Please, check your connection.' : error.replace('{"error":"', '').replace('"}', '')
       }
     })
-
-    // if (!this.error) {
-    //   console.log('entreiiii')
-    //   this.router.navigate([AuthRoutes.MAIN])
-    // }
   }
 
   GoToMainPage() {

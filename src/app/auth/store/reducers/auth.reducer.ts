@@ -122,7 +122,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
 
     case AuthActionTypes.LOGOUT_FAILURE:
     case AuthActionTypes.LOGOUT_SUCCESS: {
-      return initialState
+      return { ...initialState, language: state.language }
     }
 
     case AuthActionTypes.CHANGE_LANGUAGE: {

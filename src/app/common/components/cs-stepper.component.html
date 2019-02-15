@@ -323,12 +323,12 @@
                  style="padding-top: 20px;">
                 <button mat-raised-button
                         matStepperPrevious
-                        color="secondary">{{'csa.enter-category' | translate}}</button>
+                        color="secondary">{{'csa.back' | translate}}</button>
                 <button mat-raised-button
                         matStepperNext
                         color="primary"
                         type="submit"
-                        (click)="steperchange($event)">Next</button>
+                        (click)="steperchange($event)">{{'csa.next' | translate}}</button>
             </div>
         </div>
     </mat-step>
@@ -353,8 +353,9 @@
                             <mat-error *ngIf="formConclusion.get('email').hasError('required')">
                                 {{'csa.email-required' | translate}}
                             </mat-error>
-                            <mat-error *ngIf="formConclusion.get('email').invalid && !formConclusion.get('email').hasError('required')">
-                                {{'csa.email-not-valid' | translate}}                                
+                            <mat-error
+                                       *ngIf="formConclusion.get('email').invalid && !formConclusion.get('email').hasError('required')">
+                                {{'csa.email-not-valid' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col marginBottom">
@@ -404,10 +405,10 @@
                                           formControlName="termsConditions">
                             </mat-checkbox>
                             <span class="label_underline"
-                                  (click)="openDialog()">I accept terms and conditions</span>
-                            <mat-error *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
-                                    {{'csa.accept-terms' | translate}}
-                                <!-- You need to accept terms and conditions to go forward. -->
+                                  (click)="openDialog()">{{'csa.accept-terms' | translate}}</span>
+                            <mat-error
+                                       *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
+                                {{'csa.accept-terms.valid' | translate}}
                             </mat-error>
                         </div>
 
@@ -450,7 +451,7 @@
                             <!-- style="color: #F9AE00" -->
                             <span class="labelTitle_xlarge">{{'csa.confirm' | translate}}</span>
                             <span class="labelTitle_unset marginTop_20">{{'csa.confirm-information' | translate}}
-                                </span>
+                            </span>
                         </div>
                         <div class="row justify-content-center marginBottom_40">
                             <button mat-raised-button

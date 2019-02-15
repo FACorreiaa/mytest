@@ -1,4 +1,5 @@
 {
+	"csa.login": "Login",
 	"csa.your-restaurante": "Your Restaurant",
 	"csa.tells-more": "Tell us more about your location",
 	"csa.enter-business": "Enter your location",
@@ -28,7 +29,7 @@
 	"csa.your-offer-title-second": "What can your customers expect?",
 	"csa.category": "Category",
 	"csa.offerings": "Offerings",
-	"csa.enter-category": "",
+	"csa.enter-category": "Please select a category",
 	"csa.services": "Services",
 	"csa.payments": "Payment methods",
 	"csa.overview": "Overview",
@@ -43,11 +44,11 @@
 	"csa.confirm-password": "Confirm password",
 	"csa.password-dont-match": "Passwords doesn't match...",
 	"csa.accept-terms": "I accept terms and conditions",
+	"csa.accept-terms.valid": "You need to accept terms and conditions to go forward.",
 	"csa.confirm": "CONFIRM!",
 	"csa.confirm-information": "Confirm if you want to submit your business information.",
 	"csa.submit": "Submit",
 	"csa.congratulations": "CONGRATULATIONS!",
 	"csa.congratulations-message": "Your restaurant will be now claimed on Google Business. We will inform you via mail as soon as it is online.",
-	"csa.go-to-profile": "Go to Profile",
-	"csa.login": "Login"
+	"csa.go-to-profile": "Go to Profile"
 }
