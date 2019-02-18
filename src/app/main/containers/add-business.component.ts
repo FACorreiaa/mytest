@@ -44,7 +44,7 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
 
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getOfferings('')
+    this.offerings$ = this.categoriesService.getOfferings()
   }
 
   ngOnChanges(changes: SimpleChanges): void {}

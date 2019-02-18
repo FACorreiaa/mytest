@@ -1,6 +1,5 @@
 import { Directive, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core'
-import { OpeningTimes, Day, DaysCodes } from '@app/api/models/api-models'
-import { WeekDay } from '@angular/common'
+import { OpeningTimes, DaysCodes } from '@app/api/models/api-models'
 
 declare var google: any
 

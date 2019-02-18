@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { EmailValidation, PasswordValidation } from '@app/common/validations'
 import { Store, select } from '@ngrx/store'
@@ -14,13 +14,13 @@ import { delay, takeUntil } from 'rxjs/operators'
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  private userSubscription$: Subject<void> = new Subject<void>()
+export class LoginComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject<void>()
   formLogin: FormGroup
   loading$: Observable<boolean>
   language$: Observable<string>
 
-  constructor(private formBuilder: FormBuilder, private store: Store<fromApp.AppState>, private readonly translate: TranslateService) {}
+  constructor(private formBuilder: FormBuilder, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
 
   ngOnInit() {
     this.loading$ = this.store.select(fromApp.loginLoading)
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       .pipe(
         delay(0),
         select(fromApp.language),
-        takeUntil(this.userSubscription$)
+        takeUntil(this.unsubscribe$)
       )
       .subscribe(lang => this.translate.use(lang))
 
@@ -43,5 +43,10 @@ export class LoginComponent implements OnInit {
 
   login(formLogin: FormGroup) {
     this.store.dispatch(new AuthActions.LoginAttempt(formLogin.value))
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 }

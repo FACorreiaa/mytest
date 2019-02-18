@@ -38,7 +38,7 @@ export class BusinessDetailComponent implements OnInit, OnChanges {
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getOfferings('')
+    this.offerings$ = this.categoriesService.getOfferings()
   }
 
   ngOnInit(): void {

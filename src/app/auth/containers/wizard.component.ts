@@ -48,7 +48,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getOfferings('')
+    this.offerings$ = this.categoriesService.getOfferings()
 
     this.store
       .pipe(
@@ -65,6 +65,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnDestroy() {
     this.userSubscription$.unsubscribe()
+    this.language$.unsubscribe()
   }
 
   register(object: UserRegisterDto): void {

@@ -1,26 +1,47 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Store } from '@ngrx/store'
+import { Store, select } from '@ngrx/store'
 
-import * as fromModule from '../../app.reducers'
+import * as fromApp from '../../app.reducers'
 import * as fromMain from '../main.reducers'
 import * as Actions from '../store/actions/dashboard.actions'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
+import { delay, takeUntil } from 'rxjs/operators'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   business$: Observable<any[]>
+  private unsubscribe$: Subject<void> = new Subject<void>()
 
-  constructor(private router: Router, private route: ActivatedRoute, private store: Store<fromMain.MainState>, private appStore: Store<fromModule.AppState>) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store<fromMain.MainState>,
+    private appStore: Store<fromApp.AppState>,
+    private translate: TranslateService
+  ) {
     this.business$ = this.store.select(fromMain.getBusiness)
   }
 
   ngOnInit(): void {
     this.store.dispatch(new Actions.GetAllBusinessAction())
+
+    this.appStore
+      .pipe(
+        delay(0),
+        select(fromApp.language),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(lang => this.translate.use(lang))
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.unsubscribe()
   }
 
   editBusiness(obj: any) {
@@ -28,8 +49,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteBusiness(obj: any) {
-    // console.log(obj)
-
     const deleteObject = {
       id: obj.id,
       channels: [obj.channels[0].channel],

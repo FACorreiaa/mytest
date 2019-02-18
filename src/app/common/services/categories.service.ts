@@ -6,7 +6,7 @@ import { map } from 'rxjs/internal/operators/map'
 export class CategoriesService {
   constructor(public http: Http) {}
 
-  public getOfferings(category: string) {
+  public getOfferings() {
     return this.http.get('assets/categories/category-offering.json').pipe(map((response: any) => response.json().category))
   }
 

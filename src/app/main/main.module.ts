@@ -13,13 +13,15 @@ import { AddBusinessComponent } from './containers/add-business.component'
 // COMPONENTS
 import { BusinnessComponent } from './components/business.component'
 
-// EFFECTS
-
 import { reducers, reducerName } from './main.reducers'
 import { MainRoutingModule } from './main.routing'
 import { DashBoardEffects } from './store/effects/dashboard.effects'
 import { MaterialModule } from '@app/material.module'
 import { CsStepperModule } from '@app/common/components/cs-stepper.module'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '@env/environment'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
 @NgModule({
   imports: [
@@ -31,9 +33,17 @@ import { CsStepperModule } from '@app/common/components/cs-stepper.module'
     MaterialModule,
     CsStepperModule,
     EffectsModule.forFeature([DashBoardEffects]),
+    TranslateModule.forChild({
+      loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
+      isolate: true,
+    }),
   ],
   declarations: [MainComponent, DashboardComponent, BusinnessComponent, BusinessDetailComponent, AddBusinessComponent],
   exports: [MainComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MainModule {}
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')
+}
