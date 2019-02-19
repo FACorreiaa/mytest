@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
 
   ngOnInit() {
+    this.translate.setDefaultLang('en')
+
     this.loading$ = this.store.select(fromApp.loginLoading)
 
     this.store

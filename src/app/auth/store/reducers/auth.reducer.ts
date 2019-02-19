@@ -122,6 +122,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
 
     case AuthActionTypes.LOGOUT_FAILURE:
     case AuthActionTypes.LOGOUT_SUCCESS: {
+      state.language = state.language === undefined ? (state.language = 'en') : state.language
       return { ...initialState, language: state.language }
     }
 

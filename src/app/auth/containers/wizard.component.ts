@@ -45,6 +45,8 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
+    this.translate.setDefaultLang('en')
+
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
