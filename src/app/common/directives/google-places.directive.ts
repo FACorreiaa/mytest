@@ -29,7 +29,7 @@ export class GooglePlacesDirective implements AfterViewInit {
       return null
     }
 
-    const openingHours = place.opening_hours !== undefined ? this.buildOpeningHours(place.opening_hours.periods) : [] // this.buildOpeningHours(place.opening_hours.periods)
+    const openingHours = place.opening_hours !== undefined ? this.buildOpeningHours(place.opening_hours.periods) : null
     location = this.buildAddress(place.address_components)
 
     location['location'] = place.name

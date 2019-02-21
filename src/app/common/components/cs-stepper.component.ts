@@ -111,8 +111,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.addressFocus = false
     }
 
-    // this.validateCategoriesSelection()
-
     this.change.detectChanges()
   }
 
@@ -377,11 +375,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       name: firstForm.location,
       additional: '',
       street: firstForm.address,
-      // streetNumber: this.streetNumber,
       zipCode: firstForm.postal,
-      // zip: firstForm.postal,
       city: firstForm.city,
-      countryCode: 'DE', // firstForm.area,
+      countryCode: 'DE',
       url: secondFormGroup.website,
       languageCode: 'de',
       contactEmail: secondFormGroup.email,
@@ -497,7 +493,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
-    if (addrObj.openingHours.length > 0) {
+    if (addrObj.openingHours) {
       const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
       this.secondFormGroup.get('openHours').setValue(formBuilder)
     }
