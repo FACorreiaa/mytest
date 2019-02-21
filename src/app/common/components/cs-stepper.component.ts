@@ -206,7 +206,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   private buildOpenDaysFormControl(day: Day[], dayName: string) {
-    if (day.length <= 0) {
+    if (day !== undefined && day.length <= 0) {
       return this.formBuilder.group({
         name: [dayName],
         isSelected: [false],
@@ -216,7 +216,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         splitedFrom: [''],
         splitedTo: [''],
       })
-    } else if (day.length > 0) {
+    } else if (day !== undefined && day.length > 0) {
       return this.formBuilder.group({
         name: [dayName],
         isSelected: [true],
@@ -497,8 +497,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
-    const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
-    this.secondFormGroup.get('openHours').setValue(formBuilder)
+    if (addrObj.openingHours.length > 0) {
+      const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
+      this.secondFormGroup.get('openHours').setValue(formBuilder)
+    }
 
     this.addressFocus = true
     this.addressInput.nativeElement.focus()

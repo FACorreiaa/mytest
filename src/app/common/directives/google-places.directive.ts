@@ -14,7 +14,7 @@ export class GooglePlacesDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (google) {
-      const autocomplete = new google.maps.places.Autocomplete(this.element)
+      const autocomplete = new google.maps.places.Autocomplete(this.element, { types: ['establishment'] })
       autocomplete.setComponentRestrictions({ country: ['de', 'pt'] })
 
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
@@ -29,7 +29,7 @@ export class GooglePlacesDirective implements AfterViewInit {
       return null
     }
 
-    const openingHours = this.buildOpeningHours(place.opening_hours.periods)
+    const openingHours = place.opening_hours !== undefined ? this.buildOpeningHours(place.opening_hours.periods) : [] // this.buildOpeningHours(place.opening_hours.periods)
     location = this.buildAddress(place.address_components)
 
     location['location'] = place.name

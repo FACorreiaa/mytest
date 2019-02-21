@@ -248,12 +248,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="col-sm-3 checkBoxDisplayInline"
-                         *ngFor="let item of this.categories; let i = index">
+                         *ngFor="let item of this.categories">
                         <mat-checkbox name="categoryCusine"
                                       color="primary"
                                       [checked]="item.selected"
                                       (change)="onChangeCategory($event, item)"
-                                      [value]="item.name">{{item.name}}</mat-checkbox>
+                                      [value]="item.name">{{item.name | translate}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -274,7 +274,7 @@
                         <mat-checkbox color="primary"
                                       [value]="item"
                                       [checked]="item.selected"
-                                      (change)="onOfferingsChange($event, item)">{{item.name}}</mat-checkbox>
+                                      (change)="onOfferingsChange($event, item)">{{item.name | translate}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -294,7 +294,7 @@
                         <mat-checkbox color="primary"
                                       [value]="item"
                                       [checked]="item.selected"
-                                      (change)="onServicesChange($event, item)">{{item.name}}</mat-checkbox>
+                                      (change)="onServicesChange($event, item)">{{item.name | translate}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -314,7 +314,7 @@
                         <mat-checkbox color="primary"
                                       [value]="payment"
                                       [checked]="payment.selected"
-                                      (change)="onPaymentsChange($event, payment)">{{payment.name}}</mat-checkbox>
+                                      (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

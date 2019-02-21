@@ -23,7 +23,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule],
   exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
   declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
-  providers: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent, CategoriesService, CountriesService],
-  entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent],
+  providers: [CategoriesService, CountriesService],
+  // entryComponents: [ModalTermsConditionsComponent, LoadingRequestComponent, SideNavComponent],
 })
 export class CsStepperModule {}
