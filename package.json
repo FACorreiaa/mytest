@@ -25,7 +25,8 @@
     "extractAuth": "ngx-translate-extract -i ./src/app/auth -o ./src/assets/i18n/auth/de.json ./src/assets/i18n/auth/en.json ./src/assets/i18n/auth/pt.json",
     "extractMain": "ngx-translate-extract -i ./src/app/main -o ./src/assets/i18n/main/de.json ./src/assets/i18n/main/en.json ./src/assets/i18n/main/pt.json",
     "extractCommonAuth": "ngx-translate-extract -i ./src/app/common -o ./src/assets/i18n/auth/de.json ./src/assets/i18n/auth/en.json ./src/assets/i18n/auth/pt.json",
-    "extractCommonMain": "ngx-translate-extract -i ./src/app/common -o ./src/assets/i18n/main/de.json ./src/assets/i18n/main/en.json ./src/assets/i18n/main/pt.json"
+    "extractCommonMain": "ngx-translate-extract -i ./src/app/common -o ./src/assets/i18n/main/de.json ./src/assets/i18n/main/en.json ./src/assets/i18n/main/pt.json",
+    "extractChilds": "npm run extractAuth & npm run extractMain & npm run extractCommonAuth & npm run extractCommonMain"
   },
   "private": true,
   "dependencies": {
