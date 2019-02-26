@@ -29,8 +29,6 @@ export class GooglePlacesDirective implements AfterViewInit {
       return null
     }
 
-    // console.log('place', place)
-
     const openingHours = place.opening_hours !== undefined ? this.buildOpeningHours(place.opening_hours.periods) : null
     location = this.buildAddress(place.address_components)
 
@@ -79,7 +77,7 @@ export class GooglePlacesDirective implements AfterViewInit {
     }
 
     for (let index = 0; index <= 6; index++) {
-      const days = openingHours.filter((x: any) => x.open.day === index && x.close.day === index)
+      const days = openingHours.filter((x: any) => x.open.day === index)
 
       switch (index) {
         case DaysCodes.sunday:

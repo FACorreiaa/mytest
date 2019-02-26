@@ -541,14 +541,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.streetNumber = addrObj.street_number ? addrObj.street_number : ''
 
     const regexPhone = addrObj.phone_number.replace(/^(049|0+)?/g, '')
-
     this.firstFormGroup.get('phone').setValue(regexPhone)
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
-    if (addrObj.openingHours) {
-      const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
-      this.secondFormGroup.get('openHours').setValue(formBuilder)
-    }
+    const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
+    this.secondFormGroup.get('openHours').setValue(formBuilder)
 
     this.addressFocus = true
     this.addressInput.nativeElement.focus()
