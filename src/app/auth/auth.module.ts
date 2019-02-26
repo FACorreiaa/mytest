@@ -13,7 +13,7 @@ import { LoginComponent } from './containers/login.component'
 import { ErrorComponent } from './containers/error.component'
 
 // Modules
-import { CsStepperModule } from '@app/common/components/cs-stepper.module'
+import { CoreModule } from '@app/common/common.module'
 
 // Material
 import { MaterialModule } from '../material.module'
@@ -42,7 +42,7 @@ const AuthRoutingModule = RouterModule.forChild([
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    CsStepperModule,
+    CoreModule,
     EffectsModule.forFeature([AuthEffects]),
     TranslateModule.forChild({
       loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },

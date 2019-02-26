@@ -84,10 +84,16 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Output() private registerEvent = new EventEmitter()
   @Output() private editionEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
-  @Output() private getAllOffersEvent = new EventEmitter()
 
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel
   @ViewChild('address') addressInput: ElementRef
+
+  /*
+   * Method to get opening hours array in onboarding second step.
+   */
+  get openHoursArray(): FormArray {
+    return <FormArray>this.secondFormGroup.get('openHours')
+  }
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private change: ChangeDetectorRef) {
     this.buildInitalFormGroup()
@@ -114,10 +120,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.change.detectChanges()
   }
 
-  get openHoursArray(): FormArray {
-    return <FormArray>this.secondFormGroup.get('openHours')
-  }
-
+  /*
+   * Method to initalize form groups for each step.
+   */
   private buildInitalFormGroup() {
     this.firstFormGroup = this.formBuilder.group({
       location: ['', Validators.required],
@@ -167,17 +172,21 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.hours = OpenHoursArray()
   }
 
+  /**
+   * Initializes openeing hours with initial state or not if days is not null.
+   * @param days days of the week to build
+   */
   private buildOpenHoursArray(days?: OpeningTimes) {
     const groups = []
 
     if (!days) {
-      groups.push(this.buildOpenDaysInitalFormControl('monday'))
-      groups.push(this.buildOpenDaysInitalFormControl('tuesday'))
-      groups.push(this.buildOpenDaysInitalFormControl('wednesday'))
-      groups.push(this.buildOpenDaysInitalFormControl('thursday'))
-      groups.push(this.buildOpenDaysInitalFormControl('friday'))
-      groups.push(this.buildOpenDaysInitalFormControl('saturday'))
-      groups.push(this.buildOpenDaysInitalFormControl('sunday'))
+      groups.push(this.buildDefaultOpeningDays('monday'))
+      groups.push(this.buildDefaultOpeningDays('tuesday'))
+      groups.push(this.buildDefaultOpeningDays('wednesday'))
+      groups.push(this.buildDefaultOpeningDays('thursday'))
+      groups.push(this.buildDefaultOpeningDays('friday'))
+      groups.push(this.buildDefaultOpeningDays('saturday'))
+      groups.push(this.buildDefaultOpeningDays('sunday'))
     } else {
       groups.push(this.buildOpenDaysFormControl(days.monday, 'monday'))
       groups.push(this.buildOpenDaysFormControl(days.tuesday, 'tuesday'))
@@ -191,9 +200,13 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return groups
   }
 
-  private buildOpenDaysInitalFormControl(day: string) {
+  /**
+   * Build default opening hours data on the form.
+   * @param dayName Description of the day
+   */
+  private buildDefaultOpeningDays(dayName: string) {
     return this.formBuilder.group({
-      name: [day],
+      name: [dayName],
       isSelected: [true],
       from: new FormControl({ value: '9:00', disabled: false }, Validators.required),
       to: ['17:00'],
@@ -203,6 +216,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
   }
 
+  /**
+   * Build opening hours data on the form.
+   * @param day Day opening hours data
+   * @param dayName Description of the day
+   */
   private buildOpenDaysFormControl(day: Day[], dayName: string) {
     if (day !== undefined && day.length <= 0) {
       return this.formBuilder.group({
@@ -227,6 +245,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
+  /**
+   * When user selects a new category.
+   * @param event click event
+   * @param item Category selected
+   */
   async onChangeCategory(event, item) {
     this.categories.map(x => {
       x.selected = false
@@ -238,7 +261,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.offeringsArray = []
     if (event.checked) {
       this.category = event.source.value
-      this.offerings.filter(x => x.name === item.name)[0].offering.map(x => this.offeringsArray.push({ name: x, selected: false }))
+      this.offerings.filter(x => x.name === item.name)[0].offering.map((x: string) => this.offeringsArray.push({ name: x, selected: false }))
     }
 
     this.validateCategoriesSelection()
@@ -246,24 +269,42 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.myPanels.open()
   }
 
+  /**
+   * When users check/unckeck some offering.
+   * @param event click event
+   * @param item offering selected
+   */
   onOfferingsChange(event, item) {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
   }
 
+  /**
+   * When users check/unckeck some service.
+   * @param event click event
+   * @param item service selected
+   */
   onServicesChange(event, item) {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
   }
 
+  /**
+   * When users check/unckeck some payment.
+   * @param event click event
+   * @param item payment selected
+   */
   onPaymentsChange(event, item) {
     item.selected = !item.selected
 
     this.validateCategoriesSelection()
   }
 
+  /**
+   * Event fired when user goes to main page.
+   */
   goToProfile() {
     this.goToProfileEvent.emit()
   }
@@ -290,7 +331,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   /**
-   * This method save the business edition.
+   * This method build business data to update.
    */
   private editionData(firstForm: any, secondFormGroup: any, formConclusion: any) {
     this.offeringsArray.map(off => {
@@ -317,11 +358,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       name: firstForm.location,
       additional: '',
       street: firstForm.address,
-      // streetNumber: this.streetNumber,
       zipCode: firstForm.postal,
-      // zip: firstForm.postal,
       city: firstForm.city,
-      countryCode: 'DE', // firstForm.area,
+      countryCode: 'DE',
       url: secondFormGroup.website,
       languageCode: 'de',
       contactEmail: secondFormGroup.email,
@@ -343,7 +382,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   /**
-   * This method creates the objects for the middlware
+   * This method creates the object dto for the middlware service
    */
   private createClaimToSave(firstForm: any, secondFormGroup: any, formConclusion: any) {
     const user: UserLoginDto = {
@@ -402,7 +441,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
     return claimObject
   }
-
+  /**
+   * Build opening hours dto model to send in service.
+   * @param openHours the opening hours array for each day of the week.
+   */
   private buildOpenHoursModel(openHours: any): OpeningTimes {
     let monday: Day[] = []
     let tuesday: Day[] = []
@@ -455,6 +497,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return openingTimes
   }
 
+  /**
+   * Build the day model to send in service.
+   * @param element the day data.
+   */
   private buildDayModel(element: any): Day[] {
     const dayArray: Day[] = []
 
@@ -470,12 +516,18 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     return dayArray
   }
 
+  /**
+   * Modal to show terms and conditions.
+   */
   openDialog(): void {
     this.dialog.open(ModalTermsConditionsComponent, {
       width: '550px',
     })
   }
 
+  /**
+   * Method to build information retrieved form google places api.
+   */
   setAddress(addrObj: any) {
     if (!addrObj) {
       return null
@@ -504,10 +556,18 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.setAreaCode(addrObj.country)
   }
 
+  /**
+   * When users changes country, a new area code needs to be set.
+   * @param event country selected
+   */
   changeCountry(event: any) {
     this.setAreaCode(event.value)
   }
 
+  /**
+   * Set new areacode for selected country.
+   * @param countryName the country name
+   */
   private setAreaCode(countryName: string) {
     if (!countryName) {
       return
@@ -517,6 +577,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.firstFormGroup.get('area').setValue(newAreaValue)
   }
 
+  /**
+   * Method to validate if the user selects at least one option from each section(offers, payments, services).
+   */
   private validateCategoriesSelection() {
     let isOfferingsValid = false
     let isPaymentsValid = false
@@ -550,6 +613,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
+  /**
+   * Show modal information if categories step is not validated.
+   * @param event
+   */
   steperchange(event: any) {
     if (this.thirdFormGroup.get('hasSelection').invalid) {
       this.dialog.open(ModalTermsConditionsComponent, { data: { isOffersValidation: true }, width: '550px' })
@@ -559,6 +626,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 }
 
+/**
+ * Custom validator to check if user enters correct password.
+ * @param formGroup to be validated.
+ */
 function passwordMatchValidator(formGroup: FormGroup): any {
   const pass = formGroup.controls.password.value
   const confirmPass = formGroup.controls.confirmPassword.value

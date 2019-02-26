@@ -17,7 +17,7 @@ import { reducers, reducerName } from './main.reducers'
 import { MainRoutingModule } from './main.routing'
 import { DashBoardEffects } from './store/effects/dashboard.effects'
 import { MaterialModule } from '@app/material.module'
-import { CsStepperModule } from '@app/common/components/cs-stepper.module'
+import { CoreModule } from '@app/common/common.module'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '@env/environment'
@@ -31,7 +31,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    CsStepperModule,
+    CoreModule,
     EffectsModule.forFeature([DashBoardEffects]),
     TranslateModule.forChild({
       loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
