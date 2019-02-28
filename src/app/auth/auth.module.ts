@@ -13,7 +13,7 @@ import { LoginComponent } from './containers/login.component'
 import { ErrorComponent } from './containers/error.component'
 
 // Modules
-import { CoreModule } from '@app/common/common.module'
+import { CoreModule } from '@app/common/core.module'
 
 // Material
 import { MaterialModule } from '../material.module'

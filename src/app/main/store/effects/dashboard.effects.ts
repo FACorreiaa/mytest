@@ -51,10 +51,10 @@ export class DashBoardEffects {
   editBusiness$: Observable<Action> = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.EDIT_BUSINESS),
     switchMap((action: any) =>
-      this.dashBoardService
-        .editBusinessData(action.payload)
-        .map((response: any) => new dashBoardActions.EditBusinessSuccessAction(response))
-        .catch(error => of(new dashBoardActions.EditBusinessFailureAction(error)))
+      this.dashBoardService.editBusinessData(action.payload).pipe(
+        map((response: any) => new dashBoardActions.EditBusinessSuccessAction(response)),
+        catchError(error => of(new dashBoardActions.EditBusinessFailureAction(error)))
+      )
     )
   )
 

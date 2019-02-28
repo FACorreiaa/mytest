@@ -17,12 +17,33 @@ import { LoadingRequestComponent } from './components/loading.component'
 import { SideNavComponent } from './components/side-nav.component'
 import { EditTabsComponent } from './components/edit-tabs.component'
 import { GooglePlacesDirective } from './directives/google-places.directive'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '@env/environment'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
 @NgModule({
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule],
+  imports: [
+    MaterialModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    TranslateModule,
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpClient],
+    //   },
+    // }),
+  ],
   exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
   declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
   providers: [CategoriesService, CountriesService],
 })
 export class CoreModule {}
+
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n`, '.json')
+// }

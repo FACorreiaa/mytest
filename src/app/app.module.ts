@@ -27,7 +27,7 @@ import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
 import { HttpClientModule, HttpClient } from '@angular/common/http'
-import { CoreModule } from './common/common.module'
+import { CoreModule } from './common/core.module'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -51,6 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    // TranslateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
