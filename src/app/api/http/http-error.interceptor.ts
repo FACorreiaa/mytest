@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs'
 import { retry, catchError } from 'rxjs/operators'
 import { Injector, Injectable } from '@angular/core'
 import { RollbarService } from '../api.module'
+import { environment } from '@env/environment'
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -22,8 +23,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`
         }
 
-        //  window.alert(errorMessage)
-        rollbar.error(error)
+        if (environment.production) {
+          rollbar.error(error)
+        }
+
         return throwError(errorMessage)
       })
     )
