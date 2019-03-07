@@ -21,6 +21,8 @@
     "server": "cd dist && http-server",
     "prod": "npm run clean && npm run build:prod",
     "analyze": "npm run clean && npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/stats.json",
+    "tx:push": "tx push -s",
+    "tx:pull": "tx pull -a",
     "extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/de.json ./src/assets/i18n/en.json ./src/assets/i18n/pt.json",
     "extractAuth": "ngx-translate-extract -i ./src/app/auth -o ./src/assets/i18n/auth/de.json ./src/assets/i18n/auth/en.json ./src/assets/i18n/auth/pt.json",
     "extractMain": "ngx-translate-extract -i ./src/app/main -o ./src/assets/i18n/main/de.json ./src/assets/i18n/main/en.json ./src/assets/i18n/main/pt.json",
