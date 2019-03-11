@@ -11,14 +11,15 @@
                         <span class="col-sm-8 textAlign_Center">{{'csa.tells-more' | translate}}</span>
                     </div>
                     <div class="col-md-8 marginBottom">
-                        <mat-form-field class="col">
+                        <mat-form-field class="col">                          
                             <input matInput
                                    placeholder="{{'csa.enter-business' | translate}}"
                                    google-place
                                    formControlName="location"
                                    required
+                                   autocomplete="off"
                                    (onSelect)="setAddress($event)">
-                            <mat-icon matSuffix>mode_edit</mat-icon>
+
                             <mat-hint>{{'csa.start-typing' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('location').invalid">
                                 {{'csa.enter-value' | translate}}
@@ -31,8 +32,9 @@
                                    #address
                                    placeholder="{{'csa.enter-address' | translate}}"
                                    formControlName="address"
+                                   autocomplete="off"
                                    required>
-                            <mat-icon matSuffix>mode_edit</mat-icon>
+
                             <mat-error *ngIf="firstFormGroup.get('address').invalid">
                                 {{'csa.enter-value' | translate}}
                             </mat-error>
@@ -44,8 +46,8 @@
                                    placeholder="{{'csa.enter-postal-code' | translate}}"
                                    maxlength="5"
                                    formControlName="postal"
+                                   autocomplete="off"
                                    required>
-                            <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-hint>{{'csa.enter-5characters' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('postal').invalid">
                                 {{'csa.enter-valid-postal' | translate}}
@@ -55,8 +57,8 @@
                             <input matInput
                                    placeholder="{{'csa.enter-city' | translate}}"
                                    formControlName="city"
+                                   autocomplete="off"
                                    required>
-                            <mat-icon matSuffix>mode_edit</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('city').invalid">
                                 {{'csa.enter-value' | translate}}
                             </mat-error>
@@ -77,23 +79,24 @@
                         </mat-form-field>
                     </div>
                     <div class="col-12 col-md-8 marginBottom">
-                        <mat-form-field class="col-3 col-sm-2"
+                        <mat-form-field class="col-3 col-md-2"
                                         style="min-width: 70px">
                             <input matInput
                                    formControlName="area"
                                    maxlength="6"
+                                   autocomplete="off"
                                    style="text-align: right;">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
                                 {{'csa.wrong-prefix' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <span>&ndash;</span>
-                        <mat-form-field class="col-8 col-sm-8">
+                        <mat-form-field class="col-8 col-md-9">
                             <input matInput
                                    placeholder="{{'csa.enter-phone' | translate}}"
                                    formControlName="phone"
+                                   autocomplete="off"
                                    required>
-                            <mat-icon matSuffix>phone</mat-icon>
                             <mat-error *ngIf="firstFormGroup.get('phone').invalid">
                                 {{'csa.enter-phone' | translate}}
                             </mat-error>
@@ -104,7 +107,7 @@
             <div class="row buttons d-flex justify-content-end pad">
                 <button mat-raised-button
                         matStepperNext
-                        color="primary">{{'csa.next' | translate}}</button>
+                        class="btn-color-primary">{{'csa.next' | translate}}</button>
             </div>
         </div>
     </mat-step>
@@ -122,26 +125,25 @@
                             <input matInput
                                    placeholder="{{'csa.enter-email' | translate}}"
                                    formControlName="email"
+                                   autocomplete="off"
                                    [(ngModel)]="this.businessEmail"
                                    required>
-                            <mat-icon matSuffix>mode_edit</mat-icon>
+
                             <mat-error *ngIf="secondFormGroup.get('email').invalid">
-                                {{'csa.enter-email' | translate}}
+                                {{'csa.enter-valid-email' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-md-8 marginBottom">
-                        <div class="col-1 col-sm-1 col-md-1 label_site">
-                            <h3>www.</h3>
-                        </div>
-                        <mat-form-field class="col-9 col-md-10"
-                                        style="padding: 0px 18px;">
+                        <mat-form-field class="col">
                             <input matInput
                                    placeholder="{{'csa.enter-site' | translate}}"
                                    formControlName="website"
+                                   autocomplete="off"
                                    required>
+                            <span matPrefix>www.&nbsp;</span>
                             <mat-hint>{{'csa.example' | translate}}: www.yoursite.com</mat-hint>
-                            <mat-icon matSuffix>mode_edit</mat-icon>
+
                             <mat-error *ngIf="secondFormGroup.get('website').hasError('required')">
                                 {{'csa.enter-value' | translate}}
                             </mat-error>
@@ -216,13 +218,12 @@
                 <div class="row buttons d-flex justify-content-between pad">
                     <button mat-raised-button
                             matStepperPrevious
-                            color="secondary">{{'csa.back' | translate}}</button>
+                            class="btn-color-secondary">{{'csa.back' | translate}}</button>
                     <button mat-raised-button
                             matStepperNext
-                            color="primary">{{'csa.next' | translate}}</button>
+                            class="btn-color-primary">{{'csa.next' | translate}}</button>
                 </div>
             </form>
-
         </div>
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
@@ -274,7 +275,8 @@
                         <mat-checkbox color="primary"
                                       [value]="item"
                                       [checked]="item.selected"
-                                      (change)="onOfferingsChange($event, item)">{{item.name | translate}}</mat-checkbox>
+                                      (change)="onOfferingsChange($event, item)">{{item.name | translate}}
+                        </mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -314,7 +316,8 @@
                         <mat-checkbox color="primary"
                                       [value]="payment"
                                       [checked]="payment.selected"
-                                      (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}</mat-checkbox>
+                                      (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}
+                        </mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -323,16 +326,16 @@
                  style="padding-top: 20px;">
                 <button mat-raised-button
                         matStepperPrevious
-                        color="secondary">{{'csa.back' | translate}}</button>
+                        class="btn-color-secondary">{{'csa.back' | translate}}</button>
                 <button mat-raised-button
                         matStepperNext
-                        color="primary"
+                        class="btn-color-primary"
                         type="submit"
                         (click)="steperchange($event)">{{'csa.next' | translate}}</button>
             </div>
         </div>
     </mat-step>
-    <mat-step>
+    <mat-step [stepControl]="formConclusion">
         <ng-template matStepLabel>{{'csa.overview' | translate}}</ng-template>
         <div class="container">
             <form [formGroup]="formConclusion"
@@ -415,8 +418,7 @@
                         <div class="row justify-content-center">
                             <!-- [disabled]="!formConclusion.valid" -->
                             <button mat-raised-button
-                                    color="primary"
-                                    class="big"
+                                    class="btn-color-primary"
                                     [disabled]="!formConclusion.valid"
                                     type="submit">{{'csa.register' | translate}}</button>
                         </div>
@@ -455,7 +457,7 @@
                         </div>
                         <div class="row justify-content-center marginBottom_40">
                             <button mat-raised-button
-                                    color="primary"
+                                    class="btn-color-primary"
                                     class="big">{{'csa.submit' | translate}</button>
                         </div>
                     </div>
@@ -511,16 +513,17 @@
                     </div>
                     <div class="row justify-content-center marginBottom_40 marginTop_20">
                         <span class="labelTitle_xlarge">{{'csa.congratulations' | translate}}</span>
-                        <span class="labelTitle_unset marginTop_20">{{'csa.congratulations-message' | translate}}</span>
-                    </div>
-                    <div class="row justify-content-center marginBottom_40">
-                        <button mat-raised-button
-                                color="primary"
-                                class="big"
-                                (click)="goToProfile()">{{'csa.go-to-profile' | translate}}</button>
+                                <span
+                                      class="labelTitle_unset marginTop_20">{{'csa.congratulations-message' | translate}}</span>
+                        </div>
+                        <div class="row justify-content-center marginBottom_40">
+                            <button mat-raised-button
+                                    class="btn-color-primary"
+                                    class="big"
+                                    (click)="goToProfile()">{{'csa.go-to-profile' | translate}}</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+                </mat-card-content>
+                </mat-card>
+        </div>

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { AppRoutes as AuthRoutes } from '../app.routing'
 
@@ -8,7 +8,6 @@ import { AppRoutes as AuthRoutes } from '../app.routing'
 @Component({
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent {
   constructor(private router: Router) {}

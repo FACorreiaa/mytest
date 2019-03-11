@@ -44,8 +44,6 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.userSubscription$)
       )
       .subscribe(lang => {
-        // console.log('lang', lang)
-
         this.translate.use(lang)
         this.selectedLang = lang
       })
@@ -64,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   GoToMainPage() {
-    this.router.navigate([AuthRoutes.MAIN])
+    this.router.navigate([AuthRoutes.WIZARD])
   }
 
   onLanguageSelect({ value: language }) {

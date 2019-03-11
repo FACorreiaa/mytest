@@ -6,33 +6,33 @@
            style="cursor: pointer"><span style="font-size: 30px">{{'csa.title.short' | translate}}</span></a>
         <span class="example-spacer"></span>
 
+        <mat-form-field class="col-3 col-md-2 col-lg-1">
+          <mat-select (selectionChange)="onLanguageSelect($event)"
+                      [value]="this.selectedLang">
+            <mat-option *ngFor="let l of languages"
+                        [value]="l">
+              {{ l.toUpperCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <mat-form-field class="col-3 col-md-1">
-        <mat-select (selectionChange)="onLanguageSelect($event)"
-                    [value]="this.selectedLang">
-          <mat-option *ngFor="let l of languages"
-                      [value]="l">
-            {{ l.toUpperCase() }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-        <button *ngIf="!authorized"
+        <!-- <button *ngIf="!authorized"
                 mat-button
                 mat-stroked-button
                 color="secondary"
                 style="background-color: darkgray"
                 (click)="onLoginClick($event)">
           {{'csa.login' | translate}}
-        </button>
-        <button *ngIf="authorized"
+        </button> -->
+        <!-- <button *ngIf="authorized"
                 mat-button
                 mat-stroked-button
                 color="secondary"
                 style="background-color: darkgray"
                 (click)="onLogOutClick($event)">
           {{'csa.logout' | translate}}
-        </button>
+        </button> -->
+
       </mat-toolbar>
     </div>
 
