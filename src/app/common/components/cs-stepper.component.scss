@@ -41,6 +41,41 @@
     margin-top: 20px;
 }
 
+.paddingLefth_30 {
+    padding-left: 30px;
+}
+
+.maxWidthOpenDay{
+    width: 150px;
+    min-width: 100px;
+}
+
+.selectedOpenDay{
+    background-color: #b2dae4; 
+    box-shadow: inset 0 0 5px #000000;
+    // border-left: 1px solid #3db0ce;
+    // box-shadow: -3px -1px 6px -1px;
+}
+
+.notSelectedOpenDay{
+    background-color: #f0f0f0;
+}
+
+.labelOpenDay{
+    height: 80px;
+    border-bottom: 1px solid #c9c9c9;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 15px;
+    justify-content: center !important;
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.centerContent{
+    justify-content: center;
+    display: flex;
+}
+
 .minWidthFormField {
     min-width: 100px
 }

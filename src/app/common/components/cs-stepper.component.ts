@@ -180,21 +180,21 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     const groups = []
 
     if (!days) {
-      groups.push(this.buildDefaultOpeningDays('monday'))
-      groups.push(this.buildDefaultOpeningDays('tuesday'))
-      groups.push(this.buildDefaultOpeningDays('wednesday'))
-      groups.push(this.buildDefaultOpeningDays('thursday'))
-      groups.push(this.buildDefaultOpeningDays('friday'))
-      groups.push(this.buildDefaultOpeningDays('saturday'))
-      groups.push(this.buildDefaultOpeningDays('sunday'))
+      groups.push(this.buildDefaultOpeningDays('Monday'))
+      groups.push(this.buildDefaultOpeningDays('Tuesday'))
+      groups.push(this.buildDefaultOpeningDays('Wednesday'))
+      groups.push(this.buildDefaultOpeningDays('Thursday'))
+      groups.push(this.buildDefaultOpeningDays('Friday'))
+      groups.push(this.buildDefaultOpeningDays('Saturday'))
+      groups.push(this.buildDefaultOpeningDays('Sunday'))
     } else {
-      groups.push(this.buildOpenDaysFormControl(days.monday, 'monday'))
-      groups.push(this.buildOpenDaysFormControl(days.tuesday, 'tuesday'))
-      groups.push(this.buildOpenDaysFormControl(days.wednesday, 'wednesday'))
-      groups.push(this.buildOpenDaysFormControl(days.thursday, 'thursday'))
-      groups.push(this.buildOpenDaysFormControl(days.friday, 'friday'))
-      groups.push(this.buildOpenDaysFormControl(days.saturday, 'saturday'))
-      groups.push(this.buildOpenDaysFormControl(days.sunday, 'sunday'))
+      groups.push(this.buildOpenDaysFormControl(days.monday, 'Monday'))
+      groups.push(this.buildOpenDaysFormControl(days.tuesday, 'Tuesday'))
+      groups.push(this.buildOpenDaysFormControl(days.wednesday, 'Wednesday'))
+      groups.push(this.buildOpenDaysFormControl(days.thursday, 'Thursday'))
+      groups.push(this.buildOpenDaysFormControl(days.friday, 'Friday'))
+      groups.push(this.buildOpenDaysFormControl(days.saturday, 'Saturday'))
+      groups.push(this.buildOpenDaysFormControl(days.sunday, 'Sunday'))
     }
 
     return groups

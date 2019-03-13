@@ -6,12 +6,14 @@
         <div class="container">
             <form [formGroup]="firstFormGroup">
                 <div class="row justify-content-center">
-                    <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="col-sm-8 labelTitle">{{'csa.your-restaurante' | translate}}</span>
-                        <span class="col-sm-8 textAlign_Center">{{'csa.tells-more' | translate}}</span>
+                    <div class="col-md-8 marginBottom_40 marginTop_20">
+                        <div class="row justify-content-center">
+                            <span class="col-sm-8 labelTitle">{{'csa.your-restaurante' | translate}}</span>
+                            <span class="col-sm-8 textAlign_Center">{{'csa.tells-more' | translate}}</span>
+                        </div>
                     </div>
                     <div class="col-md-8 marginBottom">
-                        <mat-form-field class="col">                          
+                        <mat-form-field class="col">
                             <input matInput
                                    placeholder="{{'csa.enter-business' | translate}}"
                                    google-place
@@ -103,12 +105,13 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row buttons d-flex justify-content-end pad">
+                        <button mat-raised-button
+                                matStepperNext
+                                class="btn-color-primary">{{'csa.next' | translate}}</button>
+                    </div>
             </form>
-            <div class="row buttons d-flex justify-content-end pad">
-                <button mat-raised-button
-                        matStepperNext
-                        class="btn-color-primary">{{'csa.next' | translate}}</button>
-            </div>
+            
         </div>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
@@ -116,9 +119,11 @@
         <div class="container">
             <form [formGroup]="secondFormGroup">
                 <div class="row justify-content-center">
-                    <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="col-sm-8 labelTitle">{{'csa.contact-info' | translate}}</span>
-                        <span class="col-sm-8 textAlign_Center">{{'csa.contact-info-second' | translate}}</span>
+                    <div class="col-md-8 marginBottom_40 marginTop_20">
+                        <div class="row justify-content-center">
+                            <span class="col-sm-8 labelTitle">{{'csa.contact-info' | translate}}</span>
+                            <span class="col-sm-8 textAlign_Center">{{'csa.contact-info-second' | translate}}</span>
+                        </div>
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
@@ -152,67 +157,77 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12 marginBottom">
-                        <mat-list formArrayName="openHours">
-                            <h2 mat-header>{{'csa.openhours-title' | translate}}</h2>
-                            <mat-list-item *ngFor="let position of this.openHoursArray.controls let ph=index"
-                                           [formGroupName]="ph"
-                                           class="matDaylist">
+                    <div class="col-md-12 marginBottom_40">
+                        <div formArrayName="openHours">
+                            <div class="row justify-content-center marginBottom_40 marginTop_20">
+                                <span class="col-sm-8 labelTitle">{{'csa.openhours-title' | translate}}</span>
+                                <span class="col-sm-8 textAlign_Center">{{'csa.openhours-subTitle' | translate}}</span>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div *ngFor="let position of this.openHoursArray.controls let ph=index"
+                                     [formGroupName]="ph"
+                                     class="maxWidthOpenDay">
 
-                                <mat-checkbox [checked]="position.value.isSelected"
-                                              formControlName="isSelected"
-                                              class="col-sm-12 col-md-3 d-sm-inline-block"
-                                              color="primary">{{position.value.name}}</mat-checkbox>
+                                    <div [ngClass]="{selectedOpenDay: position.value.isSelected,
+                                        notSelectedOpenDay: !position.value.isSelected}">
 
-                                <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="{{'csa.from' | translate}}"
-                                                formControlName="from"
-                                                [value]="position.value.from"
-                                                [disableControl]="!position.value.isSelected">
-                                        <mat-option>{{'csa.None' | translate}}</mat-option>
-                                        <mat-option *ngFor="let hour of this.hours"
-                                                    [value]="hour.key">{{hour.value}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                        <div class="labelOpenDay">
+                                            <mat-label class="col-12 centerContent">
+                                                <b>{{position.value.name}}</b>
+                                            </mat-label>
+                                            <mat-checkbox [checked]="position.value.isSelected"
+                                                          formControlName="isSelected"></mat-checkbox>
+                                        </div>
 
-                                <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="{{'csa.to' | translate}}"
-                                                formControlName="to"
-                                                [value]="position.value.to"
-                                                [disableControl]="!position.value.isSelected">
-                                        <mat-option>{{'csa.None' | translate}}</mat-option>
-                                        <mat-option *ngFor="let hour of this.hours"
-                                                    [value]="hour.key">{{hour.value}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select placeholder="{{'csa.from' | translate}}"
+                                                        formControlName="from"
+                                                        [value]="position.value.from"
+                                                        [disableControl]="!position.value.isSelected">
+                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">{{hour.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
 
-                                <mat-label class="col-md-1 d-sm-inline-block"><b>and</b></mat-label>
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select placeholder="{{'csa.to' | translate}}"
+                                                        formControlName="to"
+                                                        [value]="position.value.to"
+                                                        [disableControl]="!position.value.isSelected">
+                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">{{hour.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
 
-                                <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="{{'csa.from' | translate}}"
-                                                formControlName="splitedFrom"
-                                                [value]="position.value.splitedFrom"
-                                                [disableControl]="!position.value.isSelected">
-                                        <mat-option>{{'csa.None' | translate}}</mat-option>
-                                        <mat-option *ngFor="let hour of this.hours"
-                                                    [value]="hour.key">{{hour.value}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                        <mat-label class="centerContent">and</mat-label>
 
-                                <mat-form-field class="col-sm-6 col-md-2">
-                                    <mat-select placeholder="{{'csa.to' | translate}}"
-                                                formControlName="splitedTo"
-                                                [value]="position.value.splitedTo"
-                                                [disableControl]="!position.value.isSelected">
-                                        <mat-option>{{'csa.None' | translate}}</mat-option>
-                                        <mat-option *ngFor="let hour of this.hours"
-                                                    [value]="hour.key">{{hour.value}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select placeholder="{{'csa.from' | translate}}"
+                                                        formControlName="splitedFrom"
+                                                        [value]="position.value.splitedFrom"
+                                                        [disableControl]="!position.value.isSelected">
+                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">{{hour.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
 
-                                <div class="divBorderLine"></div>
-                            </mat-list-item>
-                        </mat-list>
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select placeholder="{{'csa.to' | translate}}"
+                                                        formControlName="splitedTo"
+                                                        [value]="position.value.splitedTo"
+                                                        [disableControl]="!position.value.isSelected">
+                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">{{hour.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row buttons d-flex justify-content-between pad">
@@ -251,7 +266,6 @@
                     <div class="col-sm-3 checkBoxDisplayInline"
                          *ngFor="let item of this.categories">
                         <mat-checkbox name="categoryCusine"
-                                      color="primary"
                                       [checked]="item.selected"
                                       (change)="onChangeCategory($event, item)"
                                       [value]="item.name">{{item.name | translate}}</mat-checkbox>
@@ -272,8 +286,7 @@
 
                     <div class="col-sm-3 checkBoxDisplayInline"
                          *ngFor="let item of this.offeringsArray; let i = index">
-                        <mat-checkbox color="primary"
-                                      [value]="item"
+                        <mat-checkbox [value]="item"
                                       [checked]="item.selected"
                                       (change)="onOfferingsChange($event, item)">{{item.name | translate}}
                         </mat-checkbox>
@@ -293,8 +306,7 @@
 
                     <div class="col-sm-3 checkBoxDisplayInline"
                          *ngFor="let item of this.servicesArray; let i = index">
-                        <mat-checkbox color="primary"
-                                      [value]="item"
+                        <mat-checkbox [value]="item"
                                       [checked]="item.selected"
                                       (change)="onServicesChange($event, item)">{{item.name | translate}}</mat-checkbox>
                     </div>
@@ -313,8 +325,7 @@
 
                     <div class="col-sm-3 checkBoxDisplayInline"
                          *ngFor="let payment of this.paymentsArray; let i = index">
-                        <mat-checkbox color="primary"
-                                      [value]="payment"
+                        <mat-checkbox [value]="payment"
                                       [checked]="payment.selected"
                                       (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}
                         </mat-checkbox>
@@ -342,14 +353,18 @@
                   (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
                 <div *ngIf="!authorized && !editForm"
                      class="row justify-content-center">
-                    <div class="col-sm-6">
-                        <div class="row justify-content-center marginBottom_40 marginTop_20">
-                            <span class="col-sm-8 labelTitle">{{'csa.register' | translate}}</span>
-                        </div>
-                        <mat-form-field class="col marginBottom">
+
+                    <div class="col-md-8 marginBottom_40 marginTop_20"
+                         style="display: flex;
+                        justify-content: center !important;">
+                        <span class="col-md-8 labelTitle">{{'csa.register' | translate}}</span>
+                    </div>
+
+                    <div class="col-md-8 marginBottom">
+                        <mat-form-field class="col">
                             <input matInput
                                    placeholder="E-mail"
-                                   autocomplete="email"
+                                   autocomplete="off"
                                    aria-label="E-mail"
                                    formControlName="email"
                                    [(ngModel)]="this.businessEmail">
@@ -361,7 +376,11 @@
                                 {{'csa.email-not-valid' | translate}}
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field class="col marginBottom">
+                    </div>
+
+
+                    <div class="col-md-8 marginBottom">
+                        <mat-form-field class="col ">
                             <input matInput
                                    placeholder="{{'csa.password' | translate}}"
                                    autocomplete="current-password"
@@ -379,8 +398,10 @@
                                 {{'csa.password-can-not-be-long' | translate}}
                             </mat-error>
                         </mat-form-field>
+                    </div>
 
-                        <mat-form-field class="col marginBottom_40">
+                    <div class="col-md-8 marginBottom">
+                        <mat-form-field class="col">
                             <input matInput
                                    placeholder="{{'csa.confirm-password' | translate}}"
                                    autocomplete="new-password"
@@ -402,26 +423,29 @@
                                 {{'csa.password-dont-match' | translate}}
                             </mat-error>
                         </mat-form-field>
-                        <div class="col marginBottom_40">
-                            <mat-checkbox color="primary"
-                                          [checked]="false"
-                                          formControlName="termsConditions">
-                            </mat-checkbox>
-                            <span class="label_underline"
-                                  (click)="openDialog()">{{'csa.accept-terms' | translate}}</span>
-                            <mat-error
-                                       *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
-                                {{'csa.accept-terms.valid' | translate}}
-                            </mat-error>
-                        </div>
+                    </div>
 
-                        <div class="row justify-content-center">
-                            <!-- [disabled]="!formConclusion.valid" -->
-                            <button mat-raised-button
-                                    class="btn-color-primary"
-                                    [disabled]="!formConclusion.valid"
-                                    type="submit">{{'csa.register' | translate}}</button>
-                        </div>
+                    <div class="col-md-8 marginBottom_40 paddingLefth_30 marginTop_20">
+                        <mat-checkbox [checked]="false"
+                                      formControlName="termsConditions">
+                        </mat-checkbox>
+                        <span class="label_underline"
+                              (click)="openDialog()">{{'csa.accept-terms' | translate}}</span>
+                        <mat-error
+                                   *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
+                            {{'csa.accept-terms.valid' | translate}}
+                        </mat-error>
+                    </div>
+
+                    <div class="col-md-8 paddingLefth_30">
+                        <button mat-raised-button
+                                matStepperPrevious
+                                class="btn-color-secondary col-md-12"
+                                style="margin-bottom: 10px;">{{'csa.back' | translate}}</button>
+                        <button mat-raised-button
+                                class="btn-color-primary col-md-12"
+                                [disabled]="!formConclusion.valid"
+                                type="submit">{{'csa.register' | translate}}</button>
                     </div>
                 </div>
                 <div *ngIf="editForm"
@@ -450,7 +474,6 @@
                             </svg>
                         </div>
                         <div class="row justify-content-center marginBottom_40 marginTop_20">
-                            <!-- style="color: #F9AE00" -->
                             <span class="labelTitle_xlarge">{{'csa.confirm' | translate}}</span>
                             <span class="labelTitle_unset marginTop_20">{{'csa.confirm-information' | translate}}
                             </span>
@@ -512,9 +535,12 @@
                         </svg>
                     </div>
                     <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="labelTitle_xlarge">{{'csa.congratulations' | translate}}</span>
-                                <span
-                                      class="labelTitle_unset marginTop_20">{{'csa.congratulations-message' | translate}}</span>
+                        <span class="labelTitle_xlarge">
+                            {{'csa.congratulations' | translate}}
+                                </span>
+                                <span class="labelTitle_unset marginTop_20">
+                                    {{'csa.congratulations-message' | translate}}
+                                </span>
                         </div>
                         <div class="row justify-content-center marginBottom_40">
                             <button mat-raised-button

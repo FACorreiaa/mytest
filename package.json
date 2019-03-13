@@ -68,6 +68,13 @@
     "web-animations-js": "^2.2.5",
     "zone.js": "^0.8.26"
   },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "IE 9-11"
+  ],
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
     "@angular/cli": "~6.1.3",
