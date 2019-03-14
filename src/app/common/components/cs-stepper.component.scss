@@ -52,13 +52,12 @@
 
 .selectedOpenDay{
     background-color: #b2dae4; 
-    box-shadow: inset 0 0 5px #000000;
-    // border-left: 1px solid #3db0ce;
-    // box-shadow: -3px -1px 6px -1px;
+    box-shadow: inset 0 0 3px #000000;
 }
 
 .notSelectedOpenDay{
     background-color: #f0f0f0;
+    box-shadow: inset 0 0 3px #000000;
 }
 
 .labelOpenDay{
@@ -68,7 +67,8 @@
     margin-bottom: 15px;
     justify-content: center !important;
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
+    padding-top: 5px;
 }
 
 .centerContent{
