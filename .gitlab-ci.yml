@@ -1,0 +1,12 @@
+stages:
+  - test
+  - inspection
+  - build
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm install -g @angular/cli
+    - npm install
+    - ng build
