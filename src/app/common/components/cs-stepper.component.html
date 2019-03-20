@@ -8,7 +8,8 @@
         <ng-template matStepLabel>{{'csa.your-restaurante' | translate}}</ng-template>
         <div style="border-bottom: 3px solid #3db0ce; width:25%"></div>
         <div class="container">
-            <form [formGroup]="firstFormGroup">
+            <form [formGroup]="firstFormGroup"
+                  (keydown.enter)="$event.preventDefault()">
                 <div class="row justify-content-center">
                     <div class="col-md-8 marginBottom_40 marginTop_20">
                         <div class="row justify-content-center">
@@ -168,13 +169,15 @@
                                 <span class="col-sm-8 labelTitle">{{'csa.openhours-title' | translate}}</span>
                                 <span class="col-sm-8 textAlign_Center">{{'csa.openhours-subTitle' | translate}}</span>
                             </div>
+
                             <div class="row justify-content-center">
                                 <div *ngFor="let position of this.openHoursArray.controls let ph=index"
                                      [formGroupName]="ph"
                                      class="maxWidthOpenDay">
-
-                                    <div [ngClass]="{selectedOpenDay: position.value.isSelected,
-                                        notSelectedOpenDay: !position.value.isSelected}">
+                                    <div
+                                         [ngClass]="{selectedOpenDay: position.value.isSelected,
+                                        notSelectedOpenDay: !position.value.isSelected,
+                                        selectedOpenDayError: this.openHoursArray.controls[ph].hasError('openDaysError') }">
 
                                         <div class="labelOpenDay">
                                             <mat-label class="col-12 centerContent">
@@ -194,6 +197,10 @@
                                                             [value]="hour.key">{{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('fromIsRequired')">
+                                            {{ 'csa.hour-required' | translate}}
+                                        </div>
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="{{'csa.to' | translate}}"
@@ -205,6 +212,16 @@
                                                             [value]="hour.key">{{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('toHourOverlapping')">
+                                            {{ 'csa.overlapping-hours' | translate}}
+                                        </div>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('toIsRequired')">
+                                            {{ 'csa.hour-required' | translate}}
+                                        </div>
+
+                                        <!-- {{ this.openHoursArray.controls[ph].hasError('toHourOverlapping') | json}} -->
 
                                         <mat-label class="centerContent">and</mat-label>
 
@@ -218,6 +235,14 @@
                                                             [value]="hour.key">{{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromHourOverlapping')">
+                                            {{ 'csa.overlapping-hours' | translate}}
+                                        </div>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromIsRequired')">
+                                            {{ 'csa.hour-required' | translate}}
+                                        </div>
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="{{'csa.to' | translate}}"
@@ -229,6 +254,14 @@
                                                             [value]="hour.key">{{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedToHourOverlapping')">
+                                            {{ 'csa.overlapping-hours' | translate}}
+                                        </div>
+                                        <div class="overlapping-hours"
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedToIsRequired')">
+                                            {{ 'csa.hour-required' | translate}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -513,7 +546,8 @@
                             <desc>Created with sketchtool.</desc>
                             <defs>
                                 <polygon id="path-1"
-                                         points="0.0014392555 158.318105 158.318105 158.318105 158.318105 0.0014392555 0.0014392555 0.0014392555"></polygon>
+                                         points="0.0014392555 158.318105 158.318105 158.318105 158.318105 0.0014392555 0.0014392555 0.0014392555">
+                                </polygon>
                             </defs>
                             <g id="Symbols"
                                stroke="none"

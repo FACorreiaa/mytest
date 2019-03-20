@@ -92,10 +92,6 @@ $cs-theme: mat-light-theme( $cs-primary, $cs-accent, $cs-warn);
         color: $blue-primary-color;
       }
     }
-
-    // &:hover{
-    //   background-color: transparent;
-    // }
 }
 
 @media (max-width: map-get($grid-breakpoints, sm)) {

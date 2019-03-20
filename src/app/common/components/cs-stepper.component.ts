@@ -205,15 +205,20 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    * @param dayName Description of the day
    */
   private buildDefaultOpeningDays(dayName: string) {
-    return this.formBuilder.group({
-      name: [dayName],
-      isSelected: [true],
-      from: new FormControl({ value: '9:00', disabled: false }, Validators.required),
-      to: ['17:00'],
-      isSplitService: false,
-      splitedFrom: [''],
-      splitedTo: [''],
-    })
+    return this.formBuilder.group(
+      {
+        name: [dayName],
+        isSelected: [true],
+        from: ['9:00'],
+        to: ['17:00'],
+        isSplitService: false,
+        splitedFrom: [''],
+        splitedTo: [''],
+      },
+      {
+        validator: openDaysValidator,
+      }
+    )
   }
 
   /**
@@ -223,25 +228,35 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    */
   private buildOpenDaysFormControl(day: Day[], dayName: string) {
     if (day !== undefined && day.length <= 0) {
-      return this.formBuilder.group({
-        name: [dayName],
-        isSelected: [false],
-        from: '',
-        to: '',
-        isSplitService: false,
-        splitedFrom: [''],
-        splitedTo: [''],
-      })
+      return this.formBuilder.group(
+        {
+          name: [dayName],
+          isSelected: [false],
+          from: [''],
+          to: [''],
+          isSplitService: false,
+          splitedFrom: [''],
+          splitedTo: [''],
+        },
+        {
+          validator: openDaysValidator,
+        }
+      )
     } else if (day !== undefined && day.length > 0) {
-      return this.formBuilder.group({
-        name: [dayName],
-        isSelected: [true],
-        from: new FormControl({ value: day[0].startTime, disabled: false }, Validators.required),
-        to: new FormControl({ value: day[0].endTime, disabled: false }, Validators.required),
-        isSplitService: day.length > 1 ? true : false,
-        splitedFrom: day.length > 1 ? [day[1].startTime] : [''],
-        splitedTo: day.length > 1 ? [day[1].endTime] : [''],
-      })
+      return this.formBuilder.group(
+        {
+          name: [dayName],
+          isSelected: [true],
+          from: [day[0].startTime],
+          to: [day[0].endTime],
+          isSplitService: day.length > 1 ? true : false,
+          splitedFrom: day.length > 1 ? [day[1].startTime] : [''],
+          splitedTo: day.length > 1 ? [day[1].endTime] : [''],
+        },
+        {
+          validator: openDaysValidator,
+        }
+      )
     }
   }
 
@@ -635,4 +650,48 @@ function passwordMatchValidator(formGroup: FormGroup): any {
     return null
   }
   return pass === confirmPass ? null : { mismatch: true }
+}
+
+/**
+ * Custom validator to check every days schedule and see if the hours are
+ * set when the day is chosen and to verify if there is overlapping on the hours.
+ * @param openDayForm form for each day to be validated
+ */
+function openDaysValidator(openDayForm: FormGroup): { [key: string]: boolean } {
+  if (openDayForm.controls && openDayForm.controls.isSelected.value) {
+    const from = openDayForm.controls.from.value ? parseInt(openDayForm.controls.from.value, 10) : null
+    const to = openDayForm.controls.to.value ? parseInt(openDayForm.controls.to.value, 10) : null
+    const splitedFrom = openDayForm.controls.splitedFrom.value ? parseInt(openDayForm.controls.splitedFrom.value, 10) : null
+    const splitedTo = openDayForm.controls.splitedTo.value ? parseInt(openDayForm.controls.splitedTo.value, 10) : null
+
+    if (from === null) {
+      return { fromIsRequired: true, openDaysError: true }
+    }
+
+    if (to === null) {
+      return { toIsRequired: true, openDaysError: true }
+    }
+
+    if (splitedTo && !splitedFrom) {
+      return { splitedFromIsRequired: true, openDaysError: true }
+    }
+
+    if (!splitedTo && splitedFrom) {
+      return { splitedToIsRequired: true, openDaysError: true }
+    }
+
+    if (to <= from) {
+      return { toHourOverlapping: true, openDaysError: true }
+    }
+
+    if (splitedFrom && splitedTo && (splitedFrom <= from || splitedFrom <= to)) {
+      return { splitedFromHourOverlapping: true, openDaysError: true }
+    }
+
+    if (splitedFrom && splitedTo <= splitedFrom) {
+      return { splitedToHourOverlapping: true, openDaysError: true }
+    }
+  }
+
+  return null
 }
