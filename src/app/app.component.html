@@ -16,23 +16,15 @@
           </mat-select>
         </mat-form-field>
 
-        <!-- <button *ngIf="!authorized"
-                mat-button
-                mat-stroked-button
-                color="secondary"
-                style="background-color: darkgray"
-                (click)="onLoginClick($event)">
-          {{'csa.login' | translate}}
-        </button> -->
-        <!-- <button *ngIf="authorized"
-                mat-button
-                mat-stroked-button
-                color="secondary"
-                style="background-color: darkgray"
-                (click)="onLogOutClick($event)">
-          {{'csa.logout' | translate}}
-        </button> -->
-
+        <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu" style="outline: none">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #toolbarUserMenu="matMenu">
+          <button mat-menu-item (click)="onLogOutClick()" style="outline: none">
+            <mat-icon>account_circle</mat-icon>
+            <span>Log out</span>
+          </button>
+        </mat-menu>
       </mat-toolbar>
     </div>
 

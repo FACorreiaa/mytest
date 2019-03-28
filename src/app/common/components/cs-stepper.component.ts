@@ -152,17 +152,17 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       hasSelection: ['', Validators.required],
     })
 
-    this.formConclusion = this.formBuilder.group(
-      {
-        email: [this.businessEmail, EmailValidation],
-        password: ['', PasswordValidation],
-        confirmPassword: ['', PasswordValidation],
-        termsConditions: [''],
-      },
-      {
-        validator: passwordMatchValidator,
-      }
-    )
+    // this.formConclusion = this.formBuilder.group(
+    //   {
+    //     email: [this.businessEmail, EmailValidation],
+    //     password: ['', PasswordValidation],
+    //     confirmPassword: ['', PasswordValidation],
+    //     termsConditions: [''],
+    //   },
+    //   {
+    //     validator: passwordMatchValidator,
+    //   }
+    // )
 
     this.categories = CategoriesArray()
     this.categories.map(x => {
@@ -328,82 +328,19 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    * This method save the claim and registration information.
    */
   save(form: FormGroup, secondFormGroup: FormGroup, formConclusion: FormGroup) {
-    if (this.editForm) {
-      const businessToEdit = this.editionData(form.value, secondFormGroup.value, formConclusion.value)
+    const claim = this.createClaimToSave(form.value, secondFormGroup.value)
 
-      this.editionEvent.emit(businessToEdit)
-    } else {
-      if (!formConclusion.get('termsConditions').value) {
-        this.showTermConditiValidation = true
-
-        return null
-      }
-
-      const claim = this.createClaimToSave(form.value, secondFormGroup.value, formConclusion.value)
-
-      this.registerEvent.emit(claim)
-    }
-  }
-
-  /**
-   * This method build business data to update.
-   */
-  private editionData(firstForm: any, secondFormGroup: any, formConclusion: any) {
-    this.offeringsArray.map(off => {
-      if (off.selected) {
-        this.selectedOffering.push(off.name)
-      }
-    })
-
-    this.servicesArray.map(off => {
-      if (off.selected) {
-        this.selectedServices.push(off.name)
-      }
-    })
-
-    this.paymentsArray.map(off => {
-      if (off.selected) {
-        this.selectedPayments.push(off.name)
-      }
-    })
-
-    const claimData: Data = {
-      userFirstName: '',
-      userLastName: '',
-      name: firstForm.location,
-      additional: '',
-      street: firstForm.address,
-      zipCode: firstForm.postal,
-      city: firstForm.city,
-      countryCode: 'DE',
-      url: secondFormGroup.website,
-      languageCode: 'de',
-      contactEmail: secondFormGroup.email,
-      contactPhoneNumber: firstForm.phone,
-      openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
-      offers: this.selectedOffering,
-      description: '',
-      category: this.categories.find(x => x.selected).name,
-      services: this.selectedServices,
-      paymentMethods: this.selectedPayments,
-    }
-
-    const manageBusinessData: ManageBusinessData = {
-      data: claimData,
-      channels: ['GOOGLE_MY_BUSINESS'],
-    }
-
-    return manageBusinessData
+    this.registerEvent.emit(claim)
   }
 
   /**
    * This method creates the object dto for the middlware service
    */
-  private createClaimToSave(firstForm: any, secondFormGroup: any, formConclusion: any) {
-    const user: UserLoginDto = {
-      email: formConclusion.email,
-      password: formConclusion.password,
-    }
+  private createClaimToSave(firstForm: any, secondFormGroup: any) {
+    // const user: UserLoginDto = {
+    //   email: formConclusion.email,
+    //   password: formConclusion.password,
+    // }
 
     this.offeringsArray.map(off => {
       if (off.selected) {
@@ -450,7 +387,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     const claimObject: UserRegisterDto = {
-      user: user,
+      user: null,
       claim: manageBusinessData,
     }
 

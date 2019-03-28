@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgModule } from '@angular/core'
+import { NgModule, APP_INITIALIZER } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular'
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
@@ -26,8 +28,11 @@ import { EffectsModule } from '@ngrx/effects'
 import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
-import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CoreModule } from './common/core.module'
+import { initializer } from './common/utils/app-init'
+import { TokenInterceptor } from './api/http/http-token.interceptor'
+import { NgxPermissionsModule } from 'ngx-permissions'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -51,6 +56,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    NgxPermissionsModule.forRoot(),
     // TranslateModule,
     TranslateModule.forRoot({
       loader: {
@@ -62,12 +68,26 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     EffectsModule.forRoot([]),
     AppRoutingModule,
     MaterialModule,
+    KeycloakAngularModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
-    // StoreDevtoolsModule.instrument({ maxAge: 15 }),
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   declarations: [AppComponent],
   exports: [MaterialModule],
-  providers: [GlobalEnvironmentService],
+  providers: [
+    GlobalEnvironmentService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

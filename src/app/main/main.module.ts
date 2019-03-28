@@ -30,7 +30,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     CoreModule,
     EffectsModule.forFeature([DashBoardEffects]),
     TranslateModule.forChild({

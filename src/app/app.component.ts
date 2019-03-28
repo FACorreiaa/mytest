@@ -8,6 +8,9 @@ import * as fromApp from './app.reducers'
 import * as AuthActions from './auth/store/actions/auth.action'
 import { takeUntil, delay } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
+import { KeycloakService } from 'keycloak-angular'
+import { KeycloakProfile } from 'keycloak-js'
+import { NgxPermissionsService } from 'ngx-permissions'
 
 /**
  * The app component.
@@ -22,20 +25,21 @@ export class AppComponent implements OnInit, OnDestroy {
   authorized: boolean
   selectedLanguage: string
   selectedLang: string
+  userDetails: any
+  token: any
   languages = ['en', 'pt']
 
-  constructor(private router: Router, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
+  constructor(private keycloakService: KeycloakService, private router: Router, private store: Store<fromApp.AppState>, private translate: TranslateService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    this.store
-      .pipe(
-        delay(0),
-        select(fromApp.userAuthorized),
-        takeUntil(this.userSubscription$)
-      )
-      .subscribe(authorized => (this.authorized = authorized))
+    ////  ToDo - just to get examples from keycloak.
+    // if (await this.keycloakService.isLoggedIn()) {
+    // this.userDetails = await this.keycloakService.getUserRoles()
+    // await this.keycloakService.getToken().then(value => (this.token = value))
+    // console.log('this.userDetails', this.userDetails, this.token)
+    // }
 
     this.store
       .pipe(
@@ -53,12 +57,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.userSubscription$.unsubscribe()
   }
 
-  onLoginClick() {
-    this.router.navigate([AuthRoutes.LOGIN])
-  }
-
-  onLogOutClick() {
-    this.store.dispatch(new AuthActions.LogoutSuccess({}))
+  async onLogOutClick() {
+    await this.keycloakService.logout()
   }
 
   GoToMainPage() {

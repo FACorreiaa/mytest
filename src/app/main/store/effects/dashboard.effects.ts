@@ -41,7 +41,7 @@ export class DashBoardEffects {
     ofType(dashBoardActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
     tap(payload => {
       this.store$.dispatch(new dashBoardActions.ErrorLayoutShow(payload))
-      this.router.navigate([AuthRoutes.ERROR])
+      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -113,10 +113,10 @@ export class DashBoardEffects {
   removeBusiness$: Observable<Action> = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.DELETE_BUSINESS),
     switchMap((action: any) =>
-      this.dashBoardService
-        .removeBusinessData(action.payload)
-        .map((response: any) => new dashBoardActions.DeleteBusinessSuccessAction(response))
-        .catch(error => of(new dashBoardActions.DeleteBusinessFailureAction({ error })))
+      this.dashBoardService.removeBusinessData(action.payload).pipe(
+        map((response: any) => new dashBoardActions.DeleteBusinessSuccessAction(response)),
+        catchError(error => of(new dashBoardActions.DeleteBusinessFailureAction({ error })))
+      )
     )
   )
 

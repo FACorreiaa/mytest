@@ -31,13 +31,13 @@ export class ApiHttpService {
    * @returns {Observable<T>}
    */
   public Get<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    const token = localStorage.getItem(this.getTokenField())
+    // const token = localStorage.getItem(this.getTokenField())
 
-    if (token) {
-      const headers = new HttpHeaders()
-      options = {}
-      options.headers = headers.set('Authorization', token)
-    }
+    // if (token) {
+    //   const headers = new HttpHeaders()
+    //   options = {}
+    //   options.headers = headers.set('Authorization', token)
+    // }
 
     return this.http.get<T>(endPoint, options)
   }
@@ -50,13 +50,13 @@ export class ApiHttpService {
    * @returns {Observable<T>}
    */
   public Post<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
-    const token = localStorage.getItem(this.getTokenField())
+    // const token = localStorage.getItem(this.getTokenField())
 
-    if (token) {
-      const headers = new HttpHeaders()
-      options = {}
-      options.headers = headers.set('Authorization', token)
-    }
+    // if (token) {
+    //   const headers = new HttpHeaders()
+    //   options = {}
+    //   options.headers = headers.set('Authorization', token)
+    // }
 
     return this.http.post<T>(endPoint, params, options)
   }
@@ -69,13 +69,13 @@ export class ApiHttpService {
    * @returns {Observable<T>}
    */
   public Put<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
-    const token = localStorage.getItem(this.getTokenField())
+    // const token = localStorage.getItem(this.getTokenField())
 
-    if (token) {
-      const headers = new HttpHeaders()
-      options = {}
-      options.headers = headers.set('Authorization', token)
-    }
+    // if (token) {
+    //   const headers = new HttpHeaders()
+    //   options = {}
+    //   options.headers = headers.set('Authorization', token)
+    // }
 
     return this.http.put<T>(endPoint, params, options)
   }
@@ -87,13 +87,13 @@ export class ApiHttpService {
    * @returns {Observable<T>}
    */
   public Delete<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    const token = localStorage.getItem(this.getTokenField())
+    // const token = localStorage.getItem(this.getTokenField())
 
-    if (token) {
-      const headers = new HttpHeaders()
-      options = {}
-      options.headers = headers.set('Authorization', token)
-    }
+    // if (token) {
+    //   const headers = new HttpHeaders()
+    //   options = {}
+    //   options.headers = headers.set('Authorization', token)
+    // }
 
     return this.http.delete<T>(endPoint, options)
   }

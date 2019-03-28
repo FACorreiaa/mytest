@@ -15,6 +15,6 @@ export class SideNavComponent {
   }
 
   addBusiness() {
-    this.router.navigate(['../main/new'], { relativeTo: this.route })
+    this.router.navigate(['../wizard'], { relativeTo: this.route })
   }
 }

@@ -20,7 +20,6 @@ export class MainComponent implements OnInit {
   loading$: Observable<boolean>
 
   constructor(private storeApp: Store<fromModule.AppState>, private storeMain: Store<fromMainModule.MainState>) {
-    this.user$ = this.storeApp.select(fromModule.getLoggedUser)
     this.loading$ = this.storeMain.select(fromMainModule.getLoading)
   }
 

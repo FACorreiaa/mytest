@@ -38,7 +38,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     //   },
     // }),
   ],
-  exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent],
+  exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, MaterialModule],
   declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
   providers: [CategoriesService, CountriesService],
 })

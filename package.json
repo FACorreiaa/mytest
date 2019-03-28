@@ -13,7 +13,7 @@
   "scripts": {
     "ng": "ng",
     "standardize": "prettier **/*.ts --write",
-    "start": "npm run standardize && ng serve --port 5500",
+    "start": "npm run standardize && ng serve --port 8081",
     "build": "npm run standardize && ng build",
     "lint": "ng lint",
     "build:prod": "ng build --prod --vendor-chunk",
@@ -60,7 +60,9 @@
     "core-js": "^2.5.4",
     "googlemaps": "^1.12.0",
     "hammerjs": "^2.0.8",
+    "keycloak-angular": "^4.1.0",
     "ngrx-store-localstorage": "^5.1.0",
+    "ngx-permissions": "^6.0.5",
     "rollbar": "^2.5.2",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.3.3",

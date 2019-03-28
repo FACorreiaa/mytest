@@ -389,9 +389,9 @@
         <ng-template matStepLabel>{{'csa.overview' | translate}}</ng-template>
         <div style="border-bottom: 3px solid #3db0ce; width:100%"></div>
         <div class="container">
-            <form [formGroup]="formConclusion"
+            <form
                   (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
-                <div *ngIf="!authorized && !editForm"
+                <!-- <div *ngIf="!authorized && !editForm"
                      class="row justify-content-center">
 
                     <div class="col-md-8 marginBottom_40 marginTop_20"
@@ -487,9 +487,8 @@
                                 [disabled]="!formConclusion.valid"
                                 type="submit">{{'csa.register' | translate}}</button>
                     </div>
-                </div>
-                <div *ngIf="editForm"
-                     class="row justify-content-center">
+                </div> -->
+                <div class="row justify-content-center">
                     <div class="col-sm-4">
                         <div class="row justify-content-center marginBottom_40 marginTop_20">
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -521,7 +520,7 @@
                         <div class="row justify-content-center marginBottom_40">
                             <button mat-raised-button
                                     class="btn-color-primary"
-                                    class="big">{{'csa.submit' | translate}</button>
+                                    class="big">{{'csa.submit' | translate}}</button>
                         </div>
                     </div>
                 </div>

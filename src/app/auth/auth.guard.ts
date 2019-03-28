@@ -15,21 +15,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, OnDestroy {
   private subscription: Subscription
   private permissionSubscription
 
-  constructor(private store: Store<fromApp.AppState>, private router: Router, private settings: GlobalEnvironmentService) {
-    const auth = localStorage.getItem(reducerName)
-    const token = localStorage.getItem(this.settings.getTokenPath())
-
-    // Validate if local storage contains user session.
-    if (!auth || !token || token === null) {
-      this.authorized = false
-      this.navigateToLoginPage()
-    }
-
-    // Get user authorized status.
-    this.subscription = store.select(fromApp.userAuthorized).subscribe(authorized => {
-      this.authorized = authorized
-    })
-  }
+  constructor(private store: Store<fromApp.AppState>, private router: Router, private settings: GlobalEnvironmentService) {}
 
   /**
    * Angular ngOnDestroy method.
@@ -43,11 +29,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, OnDestroy {
    * Validate if can activate route.
    */
   public canActivate(): boolean {
-    if (!this.authorized) {
-      this.navigateToLoginPage()
+    console.log('canActivate')
+    // if (!this.authorized) {
+    //   this.navigateToLoginPage()
 
-      return false
-    }
+    //   return false
+    // }
 
     return true
   }
@@ -58,6 +45,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, OnDestroy {
    * @param state
    */
   public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    console.log('canActivateChild')
+
     return this.canActivate()
   }
 
@@ -65,6 +54,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, OnDestroy {
    * Navigate to login page.
    */
   private navigateToLoginPage(): void {
-    this.router.navigate([AuthRoutes.LOGIN])
+    console.log('navigateToLoginPage')
+
+    // this.router.navigate([AuthRoutes.LOGIN])
   }
 }

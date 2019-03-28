@@ -15,8 +15,7 @@ import * as fromModule from '../../app.reducers'
   selector: 'add-business',
   templateUrl: 'add-business.component.html',
 })
-export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
-  private userSubscription$: Subscription
+export class AddBusinessComponent implements OnInit {
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -32,10 +31,6 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
     private categoriesService: CategoriesService,
     private countriesService: CountriesService
   ) {
-    this.userSubscription$ = this.store.select(fromModule.userAuthorized).subscribe(authorized => {
-      this.authorized = authorized
-    })
-
     this.loading$ = this.store.select(fromApp.loginLoading)
   }
 
@@ -45,12 +40,6 @@ export class AddBusinessComponent implements OnInit, OnChanges, OnDestroy {
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
     this.offerings$ = this.categoriesService.getOfferings()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {}
-
-  public ngOnDestroy() {
-    this.userSubscription$.unsubscribe()
   }
 
   GoToMainPage() {

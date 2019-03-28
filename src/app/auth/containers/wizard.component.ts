@@ -12,16 +12,16 @@ import { UserRegisterDto, Countries, ICategory } from '@app/api/models/api-model
 import { CountriesService } from '@app/common/services/countries.service'
 import { delay, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
+import { KeycloakService } from 'keycloak-angular'
 
 @Component({
   selector: 'app-wizard',
   templateUrl: 'wizard.component.html',
   styleUrls: ['wizard.component.scss'],
 })
-export class WizardComponent implements OnInit, OnChanges, OnDestroy {
+export class WizardComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
 
-  private userSubscription$: Subscription
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -32,20 +32,18 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private router: Router,
     private store: Store<fromApp.AppState>,
-    private appStore: Store<fromModule.AppState>,
     private categoriesService: CategoriesService,
     private countriesService: CountriesService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    protected keycloakService: KeycloakService
   ) {
-    this.userSubscription$ = this.store.select(fromModule.userAuthorized).subscribe(authorized => {
-      this.authorized = authorized
-    })
-
     this.loading$ = this.store.select(fromApp.loginLoading)
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.translate.setDefaultLang('en')
+
+    // this.authorized = await this.keycloakService.isLoggedIn()
 
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
@@ -59,19 +57,14 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))
-
-    this.appStore.dispatch(new AuthActions.Logout({}))
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
-
   public ngOnDestroy() {
-    this.userSubscription$.unsubscribe()
     this.language$.unsubscribe()
   }
 
   register(object: UserRegisterDto): void {
-    this.store.dispatch(new AuthActions.RegisterAttempt(object))
+    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
   }
 
   GoToMainPage() {

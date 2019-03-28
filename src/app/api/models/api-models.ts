@@ -1,6 +1,18 @@
 import { Action as StoreAction } from '@ngrx/store'
 import { HttpHeaders, HttpParams } from '@angular/common/http'
 
+export interface KeycloakModel {
+  readonly isLoggedIn: boolean
+  readonly showLoading: boolean
+  readonly id: string
+  readonly needsLogin: boolean
+}
+
+export interface KeycloakLoginCheckResponse {
+  loggedIn: boolean
+  idmId: string
+}
+
 export interface IRequestOptions {
   headers?: HttpHeaders
   observe?: 'body'

@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
 import {} from '@app/api/models/api-models'
-import { map, catchError } from 'rxjs/operators'
+import { map, catchError, tap } from 'rxjs/operators'
 
 export abstract class BaseApi {
   private apiUrl: string

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(formLogin: FormGroup) {
-    this.store.dispatch(new AuthActions.LoginAttempt(formLogin.value))
+    // this.store.dispatch(new AuthActions.LoginAttempt(formLogin.value))
   }
 
   ngOnDestroy(): void {

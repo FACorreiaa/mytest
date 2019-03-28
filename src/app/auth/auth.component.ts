@@ -13,6 +13,6 @@ export class AuthComponent {
   constructor(private router: Router) {}
 
   onLoginClick(event) {
-    this.router.navigate([AuthRoutes.LOGIN])
+    // this.router.navigate([AuthRoutes.LOGIN])
   }
 }

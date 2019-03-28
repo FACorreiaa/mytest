@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NgxPermissionsModule, NgxPermissionsGuard } from 'ngx-permissions'
 
 import { AppRoutes } from '../app.routing'
 import { AuthGuard } from './auth.guard'
@@ -30,9 +31,18 @@ import { environment } from '@env/environment'
 const AuthRoutingModule = RouterModule.forChild([
   { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
   { path: AppRoutes.WIZARD, component: WizardComponent },
-  { path: AppRoutes.LOGIN, component: LoginComponent },
-  { path: AppRoutes.ERROR, component: ErrorComponent },
-  { path: 'main', canActivate: [AuthGuard], loadChildren: '../main/main.module#MainModule' },
+  {
+    path: AppRoutes.ERROR,
+    component: ErrorComponent,
+    canActivate: [NgxPermissionsGuard],
+    data: {
+      permissions: {
+        only: ['manage-account'],
+      },
+    },
+  },
+  { path: 'main', loadChildren: '../main/main.module#MainModule' },
+  // ToDo: decide if you continue with -> canActivate: [AuthGuard],
 ])
 
 @NgModule({
@@ -41,9 +51,9 @@ const AuthRoutingModule = RouterModule.forChild([
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     CoreModule,
     EffectsModule.forFeature([AuthEffects]),
+    NgxPermissionsModule.forChild(),
     TranslateModule.forChild({
       loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
       isolate: true,

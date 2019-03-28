@@ -26,23 +26,12 @@ export const getRouterPath = (state: AppState) => state.router.state.url
 
 export const getAuthState = (state: AppState) => state.auth
 
-export const userAuthorized = createSelector(getAuthState, fromAuth.getUserAuthorization)
-
 export const language = createSelector(getAuthState, fromAuth.getLanguage)
-
-export const hasLoginError = createSelector(getAuthState, fromAuth.hasLoginError)
 
 export const loginLoading = createSelector(getAuthState, fromAuth.getLoading)
 
 export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)
 
-export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser)
-
-export const getLoggedUserRoles = createSelector(getLoggedUser, loggedUser => {
-  if (loggedUser !== null && loggedUser !== undefined) {
-    if (loggedUser.User !== null && loggedUser.User !== undefined) {
-      return loggedUser.User.UserRoles
-    }
-  }
-  return []
-})
+// export const hasLoginError = createSelector(getAuthState, fromAuth.hasLoginError)
+// export const userAuthorized = createSelector(getAuthState, fromAuth.getUserAuthorization)
+// export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser)
