@@ -30,7 +30,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     //// ToDo: error in cors, temporarily
-    // this.store.dispatch(new Actions.GetAllBusinessAction())
+    console.log('dashboard')
+    this.store.dispatch(new Actions.GetAllBusinessAction())
 
     this.appStore
       .pipe(

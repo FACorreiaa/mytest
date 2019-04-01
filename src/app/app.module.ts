@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule, APP_INITIALIZER } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { CommonModule } from '@angular/common'
+import { CommonModule, APP_BASE_HREF } from '@angular/common'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
@@ -57,7 +57,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     ReactiveFormsModule,
     CoreModule,
     NgxPermissionsModule.forRoot(),
-    // TranslateModule,
+    // ngx-translate
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -69,8 +69,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     AppRoutingModule,
     MaterialModule,
     KeycloakAngularModule,
+    // ngrx
     StoreModule.forRoot(appReducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 15 }),
+    // StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   declarations: [AppComponent],
   exports: [MaterialModule],
@@ -87,6 +88,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent],
 })

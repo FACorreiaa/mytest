@@ -391,6 +391,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       claim: manageBusinessData,
     }
 
+    console.log('claimObject', claimObject)
     return claimObject
   }
   /**
@@ -410,25 +411,25 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       .filter((x: any) => x.isSelected)
       .forEach((element: any) => {
         switch (element.name) {
-          case 'monday':
+          case 'Monday':
             monday = this.buildDayModel(element)
             break
-          case 'tuesday':
+          case 'Tuesday':
             tuesday = this.buildDayModel(element)
             break
-          case 'wednesday':
+          case 'Wednesday':
             wednesday = this.buildDayModel(element)
             break
-          case 'thursday':
+          case 'Thursday':
             thursday = this.buildDayModel(element)
             break
-          case 'friday':
+          case 'Friday':
             friday = this.buildDayModel(element)
             break
-          case 'saturday':
+          case 'Saturday':
             saturday = this.buildDayModel(element)
             break
-          case 'sunday':
+          case 'Sunday':
             sunday = this.buildDayModel(element)
             break
           default:

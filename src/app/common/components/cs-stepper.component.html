@@ -6,15 +6,15 @@
     </ng-template>
     <mat-step [stepControl]="firstFormGroup">
         <ng-template matStepLabel>{{'csa.your-restaurante' | translate}}</ng-template>
-        <div style="border-bottom: 3px solid #3db0ce; width:25%"></div>
+        <div class="progress-border-first-step"></div>
         <div class="container">
             <form [formGroup]="firstFormGroup"
                   (keydown.enter)="$event.preventDefault()">
                 <div class="row justify-content-center">
-                    <div class="col-md-8 marginBottom_40 marginTop_20">
+                    <div class="col-md-8 margin-bottom-40 margin-top-20">
                         <div class="row justify-content-center">
-                            <span class="col-sm-8 labelTitle">{{'csa.your-restaurante' | translate}}</span>
-                            <span class="col-sm-8 textAlign_Center">{{'csa.tells-more' | translate}}</span>
+                            <span class="col-sm-8 label-title">{{'csa.your-restaurante' | translate}}</span>
+                            <span class="col-sm-8 text-align-center">{{'csa.tells-more' | translate}}</span>
                         </div>
                     </div>
                     <div class="col-md-8 marginBottom">
@@ -92,7 +92,7 @@
                                    formControlName="area"
                                    maxlength="6"
                                    autocomplete="off"
-                                   style="text-align: right;">
+                                   class="text-right">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
                                 {{'csa.wrong-prefix' | translate}}
                             </mat-error>
@@ -121,14 +121,14 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
         <ng-template matStepLabel>{{'csa.contact-info' | translate}}</ng-template>
-        <div style="border-bottom: 3px solid #3db0ce; width:55%"></div>
+        <div class="progress-border-second-step"></div>
         <div class="container">
             <form [formGroup]="secondFormGroup">
                 <div class="row justify-content-center">
-                    <div class="col-md-8 marginBottom_40 marginTop_20">
+                    <div class="col-md-8 margin-bottom-40 margin-top-20">
                         <div class="row justify-content-center">
-                            <span class="col-sm-8 labelTitle">{{'csa.contact-info' | translate}}</span>
-                            <span class="col-sm-8 textAlign_Center">{{'csa.contact-info-second' | translate}}</span>
+                            <span class="col-sm-8 label-title">{{'csa.contact-info' | translate}}</span>
+                            <span class="col-sm-8 text-align-center">{{'csa.contact-info-second' | translate}}</span>
                         </div>
                     </div>
                     <div class="col-md-8 marginBottom">
@@ -163,24 +163,24 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12 marginBottom_40">
+                    <div class="col-md-12 margin-bottom-40">
                         <div formArrayName="openHours">
-                            <div class="row justify-content-center marginBottom_40 marginTop_20">
-                                <span class="col-sm-8 labelTitle">{{'csa.openhours-title' | translate}}</span>
-                                <span class="col-sm-8 textAlign_Center">{{'csa.openhours-subTitle' | translate}}</span>
+                            <div class="row justify-content-center margin-bottom-40 margin-top-20">
+                                <span class="col-sm-8 label-title">{{'csa.openhours-title' | translate}}</span>
+                                <span class="col-sm-8 text-align-center">{{'csa.openhours-subTitle' | translate}}</span>
                             </div>
 
                             <div class="row justify-content-center">
                                 <div *ngFor="let position of this.openHoursArray.controls let ph=index"
                                      [formGroupName]="ph"
-                                     class="maxWidthOpenDay">
+                                     class="max-width-OpenDay">
                                     <div
                                          [ngClass]="{selectedOpenDay: position.value.isSelected,
                                         notSelectedOpenDay: !position.value.isSelected,
                                         selectedOpenDayError: this.openHoursArray.controls[ph].hasError('openDaysError') }">
 
-                                        <div class="labelOpenDay">
-                                            <mat-label class="col-12 centerContent">
+                                        <div class="label-OpenDay">
+                                            <mat-label class="col-12 center-content">
                                                 <b>{{position.value.name}}</b>
                                             </mat-label>
                                             <mat-checkbox [checked]="position.value.isSelected"
@@ -223,7 +223,7 @@
 
                                         <!-- {{ this.openHoursArray.controls[ph].hasError('toHourOverlapping') | json}} -->
 
-                                        <mat-label class="centerContent">and</mat-label>
+                                        <mat-label class="center-content">and</mat-label>
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="{{'csa.from' | translate}}"
@@ -281,11 +281,11 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
         <ng-template matStepLabel>{{'csa.your-offer-title' | translate}}</ng-template>
-        <div style="border-bottom: 3px solid #3db0ce; width:80%"></div>
+        <div class="progress-border-third-step"></div>
         <div class="container">
-            <div class="row justify-content-center marginBottom_40 marginTop_20">
-                <span class="col-sm-8 labelTitle">{{'csa.your-offer-title' | translate}}</span>
-                <span class="col-sm-8 textAlign_Center">{{'csa.your-offer-title-second' | translate}}</span>
+            <div class="row justify-content-center margin-bottom-40 margin-top-20">
+                <span class="col-sm-8 label-title">{{'csa.your-offer-title' | translate}}</span>
+                <span class="col-sm-8 text-align-center">{{'csa.your-offer-title-second' | translate}}</span>
             </div>
             <form [formGroup]="thirdFormGroup">
                 <input matInput
@@ -297,12 +297,12 @@
             <mat-accordion [multi]="true"
                            color="primary">
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                    <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.category' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="col-sm-3 checkBoxDisplayInline"
+                    <div class="col-sm-3 checkBox-display-inline"
                          *ngFor="let item of this.categories">
                         <mat-checkbox name="categoryCusine"
                                       [checked]="item.selected"
@@ -313,7 +313,7 @@
                 <br />
                 <mat-expansion-panel #expansionPanel
                                      [expanded]="this.OpenOfferings">
-                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                    <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.offerings' | translate}}
                         </mat-panel-title>
@@ -323,7 +323,7 @@
                         {{'csa.enter-category' | translate}}
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline"
+                    <div class="col-sm-3 checkBox-display-inline"
                          *ngFor="let item of this.offeringsArray; let i = index">
                         <mat-checkbox [value]="item"
                                       [checked]="item.selected"
@@ -333,7 +333,7 @@
                 </mat-expansion-panel>
                 <br />
                 <mat-expansion-panel>
-                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                    <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.services' | translate}}
                         </mat-panel-title>
@@ -343,7 +343,7 @@
                         {{'csa.enter-category' | translate}}
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline"
+                    <div class="col-sm-3 checkBox-display-inline"
                          *ngFor="let item of this.servicesArray; let i = index">
                         <mat-checkbox [value]="item"
                                       [checked]="item.selected"
@@ -352,7 +352,7 @@
                 </mat-expansion-panel>
                 <br />
                 <mat-expansion-panel>
-                    <mat-expansion-panel-header style="background:rgba(0, 0, 0, 0.04);">
+                    <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.payments' | translate}}
                         </mat-panel-title>
@@ -362,7 +362,7 @@
                         {{'csa.enter-category' | translate}}
                     </div>
 
-                    <div class="col-sm-3 checkBoxDisplayInline"
+                    <div class="col-sm-3 checkBox-display-inline"
                          *ngFor="let payment of this.paymentsArray; let i = index">
                         <mat-checkbox [value]="payment"
                                       [checked]="payment.selected"
@@ -372,8 +372,7 @@
                 </mat-expansion-panel>
             </mat-accordion>
 
-            <div class="row buttons d-flex justify-content-between pad"
-                 style="padding-top: 20px;">
+            <div class="row buttons d-flex justify-content-between pad padding-top-20">
                 <button mat-raised-button
                         matStepperPrevious
                         class="btn-color-secondary">{{'csa.back' | translate}}</button>
@@ -387,17 +386,17 @@
     </mat-step>
     <mat-step [stepControl]="formConclusion">
         <ng-template matStepLabel>{{'csa.overview' | translate}}</ng-template>
-        <div style="border-bottom: 3px solid #3db0ce; width:100%"></div>
+        <div class="progress-border-final-step"></div>
         <div class="container">
             <form
                   (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
                 <!-- <div *ngIf="!authorized && !editForm"
                      class="row justify-content-center">
 
-                    <div class="col-md-8 marginBottom_40 marginTop_20"
+                    <div class="col-md-8 margin-bottom-40 margin-top-20"
                          style="display: flex;
                         justify-content: center !important;">
-                        <span class="col-md-8 labelTitle">{{'csa.register' | translate}}</span>
+                        <span class="col-md-8 label-title">{{'csa.register' | translate}}</span>
                     </div>
 
                     <div class="col-md-8 marginBottom">
@@ -465,11 +464,11 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-8 marginBottom_40 paddingLefth_30 marginTop_20">
+                    <div class="col-md-8 margin-bottom-40 padding-left-30 margin-top-20">
                         <mat-checkbox [checked]="false"
                                       formControlName="termsConditions">
                         </mat-checkbox>
-                        <span class="label_underline"
+                        <span class="label-underline"
                               (click)="openDialog()">{{'csa.accept-terms' | translate}}</span>
                         <mat-error
                                    *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
@@ -477,7 +476,7 @@
                         </mat-error>
                     </div>
 
-                    <div class="col-md-8 paddingLefth_30">
+                    <div class="col-md-8 padding-left-30">
                         <button mat-raised-button
                                 matStepperPrevious
                                 class="btn-color-secondary col-md-12"
@@ -490,7 +489,7 @@
                 </div> -->
                 <div class="row justify-content-center">
                     <div class="col-sm-4">
-                        <div class="row justify-content-center marginBottom_40 marginTop_20">
+                        <div class="row justify-content-center margin-bottom-40 margin-top-20">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink"
                                  width="159"
@@ -512,12 +511,12 @@
                                 </g>
                             </svg>
                         </div>
-                        <div class="row justify-content-center marginBottom_40 marginTop_20">
-                            <span class="labelTitle_xlarge">{{'csa.confirm' | translate}}</span>
-                            <span class="labelTitle_unset marginTop_20">{{'csa.confirm-information' | translate}}
+                        <div class="row justify-content-center margin-bottom-40 margin-top-20">
+                            <span class="label-title_xlarge">{{'csa.confirm' | translate}}</span>
+                            <span class="label-title_unset margin-top-20">{{'csa.confirm-information' | translate}}
                             </span>
                         </div>
-                        <div class="row justify-content-center marginBottom_40">
+                        <div class="row justify-content-center margin-bottom-40">
                             <button mat-raised-button
                                     class="btn-color-primary"
                                     class="big">{{'csa.submit' | translate}}</button>
@@ -574,15 +573,15 @@
                             </g>
                         </svg>
                     </div>
-                    <div class="row justify-content-center marginBottom_40 marginTop_20">
-                        <span class="labelTitle_xlarge">
+                    <div class="row justify-content-center margin-bottom-40 margin-top-20">
+                        <span class="label-title_xlarge">
                             {{'csa.congratulations' | translate}}
                                 </span>
-                                <span class="labelTitle_unset marginTop_20">
+                                <span class="label-title_unset margin-top-20">
                                     {{'csa.congratulations-message' | translate}}
                                 </span>
                         </div>
-                        <div class="row justify-content-center marginBottom_40">
+                        <div class="row justify-content-center margin-bottom-40">
                             <button mat-raised-button
                                     class="btn-color-primary"
                                     class="big"

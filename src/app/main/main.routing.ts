@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router'
 
 // COMPONENTS
 import { MainComponent } from './main.component'
-import { DashboardComponent } from './containers/dashboard.component'
 import { AddBusinessComponent } from './containers/add-business.component'
 import { BusinessDetailComponent } from './containers/business-detail.component'
+import { DashboardComponent } from '@app/features/dashboard/dashboard.component'
+// import { DashboardComponent } from './containers/dashboard.component'
 
 const MainRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,16 +16,20 @@ const MainRoutes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadChildren: '../features/dashboard/dashboard.module#DashboardModule',
       },
       {
-        path: 'new',
-        component: AddBusinessComponent,
+        path: 'profile',
+        loadChildren: '../features/profile/profile.module#ProfileModule',
       },
-      {
-        path: 'business-detail/detail/:objId',
-        component: BusinessDetailComponent,
-      },
+      // {
+      //   path: 'new',
+      //   component: AddBusinessComponent,
+      // },
+      // {
+      //   path: 'business-detail/detail/:objId',
+      //   component: BusinessDetailComponent,
+      // },
     ],
   },
 ]

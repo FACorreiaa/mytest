@@ -16,9 +16,6 @@ import { ErrorComponent } from './containers/error.component'
 // Modules
 import { CoreModule } from '@app/common/core.module'
 
-// Material
-import { MaterialModule } from '../material.module'
-
 import { EffectsModule } from '@ngrx/effects'
 import { AuthEffects } from './store/effects/auth.effects'
 import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
@@ -26,24 +23,24 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '@env/environment'
+import { AuthRoutingModule } from './auth.routing'
 
 // Routing
-const AuthRoutingModule = RouterModule.forChild([
-  { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
-  { path: AppRoutes.WIZARD, component: WizardComponent },
-  {
-    path: AppRoutes.ERROR,
-    component: ErrorComponent,
-    canActivate: [NgxPermissionsGuard],
-    data: {
-      permissions: {
-        only: ['manage-account'],
-      },
-    },
-  },
-  { path: 'main', loadChildren: '../main/main.module#MainModule' },
-  // ToDo: decide if you continue with -> canActivate: [AuthGuard],
-])
+// const AuthRoutingModule = RouterModule.forChild([
+//   { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
+//   { path: AppRoutes.WIZARD, component: WizardComponent },
+//   {
+//     path: AppRoutes.ERROR,
+//     component: ErrorComponent,
+//     canActivate: [NgxPermissionsGuard],
+//     data: {
+//       permissions: {
+//         only: ['manage-account'],
+//       },
+//     },
+//   },
+//   { path: 'main', canActivate: [AppAuthGuard], loadChildren: '../main/main.module#MainModule' },
+// ])
 
 @NgModule({
   imports: [

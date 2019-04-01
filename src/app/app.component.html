@@ -3,7 +3,7 @@
     <div class="toolbar">
       <mat-toolbar color="primary">
         <a (click)="GoToMainPage()"
-           style="cursor: pointer"><span style="font-size: 30px">{{'csa.title.short' | translate}}</span></a>
+           ><span>{{'csa.title.short' | translate}}</span></a>
         <span class="example-spacer"></span>
 
         <mat-form-field class="col-3 col-md-2 col-lg-1">
@@ -16,11 +16,11 @@
           </mat-select>
         </mat-form-field>
 
-        <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu" style="outline: none">
+        <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu" class="remove-outline">
           <mat-icon>account_circle</mat-icon>
         </button>
         <mat-menu #toolbarUserMenu="matMenu">
-          <button mat-menu-item (click)="onLogOutClick()" style="outline: none">
+          <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
             <mat-icon>account_circle</mat-icon>
             <span>Log out</span>
           </button>

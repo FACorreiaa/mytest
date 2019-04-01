@@ -1,19 +1,20 @@
-@import 'styles-variables';
+@import "styles-variables";
 
-@import '../node_modules/bootstrap/scss/bootstrap-reboot';
-@import '../node_modules/bootstrap/scss/bootstrap-grid';
-@import '~@angular/material/theming';
+// @import '../node_modules/bootstrap/scss/bootstrap-reboot';
+@import "../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~@angular/material/theming";
 
 /* Custom material theme */
 $mat-black-custom: (
-  50: #F0F0F0,
-  100: #CFD8DC,
-  200: #B0BEC5,
-  300: #90A4AE,
-  400: #78909C,
-  500: #607D8B,
-  600: #546E7A,
-  700: #455A64,
+  50: #f0f0f0,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #607d8b,
+  600: #546e7a,
+  700: #455a64,
   800: #c9c9c9,
   900: #323a42,
   contrast: (
@@ -30,31 +31,35 @@ $mat-black-custom: (
     A100: $black-87-opacity,
     A200: white,
     A400: white,
-    A700: white,
+    A700: white
   )
 );
 
 /* Global font family*/
 @font-face {
-  font-family: 'Horeca';
-  src: url("./assets/fonts/OpenSans-Light.ttf") format("truetype"), url("./assets/fonts/OpenSans-Light.ttf") format("truetype");
+  font-family: "Horeca";
+  src: url("./assets/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("./assets/fonts/OpenSans-Light.ttf") format("truetype");
   font-weight: 300;
 }
 
 @font-face {
-  font-family: 'Horeca';
-  src: url("./assets/fonts/OpenSans-Regular.ttf") format("truetype"), url("./assets/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-family: "Horeca";
+  src: url("./assets/fonts/OpenSans-Regular.ttf") format("truetype"),
+    url("./assets/fonts/OpenSans-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 
-$custom-typography: mat-typography-config( $font-family: 'Horeca, sans-serif');
+$custom-typography: mat-typography-config(
+  $font-family: "Horeca, sans-serif"
+);
 @include mat-core($custom-typography);
 
 /* Global themes */
-$cs-primary:mat-palette($mat-black-custom, 900, 800, 800);
+$cs-primary: mat-palette($mat-black-custom, 900, 800, 800);
 $cs-accent: mat-palette($mat-black-custom, 200);
 $cs-warn: mat-palette($mat-red, 500);
-$cs-theme: mat-light-theme( $cs-primary, $cs-accent, $cs-warn);
+$cs-theme: mat-light-theme($cs-primary, $cs-accent, $cs-warn);
 
 @include angular-material-theme($cs-theme);
 
@@ -69,51 +74,52 @@ $cs-theme: mat-light-theme( $cs-primary, $cs-accent, $cs-warn);
   white-space: normal !important;
 }
 
-.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background .mat-checkbox-frame {
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background .mat-checkbox-frame {
   background-color: $blue-primary-color;
-  border-color: rgba(0, 0, 0, 0.54)
+  border-color: rgba(0, 0, 0, 0.54);
 }
 
 /* Stepper component, override styles*/
 .mat-step-header {
-    .mat-step-icon{
-      display: none;
-    }
-    .mat-step-icon-not-touched{
-      display: none;
-    }
+  .mat-step-icon {
+    display: none;
+  }
+  .mat-step-icon-not-touched {
+    display: none;
+  }
 
-    .mat-step-label{
-      color: black;
-    }
+  .mat-step-label {
+    color: black;
+  }
 
-    .mat-step-label {
-      &.mat-step-label-active{
-        color: $blue-primary-color;
-      }
+  .mat-step-label {
+    &.mat-step-label-active {
+      color: $blue-primary-color;
     }
+  }
 }
 
 @media (max-width: map-get($grid-breakpoints, sm)) {
-    .mat-step-header {
-      .mat-step-icon{
-        display: block;
-        background-color: $blue-primary-color;
-        margin-left: 5px;
+  .mat-step-header {
+    .mat-step-icon {
+      display: block;
+      background-color: $blue-primary-color;
+      margin-left: 5px;
 
-        > .mat-icon{
-          margin-left: 4px;
-          margin-top: 4px;
-        }
-      }      
-      .mat-step-icon-not-touched{
-        display: block;
-      } 
-
-      .mat-step-label{
-        display: none;
+      > .mat-icon {
+        margin-left: 4px;
+        margin-top: 4px;
       }
     }
+    .mat-step-icon-not-touched {
+      display: block;
+    }
+
+    .mat-step-label {
+      display: none;
+    }
+  }
 }
 
 .mat-horizontal-stepper-header {
@@ -122,17 +128,17 @@ $cs-theme: mat-light-theme( $cs-primary, $cs-accent, $cs-warn);
 }
 
 @media (max-width: map-get($grid-breakpoints, xl)) {
-  .mat-horizontal-stepper-header{
+  .mat-horizontal-stepper-header {
     padding: 0 33px !important;
   }
 }
 
 .mat-horizontal-stepper-header-container {
-    & .mat-stepper-horizontal-line{
-      border-top-style: none;
-    }
+  & .mat-stepper-horizontal-line {
+    border-top-style: none;
+  }
 
-    padding: 0px 20px;
-    background-color: #F0F0F0;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  padding: 0px 20px;
+  background-color: #f0f0f0;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }

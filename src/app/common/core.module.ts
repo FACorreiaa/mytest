@@ -15,7 +15,6 @@ import { ModalTermsConditionsComponent } from '@app/common/components/model-term
 import { DisableControlDirective } from '@app/common/directives/disable-control.directive'
 import { LoadingRequestComponent } from './components/loading.component'
 import { SideNavComponent } from './components/side-nav.component'
-import { EditTabsComponent } from './components/edit-tabs.component'
 import { GooglePlacesDirective } from './directives/google-places.directive'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
@@ -38,8 +37,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     //   },
     // }),
   ],
-  exports: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, MaterialModule],
-  declarations: [CsStepperComponent, EditTabsComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
+  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, MaterialModule],
+  declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
   providers: [CategoriesService, CountriesService],
 })
 export class CoreModule {}
