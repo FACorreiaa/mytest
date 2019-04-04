@@ -1,21 +1,22 @@
 <div class="layout-container">
-    <mat-sidenav-container class="sidenav-container">
-        <!-- <mat-sidenav #snav class="sidenav mat-elevation-z10" [(mode)]="sideNavMode" [(opened)]="sideNavOpened">
-            <app-side-nav></app-side-nav>
-        </mat-sidenav> -->
-        <mat-sidenav-content>
-            <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
-                <mat-card class="col">
-                    <mat-card-content>
-                        <div class="row justify-content-center">
-                            <cs-loading [show]="true"></cs-loading>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <main class="main-container" *ngIf="!(this.loading$ | async)">
-                <router-outlet></router-outlet>
-            </main>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+
+  <mat-sidenav-container class="sidenav-container">
+
+    <nav-bar></nav-bar>
+    
+    <div *ngIf="(this.loading$ | async)"
+         style="display: flex; padding: 50px">
+      <mat-card class="col">
+        <mat-card-content>
+          <div class="row justify-content-center">
+            <cs-loading [show]="true"></cs-loading>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <main class="main-container"
+          *ngIf="!(this.loading$ | async)">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-container>
 </div>

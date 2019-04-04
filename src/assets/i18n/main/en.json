@@ -1,5 +1,5 @@
 {
-	"csa.your-restaurante": "",
+	"csa.your-restaurante": "Your Restaurant",
 	"csa.tells-more": "",
 	"csa.enter-business": "",
 	"csa.start-typing": "",
@@ -55,5 +55,7 @@
 	"csa.congratulations-message": "",
 	"csa.go-to-profile": "",
 	"csa.loading": "",
-	"csa.main.category": "Category"
+	"csa.main.category": "Category",
+	"cs.navmenu-dashboard": "Dashboard",
+	"cs.navmenu-profile": "Profile"
 }

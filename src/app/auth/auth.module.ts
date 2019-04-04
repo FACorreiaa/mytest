@@ -25,23 +25,6 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from '@env/environment'
 import { AuthRoutingModule } from './auth.routing'
 
-// Routing
-// const AuthRoutingModule = RouterModule.forChild([
-//   { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
-//   { path: AppRoutes.WIZARD, component: WizardComponent },
-//   {
-//     path: AppRoutes.ERROR,
-//     component: ErrorComponent,
-//     canActivate: [NgxPermissionsGuard],
-//     data: {
-//       permissions: {
-//         only: ['manage-account'],
-//       },
-//     },
-//   },
-//   { path: 'main', canActivate: [AppAuthGuard], loadChildren: '../main/main.module#MainModule' },
-// ])
-
 @NgModule({
   imports: [
     CommonModule,

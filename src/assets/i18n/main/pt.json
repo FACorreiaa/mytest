@@ -55,5 +55,7 @@
 	"csa.congratulations-message": "",
 	"csa.go-to-profile": "",
 	"csa.loading": "",
-	"csa.main.category": "Categoria"
+	"csa.main.category": "Categoria",
+	"cs.navmenu-dashboard": "Início",
+	"cs.navmenu-profile": "Perfil"
 }

@@ -1,0 +1,43 @@
+.mn-active {
+  background-color: #e5e1e1;
+  opacity: 1;
+  border-bottom: 3px solid #807f7f;
+}
+
+.location-global-header {
+  height: 75px;
+  width: 100%;
+  padding: 0 20px;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+
+  .location-global-header-location-info {
+    flex-basis: 40%;
+  }
+
+  nav {
+    .mat-tab-link {
+      height: 100%;
+    }
+    .mat-tab-link {
+      min-width: 0px;
+    }
+    .mat-tab-link:hover {
+      text-decoration: none;
+      opacity: 1;
+      background-color: #f3f0f0;
+    }
+  }
+
+  .global-header-link-icon-container {
+    flex-basis: 60%;
+    height: 100%;
+    border-bottom: none;
+  }
+}

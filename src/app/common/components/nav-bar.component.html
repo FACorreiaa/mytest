@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav-responsive d-sm-none d-flex">
+  <button class="navbar-toggler"
+          type="button"
+          (click)="toggleNavBar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="navbar-brand">Business Name</span>
+
+  <div class="collapse navbar-collapse pt-3"
+       [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav">
+      <li class="nav-item active" *ngFor="let e of navBarMenu" [ngClass]="{'mn-active': isActive(e)}">
+        <a class="nav-link"
+        [routerLink]="e.link">{{e.label | translate}} <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="d-none d-sm-flex location-global-header">
+  <div class="location-global-header-location-info">
+    <span class="navbar-brand">Business Name</span>
+  </div>
+  <nav mat-tab-nav-bar
+       class="global-header-link-icon-container">
+    <a mat-tab-link
+       *ngFor="let e of navBarMenu"
+       [routerLink]="e.link"
+       routerLinkActive="on"
+       #rla="routerLinkActive"
+       [active]="rla.isActive"
+       style="flex-direction: column"
+       [ngClass]="{'mn-active': isActive(e)}">
+      <span class="pb-2">
+        <img src="../../../assets/images/icons/{{e.id}}.svg">
+      </span>
+      <span style="color:#333333;">
+        {{e.label | translate}}
+      </span>
+    </a>
+  </nav>
+</div>

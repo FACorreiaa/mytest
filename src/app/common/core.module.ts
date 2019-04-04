@@ -20,29 +20,21 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '@env/environment'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { NavigationBarComponent } from './components/nav-bar.component'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
-  imports: [
-    MaterialModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    TranslateModule,
-    // TranslateModule.forRoot({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: HttpLoaderFactory,
-    //     deps: [HttpClient],
-    //   },
-    // }),
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule],
+  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, NavigationBarComponent, MaterialModule, RouterModule],
+  declarations: [
+    CsStepperComponent,
+    ModalTermsConditionsComponent,
+    DisableControlDirective,
+    LoadingRequestComponent,
+    SideNavComponent,
+    NavigationBarComponent,
+    GooglePlacesDirective,
   ],
-  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, MaterialModule],
-  declarations: [CsStepperComponent, ModalTermsConditionsComponent, DisableControlDirective, LoadingRequestComponent, SideNavComponent, GooglePlacesDirective],
   providers: [CategoriesService, CountriesService],
 })
 export class CoreModule {}
-
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n`, '.json')
-// }
