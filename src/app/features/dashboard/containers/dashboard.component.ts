@@ -9,6 +9,7 @@ import * as fromApp from '../../../app.reducers'
 
 import { Subject } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
+import { KeycloakService } from 'keycloak-angular'
 
 @Component({
   selector: 'dashboard-feature',
@@ -17,12 +18,22 @@ import { delay, takeUntil } from 'rxjs/operators'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
+  userName: string
 
-  constructor(private appStore: Store<fromApp.AppState>, private store: Store<fromDashboard.DashBoardState>, private translate: TranslateService) {}
+  constructor(
+    private appStore: Store<fromApp.AppState>,
+    private store: Store<fromDashboard.DashBoardState>,
+    private translate: TranslateService,
+    protected keycloakService: KeycloakService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.translate.setDefaultLang('en')
     // this.store.dispatch(new Actions.GetAllBusinessAction())
+
+    const userProfile = await this.keycloakService.loadUserProfile(false)
+    this.userName = userProfile.firstName
+
     this.appStore
       .pipe(
         delay(0),

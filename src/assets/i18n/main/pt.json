@@ -57,5 +57,7 @@
 	"csa.loading": "",
 	"csa.main.category": "Categoria",
 	"cs.navmenu-dashboard": "Início",
-	"cs.navmenu-profile": "Perfil"
+	"cs.navmenu-profile": "Perfil",
+	"cs.navmenu-welcome": "Bem-vindo",
+	"cs.profile-completeness": "Perfil completo"
 }

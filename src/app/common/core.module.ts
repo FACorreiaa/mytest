@@ -17,15 +17,23 @@ import { LoadingRequestComponent } from './components/loading.component'
 import { SideNavComponent } from './components/side-nav.component'
 import { GooglePlacesDirective } from './directives/google-places.directive'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { HttpClient } from '@angular/common/http'
-import { environment } from '@env/environment'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { NavigationBarComponent } from './components/nav-bar.component'
 import { RouterModule } from '@angular/router'
+import { ProgressBarComponent } from './components/progress-bar.component'
 
 @NgModule({
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule],
-  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, SideNavComponent, NavigationBarComponent, MaterialModule, RouterModule],
+  exports: [
+    CsStepperComponent,
+    ModalTermsConditionsComponent,
+    CommonModule,
+    LoadingRequestComponent,
+    SideNavComponent,
+    NavigationBarComponent,
+    ProgressBarComponent,
+    MaterialModule,
+    RouterModule,
+  ],
   declarations: [
     CsStepperComponent,
     ModalTermsConditionsComponent,
@@ -33,6 +41,7 @@ import { RouterModule } from '@angular/router'
     LoadingRequestComponent,
     SideNavComponent,
     NavigationBarComponent,
+    ProgressBarComponent,
     GooglePlacesDirective,
   ],
   providers: [CategoriesService, CountriesService],

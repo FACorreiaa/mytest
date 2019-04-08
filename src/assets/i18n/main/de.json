@@ -57,5 +57,7 @@
 	"csa.loading": "",
 	"csa.main.category": "",
 	"cs.navmenu-dashboard": "Dashboard",
-	"cs.navmenu-profile": "Profile"
+	"cs.navmenu-profile": "Profile",
+	"cs.navmenu-welcome": "",
+	"cs.profile-completeness": ""
 }

@@ -1,0 +1,52 @@
+<div class="progress-bar-root">
+    <div class="progress progress-bar-position">
+        <div class="progress-bar"
+             role="progressbar"
+             class="progress-bar-template"
+             style="width: 55%;"
+             aria-valuenow="55"
+             aria-valuemin="0"
+             aria-valuemax="100">
+        </div>
+    </div>
+
+    <div class="first-position">
+        <span>
+            <div class="circle type1"></div>
+        </span>
+    </div>
+    <div class="second-position">
+        <span class="float-right">
+            <div class="circle type1"></div>
+        </span>
+    </div>
+    <div class="third-position">
+        <span class="float-right">
+            <div class="circle type2"></div>
+        </span>
+    </div>
+    <div class="fourth-position">
+        <span class="float-right">
+            <div class="circle type2"></div>
+        </span>
+    </div>
+    <div class="fifth-position">
+        <span class="float-right">
+            <div class="circle type3"></div>
+        </span>
+    </div>
+</div>
+
+<div class="row missing-items">
+    <div>
+        <span>Still missing:</span>
+    </div>
+    <div class="col-sm-8 col-md-9">
+        <div class="col-md-4 d-inline-flex"
+             *ngFor="let item of this.missingItems">
+            <ul>
+                <li>{{item}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
