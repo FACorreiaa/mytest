@@ -1,12 +1,18 @@
 <div class="progress-bar-root">
     <div class="progress progress-bar-position">
+            <!-- triggers="mouseenter:mouseleave" -->
         <div class="progress-bar"
              role="progressbar"
              class="progress-bar-template"
-             style="width: 55%;"
+             [ngStyle]="{width: this.percentage}"
              aria-valuenow="55"
              aria-valuemin="0"
-             aria-valuemax="100">
+             aria-valuemax="100"
+             triggers="mouseenter:mouseleave"
+             popoverClass="percentage-popup"
+             placement="top"
+             ngbPopover="{{this.percentage}}"
+             [placement]="['top-right']">
         </div>
     </div>
 
@@ -15,37 +21,52 @@
             <div class="circle type1"></div>
         </span>
     </div>
-    <div class="second-position">
-        <span class="float-right">
+
+    <div class="second-position"
+         placement="bottom"
+         triggers="mouseenter:mouseleave"
+         ngbPopover="Here's some content about each Level / Achievement and maybe also a bonus for reaching this level"
+         popoverTitle="Level 1">
+
+        <span>
             <div class="circle type1"></div>
         </span>
     </div>
-    <div class="third-position">
-        <span class="float-right">
+
+    <div class="third-position"
+         placement="bottom"
+         triggers="mouseenter:mouseleave"
+         ngbPopover="Here's some content about each Level / Achievement and maybe also a bonus for reaching this level"
+         popoverTitle="Level 2">
+        <span>
             <div class="circle type2"></div>
         </span>
     </div>
+
     <div class="fourth-position">
-        <span class="float-right">
+        <span>
             <div class="circle type2"></div>
         </span>
     </div>
+
     <div class="fifth-position">
-        <span class="float-right">
+        <span>
             <div class="circle type3"></div>
         </span>
     </div>
 </div>
 
 <div class="row missing-items">
-    <div>
-        <span>Still missing:</span>
+    <div class="div-padding">
+        <span>{{'csa.still-missing' | translate}}</span>
     </div>
-    <div class="col-sm-8 col-md-9">
+    <div class="col-sm-10 col-md-10">
         <div class="col-md-4 d-inline-flex"
              *ngFor="let item of this.missingItems">
             <ul>
-                <li>{{item}}</li>
+                <li>
+                    <span>{{item}}</span>
+                </li>
             </ul>
         </div>
     </div>

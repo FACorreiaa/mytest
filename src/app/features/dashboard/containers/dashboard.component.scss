@@ -1,4 +1,8 @@
+@import "../../../../styles-variables.scss";
+
 .container {
+  padding-bottom: 60px;
+
   .welcome-message {
     height: 140px;
     padding-top: 40px;
@@ -13,5 +17,30 @@
     padding: 30px;
     background: white;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+
+    .profile-title {
+      font-size: 28px;
+    }
+
+    .percentage-complete {
+      color: rgb(60, 176, 206);
+      font-size: 20px;
+      padding-bottom: 80px;
+    }
+
+    .button-height {
+      height: 45px;
+    }
   }
+}
+
+.padding-top {
+  padding-top: 60px;
+}
+
+.btn-color-primary {
+  background-color: #3db0ce;
+  color: white;
+  font-size: 18px;
 }

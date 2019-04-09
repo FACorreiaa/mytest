@@ -6,6 +6,9 @@ import { HttpModule } from '@angular/http'
 // Material
 import { MaterialModule } from '@app/material.module'
 
+// Ng-bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+
 // Services
 import { CategoriesService } from '@app/common/services/categories.service'
 import { CountriesService } from '@app/common/services/countries.service'
@@ -22,7 +25,7 @@ import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar.component'
 
 @NgModule({
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule],
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbModule],
   exports: [
     CsStepperComponent,
     ModalTermsConditionsComponent,

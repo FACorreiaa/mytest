@@ -59,5 +59,9 @@
 	"cs.navmenu-dashboard": "Início",
 	"cs.navmenu-profile": "Perfil",
 	"cs.navmenu-welcome": "Bem-vindo",
-	"cs.profile-completeness": "Perfil completo"
+	"cs.profile-completeness": "Perfil completo",
+	"csa.still-missing": "Em falta:",
+	"csa.to-complete": "para completar",
+	"csa.data-assistant": "Perfil suporte"
+
 }

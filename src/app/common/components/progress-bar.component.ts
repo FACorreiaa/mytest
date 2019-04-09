@@ -8,13 +8,13 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input } 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent implements OnInit {
-  @Input() percentage: number
+  @Input() percentage: string
   @Input() missingItems: string[]
 
   constructor() {}
 
   ngOnInit() {
-    this.percentage = 55
-    this.missingItems = ['category', 'fax', 'Opening Hours', 'Keywords', 'Short', 'Long', 'Imprint', 'Payment']
+    this.percentage = '65%'
+    this.missingItems = ['Category', 'Fax', 'Keywords', 'Short', 'Long', 'Imprint', 'Payment', 'Opening Hours']
   }
 }

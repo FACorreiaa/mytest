@@ -19,6 +19,7 @@ import { KeycloakService } from 'keycloak-angular'
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   userName: string
+  percentageToComplete: string
 
   constructor(
     private appStore: Store<fromApp.AppState>,
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
     this.userName = userProfile.firstName
+    this.percentageToComplete = '35%'
 
     this.appStore
       .pipe(

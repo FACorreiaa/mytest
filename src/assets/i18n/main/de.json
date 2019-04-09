@@ -59,5 +59,8 @@
 	"cs.navmenu-dashboard": "Dashboard",
 	"cs.navmenu-profile": "Profile",
 	"cs.navmenu-welcome": "",
-	"cs.profile-completeness": ""
+	"cs.profile-completeness": "",
+	"csa.still-missing": ":",
+	"csa.to-complete": "",
+	"csa.data-assistant": ""
 }

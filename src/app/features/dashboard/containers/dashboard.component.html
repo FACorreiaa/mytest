@@ -5,12 +5,19 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col card-template">
+    <div class="col col-md-10 card-template">
 
-      <div>{{'cs.profile-completeness' | translate}}</div>
-      <br />
+      <div class="profile-title">{{'cs.profile-completeness' | translate}}</div>
+      <div class="percentage-complete">{{this.percentageToComplete}} {{'csa.to-complete' | translate}}</div>
       <div class="col-12 offset-md-1 col-md-10">
         <progress-bar></progress-bar>
       </div>
+
+      <div class="padding-top offset-sm-1 col-sm-10 offset-md-2 col-md-8">
+        <button mat-raised-button
+                class="btn-color-primary button-height col-md-12">{{'csa.data-assistant' | translate}}
+        </button>
+      </div>
     </div>
   </div>
+</div>
