@@ -394,6 +394,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     console.log('claimObject', claimObject)
     return claimObject
   }
+
   /**
    * Build opening hours dto model to send in service.
    * @param openHours the opening hours array for each day of the week.

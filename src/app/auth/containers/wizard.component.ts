@@ -64,7 +64,8 @@ export class WizardComponent implements OnInit, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
-    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
+    // this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
+    this.GoToMainPage()
   }
 
   GoToMainPage() {
