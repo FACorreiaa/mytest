@@ -14,9 +14,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '@env/environment'
 import { CoreModule } from '@app/common/core.module'
 
+// Ng-bootstrap
+import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
+
 @NgModule({
   imports: [
     CoreModule,
+    NgbRatingModule,
+    NgbProgressbarModule,
     DashboardRoutingModule,
     StoreModule.forFeature(reducerName, reducers),
     EffectsModule.forFeature([DashBoardEffects]),

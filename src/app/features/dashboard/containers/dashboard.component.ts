@@ -20,6 +20,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   userName: string
   percentageToComplete: string
+  averageService: string
+  services: string[] = ['All', 'Google', 'Other']
+  currentRate = 4
 
   constructor(
     private appStore: Store<fromApp.AppState>,

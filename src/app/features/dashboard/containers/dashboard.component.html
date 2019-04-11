@@ -26,10 +26,80 @@
       <span class="d-block">Some content</span>
       <span class="d-block">Some text for this content is set here</span>
     </div>
-    
+
     <div class="offset-md-1 col-md-5 card-template">
       <span class="d-block">Current publishers</span>
       <span class="d-block">Here is a list of your current publishers.</span>
+    </div>
+  </div>
+
+  <div class="row justify-content-center pt-5">
+    <div class="row col-md-10 card-template">
+      <div class="col-md-2">
+        <label id="example-radio-group-label">Average ratings</label>
+        <mat-radio-group aria-labelledby="example-radio-group-label"
+                         class="example-radio-group"
+                         [(ngModel)]="averageService">
+          <mat-radio-button class="example-radio-button"
+                            *ngFor="let season of services"
+                            [value]="season">
+            {{season}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="offset-md-2 col-md-3 pt-4">
+        <div style="background-color: lightgray; height: auto; padding: 20px">
+          <span class="d-block"
+                style="text-align: center; font-size: 20px;font-weight: bold">4,5</span>
+          <span class="d-block"
+                style="text-align: center;">von 5</span>
+
+          <div style="text-align: center;">
+            <ngb-rating max="5"
+                        [(rate)]="currentRate"></ngb-rating>
+          </div>
+        </div>
+      </div>
+
+      <div class="offset-md-1 col-md-4 pt-4">
+        <div style="display: flex">
+          <label>5</label>
+          <ngb-progressbar type="warning"
+                           [value]="75"
+                           class="progress-bar-average"></ngb-progressbar>
+          <label>%</label>
+        </div>
+        <div style="display: flex">
+          <label>4</label>
+          <ngb-progressbar type="warning"
+                           [value]="35"
+                           class="progress-bar-average"></ngb-progressbar>
+          <label>%</label>
+        </div>
+        <div style="display: flex">
+          <label>3</label>
+          <ngb-progressbar type="warning"
+                           [value]="5"
+                           class="progress-bar-average"></ngb-progressbar>
+          <label>%</label>
+        </div>
+        <div style="display: flex">
+          <label>2</label>
+          <ngb-progressbar type="warning"
+                           [value]="10"
+                           class="progress-bar-average"></ngb-progressbar>
+          <label>%</label>
+        </div>
+        <div style="display: flex">
+          <label>1</label>
+          <ngb-progressbar type="warning"
+                           [value]="5"
+                           class="progress-bar-average"></ngb-progressbar>
+          <label>%</label>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

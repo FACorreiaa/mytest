@@ -55,6 +55,13 @@ $custom-typography: mat-typography-config(
 );
 @include mat-core($custom-typography);
 
+* {
+  font-family: "Horeca";
+  src: url("./assets/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("./assets/fonts/OpenSans-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
 /* Global themes */
 $cs-primary: mat-palette($mat-black-custom, 900, 800, 800);
 $cs-accent: mat-palette($mat-black-custom, 200);
