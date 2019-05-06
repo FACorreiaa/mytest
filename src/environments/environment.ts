@@ -1,13 +1,6 @@
 import { KeycloakConfig } from 'keycloak-angular'
 
-// Add here your keycloak setup infos
 const keycloakConfig: KeycloakConfig = {
-  /** localhost **/
-  //   url: 'http://localhost:8080/auth',
-  //   realm: 'master',
-  //   clientId: 'my-angular-app',
-  // }
-
   /** HD Digital **/
   url: 'http://dev.sso.app.hd.digital/auth',
   realm: 'HDCustomers-nonprod',

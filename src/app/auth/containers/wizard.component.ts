@@ -7,9 +7,9 @@ import * as AuthActions from '../store/actions/auth.action'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import * as fromModule from '../../app.reducers'
-import { CategoriesService } from '@app/common/services/categories.service'
+import { CategoriesService } from '@app/core/services/categories.service'
 import { UserRegisterDto, Countries, ICategory } from '@app/api/models/api-models'
-import { CountriesService } from '@app/common/services/countries.service'
+import { CountriesService } from '@app/core/services/countries.service'
 import { delay, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
 import { KeycloakService } from 'keycloak-angular'
@@ -34,8 +34,7 @@ export class WizardComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>,
     private categoriesService: CategoriesService,
     private countriesService: CountriesService,
-    private readonly translate: TranslateService,
-    protected keycloakService: KeycloakService
+    private readonly translate: TranslateService
   ) {
     this.loading$ = this.store.select(fromApp.loginLoading)
   }
@@ -64,7 +63,7 @@ export class WizardComponent implements OnInit, OnDestroy {
   }
 
   register(object: UserRegisterDto): void {
-    // this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
+    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
     this.GoToMainPage()
   }
 

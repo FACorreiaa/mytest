@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
-import { CoreModule } from '@app/common/core.module'
+import { CoreModule } from '@app/core/core.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'

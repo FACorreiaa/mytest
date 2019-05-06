@@ -2,8 +2,8 @@ import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy } from '@angular
 import { Observable, Subscription } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { CountriesService } from '@app/common/services/countries.service'
-import { CategoriesService } from '@app/common/services/categories.service'
+import { CountriesService } from '@app/core/services/countries.service'
+import { CategoriesService } from '@app/core/services/categories.service'
 
 import { ICategory, Countries, ManageBusinessData } from '@app/api/models/api-models'
 import * as MainActions from '../store/actions/dashboard.actions'

@@ -14,7 +14,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
-import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/common/validations'
+import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
 import {
   OpeningTimes,
   Day,
@@ -30,7 +30,7 @@ import {
 } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
-import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
+import { ModalTermsConditionsComponent } from '../modal/model-term-conditions'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -151,18 +151,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.thirdFormGroup = this.formBuilder.group({
       hasSelection: ['', Validators.required],
     })
-
-    // this.formConclusion = this.formBuilder.group(
-    //   {
-    //     email: [this.businessEmail, EmailValidation],
-    //     password: ['', PasswordValidation],
-    //     confirmPassword: ['', PasswordValidation],
-    //     termsConditions: [''],
-    //   },
-    //   {
-    //     validator: passwordMatchValidator,
-    //   }
-    // )
 
     this.categories = CategoriesArray()
     this.categories.map(x => {
@@ -337,11 +325,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
    * This method creates the object dto for the middlware service
    */
   private createClaimToSave(firstForm: any, secondFormGroup: any) {
-    // const user: UserLoginDto = {
-    //   email: formConclusion.email,
-    //   password: formConclusion.password,
-    // }
-
     this.offeringsArray.map(off => {
       if (off.selected) {
         this.selectedOffering.push(off.name)
@@ -473,11 +456,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   /**
    * Modal to show terms and conditions.
    */
-  openDialog(): void {
-    this.dialog.open(ModalTermsConditionsComponent, {
-      width: '550px',
-    })
-  }
+  // openDialog(): void {
+  //   this.dialog.open(ModalTermsConditionsComponent, {
+  //     width: '550px',
+  //   })
+  // }
 
   /**
    * Method to build information retrieved form google places api.

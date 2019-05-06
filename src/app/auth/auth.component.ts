@@ -11,8 +11,4 @@ import { AppRoutes as AuthRoutes } from '../app.routing'
 })
 export class AuthComponent {
   constructor(private router: Router) {}
-
-  onLoginClick(event) {
-    // this.router.navigate([AuthRoutes.LOGIN])
-  }
 }

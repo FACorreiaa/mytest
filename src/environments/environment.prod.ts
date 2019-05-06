@@ -1,24 +1,24 @@
 import { KeycloakConfig } from 'keycloak-angular'
 
 // DEV
-const keycloakConfig: KeycloakConfig = {
-  url: 'https://dev.sso.app.hd.digital/auth',
-  realm: 'HDCustomers-nonprod',
-  clientId: 'claimingservice',
-  credentials: {
-    secret: 'f016c8e4-98e7-4f81-871b-3c8121d79d0e',
-  },
-}
-
-// ACC
 // const keycloakConfig: KeycloakConfig = {
-//   url: 'https://acc.sso.app.hd.digital/auth',
-//   realm: 'Acceptance',
+//   url: 'https://dev.sso.app.hd.digital/auth',
+//   realm: 'HDCustomers-nonprod',
 //   clientId: 'claimingservice',
 //   credentials: {
-//     secret: '005accc6-2abb-49a9-bdae-c4e0228c9d67',
+//     secret: 'f016c8e4-98e7-4f81-871b-3c8121d79d0e',
 //   },
 // }
+
+// ACC
+const keycloakConfig: KeycloakConfig = {
+  url: 'https://acc.sso.app.hd.digital/auth',
+  realm: 'Acceptance',
+  clientId: 'claimingservice',
+  credentials: {
+    secret: '005accc6-2abb-49a9-bdae-c4e0228c9d67',
+  },
+}
 
 export const environment = {
   appName: 'Claiming service',

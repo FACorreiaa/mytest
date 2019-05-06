@@ -51,10 +51,8 @@ export interface DeleteBusinessData {
 export interface Data {
   id?: number
   zipCode: string
-  // zip: string
   city: string
   street: string
-  // streetNumber: string
   additional: string
   category: string
   name: string
@@ -66,10 +64,6 @@ export interface Data {
   url: string
   contactEmail: string
   contactPhoneNumber: string
-  // reservationUri: string
-  // menuUri: string
-  // profileImageUri: string
-  // titleImageUri: string
   openingTimes: OpeningTimes
   offers: string[]
   services: string[]

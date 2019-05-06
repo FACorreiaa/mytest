@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Outpu
 import { Observable } from 'rxjs'
 import { Router, ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
-import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
+import { ModalTermsConditionsComponent } from '@app/core/components/modal/model-term-conditions'
 
 @Component({
   selector: 'business-card',

@@ -16,15 +16,16 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
     return this.getObjects(`${this.businessControllerRoute}/getAll`)
   }
 
-  public editBusinessData(manageData: ManageBusinessData): Observable<any> {
-    return this.getObjectsPUT(manageData, `${this.businessControllerRoute}/manage/${manageData.data.id}`)
-  }
+  // TODO - Pending services from POC version
+  // public editBusinessData(manageData: ManageBusinessData): Observable<any> {
+  //   return this.getObjectsPUT(manageData, `${this.businessControllerRoute}/manage/${manageData.data.id}`)
+  // }
 
-  public removeBusinessData(deleteData: DeleteBusinessData): Observable<any> {
-    return this.getObjectsDELETE(deleteData, `${this.businessControllerRoute}/manage/${deleteData.id}`)
-  }
+  // public removeBusinessData(deleteData: DeleteBusinessData): Observable<any> {
+  //   return this.getObjectsDELETE(deleteData, `${this.businessControllerRoute}/manage/${deleteData.id}`)
+  // }
 
-  public addBusinessData(manageData: ManageBusinessData): Observable<any> {
-    return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage`)
-  }
+  // public addBusinessData(manageData: ManageBusinessData): Observable<any> {
+  //   return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage`)
+  // }
 }

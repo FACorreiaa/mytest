@@ -10,15 +10,14 @@ import { AuthGuard } from './auth.guard'
 // COMPONENTS
 import { AuthComponent } from './auth.component'
 import { WizardComponent } from './containers/wizard.component'
-import { LoginComponent } from './containers/login.component'
 import { ErrorComponent } from './containers/error.component'
 
 // Modules
-import { CoreModule } from '@app/common/core.module'
+import { CoreModule } from '@app/core/core.module'
 
 import { EffectsModule } from '@ngrx/effects'
 import { AuthEffects } from './store/effects/auth.effects'
-import { ModalTermsConditionsComponent } from '@app/common/components/model-term-conditions'
+import { ModalTermsConditionsComponent } from '@app/core/components/modal/model-term-conditions'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
@@ -39,7 +38,7 @@ import { AuthRoutingModule } from './auth.routing'
       isolate: true,
     }),
   ],
-  declarations: [AuthComponent, WizardComponent, LoginComponent, ErrorComponent],
+  declarations: [AuthComponent, WizardComponent, ErrorComponent],
   entryComponents: [ModalTermsConditionsComponent],
   providers: [AuthGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

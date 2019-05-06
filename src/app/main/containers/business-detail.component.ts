@@ -5,11 +5,11 @@ import { Store, select } from '@ngrx/store'
 import * as fromModule from '../../app.reducers'
 import * as fromMain from '../main.reducers'
 import { Observable } from 'rxjs'
-import { CountriesService } from '@app/common/services/countries.service'
+import { CountriesService } from '@app/core/services/countries.service'
 import { Countries, ICategory, Data, ManageBusinessData } from '@app/api/models/api-models'
 import * as Actions from '../store/actions/dashboard.actions'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
-import { CategoriesService } from '@app/common/services/categories.service'
+import { CategoriesService } from '@app/core/services/categories.service'
 
 @Component({
   selector: 'business-detail',
