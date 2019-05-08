@@ -4,10 +4,28 @@
   border-bottom: 3px solid #807f7f;
 }
 
+nav {
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  button {
+    padding-right: 16px;
+  }
+
+  li {
+    padding: 0 16px;
+  }
+
+  .navbar-brand {
+    padding-left: 16px;
+  }
+}
+
 .location-global-header {
   height: 75px;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 16px;
   right: 0;
   left: 0;
   background-color: #fff;
@@ -19,6 +37,16 @@
 
   .location-global-header-location-info {
     flex-basis: 40%;
+
+    .navbar-brand {
+      padding-bottom: 0;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    
+    .navbar-adress {
+      font-size: 0.8rem;
+    }
   }
 
   nav {

@@ -11,10 +11,10 @@ export class ProgressBarComponent implements OnInit {
   @Input() percentage: string
   @Input() missingItems: string[]
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    this.percentage = '65%'
+    this.percentage = '40%'
     this.missingItems = ['Category', 'Fax', 'Keywords', 'Short', 'Long', 'Imprint', 'Payment', 'Opening Hours']
   }
 }

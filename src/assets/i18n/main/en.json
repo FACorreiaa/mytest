@@ -7,5 +7,8 @@
 	"cs.profile-completeness": "Profile completeness",
 	"csa.still-missing": "Still missing:",
 	"csa.to-complete": "to complete",
-	"csa.data-assistant": "Data entry Assistant"
+	"csa.data-assistant": "Data entry Assistant",
+	"csa.your-listing": "Your Listing",
+	"csa.view-listing": "View Listing",
+	"csa.status": "Status:"
 }

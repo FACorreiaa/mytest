@@ -1,45 +1,33 @@
 <mat-sidenav-container>
-  <div class="wrapper">
-    <div class="toolbar">
-      <mat-toolbar color="primary">
-        <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
-        <span class="example-spacer"></span>
+	<div class="wrapper">
+		<div class="toolbar">
+			<mat-toolbar color="primary">
+				<a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
+				<span class="example-spacer"></span>
 
-        <div [matMenuTriggerFor]="toolbarUserMenu"
-             style="padding: 20px">
-          <div>
-            <svg width="21px" height="25px" viewBox="0 0 448 512"
-                 version="1.0">
-              <path fill="#FFFFFF"
-                    d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z" />
-            </svg>
-          </div>
-        </div>
+				<div [matMenuTriggerFor]="toolbarUserMenu">
+					<mat-icon aria-label="User icon">person</mat-icon>
+				</div>
 
-        <mat-menu #toolbarUserMenu="matMenu">    
-          <button mat-menu-item
-                  (click)="onLogOutClick()"
-                  class="remove-outline">
-            <mat-icon>account_circle</mat-icon>
-            <span>Log out</span>
-          </button>
-        </mat-menu>
+				<mat-menu #toolbarUserMenu="matMenu">
+					<button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
+						<mat-icon>account_circle</mat-icon>
+						<span>Log out</span>
+					</button>
+				</mat-menu>
 
-        <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
-          <mat-select (selectionChange)="onLanguageSelect($event)"
-                      [value]="this.selectedLang">
-            <mat-option *ngFor="let l of languages"
-                        [value]="l">
-              {{ l.toUpperCase() }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+				<mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
+					<mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
+						<mat-option *ngFor="let l of languages" [value]="l">
+							{{ l.toUpperCase() }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-toolbar>
+		</div>
 
-      </mat-toolbar>
-    </div>
-    
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+		<div class="content">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
 </mat-sidenav-container>

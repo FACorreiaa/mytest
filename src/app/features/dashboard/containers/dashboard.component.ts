@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private store: Store<fromDashboard.DashBoardState>,
     private translate: TranslateService,
     protected keycloakService: KeycloakService
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
     this.userName = userProfile.firstName
-    this.percentageToComplete = '35%'
+    this.percentageToComplete = '60%'
 
     this.appStore
       .pipe(

@@ -19,7 +19,11 @@ export class MainComponent implements OnInit {
   loade = false
   loading$: Observable<boolean>
 
-  constructor(private storeApp: Store<fromModule.AppState>, private storeMain: Store<fromMainModule.MainState>, private readonly translate: TranslateService) {
+  constructor(
+    private storeApp: Store<fromModule.AppState>,
+    private storeMain: Store<fromMainModule.MainState>,
+    private readonly translate: TranslateService
+  ) {
     this.loading$ = this.storeMain.select(fromMainModule.getLoading)
   }
 
