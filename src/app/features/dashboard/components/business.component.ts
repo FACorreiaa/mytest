@@ -10,9 +10,17 @@ import { Observable } from 'rxjs'
 export class BusinessComponent implements OnInit, OnChanges {
   @Input() businessData$: Observable<any[]>
 
-  constructor() {}
+  listingStatus: boolean
 
-  ngOnInit() {}
+  constructor() { }
+
+  ngOnInit() {
+    this.listingStatus = false
+  }
+
+  setStatus() {
+    this.listingStatus = this.listingStatus = !this.listingStatus
+  }
 
   ngOnChanges() {
     // console.log('testeee', this.businessData$)

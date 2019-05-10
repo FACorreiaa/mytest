@@ -33,6 +33,7 @@ import { CoreModule } from './core/core.module'
 import { initializer } from './core/utils/app-init'
 import { TokenInterceptor } from './api/http/http-token.interceptor'
 import { NgxPermissionsModule } from 'ngx-permissions'
+import { HeaderService } from './api/services/core/header.service'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -76,6 +77,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
   declarations: [AppComponent],
   exports: [MaterialModule],
   providers: [
+    HeaderService,
     GlobalEnvironmentService,
     {
       provide: APP_INITIALIZER,

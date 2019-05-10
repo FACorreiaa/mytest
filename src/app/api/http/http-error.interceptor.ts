@@ -7,14 +7,12 @@ import { environment } from '@env/environment'
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       // retry(1),
       catchError((error: HttpErrorResponse) => {
-        console.log('error:', error)
-
         const rollbar = this.injector.get(RollbarService)
         let errorMessage = ''
         if (error.error instanceof ErrorEvent) {

@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   averageService: string
   services: string[] = ['All', 'Google', 'Other']
   currentRate = 4
+  listingStatus: boolean
 
   constructor(
     private appStore: Store<fromApp.AppState>,
@@ -51,6 +52,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe(lang => this.translate.use(lang))
+
+    this.listingStatus = false
+  }
+
+  setStatus() {
+    this.listingStatus = this.listingStatus = !this.listingStatus
   }
 
   ngOnDestroy() {
