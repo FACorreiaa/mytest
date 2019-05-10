@@ -2,30 +2,32 @@ import { IDashBoardService } from '@app/api/interfaces/i.dashboard.service'
 import { BaseApi } from '../base/baseapi'
 import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Data, ManageBusinessData, DeleteBusinessData } from '@app/api/models/api-models'
+import { Data, FetchVerificationResponse, BaseServiceResponse, FetchVerificationRequest, InitVerificationRequest, CompleteVerificationRequest } from '@app/api/models/api-models'
 
 @Injectable()
 export class DashBoardService extends BaseApi implements IDashBoardService {
   private businessControllerRoute = 'businessUnit'
+  private businessVerificationControllerRoute = 'businessUnit/verification'
 
   constructor(injector: Injector) {
     super(injector)
   }
 
   public businessData(): Observable<Data> {
-    return this.getObjects(`${this.businessControllerRoute}/getAll`)
+    return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=true`)
   }
 
-  // TODO - Pending services from POC version
-  // public editBusinessData(manageData: ManageBusinessData): Observable<any> {
-  //   return this.getObjectsPUT(manageData, `${this.businessControllerRoute}/manage/${manageData.data.id}`)
-  // }
+  public fetchVerificationOptions(id: number, req: FetchVerificationRequest): Observable<any> {
+    // console.log('object', obj)
 
-  // public removeBusinessData(deleteData: DeleteBusinessData): Observable<any> {
-  //   return this.getObjectsDELETE(deleteData, `${this.businessControllerRoute}/manage/${deleteData.id}`)
-  // }
+    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/fetchOptions?testMode=true`)
+  }
 
-  // public addBusinessData(manageData: ManageBusinessData): Observable<any> {
-  //   return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage`)
-  // }
+  public initializeVerification(id: number, req: InitVerificationRequest): Observable<any> {
+    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/init?testMode=true`)
+  }
+
+  public completeVerification(id: number, req: CompleteVerificationRequest): Observable<any> {
+    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/complete?testMode=true`)
+  }
 }

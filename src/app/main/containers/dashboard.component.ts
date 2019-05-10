@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { Store, select } from '@ngrx/store'
 
 import * as fromApp from '../../app.reducers'
-import * as fromMain from '../main.reducers'
-import * as Actions from '../store/actions/dashboard.actions'
+// import * as fromMain from '../'
+// import * as Actions from '../store/actions/dashboard.actions'
 import { Observable, Subject } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
@@ -21,43 +21,42 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<fromMain.MainState>,
+    // private store: Store<fromMain.MainState>,
     private appStore: Store<fromApp.AppState>,
     private translate: TranslateService
   ) {
-    this.business$ = this.store.select(fromMain.getBusiness)
+    // this.business$ = this.store.select(fromMain.getBusiness)
   }
 
   ngOnInit(): void {
     //// ToDo: error in cors, temporarily
-    console.log('dashboard')
-    this.store.dispatch(new Actions.GetAllBusinessAction())
-
-    this.appStore
-      .pipe(
-        delay(0),
-        select(fromApp.language),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe(lang => this.translate.use(lang))
+    // console.log('dashboard')
+    // this.store.dispatch(new Actions.GetAllBusinessAction())
+    // this.appStore
+    //   .pipe(
+    //     delay(0),
+    //     select(fromApp.language),
+    //     takeUntil(this.unsubscribe$)
+    //   )
+    //   .subscribe(lang => this.translate.use(lang))
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.unsubscribe()
+    // this.unsubscribe$.unsubscribe()
   }
 
   editBusiness(obj: any) {
-    this.router.navigate(['../business-detail/detail', obj.id], { relativeTo: this.route })
+    // this.router.navigate(['../business-detail/detail', obj.id], { relativeTo: this.route })
   }
 
   deleteBusiness(obj: any) {
-    const deleteObject = {
-      id: obj.id,
-      channels: [obj.channels[0].channel],
-      data: {
-        countryCode: obj.countryCode,
-      },
-    }
-    this.store.dispatch(new Actions.DeleteBusinessAction(deleteObject))
+    //   const deleteObject = {
+    //     id: obj.id,
+    //     channels: [obj.channels[0].channel],
+    //     data: {
+    //       countryCode: obj.countryCode,
+    //     },
+    //   }
+    //   this.store.dispatch(new Actions.DeleteBusinessAction(deleteObject))
   }
 }

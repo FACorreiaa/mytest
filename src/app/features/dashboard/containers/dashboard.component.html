@@ -13,7 +13,9 @@
 		</div>
 	</div>
 
-	<div class="row justify-content-between">
+	<business-comp [businessData$]="(this.businessList$ | async)"></business-comp>
+
+	<!-- <div class="row justify-content-between">
 		<div class="col-md-5 mb-5 card-template">
 			<h4>{{'csa.your-listing' | translate}}</h4>
 			<div class="row gmb-head">
@@ -68,7 +70,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!--
 	<div class="row justify-content-center mb-5">

@@ -31,7 +31,3 @@ export const language = createSelector(getAuthState, fromAuth.getLanguage)
 export const loginLoading = createSelector(getAuthState, fromAuth.getLoading)
 
 export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)
-
-// export const hasLoginError = createSelector(getAuthState, fromAuth.hasLoginError)
-// export const userAuthorized = createSelector(getAuthState, fromAuth.getUserAuthorization)
-// export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser)

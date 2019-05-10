@@ -6,7 +6,7 @@ import { CountriesService } from '@app/core/services/countries.service'
 import { CategoriesService } from '@app/core/services/categories.service'
 
 import { ICategory, Countries, ManageBusinessData } from '@app/api/models/api-models'
-import * as MainActions from '../store/actions/dashboard.actions'
+// import * as MainActions from '../store/actions/dashboard.actions'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import * as fromModule from '../../app.reducers'
@@ -48,7 +48,6 @@ export class AddBusinessComponent implements OnInit {
 
   addBusiness(object: ManageBusinessData) {
     // console.log('object', object)
-
-    this.store.dispatch(new MainActions.AddBusinessAction(object))
+    // this.store.dispatch(new MainActions.AddBusinessAction(object))
   }
 }

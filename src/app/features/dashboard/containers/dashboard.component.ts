@@ -7,9 +7,10 @@ import * as Actions from '../store/actions/dashboard.actions'
 import * as fromDashboard from '../dashboard.reducer'
 import * as fromApp from '../../../app.reducers'
 
-import { Subject } from 'rxjs'
+import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 import { KeycloakService } from 'keycloak-angular'
+import { FetchVerificationRequest, Data, InitVerificationRequest, CompleteVerificationRequest } from '@app/api/models/api-models'
 
 @Component({
   selector: 'dashboard-feature',
@@ -18,6 +19,7 @@ import { KeycloakService } from 'keycloak-angular'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
+  businessList$: Observable<Data[]>
   userName: string
   percentageToComplete: string
   averageService: string
@@ -29,11 +31,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private store: Store<fromDashboard.DashBoardState>,
     private translate: TranslateService,
     protected keycloakService: KeycloakService
-  ) { }
+  ) {
+    this.businessList$ = this.store.select(fromDashboard.getDashBoardBusinessList)
+  }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
-    this.store.dispatch(new Actions.GetAllBusinessAction())
+    // this.store.dispatch(new Actions.GetAllBusinessAction())
+    // this.fetchAllVerificationOptions(281)
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
     this.userName = userProfile.firstName
@@ -50,5 +55,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe$.unsubscribe()
+  }
+
+  fetchAllVerificationOptions(id: number) {
+    const req: FetchVerificationRequest = {
+      languageCode: 'de',
+    }
+
+    this.store.dispatch(new Actions.FetchVerificationOptions(id, req))
+  }
+
+  initVerificationOptions(id: number) {
+    const req: InitVerificationRequest = {
+      input: '',
+      method: '',
+      languageCode: 'de',
+    }
+
+    this.store.dispatch(new Actions.InitVerification(id, req))
+  }
+
+  completeVerification(id: number) {
+    const req: CompleteVerificationRequest = {
+      pin: '',
+    }
+
+    this.store.dispatch(new Actions.CompleteVerification(id, req))
   }
 }

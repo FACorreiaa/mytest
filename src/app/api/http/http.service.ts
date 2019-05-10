@@ -27,7 +27,6 @@ export class ApiHttpService {
    * GET request
    * @param {string} endPoint it doesn't need / in front of the end point
    * @param {IRequestOptions} options options of the request like headers, body, etc.
-   * @param {string} api use if there is needed to send request to different back-end than the default one.
    * @returns {Observable<T>}
    */
   public Get<T>(endPoint: string, options?: IRequestOptions): Observable<T> {

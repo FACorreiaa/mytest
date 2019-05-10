@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store'
 import { Observable, Subject } from 'rxjs'
 
 import * as fromModule from '../app.reducers'
-import * as fromMainModule from '../main/main.reducers'
+// import * as fromMainModule from '../main/main.reducers'
 import { TranslateService } from '@ngx-translate/core'
 import { delay, takeUntil } from 'rxjs/operators'
 
@@ -19,12 +19,8 @@ export class MainComponent implements OnInit {
   loade = false
   loading$: Observable<boolean>
 
-  constructor(
-    private storeApp: Store<fromModule.AppState>,
-    private storeMain: Store<fromMainModule.MainState>,
-    private readonly translate: TranslateService
-  ) {
-    this.loading$ = this.storeMain.select(fromMainModule.getLoading)
+  constructor(private storeApp: Store<fromModule.AppState>, private readonly translate: TranslateService) {
+    // this.loading$ = this.storeMain.select(fromMainModule.getLoading)
   }
 
   ngOnInit() {

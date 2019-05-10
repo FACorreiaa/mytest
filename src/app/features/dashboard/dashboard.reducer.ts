@@ -16,4 +16,10 @@ export const reducers: ActionReducerMap<DashBoardState> = {
 
 export const getDashBoardState = createFeatureSelector<DashBoardState>(reducerName)
 
-export const getDashBoardResults = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard)
+export const getDashBoardBusinessList = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.business)
+
+export const getfecthVerificationOptions = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.fetchVerificationOptions)
+
+export const initVerification = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.initVerification)
+
+export const completeVerification = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.completeVerification)

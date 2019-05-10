@@ -1,11 +1,12 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 import { DashboardComponent } from './containers/dashboard.component'
+import { BusinessComponent } from './components/business.component'
 import { DashboardRoutingModule } from './dashboard.routing'
 import { RouterModule } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
-import { DashBoardEffects } from '@app/main/store/effects/dashboard.effects'
+import { DashBoardEffects } from './store/effects/dashboard.effects'
 
 import { reducers, reducerName } from './dashboard.reducer'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
@@ -31,7 +32,7 @@ import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstra
     }),
   ],
   exports: [RouterModule],
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, BusinessComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

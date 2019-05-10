@@ -17,20 +17,20 @@ import { AddBusinessComponent } from './containers/add-business.component'
 // COMPONENTS
 import { BusinnessComponent } from './components/business.component'
 
-import { reducers, reducerName } from './main.reducers'
+// import { reducers, reducerName } from './main.reducers'
 import { MainRoutingModule } from './main.routing'
-import { DashBoardEffects } from './store/effects/dashboard.effects'
+// import { DashBoardEffects } from './store/effects/dashboard.effects'
 import { environment } from '@env/environment'
 
 @NgModule({
   imports: [
-    StoreModule.forFeature(reducerName, reducers),
+    // StoreModule.forFeature(reducerName, reducers),
     MainRoutingModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
-    EffectsModule.forFeature([DashBoardEffects]),
+    // EffectsModule.forFeature([DashBoardEffects]),
     TranslateModule.forChild({
       loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
       isolate: true,

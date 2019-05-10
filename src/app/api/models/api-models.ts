@@ -1,6 +1,50 @@
 import { Action as StoreAction } from '@ngrx/store'
 import { HttpHeaders, HttpParams } from '@angular/common/http'
 
+export interface BaseServiceResponse<T> {
+  status: number
+  data: T[]
+}
+
+export interface FetchVerificationRequest {
+  // id: number
+  languageCode: string
+}
+
+export interface FetchVerificationResponse {
+  GOOGLE_MY_BUSINESS: GoogleVerificationOptions
+}
+
+export interface GoogleVerificationOptions {
+  selectedOption: string
+  options: any[]
+}
+
+export interface InitVerificationRequest {
+  method: string
+  input: any
+  languageCode: string
+}
+
+export interface InitVerificationResponse {
+  GOOGLE_MY_BUSINESS: GoogleStatusResponse
+}
+
+export interface CompleteVerificationRequest {
+  pin: string
+}
+
+export interface CompleteVerificationResponse {
+  GOOGLE_MY_BUSINESS: GoogleStatusResponse
+}
+
+export interface GoogleStatusResponse {
+  name: string
+  method: string
+  createTime: string
+  state: string
+}
+
 export interface KeycloakModel {
   readonly isLoggedIn: boolean
   readonly showLoading: boolean

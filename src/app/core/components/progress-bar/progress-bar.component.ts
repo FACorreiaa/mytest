@@ -11,7 +11,7 @@ export class ProgressBarComponent implements OnInit {
   @Input() percentage: string
   @Input() missingItems: string[]
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.percentage = '40%'

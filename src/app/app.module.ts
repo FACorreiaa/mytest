@@ -71,7 +71,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     KeycloakAngularModule,
     // ngrx
     StoreModule.forRoot(appReducers, { metaReducers }),
-    // StoreDevtoolsModule.instrument({ maxAge: 15 }),
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   declarations: [AppComponent],
   exports: [MaterialModule],
@@ -92,7 +92,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/`, '.json')
