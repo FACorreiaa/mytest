@@ -1,0 +1,146 @@
+<div class="modal-header">
+    <h4 *ngIf="IsSelectVerification"
+        class="modal-title">Select a verification method</h4>
+    <h4 *ngIf="IsTypeCode"
+        class="modal-title">Type in your Code</h4>
+    <h4 *ngIf="IsProcessing"
+        class="modal-title">Incoming call on the way</h4>
+    <button type="button"
+            class="close"
+            aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <!-- <ng-content select="[body]"></ng-content> -->
+
+    <div *ngIf="IsSelectVerification"
+         class="select-verification">
+        <div>To complete your listing , Google requires your verification.</div>
+        <br />
+        <div>Please select how you want to receive a verification code.</div>
+
+        <div class="row pt-5">
+            <div class="col-lg-6">
+                <div class="verification-option">
+                    <img src="../../../../assets/images/icons/phone.svg"
+                         alt="">
+                    <div>
+                        <h5>01201265623</h5>
+                        <p>Receive your code direclty by an automated call or text message to this number</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="verification-buttons">
+                    <button type="button"
+                            class="btn btn-color-primary">Call</button>
+                    <button type="button"
+                            class="btn btn-secondary">Text</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="label-other-verifications">
+            <span>
+                <a href="#"
+                   onclick="return false;"
+                   style="color: black">Other verification options</a>
+            </span>
+        </div>
+
+        <hr class="line-division" />
+
+        <div class="row pt-1">
+            <div class="col-lg-6">
+                <div class="verification-option">
+                    <img src="../../../../assets/images/icons/question.svg"
+                         alt="">
+                    <div>
+                        <h5>Verify later</h5>
+                        <p>Your listing can only be accepted if the verification is completed.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="verification-buttons">
+                    <button type="button"
+                            class="btn btn-color-primary"
+                            (click)="activeModal.dismiss('Cross click')">Later</button>
+                </div>
+            </div>
+        </div>
+        <hr class="line-division" />
+    </div>
+
+    <div *ngIf="IsTypeCode"
+         class="type-code">
+        <div>Please type in your six digits long code that you received.</div>
+        <div class="type-code-form pb-5">
+
+            <img src="../../../../assets/images/icons/check_circle_gray.svg"
+                 alt="">
+            <mat-form-field class="">
+                <input matInput
+                       placeholder="Type in code"
+                       autocomplete="off"
+                       required>
+            </mat-form-field>
+
+            <div class="button-div">
+                <button type="button"
+                        class="btn btn-color-primary">Confirm</button>
+            </div>
+        </div>
+
+        <div class="row pl-3 pt-5">
+            <div style="width: 30%">
+                <span>Didn't receive a code?</span>
+            </div>
+
+            <div class="label-other-verifications pl-4">
+                <span> <a href="#"
+                       onclick="return false;"
+                       style="color: black">Send code again</a></span>
+            </div>
+        </div>
+
+        <div class="row pl-3 pt-4 pb-5">
+            <div style="width: 30%">
+                <span>Change your mind?</span>
+            </div>
+
+            <div class="label-other-verifications pl-4">
+                <span>
+                    <a [routerLink]=""
+                       (click)="verificationsMethods()"
+                       style="color: black">Verification methods</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="IsProcessing"
+         class="processing">
+        <div>In a few seconds you will receive a call to number</div>
+        <div class="padding-botton-100" style="font-weight: 900">01578827323</div>
+
+        <div class="padding-botton-100">
+            <cs-loading [show]="true"></cs-loading>
+        </div>
+        <div class="row pl-3 pt-4 pb-5">
+                <div style="width: 30%">
+                    <span>Change your mind?</span>
+                </div>
+    
+                <div class="label-other-verifications pl-4">
+                    <span>
+                        <a [routerLink]=""
+                           (click)="verificationsMethods()"
+                           style="color: black">Verification methods</a>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@app/material.module'
 
 // Ng-bootstrap
-import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbPopoverModule, NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 // Services
 import { CategoriesService } from '@app/core/services/categories.service'
@@ -22,12 +22,24 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { NavigationBarComponent } from './components/navigation-bar/nav-bar.component'
 import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component'
+import { ModalVerificationComponent } from './components/modal/modal-verification.component'
 
 @NgModule({
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbPopoverModule],
-  exports: [CsStepperComponent, ModalTermsConditionsComponent, CommonModule, LoadingRequestComponent, NavigationBarComponent, ProgressBarComponent, MaterialModule, RouterModule],
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbPopoverModule, NgbModalModule],
+  exports: [
+    CsStepperComponent,
+    ModalVerificationComponent,
+    ModalTermsConditionsComponent,
+    CommonModule,
+    LoadingRequestComponent,
+    NavigationBarComponent,
+    ProgressBarComponent,
+    MaterialModule,
+    RouterModule,
+  ],
   declarations: [
     CsStepperComponent,
+    ModalVerificationComponent,
     ModalTermsConditionsComponent,
     DisableControlDirective,
     LoadingRequestComponent,
@@ -35,6 +47,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     ProgressBarComponent,
     GooglePlacesDirective,
   ],
-  providers: [CategoriesService, CountriesService],
+  providers: [CategoriesService, CountriesService, NgbActiveModal],
+  entryComponents: [ModalVerificationComponent],
 })
 export class CoreModule {}

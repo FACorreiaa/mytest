@@ -14,7 +14,7 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
   }
 
   public businessData(): Observable<Data> {
-    return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=true`)
+    return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=verification`)
   }
 
   public fetchVerificationOptions(id: number, req: FetchVerificationRequest): Observable<any> {
