@@ -5,12 +5,9 @@
 }
 
 nav {
-  .navbar {
-    padding: 0.5rem 0;
-  }
 
   button {
-    padding-right: 16px;
+    margin-right: 16px;
   }
 
   li {
@@ -67,5 +64,11 @@ nav {
     flex-basis: 60%;
     height: 100%;
     border-bottom: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .navbar {
+    padding: 0.5rem 0;
   }
 }

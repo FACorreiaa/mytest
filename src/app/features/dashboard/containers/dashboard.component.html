@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row justify-content-center welcome-message">
+	<div class="row justify-content-center">
 		<h2>{{ 'cs.navmenu-welcome' | translate }} <span>{{this.userName}}</span></h2>
 	</div>
 
@@ -28,18 +28,21 @@
 			</div>
 			<div class="row gmb-body">
 				<div class="col-4">{{'csa.status' | translate}}</div>
-				<div class="status col-*">deactivated</div>
-				<img src="../../../../assets/images/icons/info_icon.svg" alt="Info icon" placement="right"
-					triggers="mouseenter:mouseleave" ngbPopover="Here's some content">
+				<div class="status col-8">{{listingStatus ? 'activated' :
+						'deactivated'}}
+					<img src="../../../../assets/images/icons/info_icon.svg" alt="Info icon" placement="right"
+						triggers="mouseenter:mouseleave" ngbPopover="Here's some content">
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-center">
-					<button type="button" class="btn btn-secondary">Activate</button>
+					<button type="button" class="btn btn-secondary" (click)="setStatus()">{{!listingStatus ? 'Activate' :
+						'Deactivate'}}</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-md-6 mb-5 card-template">
+		<div *ngIf="listingStatus" class="col-md-6 mb-5 card-template">
 			<h4>{{'csa.view-listing' | translate}}</h4>
 			<div class="row justify-content-center">
 				<div class="col-6">

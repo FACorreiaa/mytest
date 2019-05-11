@@ -9,7 +9,7 @@ export function applicationHttpClientCreator(http: HttpClient) {
 export class ApiHttpService {
   private tokenField: string
 
-  public constructor(public http: HttpClient) {}
+  public constructor(public http: HttpClient) { }
 
   public setTokenField(tokenField: string) {
     this.tokenField = tokenField

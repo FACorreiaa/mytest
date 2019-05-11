@@ -11,10 +11,17 @@ import { ModalVerificationComponent } from '@app/core/components/modal/modal-ver
 })
 export class BusinessComponent implements OnInit, OnChanges {
   @Input() businessData$: Observable<any[]>
+  listingStatus: boolean
 
   constructor(private modalService: NgbModal) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.listingStatus = false
+  }
+
+  setStatus() {
+    this.listingStatus = this.listingStatus = !this.listingStatus
+  }
 
   ngOnChanges() {
     // console.log('testeee', this.businessData$)

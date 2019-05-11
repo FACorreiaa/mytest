@@ -1,11 +1,10 @@
-<div class="layout-container">
+<div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
 
   <mat-sidenav-container class="sidenav-container">
 
     <nav-bar></nav-bar>
-    
-    <div *ngIf="(this.loading$ | async)"
-         style="display: flex; padding: 50px">
+
+    <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
       <mat-card class="col">
         <mat-card-content>
           <div class="row justify-content-center">
@@ -14,8 +13,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <main class="main-container"
-          *ngIf="!(this.loading$ | async)">
+    <main class="main-container" *ngIf="!(this.loading$ | async)">
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-container>

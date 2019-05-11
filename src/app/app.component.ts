@@ -12,6 +12,7 @@ import { KeycloakService } from 'keycloak-angular'
 import { KeycloakProfile } from 'keycloak-js'
 import { NgxPermissionsService } from 'ngx-permissions'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HeaderService } from './api/services/core/header.service'
 
 /**
  * The app component.
@@ -36,8 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private keycloakService: KeycloakService,
     private router: Router,
     private store: Store<fromApp.AppState>,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    public headerService: HeaderService
+  ) { }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translate.use(lang)
         this.selectedLang = lang
       })
+    this.onLanguageSelect({ value: this.keycloakService.getKeycloakInstance().tokenParsed['locale'] })
   }
 
   public ngOnDestroy() {

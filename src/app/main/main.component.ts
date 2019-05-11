@@ -6,6 +6,7 @@ import * as fromModule from '../app.reducers'
 // import * as fromMainModule from '../main/main.reducers'
 import { TranslateService } from '@ngx-translate/core'
 import { delay, takeUntil } from 'rxjs/operators'
+import { HeaderService } from '@app/api/services/core/header.service'
 
 @Component({
   selector: 'app-main',
@@ -19,7 +20,11 @@ export class MainComponent implements OnInit {
   loade = false
   loading$: Observable<boolean>
 
-  constructor(private storeApp: Store<fromModule.AppState>, private readonly translate: TranslateService) {
+  constructor(
+    private storeApp: Store<fromModule.AppState>,
+    private readonly translate: TranslateService,
+    public headerService: HeaderService
+  ) {
     // this.loading$ = this.storeMain.select(fromMainModule.getLoading)
   }
 
