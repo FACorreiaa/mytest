@@ -39,7 +39,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.translate.setDefaultLang('en')
     // this.store.dispatch(new Actions.GetAllBusinessAction())
-    this.fetchAllVerificationOptions(315)
+
+    // TODO : example to show in sprint review - CS-676
+    await this.fetchAllVerificationOptions(315)
+    await this.initVerificationOptions(315)
+    await this.completeVerification(315)
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
     this.userName = userProfile.firstName
@@ -74,8 +78,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   initVerificationOptions(id: number) {
     const req: InitVerificationRequest = {
-      input: '',
-      method: '',
+      input: { emailAddress: 'use@this.com' },
+      method: 'EMAIL',
       languageCode: 'de',
     }
 
@@ -84,7 +88,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   completeVerification(id: number) {
     const req: CompleteVerificationRequest = {
-      pin: '',
+      pin: '3443',
     }
 
     this.store.dispatch(new Actions.CompleteVerification(id, req))

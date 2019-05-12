@@ -5,6 +5,8 @@
         class="modal-title">Type in your Code</h4>
     <h4 *ngIf="IsProcessing"
         class="modal-title">Incoming call on the way</h4>
+    <h4 *ngIf="IsSuccess"
+        class="modal-title">Verification successful</h4>
     <button type="button"
             class="close"
             aria-label="Close"
@@ -35,8 +37,10 @@
             <div class="col-lg-6">
                 <div class="verification-buttons">
                     <button type="button"
+                            (click)="inProcess()"
                             class="btn btn-color-primary">Call</button>
                     <button type="button"
+                            (click)="inProcess()"
                             class="btn btn-secondary">Text</button>
                 </div>
             </div>
@@ -44,8 +48,8 @@
 
         <div class="label-other-verifications">
             <span>
-                <a href="#"
-                   onclick="return false;"
+                <a [routerLink]=""
+                   (click)="open()"
                    style="color: black">Other verification options</a>
             </span>
         </div>
@@ -90,6 +94,7 @@
 
             <div class="button-div">
                 <button type="button"
+                        (click)="confirmCode()"
                         class="btn btn-color-primary">Confirm</button>
             </div>
         </div>
@@ -124,23 +129,43 @@
     <div *ngIf="IsProcessing"
          class="processing">
         <div>In a few seconds you will receive a call to number</div>
-        <div class="padding-botton-100" style="font-weight: 900">01578827323</div>
+        <div class="padding-botton-100"
+             style="font-weight: 900">01578827323</div>
 
         <div class="padding-botton-100">
             <cs-loading [show]="true"></cs-loading>
         </div>
         <div class="row pl-3 pt-4 pb-5">
-                <div style="width: 30%">
-                    <span>Change your mind?</span>
-                </div>
-    
-                <div class="label-other-verifications pl-4">
-                    <span>
-                        <a [routerLink]=""
-                           (click)="verificationsMethods()"
-                           style="color: black">Verification methods</a>
-                    </span>
-                </div>
+            <div style="width: 30%">
+                <span>Change your mind?</span>
             </div>
+
+            <div class="label-other-verifications pl-4">
+                <span>
+                    <a [routerLink]=""
+                       (click)="verificationsMethods()"
+                       style="color: black">Verification methods</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="IsSuccess"
+         class="successful">
+        <div>Your location is now online and can be found by your customers.</div>
+        <div>If you want to change or add information you can do this any time in the Dashboard.</div>
+        <div>
+            <div class="row justify-content-center padding-100">
+                <img 
+                     src="../../../../assets/images/icons/check_circle_green.svg"
+                     alt="">
+            </div>
+
+            <div class="row justify-content-center">
+                <button type="button"
+                        (click)="activeModal.dismiss('Cross click')"
+                        class="btn btn-color-primary">Close</button>
+            </div>
+        </div>
     </div>
 </div>

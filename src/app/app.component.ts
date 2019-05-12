@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>,
     private translate: TranslateService,
     public headerService: HeaderService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')

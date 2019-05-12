@@ -1,0 +1,55 @@
+@import "../../../../styles-variables.scss";
+
+.modal-header {
+  border-bottom: none;
+}
+
+.close:focus {
+  outline: 1px transparent;
+}
+
+.select-verification {
+  padding-left: 25px;
+
+  .verification-option {
+    display: flex;
+    align-items: flex-start;
+  }
+  .verification-option > img {
+    width: 25px;
+    margin: 0 2rem 0 0;
+  }
+  .verification-option > div {
+    flex: 1;
+  }
+  .verification-option h5 {
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .div-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .verification-buttons {
+    padding-left: 45px;
+  }
+
+  .line-division {
+    width: 85%;
+    display: inline-block;
+  }
+
+  @media (max-width: map-get($grid-breakpoints, lg)) {
+    .verification-buttons {
+      padding-top: 0px;
+      padding-left: 55px;
+    }
+
+    .label-other-verifications {
+      padding-left: 0px;
+      padding-top: 30px;
+    }
+  }
+}

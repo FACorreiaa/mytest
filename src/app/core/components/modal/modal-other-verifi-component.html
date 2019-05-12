@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <button type="button"
+            class="close"
+            aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <div class="select-verification">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="verification-option">
+                    <img src="../../../../assets/images/icons/mail.svg"
+                         alt="">
+                    <div>
+                        <h5>testuser@gmail.com</h5>
+                        <p>Receive your code direclty by an automated email to this email address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 div-buttons">
+                <div class="verification-buttons">
+                    <button type="button" (click)="emailRequest()"
+                            class="btn btn-color-primary">Send email</button>
+                </div>
+            </div>
+        </div>
+        <hr class="line-division" />
+
+        <div class="row">
+                <div class="col-lg-7">
+                    <div class="verification-option">
+                        <img src="../../../../assets/images/icons/Home-24.png"
+                             alt="">
+                        <div>
+                            <h5>Business Name</h5>
+                            <p>Receive your code with a postcard send to your locations address</p>
+
+                            <p style="color: red">This may require up to four days</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 div-buttons">
+                    <div class="verification-buttons">
+                        <button type="button" (click)="emailRequest()"
+                                class="btn btn-color-primary">Request</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="line-division" />
+    </div>
+
+   
+</div>
