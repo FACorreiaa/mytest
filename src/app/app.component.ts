@@ -30,16 +30,14 @@ export class AppComponent implements OnInit, OnDestroy {
   userDetails: any
   token: any
   languages = ['en', 'pt', 'de']
-  headers: any
 
   constructor(
-    // private http: HttpHeaders,
     private keycloakService: KeycloakService,
     private router: Router,
     private store: Store<fromApp.AppState>,
     private translate: TranslateService,
     public headerService: HeaderService
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')

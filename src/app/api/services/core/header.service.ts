@@ -3,10 +3,9 @@ import { HttpClient } from '@angular/common/http'
 
 @Injectable()
 export class HeaderService {
-  webview: boolean
+  webview = false
 
   constructor(private readonly http: HttpClient) {
-    this.webview = false
     this.getHeader()
   }
 

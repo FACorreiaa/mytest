@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     await this.completeVerification(315)
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
+
     this.userName = userProfile.firstName
     this.percentageToComplete = '60%'
 

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core'
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     this.translate.setDefaultLang('en')

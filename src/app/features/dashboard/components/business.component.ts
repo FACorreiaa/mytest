@@ -12,19 +12,32 @@ import { ModalVerificationComponent } from '@app/core/components/modal/modal-ver
 export class BusinessComponent implements OnInit, OnChanges {
   @Input() businessData$: Observable<any[]>
   listingStatus: boolean
+  gmbUrl: string
+  gSearchUrl: string
+  gMapsUrl: string
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.listingStatus = false
+    this.gmbUrl = 'https://www.google.com/intl/de_de/business/'
+    this.gSearchUrl = 'https://www.google.de/'
+    this.gMapsUrl = 'https://www.google.de/maps?hl=de&tab=wl'
   }
 
   setStatus() {
     this.listingStatus = this.listingStatus = !this.listingStatus
+    if (this.listingStatus) {
+      window.open(this.gmbUrl, '_blank')
+    }
   }
 
-  ngOnChanges() {
-    // console.log('testeee', this.businessData$)
+  googleSearch() {
+    window.open(this.gSearchUrl, '_blank')
+  }
+
+  googleMaps() {
+    window.open(this.gMapsUrl, '_blank')
   }
 
   open() {
@@ -36,4 +49,6 @@ export class BusinessComponent implements OnInit, OnChanges {
     const modalRef = this.modalService.open(ModalVerificationComponent, options)
     // modalRef.componentInstance.body = '<div>asdas<div>'
   }
+
+  ngOnChanges() { }
 }
