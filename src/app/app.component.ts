@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>,
     private translate: TranslateService,
     public headerService: HeaderService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
@@ -56,6 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.userSubscription$)
       )
       .subscribe(lang => {
+        lang = !lang ? 'en' : lang
+
         this.translate.use(lang)
         this.selectedLang = lang
       })

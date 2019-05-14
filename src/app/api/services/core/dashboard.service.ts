@@ -2,7 +2,14 @@ import { IDashBoardService } from '@app/api/interfaces/i.dashboard.service'
 import { BaseApi } from '../base/baseapi'
 import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Data, FetchVerificationResponse, BaseServiceResponse, FetchVerificationRequest, InitVerificationRequest, CompleteVerificationRequest } from '@app/api/models/api-models'
+import {
+  BusinessData,
+  FetchVerificationResponse,
+  BaseServiceResponse,
+  FetchVerificationRequest,
+  InitVerificationRequest,
+  CompleteVerificationRequest,
+} from '@app/api/models/api-models'
 
 @Injectable()
 export class DashBoardService extends BaseApi implements IDashBoardService {
@@ -13,7 +20,7 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
     super(injector)
   }
 
-  public businessData(): Observable<Data> {
+  public businessData(): Observable<BusinessData> {
     return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=verification`)
   }
 

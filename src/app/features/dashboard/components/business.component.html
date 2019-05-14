@@ -17,9 +17,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 d-flex justify-content-center">
+            <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded" class="col-12 d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" (click)="setStatus()">
                     {{!listingStatus ? 'Activate' : 'Deactivate'}}
+                </button>
+            </div>
+            
+            <div *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded" class="col-12 d-flex justify-content-center pt-4">
+                <button type="button" class="btn btn-secondary" (click)="verify()">
+                    Verify
                 </button>
             </div>
         </div>

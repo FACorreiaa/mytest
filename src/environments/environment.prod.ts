@@ -21,6 +21,7 @@ const keycloakConfig: KeycloakConfig = {
   },
 }
 */
+
 export const environment = {
   appName: 'Claiming service',
   envName: 'PROD',

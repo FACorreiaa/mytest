@@ -1,24 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core'
 import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
 import { ModalOtherVerifiComponent } from './modal-other-verifi-component'
+import { FetchVerificationResponse } from '@app/api/models/api-models'
 
 @Component({
   selector: 'cs-modal',
   templateUrl: 'modal-verification.component.html',
   styleUrls: ['./modal-verification.component.scss'],
 })
-export class ModalVerificationComponent implements OnInit {
+export class ModalVerificationComponent implements OnInit, OnChanges {
   IsSelectVerification: boolean
   IsTypeCode: boolean
   IsProcessing: boolean
   IsSuccess: boolean
 
+  @Input() fecthOptions$: FetchVerificationResponse
   @Input() public header: ''
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.IsSelectVerification = true
+  }
+
+  ngOnChanges(): void {
+    // console.log('fetch modal', this.fecthOptions$)
   }
 
   closeModal() {

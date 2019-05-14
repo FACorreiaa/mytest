@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store'
 import * as Actions from '../actions/dashboard.actions'
-import { Data, FetchVerificationResponse } from '@app/api/models/api-models'
+import { FetchVerificationResponse, BusinessData } from '@app/api/models/api-models'
 
 export interface DashBoardState {
   selectedBusiness: any
   isLoading: boolean
-  business: Data[]
-  fetchVerificationOptions: FetchVerificationResponse[]
+  business: BusinessData[]
+  fetchVerificationOptions: FetchVerificationResponse
   initVerification: any
   completeVerification: any
   errorMessage: string
@@ -16,7 +16,7 @@ const initialState: DashBoardState = {
   isLoading: false,
   selectedBusiness: null,
   business: [],
-  fetchVerificationOptions: [],
+  fetchVerificationOptions: null,
   initVerification: null,
   completeVerification: null,
   errorMessage: null,

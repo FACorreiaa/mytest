@@ -12,12 +12,26 @@ export interface FetchVerificationRequest {
 }
 
 export interface FetchVerificationResponse {
-  GOOGLE_MY_BUSINESS: GoogleVerificationOptions
+  options: GoogleVerificationOptions
 }
 
 export interface GoogleVerificationOptions {
   selectedOption: string
-  options: any[]
+  options: OptionsVerification[]
+}
+
+export interface OptionsVerification {
+  verificationMethod: OptionsVerificationType
+  emailData?: any
+  phoneData?: any
+  addressData?: any
+}
+
+export enum OptionsVerificationType {
+  EMAIL,
+  PHONE_CALL,
+  SMS,
+  ADDRESS,
 }
 
 export interface InitVerificationRequest {
@@ -82,17 +96,18 @@ export interface Action extends StoreAction {
 }
 
 export interface ManageBusinessData {
-  data: Data
+  data: BusinessData
   channels: string[]
 }
 
 export interface DeleteBusinessData {
   id: number
-  data: Data
+  data: BusinessData
   channels: string[]
 }
 
-export interface Data {
+export interface BusinessData {
+  channels: Channels
   id?: number
   zipCode: string
   city: string
@@ -112,6 +127,14 @@ export interface Data {
   offers: string[]
   services: string[]
   paymentMethods: string[]
+}
+
+export interface Channels {
+  awaitingOwnership: string
+  callbackUrl: string
+  channel: string
+  errorCode: string
+  verificationNeeded: boolean
 }
 
 export interface OpeningTimes {

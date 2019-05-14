@@ -13,7 +13,7 @@ const AuthRoutes = [
   {
     path: AppRoutes.ERROR,
     component: ErrorComponent,
-    //// ToDO - example in how to use ngx permissions
+    //// ToDo - example in how to use ngx permissions
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {

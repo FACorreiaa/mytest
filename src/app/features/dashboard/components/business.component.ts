@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, AfterViewChecked } from '@angular/core'
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
 import { ModalVerificationComponent } from '@app/core/components/modal/modal-verification.component'
+import { BusinessData, FetchVerificationResponse } from '@app/api/models/api-models'
 
 @Component({
   selector: 'business-comp',
@@ -10,13 +10,23 @@ import { ModalVerificationComponent } from '@app/core/components/modal/modal-ver
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BusinessComponent implements OnInit, OnChanges {
-  @Input() businessData$: Observable<any[]>
+  @Input() businessData$: any[]
+  @Input() fecthOptions$: FetchVerificationResponse
+
+  @Output() fetchOptionsEvent: EventEmitter<any> = new EventEmitter()
+
+  hasEmailOption: boolean
+  hasPhoneOption: boolean
+  hasSMSOption: boolean
+  hasAddressOption: boolean
   listingStatus: boolean
   gmbUrl: string
   gSearchUrl: string
   gMapsUrl: string
+  selectedBusiness: BusinessData
+  fetchOptions: any[]
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
     this.listingStatus = false
@@ -24,6 +34,45 @@ export class BusinessComponent implements OnInit, OnChanges {
     this.gSearchUrl = 'https://www.google.de/'
     this.gMapsUrl = 'https://www.google.de/maps?hl=de&tab=wl'
   }
+
+  ngOnChanges() {
+    if (this.businessData$[this.businessData$.length - 1]) {
+      this.selectedBusiness = this.businessData$[this.businessData$.length - 1]
+    }
+
+    if (this.fecthOptions$) {
+      this.fetchOptions = this.fecthOptions$.options.options
+
+      if (!this.hasEmailOption) {
+        console.log('options', this.fetchOptions)
+
+        // const options: NgbModalOptions = {
+        //   centered: true,
+        //   size: 'lg',
+        // }
+
+        // const modalRef = this.modalService.open(ModalVerificationComponent, options)
+        // modalRef.componentInstance.fecthOptions$ = this.fetchOptions
+      }
+      this.hasEmailOption = true
+    }
+  }
+
+  // ngAfterViewChecked() {
+  //   if (this.fetchOptions) {
+  //     console.log('ngAfterViewChecked')
+
+  //     // this.modalService.dismissAll()
+
+  //     // const options: NgbModalOptions = {
+  //     //   centered: true,
+  //     //   size: 'lg',
+  //     // }
+
+  //     // const modalRef = this.modalService.open(ModalVerificationComponent, options)
+  //     // modalRef.componentInstance.fecthOptions$ = this.fetchOptions
+  //   }
+  // }
 
   setStatus() {
     this.listingStatus = this.listingStatus = !this.listingStatus
@@ -40,15 +89,15 @@ export class BusinessComponent implements OnInit, OnChanges {
     window.open(this.gMapsUrl, '_blank')
   }
 
-  open() {
+  verify() {
+    this.fetchOptionsEvent.emit(this.selectedBusiness.id)
+
     const options: NgbModalOptions = {
       centered: true,
       size: 'lg',
     }
 
     const modalRef = this.modalService.open(ModalVerificationComponent, options)
-    // modalRef.componentInstance.body = '<div>asdas<div>'
+    // modalRef.componentInstance.fecthOptions$ = this.selectedBusiness
   }
-
-  ngOnChanges() { }
 }

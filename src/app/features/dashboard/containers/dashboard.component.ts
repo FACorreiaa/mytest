@@ -10,7 +10,7 @@ import * as fromApp from '../../../app.reducers'
 import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 import { KeycloakService } from 'keycloak-angular'
-import { FetchVerificationRequest, Data, InitVerificationRequest, CompleteVerificationRequest } from '@app/api/models/api-models'
+import { FetchVerificationRequest, InitVerificationRequest, CompleteVerificationRequest, BusinessData, FetchVerificationResponse } from '@app/api/models/api-models'
 
 @Component({
   selector: 'dashboard-feature',
@@ -19,7 +19,8 @@ import { FetchVerificationRequest, Data, InitVerificationRequest, CompleteVerifi
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
-  businessList$: Observable<Data[]>
+  businessList$: Observable<BusinessData[]>
+  fecthOptions$: Observable<FetchVerificationResponse>
   userName: string
   percentageToComplete: string
   averageService: string
@@ -34,19 +35,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     protected keycloakService: KeycloakService
   ) {
     this.businessList$ = this.store.select(fromDashboard.getDashBoardBusinessList)
+    this.fecthOptions$ = this.store.select(fromDashboard.getfecthVerificationOptions)
   }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
-    // this.store.dispatch(new Actions.GetAllBusinessAction())
 
-    // TODO : example to show in sprint review - CS-676
-    await this.fetchAllVerificationOptions(315)
-    await this.initVerificationOptions(315)
-    await this.completeVerification(315)
+    this.store.dispatch(new Actions.GetAllBusinessAction())
 
     const userProfile = await this.keycloakService.loadUserProfile(false)
-
     this.userName = userProfile.firstName
     this.percentageToComplete = '60%'
 
@@ -67,6 +64,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe$.unsubscribe()
+  }
+
+  async fetchOptions(businessId: number) {
+    await this.fetchAllVerificationOptions(businessId)
   }
 
   fetchAllVerificationOptions(id: number) {

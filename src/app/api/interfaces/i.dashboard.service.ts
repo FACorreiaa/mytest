@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs'
 import {
-  Data,
+  BusinessData,
   ManageBusinessData,
   DeleteBusinessData,
   FetchVerificationResponse,
@@ -11,7 +11,7 @@ import {
 } from '../models/api-models'
 
 export abstract class IDashBoardService {
-  public abstract businessData(): Observable<Data>
+  public abstract businessData(): Observable<BusinessData>
 
   public abstract fetchVerificationOptions(id: number, obj: FetchVerificationRequest): Observable<any>
 

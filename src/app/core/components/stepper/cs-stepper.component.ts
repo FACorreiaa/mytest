@@ -15,19 +15,7 @@ import {
 } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import {
-  OpeningTimes,
-  Day,
-  IHours,
-  OpenHoursArray,
-  CategoriesArray,
-  ICategory,
-  UserRegisterDto,
-  UserLoginDto,
-  Data,
-  ManageBusinessData,
-  Countries,
-} from '@app/api/models/api-models'
+import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
 import { ModalTermsConditionsComponent } from '../modal/model-term-conditions'
@@ -74,9 +62,9 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() authorized: any
   @Input() editForm: false
   @Input() newBusiness: false
-  @Input() businessToEdit: Data
+  @Input() businessToEdit: BusinessData
   @Input() businessToEditId: number
-  @Input() business: Data[]
+  @Input() business: BusinessData[]
   @Input() offerings: any[]
   @Input() services: any[]
   @Input() payments: any[]
@@ -343,9 +331,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       }
     })
 
-    const claimData: Data = {
+    const claimData: BusinessData = {
       userFirstName: '',
       userLastName: '',
+      channels: null,
       name: firstForm.location,
       additional: '',
       street: firstForm.address,
