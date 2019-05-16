@@ -36,9 +36,15 @@ export class BusinessComponent implements OnInit, OnChanges {
   listingStatus: boolean
 
   IsSelectVerification: boolean
-  IsInsertCode: boolean
   IsProcessing: boolean
+  IsPostCard: boolean
+  IsInsertCode: boolean
   IsSuccess: boolean
+
+  selectedOptionType: OptionsVerificationType
+  selectedVerificationOption: any
+  businessName: string
+  businessAddressLine: string
 
   gmbUrl: string
   gSearchUrl: string
@@ -64,10 +70,10 @@ export class BusinessComponent implements OnInit, OnChanges {
     if (this.fecthOptions$) {
       this.verificationOptions = this.fecthOptions$.options.options
 
-      // console.log('OnChanges', this.verificationOptions)
-
       this.verificationOptions.map(item => {
         if (item.verificationMethod === OptionsVerificationType.ADDRESS) {
+          this.businessName = item.addressData.businessName
+          this.businessAddressLine = item.addressData.address.addressLines[0] + ', ' + item.addressData.address.locality + ', ' + item.addressData.address.postalCode
           this.hasAddressOption = true
         } else if (item.verificationMethod === OptionsVerificationType.EMAIL) {
           this.hasEmailOption = true
@@ -129,12 +135,12 @@ export class BusinessComponent implements OnInit, OnChanges {
 
     modalRef.componentInstance.inProcessEmail.subscribe((email: string) => {
       modalRef.close()
-      this.inProcess(OptionsVerificationType.EMAIL)
+      this.initProcess(OptionsVerificationType.EMAIL)
     })
 
     modalRef.componentInstance.inProcessAddress.subscribe((address: string) => {
       modalRef.close()
-      this.inProcess(OptionsVerificationType.ADDRESS)
+      this.initProcess(OptionsVerificationType.ADDRESS)
     })
   }
 
@@ -143,30 +149,49 @@ export class BusinessComponent implements OnInit, OnChanges {
    */
   verificationsMethods() {
     this.IsSelectVerification = true
+    this.IsPostCard = false
     this.IsInsertCode = false
     this.IsProcessing = false
+  }
+
+  sendCodeAgain() {
+    this.IsInsertCode = false
+    this.initProcess(this.selectedOptionType)
   }
 
   /**
    * Event that initiates the verifications
    * @param type of the verifications.
    */
-  inProcess(type: string) {
+  initProcess(type: string) {
+    this.selectedOptionType = type as OptionsVerificationType
+    this.selectedVerificationOption = this.verificationOptions.find(item => item.verificationMethod === type)
+    console.log('initProcess', this.selectedVerificationOption)
+
     const eventReq = this.buildInitRequest(type)
     this.InitializeVerificationEvent.emit(eventReq)
 
     this.IsSelectVerification = false
-    this.IsProcessing = true
+    if (type === OptionsVerificationType.ADDRESS) {
+      this.IsPostCard = true
 
+      return
+    }
+
+    this.IsProcessing = true
     setTimeout(
       function() {
-        this.IsInsertCode = true
+        this.IsInsertCode = !this.IsSelectVerification
         this.IsProcessing = false
       }.bind(this),
       2000
     )
   }
 
+  postCardContinue() {
+    this.IsPostCard = false
+    this.IsInsertCode = true
+  }
   /**
    * Event to confirm code of verification.
    */
@@ -191,7 +216,7 @@ export class BusinessComponent implements OnInit, OnChanges {
       const eventReq: InitVerificationEvent = {
         id: this.selectedBusiness.id,
         request: {
-          input: { emailAddress: 'npinha@cocus.com' }, // this.verificationOptions.find(item => item.verificationMethod === OptionsVerificationType.EMAIL).emailData.domainName },
+          input: { emailAddress: this.verificationOptions.find(item => item.verificationMethod === OptionsVerificationType.EMAIL).emailData.domainName },
           method: OptionsVerificationType.EMAIL,
           languageCode: 'de',
         } as InitVerificationRequest,

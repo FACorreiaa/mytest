@@ -39,7 +39,7 @@ export interface PhoneData {
 
 export interface AddressData {
   businessName: string
-  address: any
+  address: Address
 }
 
 export interface Address {

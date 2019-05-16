@@ -87,6 +87,17 @@ $cs-theme: mat-light-theme($cs-primary, $cs-accent, $cs-warn);
   border-color: rgba(0, 0, 0, 0.54);
 }
 
+/* Modal component */
+.modal-content {
+  border-radius: 1.3rem;
+}
+.close {
+  font-size: 2rem;
+}
+.close:focus {
+  outline: 1px transparent;
+}
+
 /* Stepper component, override styles*/
 .mat-step-header {
   .mat-step-icon {

@@ -3,7 +3,8 @@
         <h4>{{'csa.your-listing' | translate}}</h4>
         <div class="row gmb-head">
             <div class="col-4">
-                <img src="../../../../assets/images/icons/google_icon.svg" alt="Google Icon">
+                <img src="../../../../assets/images/icons/google_icon.svg"
+                     alt="Google Icon">
             </div>
             <div class="col-8">
                 <span>Google My Business</span>
@@ -12,35 +13,46 @@
         <div class="row gmb-body">
             <div class="col-4">{{'csa.status' | translate}}</div>
             <div class="status col-8">{{listingStatus ? 'activated' : 'deactivated'}}
-                <img src="../../../../assets/images/icons/info_icon.svg" alt="Info icon" placement="right"
-                    triggers="mouseenter:mouseleave" ngbPopover="Here's some content">
+                <img src="../../../../assets/images/icons/info_icon.svg"
+                     alt="Info icon"
+                     placement="right"
+                     triggers="mouseenter:mouseleave"
+                     ngbPopover="Here's some content">
             </div>
         </div>
         <div class="row">
-                <!-- *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded" -->
-            <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded" class="col-12 d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary" (click)="setStatus()">
+            <!-- *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded" -->
+            <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded"
+                 class="col-12 d-flex justify-content-center">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="setStatus()">
                     {{!listingStatus ? 'Activate' : 'Deactivate'}}
                 </button>
             </div>
             <!-- *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded" -->
-            <div  class="col-12 d-flex justify-content-center pt-4">
-                <button type="button" class="btn btn-secondary" (click)="verifyBusiness()">
+            <div class="col-12 d-flex justify-content-center pt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="verifyBusiness()">
                     Verify
                 </button>
             </div>
         </div>
     </div>
 
-    <div *ngIf="listingStatus" class="col-md-6 mb-5 card-template">
+    <div *ngIf="listingStatus"
+         class="col-md-6 mb-5 card-template">
         <h4>{{'csa.view-listing' | translate}}</h4>
         <div class="row justify-content-center">
             <div class="col-6">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-white"><img
-                                src="../../../../assets/images/icons/google_icon.svg" alt="Google Icon"
-                                class="img-responsive" (click)="googleSearch()">
+                        <button type="button"
+                                class="btn btn-white"><img src="../../../../assets/images/icons/google_icon.svg"
+                                 alt="Google Icon"
+                                 class="img-responsive"
+                                 (click)="googleSearch()">
                         </button>
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
@@ -51,9 +63,11 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-white"><img
-                                src="../../../../assets/images/icons/maps_logo.svg" alt="Google Maps Logo"
-                                class="img-responsive" (click)="googleMaps()">
+                        <button type="button"
+                                class="btn btn-white"><img src="../../../../assets/images/icons/maps_logo.svg"
+                                 alt="Google Maps Logo"
+                                 class="img-responsive"
+                                 (click)="googleMaps()">
                         </button>
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
@@ -65,10 +79,14 @@
     </div>
 </div>
 
-<ng-template #content="" let-c="close" let-d="dismiss">
+<ng-template #content=""
+             let-c="close"
+             let-d="dismiss">
     <div class="modal-header">
         <h4 *ngIf="IsSelectVerification"
             class="modal-title">Select a verification method</h4>
+        <h4 *ngIf="IsPostCard"
+            class="modal-title">Postcard on the way</h4>
         <h4 *ngIf="IsInsertCode"
             class="modal-title">Type in your Code</h4>
         <h4 *ngIf="IsProcessing"
@@ -83,13 +101,14 @@
         </button>
     </div>
     <div class="modal-body">
-    
+
         <div *ngIf="IsSelectVerification"
              class="select-verification">
             <div>To complete your listing , Google requires your verification.</div>
             <br />
             <div>Please select how you want to receive a verification code.</div>
-            <div *ngIf="hasPhoneOption || hasSMSOption" class="row pt-5">
+            <div *ngIf="hasPhoneOption || hasSMSOption"
+                 class="row pt-5">
                 <div class="col-lg-6">
                     <div class="verification-option">
                         <img src="../../../../assets/images/icons/phone.svg"
@@ -104,26 +123,27 @@
                     <div class="verification-buttons">
                         <button *ngIf="hasPhoneOption"
                                 type="button"
-                                (click)="inProcess('PHONE_CALL')"
+                                (click)="initProcess('PHONE_CALL')"
                                 class="btn btn-color-primary-modal">Call</button>
                         <button *ngIf="hasSMSOption"
                                 type="button"
-                                (click)="inProcess('SMS')"
+                                (click)="initProcess('SMS')"
                                 class="btn btn-secondary-modal">Text</button>
                     </div>
                 </div>
             </div>
-    
-            <div *ngIf="hasAddressOption || hasEmailOption" class="label-other-verifications">
+
+            <div *ngIf="hasAddressOption || hasEmailOption"
+                 class="label-other-verifications">
                 <span>
                     <a [routerLink]=""
                        (click)="openOtherVerifications()"
                        style="color: black">Other verification options</a>
                 </span>
             </div>
-    
+
             <hr class="line-division" />
-    
+
             <div class="row pt-1">
                 <div class="col-lg-6">
                     <div class="verification-option">
@@ -145,13 +165,22 @@
             </div>
             <hr class="line-division" />
         </div>
-    
+
         <div *ngIf="IsProcessing"
              class="processing">
-            <div>In a few seconds you will receive a call to number</div>
-            <div class="padding-botton-100"
-                 style="font-weight: 900">01578827323</div>
-    
+            <div *ngIf="this.selectedOptionType === 'SMS' || this.selectedOptionType === 'PHONE_CALL'">
+                <div *ngIf="this.selectedOptionType === 'PHONE_CALL'">In a few seconds you will receive a call to number</div>
+                <div *ngIf="this.selectedOptionType === 'SMS'">In a few seconds you will receive a text message to the number</div>
+                <div class="padding-botton-100"
+                     style="font-weight: 900">{{this.selectedVerificationOption.phoneData.phoneNumber}}</div>
+            </div>
+
+            <div *ngIf="this.selectedOptionType === 'EMAIL'">In a few seconds you will receive an email to the email
+                address</div>
+            <div *ngIf="this.selectedOptionType === 'EMAIL'"
+                 class="padding-botton-100"
+                 style="font-weight: 900">{{this.selectedVerificationOption.emailData.domainName}}</div>
+
             <div class="padding-botton-100">
                 <cs-loading [show]="true"></cs-loading>
             </div>
@@ -159,7 +188,7 @@
                 <div style="width: 30%">
                     <span>Change your mind?</span>
                 </div>
-    
+
                 <div class="label-other-verifications pl-4">
                     <span>
                         <a [routerLink]=""
@@ -170,11 +199,51 @@
             </div>
         </div>
 
+        <div *ngIf="IsPostCard"
+             class="type-code">
+            <div>We will send your postcard as soon as possible to the following locations.</div>
+            <div class="pt-3">
+                <h5>{{this.businessName}}</h5>
+                <p style="font-size: 13px">{{this.businessAddressLine}}</p>
+
+                <p class="pt-1"
+                   style="font-size: 13px;color: red">Please consider that the postcard might require up to four days to
+                    arrive at your
+                    location.</p>
+
+                <div class="row pl-3 pt-5 pb-5">
+                    <div style="width: 30%">
+                        <span>Already received the postcard?</span>
+                    </div>
+
+                    <div class="button-div">
+                        <button type="button"
+                                (click)="postCardContinue()"
+                                class="btn btn-color-secondary-modal">Continue</button>
+                    </div>
+                </div>
+
+                <div class="row pl-3 pt-5 pb-5">
+                    <div style="width: 30%">
+                        <span>Change your mind?</span>
+                    </div>
+
+                    <div class="label-other-verifications pl-4">
+                        <span>
+                            <a [routerLink]=""
+                               (click)="verificationsMethods()"
+                               style="color: black">Verification methods</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div *ngIf="IsInsertCode"
              class="type-code">
             <div>Please type in your six digits long code that you received.</div>
             <div class="type-code-form pb-5">
-    
+
                 <img src="../../../../assets/images/icons/check_circle_gray.svg"
                      alt="">
                 <mat-form-field class="">
@@ -183,31 +252,31 @@
                            autocomplete="off"
                            required>
                 </mat-form-field>
-    
+
                 <div class="button-div">
                     <button type="button"
                             (click)="confirmCode()"
                             class="btn btn-color-primary-modal">Confirm</button>
                 </div>
             </div>
-    
+
             <div class="row pl-3 pt-5">
                 <div style="width: 30%">
                     <span>Didn't receive a code?</span>
                 </div>
-    
+
                 <div class="label-other-verifications pl-4">
-                    <span> <a href="#"
-                           onclick="return false;"
+                    <span> <a [routerLink]=""
+                           (click)="sendCodeAgain()"
                            style="color: black">Send code again</a></span>
                 </div>
             </div>
-    
+
             <div class="row pl-3 pt-4 pb-5">
                 <div style="width: 30%">
                     <span>Change your mind?</span>
                 </div>
-    
+
                 <div class="label-other-verifications pl-4">
                     <span>
                         <a [routerLink]=""
@@ -217,18 +286,17 @@
                 </div>
             </div>
         </div>
-    
+
         <div *ngIf="IsSuccess"
              class="successful">
             <div>Your location is now online and can be found by your customers.</div>
             <div>If you want to change or add information you can do this any time in the Dashboard.</div>
             <div>
                 <div class="row justify-content-center padding-100">
-                    <img 
-                         src="../../../../assets/images/icons/check_circle_green.svg"
+                    <img src="../../../../assets/images/icons/check_circle_green.svg"
                          alt="">
                 </div>
-    
+
                 <div class="row justify-content-center">
                     <button type="button"
                             (click)="closeModal()"
