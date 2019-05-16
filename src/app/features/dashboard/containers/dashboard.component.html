@@ -15,7 +15,9 @@
 
 	<business-comp [businessData$]="(this.businessList$ | async)" 
 				[fecthOptions$]="(this.fecthOptions$ | async)" 
-				(fetchOptionsEvent)="fetchOptions($event)"></business-comp>
+				(fetchOptionsEvent)="fetchOptions($event)"
+				(InitializeVerificationEvent)="initializeOption($event)"
+				(CompleteVerificationEvent)="completeVerification($event)"></business-comp>
 
 	<!-- <div class="row justify-content-between">
 		<div class="col-md-5 mb-5 card-template">

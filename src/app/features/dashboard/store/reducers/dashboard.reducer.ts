@@ -33,10 +33,12 @@ export function DashBoardReducer(state = initialState, action: Actions.DashBoard
     }
 
     case Actions.ActionTypes.INIT_VERIFICATION_SUCCESS: {
+      console.log('reducer Init', action.payload)
       return { ...state, initVerification: action.payload }
     }
 
     case Actions.ActionTypes.COMPLETE_VERIFICATION_SUCCESS: {
+      console.log('reducer Complete', action.payload)
       return { ...state, completeVerification: action.payload }
     }
 

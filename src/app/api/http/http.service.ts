@@ -1,6 +1,7 @@
 import { Observable, throwError } from 'rxjs'
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http'
-import { IRequestOptions } from '../models/api-models'
+import { IRequestOptions, IRequestOptionsText } from '../models/api-models'
+import { tap } from 'rxjs/operators'
 
 export function applicationHttpClientCreator(http: HttpClient) {
   return new ApiHttpService(http)
@@ -42,6 +43,17 @@ export class ApiHttpService {
    */
   public Post<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
     return this.http.post<T>(endPoint, params, options)
+  }
+
+  /**
+   * POST request type text
+   * @param {string} endPoint end point of the api
+   * @param {Object} params body of the request.
+   * @param {IRequestOptionsText} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  public PostText<T>(endPoint: string, params: Object, options?: IRequestOptionsText): Observable<string> {
+    return this.http.post(endPoint, params, options)
   }
 
   /**

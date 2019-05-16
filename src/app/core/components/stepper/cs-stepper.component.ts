@@ -363,7 +363,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       claim: manageBusinessData,
     }
 
-    console.log('claimObject', claimObject)
+    // console.log('claimObject', claimObject)
     return claimObject
   }
 

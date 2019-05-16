@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
@@ -10,14 +10,22 @@ import * as fromApp from '../../../app.reducers'
 import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 import { KeycloakService } from 'keycloak-angular'
-import { FetchVerificationRequest, InitVerificationRequest, CompleteVerificationRequest, BusinessData, FetchVerificationResponse } from '@app/api/models/api-models'
+import {
+  FetchVerificationRequest,
+  InitVerificationRequest,
+  CompleteVerificationRequest,
+  BusinessData,
+  FetchVerificationResponse,
+  InitVerificationEvent,
+  CompleteVerificationEvent,
+} from '@app/api/models/api-models'
 
 @Component({
   selector: 'dashboard-feature',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   businessList$: Observable<BusinessData[]>
   fecthOptions$: Observable<FetchVerificationResponse>
@@ -58,6 +66,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.listingStatus = false
   }
 
+  ngOnChanges(): void {
+    // const aux = this.fecthOptions$.subscribe(x => console.log('x', x.options))
+  }
+
   setStatus() {
     this.listingStatus = this.listingStatus = !this.listingStatus
   }
@@ -70,29 +82,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
     await this.fetchAllVerificationOptions(businessId)
   }
 
-  fetchAllVerificationOptions(id: number) {
-    const req: FetchVerificationRequest = {
-      languageCode: 'de',
-    }
-
-    this.store.dispatch(new Actions.FetchVerificationOptions(id, req))
+  private fetchAllVerificationOptions(id: number) {
+    this.store.dispatch(
+      new Actions.FetchVerificationOptions(id, {
+        languageCode: 'de',
+      } as FetchVerificationRequest)
+    )
   }
 
-  initVerificationOptions(id: number) {
-    const req: InitVerificationRequest = {
-      input: { emailAddress: 'use@this.com' },
-      method: 'EMAIL',
-      languageCode: 'de',
-    }
-
-    this.store.dispatch(new Actions.InitVerification(id, req))
+  async initializeOption(optionEvent: InitVerificationEvent) {
+    await this.initVerificationOptions(optionEvent)
   }
 
-  completeVerification(id: number) {
+  private initVerificationOptions(optionEvent: InitVerificationEvent) {
+    console.log('initVerificationOptions', optionEvent)
+
+    this.store.dispatch(new Actions.InitVerification(optionEvent.id, optionEvent.request))
+  }
+
+  completeVerification(completeReq: CompleteVerificationEvent) {
     const req: CompleteVerificationRequest = {
-      pin: '3443',
+      pin: completeReq.request.pin,
     }
 
-    this.store.dispatch(new Actions.CompleteVerification(id, req))
+    this.store.dispatch(new Actions.CompleteVerification(completeReq.id, req))
   }
 }

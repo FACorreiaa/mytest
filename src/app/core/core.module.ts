@@ -22,14 +22,12 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { NavigationBarComponent } from './components/navigation-bar/nav-bar.component'
 import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component'
-import { ModalVerificationComponent } from './components/modal/modal-verification.component'
 import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi-component'
 
 @NgModule({
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbPopoverModule, NgbModalModule],
   exports: [
     CsStepperComponent,
-    ModalVerificationComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     CommonModule,
@@ -41,7 +39,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   ],
   declarations: [
     CsStepperComponent,
-    ModalVerificationComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     DisableControlDirective,
@@ -51,6 +48,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     GooglePlacesDirective,
   ],
   providers: [CategoriesService, CountriesService, NgbActiveModal],
-  entryComponents: [ModalVerificationComponent, ModalOtherVerifiComponent],
+  entryComponents: [ModalOtherVerifiComponent],
 })
 export class CoreModule {}

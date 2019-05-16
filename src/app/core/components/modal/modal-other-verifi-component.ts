@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core'
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
+import { OptionsVerificationType } from '@app/api/models/api-models'
 
 @Component({
   selector: 'cs-modal-other',
@@ -7,12 +8,21 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./modal-other-verifi-component.scss'],
 })
 export class ModalOtherVerifiComponent implements OnInit {
-  @Output() passEntry: EventEmitter<any> = new EventEmitter()
+  @Input() hasEmailOption: boolean
+  @Input() hasAddressOption: boolean
+
+  @Output() inProcessEmail: EventEmitter<any> = new EventEmitter()
+  @Output() inProcessAddress: EventEmitter<any> = new EventEmitter()
+
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {}
 
   emailRequest(): void {
-    this.passEntry.emit('email')
+    this.inProcessEmail.emit(OptionsVerificationType.EMAIL)
+  }
+
+  addressRequest(): void {
+    this.inProcessAddress.emit(OptionsVerificationType.ADDRESS)
   }
 }

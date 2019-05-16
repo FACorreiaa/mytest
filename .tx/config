@@ -20,3 +20,9 @@ file_filter = src/assets/i18n/main/<lang>.json
 source_file = src/assets/i18n/main/en.json
 source_lang = en
 type = KEYVALUEJSON
+
+[claiming.en_feature_dashboardjson]
+file_filter = src/assets/i18n/features/dashboard/<lang>.json
+source_file = src/assets/i18n/features/dashboard/en.json
+source_lang = en
+type = KEYVALUEJSON

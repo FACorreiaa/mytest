@@ -17,21 +17,49 @@ export interface FetchVerificationResponse {
 
 export interface GoogleVerificationOptions {
   selectedOption: string
-  options: OptionsVerification[]
+  options: VerificationOptions[]
 }
 
-export interface OptionsVerification {
+export interface VerificationOptions {
   verificationMethod: OptionsVerificationType
-  emailData?: any
-  phoneData?: any
-  addressData?: any
+  emailData?: EmailData
+  phoneData?: PhoneData
+  addressData?: AddressData
+}
+
+export interface EmailData {
+  domainName: string
+  userName: string
+  isUserNameEditable: boolean
+}
+
+export interface PhoneData {
+  phoneNumber: string
+}
+
+export interface AddressData {
+  businessName: string
+  address: any
+}
+
+export interface Address {
+  regionCode: string
+  languageCode: string
+  postalCode: string
+  locality: string
+  addressLines: Array<string>
 }
 
 export enum OptionsVerificationType {
-  EMAIL,
-  PHONE_CALL,
-  SMS,
-  ADDRESS,
+  EMAIL = 'EMAIL',
+  PHONE_CALL = 'PHONE_CALL',
+  SMS = 'SMS',
+  ADDRESS = 'ADDRESS',
+}
+
+export interface InitVerificationEvent {
+  id: number
+  request: InitVerificationRequest
 }
 
 export interface InitVerificationRequest {
@@ -42,6 +70,11 @@ export interface InitVerificationRequest {
 
 export interface InitVerificationResponse {
   GOOGLE_MY_BUSINESS: GoogleStatusResponse
+}
+
+export interface CompleteVerificationEvent {
+  id: number
+  request: CompleteVerificationRequest
 }
 
 export interface CompleteVerificationRequest {
@@ -80,6 +113,26 @@ export interface IRequestOptions {
   withCredentials?: boolean
   body?: any
 }
+
+export interface IRequestOptionsText {
+  headers?: HttpHeaders
+  observe?: 'body'
+  params?: HttpParams
+  reportProgress?: boolean
+  responseType: 'text'
+  withCredentials?: boolean
+}
+
+//   headers?: HttpHeaders | {
+//     [header: string]: string | string[];
+// };
+// observe: 'response';
+// params?: HttpParams | {
+//     [param: string]: string | string[];
+// };
+// reportProgress?: boolean;
+// responseType: 'text';
+// withCredentials?: boolean;
 
 export interface UserRegisterDto {
   user: UserLoginDto

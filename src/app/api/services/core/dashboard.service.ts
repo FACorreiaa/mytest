@@ -31,7 +31,7 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
   }
 
   public initializeVerification(id: number, req: InitVerificationRequest): Observable<any> {
-    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/init?testMode=true`)
+    return this.getObjectsPOST_Text(req, `${this.businessVerificationControllerRoute}/${id}/init?testMode=true`)
   }
 
   public completeVerification(id: number, req: CompleteVerificationRequest): Observable<any> {

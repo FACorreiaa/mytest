@@ -4,7 +4,7 @@ import { Injector } from '@angular/core'
 import { Observable, throwError } from 'rxjs'
 
 import { Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http'
-import {} from '@app/api/models/api-models'
+import { IRequestOptions, IRequestOptionsText } from '@app/api/models/api-models'
 import { map, catchError, tap } from 'rxjs/operators'
 
 export abstract class BaseApi {
@@ -44,6 +44,26 @@ export abstract class BaseApi {
     return this.basehttp.Post(`${this.apiUrl}/${path}`, obj).pipe(
       map((res: Response) => {
         const responseObject = res as any
+        return responseObject
+      }),
+      catchError((error: any) => throwError(error))
+    )
+  }
+
+  /**
+   * Using POST.
+   * Method to send a request of type form. POST
+   * @param obj - The object value.
+   * @param path - The path from resource.
+   */
+  public getObjectsPOST_Text<T>(obj: Object, path: string): Observable<string> {
+    const reqOptions: IRequestOptionsText = {
+      responseType: 'text',
+    }
+
+    return this.basehttp.PostText(`${this.apiUrl}/${path}`, obj, reqOptions).pipe(
+      map((res: string) => {
+        const responseObject = res
         return responseObject
       }),
       catchError((error: any) => throwError(error))

@@ -9,7 +9,7 @@
 <div class="modal-body">
 
     <div class="select-verification">
-        <div class="row">
+        <div *ngIf="hasEmailOption" class="row">
             <div class="col-lg-7">
                 <div class="verification-option">
                     <img src="../../../../assets/images/icons/mail.svg"
@@ -23,13 +23,13 @@
             <div class="col-lg-5 div-buttons">
                 <div class="verification-buttons">
                     <button type="button" (click)="emailRequest()"
-                            class="btn btn-color-primary">Send email</button>
+                            class="btn btn-color-secondary">Send email</button>
                 </div>
             </div>
         </div>
-        <hr class="line-division" />
+        <hr *ngIf="hasEmailOption" class="line-division" />
 
-        <div class="row">
+        <div *ngIf="hasAddressOption" class="row">
                 <div class="col-lg-7">
                     <div class="verification-option">
                         <img src="../../../../assets/images/icons/Home-24.png"
@@ -45,8 +45,8 @@
                 </div>
                 <div class="col-lg-5 div-buttons">
                     <div class="verification-buttons">
-                        <button type="button" (click)="emailRequest()"
-                                class="btn btn-color-primary">Request</button>
+                        <button type="button" (click)="addressRequest()"
+                                class="btn btn-color-secondary">Request</button>
                     </div>
                 </div>
             </div>
