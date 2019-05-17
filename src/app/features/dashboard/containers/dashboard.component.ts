@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
   businessList$: Observable<BusinessData[]>
   fecthOptions$: Observable<FetchVerificationResponse>
   userName: string
+  userFirstLastName: string
   percentageToComplete: string
   averageService: string
   services: string[] = ['All', 'Google', 'Other']
@@ -50,9 +51,11 @@ export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
     this.translate.setDefaultLang('en')
 
     this.store.dispatch(new Actions.GetAllBusinessAction())
-
     const userProfile = await this.keycloakService.loadUserProfile(false)
+
     this.userName = userProfile.firstName
+    this.userFirstLastName = userProfile.firstName + ' ' + userProfile.lastName
+
     this.percentageToComplete = '60%'
 
     this.appStore
@@ -95,7 +98,7 @@ export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private initVerificationOptions(optionEvent: InitVerificationEvent) {
-    console.log('initVerificationOptions', optionEvent)
+    // console.log('initVerificationOptions', optionEvent)
 
     this.store.dispatch(new Actions.InitVerification(optionEvent.id, optionEvent.request))
   }

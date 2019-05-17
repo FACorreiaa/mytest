@@ -169,8 +169,10 @@
         <div *ngIf="IsProcessing"
              class="processing">
             <div *ngIf="this.selectedOptionType === 'SMS' || this.selectedOptionType === 'PHONE_CALL'">
-                <div *ngIf="this.selectedOptionType === 'PHONE_CALL'">In a few seconds you will receive a call to number</div>
-                <div *ngIf="this.selectedOptionType === 'SMS'">In a few seconds you will receive a text message to the number</div>
+                <div *ngIf="this.selectedOptionType === 'PHONE_CALL'">In a few seconds you will receive a call to number
+                </div>
+                <div *ngIf="this.selectedOptionType === 'SMS'">In a few seconds you will receive a text message to the
+                    number</div>
                 <div class="padding-botton-100"
                      style="font-weight: 900">{{this.selectedVerificationOption.phoneData.phoneNumber}}</div>
             </div>
@@ -242,21 +244,23 @@
         <div *ngIf="IsInsertCode"
              class="type-code">
             <div>Please type in your six digits long code that you received.</div>
-            <div class="type-code-form pb-5">
-
-                <img src="../../../../assets/images/icons/check_circle_gray.svg"
-                     alt="">
-                <mat-form-field class="">
-                    <input matInput
-                           placeholder="Type in code"
-                           autocomplete="off"
-                           required>
-                </mat-form-field>
-
-                <div class="button-div">
-                    <button type="button"
-                            (click)="confirmCode()"
-                            class="btn btn-color-primary-modal">Confirm</button>
+            <div class="row type-code-form pb-5">
+                <div class="col-lg-4 col-12">
+                    <img src="../../../../assets/images/icons/check_circle_gray.svg"
+                         alt="">
+                    <mat-form-field class="">
+                        <input matInput
+                               placeholder="Type in code"
+                               autocomplete="off"
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-8 col-12">
+                    <div class="button-div">
+                        <button type="button"
+                                (click)="confirmCode()"
+                                class="btn btn-color-primary-modal">Confirm</button>
+                    </div>
                 </div>
             </div>
 

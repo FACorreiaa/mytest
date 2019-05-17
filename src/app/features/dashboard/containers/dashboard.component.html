@@ -15,6 +15,7 @@
 
 	<business-comp [businessData$]="(this.businessList$ | async)" 
 				[fecthOptions$]="(this.fecthOptions$ | async)" 
+				[userNames]="(this.userFirstLastName)"
 				(fetchOptionsEvent)="fetchOptions($event)"
 				(InitializeVerificationEvent)="initializeOption($event)"
 				(CompleteVerificationEvent)="completeVerification($event)"></business-comp>

@@ -22,6 +22,7 @@ import { ModalOtherVerifiComponent } from '@app/core/components/modal/modal-othe
 export class BusinessComponent implements OnInit, OnChanges {
   @Input() businessData$: any[]
   @Input() fecthOptions$: FetchVerificationResponse
+  @Input() userNames: string
 
   @Output() fetchOptionsEvent: EventEmitter<any> = new EventEmitter()
   @Output() InitializeVerificationEvent: EventEmitter<any> = new EventEmitter()
@@ -166,7 +167,7 @@ export class BusinessComponent implements OnInit, OnChanges {
   initProcess(type: string) {
     this.selectedOptionType = type as OptionsVerificationType
     this.selectedVerificationOption = this.verificationOptions.find(item => item.verificationMethod === type)
-    console.log('initProcess', this.selectedVerificationOption)
+    // console.log('initProcess', this.selectedVerificationOption)
 
     const eventReq = this.buildInitRequest(type)
     this.InitializeVerificationEvent.emit(eventReq)
@@ -227,7 +228,12 @@ export class BusinessComponent implements OnInit, OnChanges {
       const eventReq: InitVerificationEvent = {
         id: this.selectedBusiness.id,
         request: {
-          input: { mailerContactName: this.verificationOptions.find(item => item.verificationMethod === OptionsVerificationType.ADDRESS).addressData.businessName },
+          input: {
+            mailerContactName:
+              this.selectedBusiness.userFirstName === '' && this.selectedBusiness.userLastName === ''
+                ? this.userNames
+                : this.selectedBusiness.userFirstName + ' ' + this.selectedBusiness.userLastName,
+          },
           method: OptionsVerificationType.ADDRESS,
           languageCode: 'de',
         } as InitVerificationRequest,
