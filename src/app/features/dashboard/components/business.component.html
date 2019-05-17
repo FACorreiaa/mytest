@@ -7,12 +7,19 @@
                      alt="Google Icon">
             </div>
             <div class="col-8">
-                <span>Google My Business</span>
+                <span>{{'csa.gmb' | translate}}</span>
             </div>
         </div>
         <div class="row gmb-body">
             <div class="col-4">{{'csa.status' | translate}}</div>
-            <div class="status col-8">{{listingStatus ? 'activated' : 'deactivated'}}
+            <div *ngIf="listingStatus" class="status col-8">{{'csa.activate' | translate}}
+                <img src="../../../../assets/images/icons/info_icon.svg"
+                     alt="Info icon"
+                     placement="right"
+                     triggers="mouseenter:mouseleave"
+                     ngbPopover="Here's some content">
+            </div>
+            <div *ngIf="!listingStatus" class="status col-8">{{'csa.deactivate' | translate}}
                 <img src="../../../../assets/images/icons/info_icon.svg"
                      alt="Info icon"
                      placement="right"
@@ -21,21 +28,20 @@
             </div>
         </div>
         <div class="row">
-            <!-- *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded" -->
             <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded"
                  class="col-12 d-flex justify-content-center">
                 <button type="button"
                         class="btn btn-secondary"
                         (click)="setStatus()">
-                    {{!listingStatus ? 'Activate' : 'Deactivate'}}
+                    {{!listingStatus}} ? {{'csa.activate' | translate}} : {{'csa.deactivate' | translate}}
                 </button>
             </div>
             <!-- *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded" -->
-            <div class="col-12 d-flex justify-content-center pt-4">
+            <div *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded"  class="col-12 d-flex justify-content-center pt-4">
                 <button type="button"
                         class="btn btn-secondary"
                         (click)="verifyBusiness()">
-                    Verify
+                        {{'csa.verify' | translate}}
                 </button>
             </div>
         </div>
@@ -56,7 +62,7 @@
                         </button>
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <span>Google Search</span>
+                        <span>{{'csa.google-search' | translate}}</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +77,7 @@
                         </button>
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <span>Google Maps</span>
+                        <span>{{'csa.google-maps' | translate}}</span>
                     </div>
                 </div>
             </div>
@@ -84,15 +90,15 @@
              let-d="dismiss">
     <div class="modal-header">
         <h4 *ngIf="IsSelectVerification"
-            class="modal-title">Select a verification method</h4>
+            class="modal-title">{{'csa.select-verification' | translate}}</h4>
         <h4 *ngIf="IsPostCard"
-            class="modal-title">Postcard on the way</h4>
+            class="modal-title">{{'csa.postcard-way' | translate}}</h4>
         <h4 *ngIf="IsInsertCode"
-            class="modal-title">Type in your Code</h4>
+            class="modal-title">{{'csa.type-code' | translate}}</h4>
         <h4 *ngIf="IsProcessing"
-            class="modal-title">Incoming call on the way</h4>
+            class="modal-title">{{'csa.incoming-call' | translate}}</h4>
         <h4 *ngIf="IsSuccess"
-            class="modal-title">Verification successful</h4>
+            class="modal-title">{{'csa.verification-successful' | translate}}</h4>
         <button type="button"
                 class="close"
                 aria-label="Close"
@@ -104,9 +110,9 @@
 
         <div *ngIf="IsSelectVerification"
              class="select-verification">
-            <div>To complete your listing , Google requires your verification.</div>
+            <div>{{ 'csa.complete-your-listing' | translate }}</div>
             <br />
-            <div>Please select how you want to receive a verification code.</div>
+            <div>{{ 'csa.please-select-how' | translate }}</div>
             <div *ngIf="hasPhoneOption || hasSMSOption"
                  class="row pt-5">
                 <div class="col-lg-6">
@@ -114,8 +120,8 @@
                         <img src="../../../../assets/images/icons/phone.svg"
                              alt="">
                         <div>
-                            <h5>01201265623</h5>
-                            <p>Receive your code direclty by an automated call or text message to this number</p>
+                            <h5>{{this.selectedBusiness.contactPhoneNumber}}</h5>
+                            <p>{{ 'csa.receive-your-code' | translate }}</p>
                         </div>
                     </div>
                 </div>
@@ -124,11 +130,11 @@
                         <button *ngIf="hasPhoneOption"
                                 type="button"
                                 (click)="initProcess('PHONE_CALL')"
-                                class="btn btn-color-primary-modal">Call</button>
+                                class="btn btn-color-primary-modal">{{ 'csa.call' | translate }}</button>
                         <button *ngIf="hasSMSOption"
                                 type="button"
                                 (click)="initProcess('SMS')"
-                                class="btn btn-secondary-modal">Text</button>
+                                class="btn btn-secondary-modal">{{ 'csa.text' | translate }}</button>
                     </div>
                 </div>
             </div>
@@ -138,7 +144,7 @@
                 <span>
                     <a [routerLink]=""
                        (click)="openOtherVerifications()"
-                       style="color: black">Other verification options</a>
+                       style="color: black">{{ 'csa.other-verifications' | translate }}</a>
                 </span>
             </div>
 
@@ -150,8 +156,8 @@
                         <img src="../../../../assets/images/icons/question.svg"
                              alt="">
                         <div>
-                            <h5>Verify later</h5>
-                            <p>Your listing can only be accepted if the verification is completed.</p>
+                            <h5>{{ 'csa.verify-later' | translate }}</h5>
+                            <p>{{ 'csa.your-listing-only' | translate }}</p>
                         </div>
                     </div>
                 </div>
@@ -159,7 +165,7 @@
                     <div class="verification-buttons">
                         <button type="button"
                                 class="btn btn-color-primary-modal"
-                                (click)="closeModal()">Later</button>
+                                (click)="closeModal()">{{ 'csa.later' | translate }}</button>
                     </div>
                 </div>
             </div>
@@ -169,16 +175,14 @@
         <div *ngIf="IsProcessing"
              class="processing">
             <div *ngIf="this.selectedOptionType === 'SMS' || this.selectedOptionType === 'PHONE_CALL'">
-                <div *ngIf="this.selectedOptionType === 'PHONE_CALL'">In a few seconds you will receive a call to number
+                <div *ngIf="this.selectedOptionType === 'PHONE_CALL'">{{'csa.receive-call-phone' | translate}}
                 </div>
-                <div *ngIf="this.selectedOptionType === 'SMS'">In a few seconds you will receive a text message to the
-                    number</div>
+                <div *ngIf="this.selectedOptionType === 'SMS'">{{'csa.receive-call-sms' | translate}}</div>
                 <div class="padding-botton-100"
                      style="font-weight: 900">{{this.selectedVerificationOption.phoneData.phoneNumber}}</div>
             </div>
 
-            <div *ngIf="this.selectedOptionType === 'EMAIL'">In a few seconds you will receive an email to the email
-                address</div>
+            <div *ngIf="this.selectedOptionType === 'EMAIL'">{{'csa.receive-call-email' | translate}}</div>
             <div *ngIf="this.selectedOptionType === 'EMAIL'"
                  class="padding-botton-100"
                  style="font-weight: 900">{{this.selectedVerificationOption.emailData.domainName}}</div>
@@ -188,14 +192,14 @@
             </div>
             <div class="row pl-3 pt-4 pb-5">
                 <div style="width: 30%">
-                    <span>Change your mind?</span>
+                    <span>{{'csa.change-mind' | translate}}</span>
                 </div>
 
                 <div class="label-other-verifications pl-4">
                     <span>
                         <a [routerLink]=""
                            (click)="verificationsMethods()"
-                           style="color: black">Verification methods</a>
+                           style="color: black">{{'csa.verification-methods' | translate}}</a>
                     </span>
                 </div>
             </div>
@@ -203,38 +207,36 @@
 
         <div *ngIf="IsPostCard"
              class="type-code">
-            <div>We will send your postcard as soon as possible to the following locations.</div>
+            <div>{{'csa.send-postcard' | translate}}</div>
             <div class="pt-3">
                 <h5>{{this.businessName}}</h5>
                 <p style="font-size: 13px">{{this.businessAddressLine}}</p>
 
                 <p class="pt-1"
-                   style="font-size: 13px;color: red">Please consider that the postcard might require up to four days to
-                    arrive at your
-                    location.</p>
+                   style="font-size: 13px;color: red">{{'csa.postcard-location' | translate}}</p>
 
                 <div class="row pl-3 pt-5 pb-5">
                     <div style="width: 30%">
-                        <span>Already received the postcard?</span>
+                        <span>{{'csa.already-postcard' | translate}}</span>
                     </div>
 
                     <div class="button-div">
                         <button type="button"
                                 (click)="postCardContinue()"
-                                class="btn btn-color-secondary-modal">Continue</button>
+                                class="btn btn-color-secondary-modal">{{'csa.continue' | translate}}</button>
                     </div>
                 </div>
 
                 <div class="row pl-3 pt-5 pb-5">
                     <div style="width: 30%">
-                        <span>Change your mind?</span>
+                        <span>{{'csa.change-mind' | translate}}</span>
                     </div>
 
                     <div class="label-other-verifications pl-4">
                         <span>
                             <a [routerLink]=""
                                (click)="verificationsMethods()"
-                               style="color: black">Verification methods</a>
+                               style="color: black">{{'csa.verification-methods' | translate}}</a>
                         </span>
                     </div>
                 </div>
@@ -243,14 +245,14 @@
 
         <div *ngIf="IsInsertCode"
              class="type-code">
-            <div>Please type in your six digits long code that you received.</div>
+            <div>{{'csa.type-digits' | translate}}</div>
             <div class="row type-code-form pb-5">
                 <div class="col-lg-4 col-12">
                     <img src="../../../../assets/images/icons/check_circle_gray.svg"
                          alt="">
                     <mat-form-field class="">
                         <input matInput
-                               placeholder="Type in code"
+                               placeholder="{{'csa.type-code' | translate}}"
                                autocomplete="off"
                                required>
                     </mat-form-field>
@@ -259,33 +261,33 @@
                     <div class="button-div">
                         <button type="button"
                                 (click)="confirmCode()"
-                                class="btn btn-color-primary-modal">Confirm</button>
+                                class="btn btn-color-primary-modal">{{'csa.confirm' | translate}}</button>
                     </div>
                 </div>
             </div>
 
             <div class="row pl-3 pt-5">
                 <div style="width: 30%">
-                    <span>Didn't receive a code?</span>
+                    <span>{{'csa.receive-code' | translate}}</span>
                 </div>
 
                 <div class="label-other-verifications pl-4">
                     <span> <a [routerLink]=""
                            (click)="sendCodeAgain()"
-                           style="color: black">Send code again</a></span>
+                           style="color: black">{{'csa.send-code-again' | translate}}</a></span>
                 </div>
             </div>
 
             <div class="row pl-3 pt-4 pb-5">
                 <div style="width: 30%">
-                    <span>Change your mind?</span>
+                    <span>{{'csa.change-mind' | translate}}</span>
                 </div>
 
                 <div class="label-other-verifications pl-4">
                     <span>
                         <a [routerLink]=""
                            (click)="verificationsMethods()"
-                           style="color: black">Verification methods</a>
+                           style="color: black">{{'csa.verification-methods' | translate}}</a>
                     </span>
                 </div>
             </div>
@@ -293,8 +295,8 @@
 
         <div *ngIf="IsSuccess"
              class="successful">
-            <div>Your location is now online and can be found by your customers.</div>
-            <div>If you want to change or add information you can do this any time in the Dashboard.</div>
+            <div>{{'csa.location-online' | translate}}</div>
+            <div>{{'csa.change-info' | translate}}</div>
             <div>
                 <div class="row justify-content-center padding-100">
                     <img src="../../../../assets/images/icons/check_circle_green.svg"
@@ -304,7 +306,7 @@
                 <div class="row justify-content-center">
                     <button type="button"
                             (click)="closeModal()"
-                            class="btn btn-color-primary-modal">Close</button>
+                            class="btn btn-color-primary-modal">{{ 'csa.close' | translate}}</button>
                 </div>
             </div>
         </div>

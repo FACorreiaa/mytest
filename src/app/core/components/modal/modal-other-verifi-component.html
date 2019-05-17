@@ -16,14 +16,14 @@
                          alt="">
                     <div>
                         <h5>testuser@gmail.com</h5>
-                        <p>Receive your code direclty by an automated email to this email address</p>
+                        <p>{{'csa.receive-code-email' | translate }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5 div-buttons">
                 <div class="verification-buttons">
                     <button type="button" (click)="emailRequest()"
-                            class="btn btn-color-secondary">Send email</button>
+                            class="btn btn-color-secondary-modal">{{'csa.send-email' | translate }}</button>
                 </div>
             </div>
         </div>
@@ -36,9 +36,9 @@
                              alt="">
                         <div>
                             <h5>Business Name</h5>
-                            <p>Receive your code with a postcard send to your locations address</p>
+                            <p>{{'csa.receive-code-postcard' | translate }}</p>
 
-                            <p style="color: red">This may require up to four days</p>
+                            <p style="color: red">{{'csa.may-required' | translate }}</p>
 
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="col-lg-5 div-buttons">
                     <div class="verification-buttons">
                         <button type="button" (click)="addressRequest()"
-                                class="btn btn-color-secondary">Request</button>
+                                class="btn btn-color-secondary-modal">{{'csa.request' | translate }}</button>
                     </div>
                 </div>
             </div>

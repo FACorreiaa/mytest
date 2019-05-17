@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { FormArray } from '@angular/forms'
+import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 @Component({
@@ -10,8 +9,8 @@ import { Router } from '@angular/router'
 export class NavigationBarComponent implements OnInit {
   navbarOpen = false
   navBarMenu = [
-    { id: 'dashboard', link: '/main/dashboard', label: 'cs.navmenu-dashboard', isActive: true },
-    { id: 'profile', link: '/main/profile', label: 'cs.navmenu-profile', isActive: false },
+    { id: 'dashboard', link: '/main/dashboard', label: 'csa.navmenu-dashboard', isActive: true },
+    { id: 'profile', link: '/main/profile', label: 'csa.navmenu-profile', isActive: false },
   ]
 
   constructor(private router: Router) {}
