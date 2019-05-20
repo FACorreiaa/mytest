@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { DashboardComponent } from './containers/dashboard.component'
 import { BusinessComponent } from './components/business.component'
@@ -21,6 +22,7 @@ import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstra
 @NgModule({
   imports: [
     CoreModule,
+    ReactiveFormsModule,
     NgbRatingModule,
     NgbProgressbarModule,
     DashboardRoutingModule,

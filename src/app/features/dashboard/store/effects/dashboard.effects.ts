@@ -8,10 +8,7 @@ import * as fromModuleFeature from '../../dashboard.reducer'
 
 import { IDashBoardService } from '@app/api/interfaces/i.dashboard.service'
 import { switchMap, catchError, map, tap } from 'rxjs/operators'
-// import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { Router } from '@angular/router'
-import { FetchVerificationRequest } from '@app/api/models/api-models'
-import { FetchVerificationOptions } from '../actions/dashboard.actions'
 
 @Injectable()
 export class DashBoardEffects {
@@ -43,7 +40,6 @@ export class DashBoardEffects {
     ofType(dashBoardActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
     tap(payload => {
       this.storeDashBoard$.dispatch(new dashBoardActions.ErrorLayoutShow(payload))
-      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -67,7 +63,6 @@ export class DashBoardEffects {
     ofType(dashBoardActions.ActionTypes.FETCH_VERIFICATION_OPTIONS_FAILURE),
     tap(payload => {
       this.storeDashBoard$.dispatch(new dashBoardActions.ErrorLayoutShow(payload))
-      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -91,7 +86,6 @@ export class DashBoardEffects {
     ofType(dashBoardActions.ActionTypes.INIT_VERIFICATION_FAILURE),
     tap(payload => {
       this.storeDashBoard$.dispatch(new dashBoardActions.ErrorLayoutShow(payload))
-      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -111,11 +105,18 @@ export class DashBoardEffects {
   )
 
   @Effect({ dispatch: false })
+  completeVerificationSuccess$ = this.actions$.pipe(
+    ofType(dashBoardActions.ActionTypes.COMPLETE_VERIFICATION_SUCCESS),
+    tap(payload => {
+      this.storeDashBoard$.dispatch(new dashBoardActions.GetAllBusinessAction())
+    })
+  )
+
+  @Effect({ dispatch: false })
   completeVerificationFailure$ = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.COMPLETE_VERIFICATION_FAILURE),
     tap(payload => {
       this.storeDashBoard$.dispatch(new dashBoardActions.ErrorLayoutShow(payload))
-      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 

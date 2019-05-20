@@ -12,14 +12,16 @@
         </div>
         <div class="row gmb-body">
             <div class="col-4">{{'csa.status' | translate}}</div>
-            <div *ngIf="listingStatus" class="status col-8">{{'csa.activate' | translate}}
+            <div *ngIf="listingStatus"
+                 class="status col-8">{{'csa.activate' | translate}}
                 <img src="../../../../assets/images/icons/info_icon.svg"
                      alt="Info icon"
                      placement="right"
                      triggers="mouseenter:mouseleave"
                      ngbPopover="Here's some content">
             </div>
-            <div *ngIf="!listingStatus" class="status col-8">{{'csa.deactivate' | translate}}
+            <div *ngIf="!listingStatus"
+                 class="status col-8">{{'csa.deactivate' | translate}}
                 <img src="../../../../assets/images/icons/info_icon.svg"
                      alt="Info icon"
                      placement="right"
@@ -31,17 +33,26 @@
             <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded"
                  class="col-12 d-flex justify-content-center">
                 <button type="button"
+                        *ngIf="!listingStatus"
                         class="btn btn-secondary"
                         (click)="setStatus()">
-                    {{!listingStatus}} ? {{'csa.activate' | translate}} : {{'csa.deactivate' | translate}}
+                    <!-- {{!listingStatus}} ? {{'csa.activate' | translate}} : {{'csa.deactivate' | translate}} -->
+                    {{'csa.activate' | translate}}
+                </button>
+                <button type="button"
+                        *ngIf="listingStatus"
+                        class="btn btn-secondary"
+                        (click)="setStatus()">
+                    {{'csa.deactivate' | translate}}
                 </button>
             </div>
             <!-- *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded" -->
-            <div *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded"  class="col-12 d-flex justify-content-center pt-4">
+            <div *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded"
+                 class="col-12 d-flex justify-content-center pt-4">
                 <button type="button"
                         class="btn btn-secondary"
                         (click)="verifyBusiness()">
-                        {{'csa.verify' | translate}}
+                    {{'csa.verify' | translate}}
                 </button>
             </div>
         </div>
@@ -245,52 +256,62 @@
 
         <div *ngIf="IsInsertCode"
              class="type-code">
-            <div>{{'csa.type-digits' | translate}}</div>
-            <div class="row type-code-form pb-5">
-                <div class="col-lg-4 col-12">
-                    <img src="../../../../assets/images/icons/check_circle_gray.svg"
-                         alt="">
-                    <mat-form-field class="">
-                        <input matInput
-                               placeholder="{{'csa.type-code' | translate}}"
-                               autocomplete="off"
-                               required>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-8 col-12">
-                    <div class="button-div">
-                        <button type="button"
-                                (click)="confirmCode()"
-                                class="btn btn-color-primary-modal">{{'csa.confirm' | translate}}</button>
+            <form [formGroup]="verificationCodeForm"
+                  (keydown.enter)="$event.preventDefault()">
+                <div>{{'csa.type-digits' | translate}}</div>
+                <div class="row type-code-form pb-5">
+                    <div class="col-lg-4 col-12">
+                        <img *ngIf="verificationCodeForm.invalid" src="../../../../assets/images/icons/check_circle_gray.svg"
+                             alt="">
+                        <img width="20px" height="20px" *ngIf="verificationCodeForm.valid" src="../../../../assets/images/icons/check_circle_green.svg"
+                             alt="">
+                        <mat-form-field class="">
+                            <input matInput
+                                   placeholder="{{'csa.type-code' | translate}}"
+                                   formControlName="KeyCode"
+                                   autocomplete="off"
+                                   required>
+                            <mat-error *ngIf="verificationCodeForm.get('KeyCode').invalid">
+                                {{'csa.enter-value' | translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="button-div">
+                            <button type="button"
+                                    [disabled]="verificationCodeForm.invalid"
+                                    (click)="confirmCode()"
+                                    class="btn btn-color-primary-modal">{{'csa.confirm' | translate}}</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row pl-3 pt-5">
-                <div style="width: 30%">
-                    <span>{{'csa.receive-code' | translate}}</span>
+                <div class="row pl-3 pt-5">
+                    <div style="width: 30%">
+                        <span>{{'csa.receive-code' | translate}}</span>
+                    </div>
+
+                    <div class="label-other-verifications pl-4">
+                        <span> <a [routerLink]=""
+                               (click)="sendCodeAgain()"
+                               style="color: black">{{'csa.send-code-again' | translate}}</a></span>
+                    </div>
                 </div>
 
-                <div class="label-other-verifications pl-4">
-                    <span> <a [routerLink]=""
-                           (click)="sendCodeAgain()"
-                           style="color: black">{{'csa.send-code-again' | translate}}</a></span>
-                </div>
-            </div>
+                <div class="row pl-3 pt-4 pb-5">
+                    <div style="width: 30%">
+                        <span>{{'csa.change-mind' | translate}}</span>
+                    </div>
 
-            <div class="row pl-3 pt-4 pb-5">
-                <div style="width: 30%">
-                    <span>{{'csa.change-mind' | translate}}</span>
+                    <div class="label-other-verifications pl-4">
+                        <span>
+                            <a [routerLink]=""
+                               (click)="verificationsMethods()"
+                               style="color: black">{{'csa.verification-methods' | translate}}</a>
+                        </span>
+                    </div>
                 </div>
-
-                <div class="label-other-verifications pl-4">
-                    <span>
-                        <a [routerLink]=""
-                           (click)="verificationsMethods()"
-                           style="color: black">{{'csa.verification-methods' | translate}}</a>
-                    </span>
-                </div>
-            </div>
+            </form>
         </div>
 
         <div *ngIf="IsSuccess"

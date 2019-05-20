@@ -12,6 +12,7 @@ import {
   CompleteVerificationRequest,
 } from '@app/api/models/api-models'
 import { ModalOtherVerifiComponent } from '@app/core/components/modal/modal-other-verifi-component'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
   selector: 'business-comp',
@@ -29,6 +30,8 @@ export class BusinessComponent implements OnInit, OnChanges {
   @Output() CompleteVerificationEvent: EventEmitter<any> = new EventEmitter()
 
   @ViewChild('content') _templateModal: ElementRef
+
+  verificationCodeForm: FormGroup
 
   hasEmailOption: boolean
   hasPhoneOption: boolean
@@ -53,7 +56,11 @@ export class BusinessComponent implements OnInit, OnChanges {
   selectedBusiness: BusinessData
   verificationOptions: VerificationOptions[]
 
-  constructor(private modalService: NgbModal, public activeModal: NgbActiveModal) {}
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, public activeModal: NgbActiveModal) {
+    this.verificationCodeForm = this.formBuilder.group({
+      KeyCode: ['', Validators.required],
+    })
+  }
 
   ngOnInit() {
     this.IsSelectVerification = true

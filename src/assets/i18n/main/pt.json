@@ -8,7 +8,7 @@
 	"csa.view-listing": "View Listing",
 	"csa.google-search": "Google Search",
 	"csa.google-maps": "Google Maps",
-	"csa.select-verification": "Select a verification method",
+	"csa.select-verification": "Seleciona um metodo de verificação",
 	"csa.postcard-way": "Postcard on the way",
 	"csa.type-code": "Type in your Code",
 	"csa.incoming-call": "Incoming call on the way",
@@ -52,5 +52,6 @@
 	"csa.send-email": "Send email",
 	"csa.receive-code-postcard": "Receive your code with a postcard send to your locations address",
 	"csa.may-required": "This may require up to four days",
-	"csa.request": "Request"
+	"csa.request": "Request",
+	"csa.enter-value": "Please enter a value"
 }
