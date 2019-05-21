@@ -104,18 +104,17 @@
 
 .missing-items {
   height: auto;
-  padding: 20px;  
   position: relative;
-  margin-top: -25px;
 
   .div-padding {
-    padding-top: 2px;
     font-size: 18px;
+    margin-bottom: 10px;
   }
 
   ul {
     list-style: none; /* Remove default bullets */
     margin-bottom: 0;
+    padding-left: 10px;
   }
 
   ul li::before {

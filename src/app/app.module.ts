@@ -99,7 +99,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/`, '.json')

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { ProfileComponent } from './profile.component'
+import { ProfileComponent } from './containers/profile.component'
 
 const MainRoutes: Routes = [{ path: '', component: ProfileComponent, children: [] }]
 
@@ -8,4 +8,4 @@ const MainRoutes: Routes = [{ path: '', component: ProfileComponent, children: [
   imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class ProfileRoutingModule {}
+export class ProfileRoutingModule { }

@@ -82,7 +82,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.buildInitalFormGroup()
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services && this.newBusiness) {

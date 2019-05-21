@@ -1,10 +1,12 @@
 import {
+  MatAutocompleteModule,
   MatFormFieldModule,
   MatButtonModule,
   MatCheckboxModule,
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
+  MatChipsModule,
   MatInputModule,
   MatTooltipModule,
   MatSidenavModule,
@@ -23,12 +25,14 @@ import { NgModule } from '@angular/core'
 
 @NgModule({
   imports: [
+    MatAutocompleteModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
@@ -43,12 +47,14 @@ import { NgModule } from '@angular/core'
     MatRadioModule,
   ],
   exports: [
+    MatAutocompleteModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
@@ -63,4 +69,4 @@ import { NgModule } from '@angular/core'
     MatRadioModule,
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

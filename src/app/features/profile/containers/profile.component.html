@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h2>{{'cs.navmenu-profile' | translate}}</h2>
+    </div>
+    <div class="row">
+        <div class="col-12 order-2 order-lg-1">
+            <ul id="profileNav" class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a id="basic-tab" class="nav-link" [ngClass]="{active: isActiveTab('basic')}" data-toggle="tab"
+                        (click)="setActiveTab('basic')" role="tab" aria-controls="basic" aria-selected="true">
+                        Basic Data
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a id="extended-tab" class="nav-link" [ngClass]="{active: isActiveTab('extended')}"
+                        data-toggle="tab" (click)="setActiveTab('extended')" role="tab" aria-controls="extended"
+                        aria-selected="true">
+                        Extended Data
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12 col-lg-8 order-3 order-lg-2">
+            <div class="tab-content">
+                <app-profile-form [formId]="activeTab" [profileData]="this.profileData$ | async"
+                    [authorized]="this.authorized" [offerings]="this.offerings$ | async"
+                    [services]="this.services$ | async" [payments]="this.payments$ | async"
+                    [countries]="this.countries$ | async">
+                </app-profile-form>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4 order-1 order-lg-3">
+            <div class="card">
+                <h5>{{'cs.profile-completeness' | translate}}</h5>
+                <div class="percentage-complete">
+                    {{this.percentageToComplete}} {{'csa.to-complete' | translate}}
+                </div>
+                <progress-bar></progress-bar>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- For Testing -->
+<mat-card class="save-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary">{{'csa.save' | translate}}</button>
+                <button type="button" class="btn btn-secondary">{{'csa.delete' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</mat-card>

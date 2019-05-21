@@ -187,6 +187,11 @@ export interface Channels {
   channel: string
   errorCode: string
   verificationNeeded: boolean
+  offers: string[]
+  services: string[]
+  paymentMethods: string[]
+  keywords?: string[]
+  languages?: string[]
 }
 
 export interface OpeningTimes {
