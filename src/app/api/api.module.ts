@@ -10,6 +10,8 @@ import { AuthorizationService } from './services/core/authorization.service'
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http'
 import { HttpErrorInterceptor } from './http/http-error.interceptor'
 import * as Rollbar from 'rollbar'
+import { IRestaurantAssistentService } from './interfaces/i.restaurant-assistent.service'
+import { RestaurantAssistentService } from './services/core/restaurant-assistent.service'
 
 const rollbarConfig = {
   accessToken: '9138b9a5aa794f47b73712a51da0aca5',
@@ -54,6 +56,10 @@ export class ApiModule {
         {
           provide: IDashBoardService,
           useClass: DashBoardService,
+        },
+        {
+          provide: IRestaurantAssistentService,
+          useClass: RestaurantAssistentService,
         },
       ],
     }

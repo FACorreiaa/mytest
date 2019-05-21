@@ -70,7 +70,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() payments: any[]
   @Input() countries: Countries[]
   @Output() private registerEvent = new EventEmitter()
-  @Output() private editionEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
 
   @ViewChild('expansionPanel') myPanels: MatExpansionPanel

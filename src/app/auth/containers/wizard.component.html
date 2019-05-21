@@ -10,7 +10,7 @@
                         [payments]="this.payments$ | async"
                         [countries]="this.countries$ | async" 
                         [newBusiness]="true"
-                        (registerEvent)="register($event)"
+                        (registerEvent)="manageBusiness($event)"
                         (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>
                     <div *ngIf="(this.loading$ | async)" style="display: flex">

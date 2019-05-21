@@ -31,7 +31,7 @@ export class AddBusinessComponent implements OnInit {
     private categoriesService: CategoriesService,
     private countriesService: CountriesService
   ) {
-    this.loading$ = this.store.select(fromApp.loginLoading)
+    // this.loading$ = this.store.select(fromApp.loginLoading)
   }
 
   ngOnInit() {

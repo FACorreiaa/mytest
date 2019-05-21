@@ -123,17 +123,6 @@ export interface IRequestOptionsText {
   withCredentials?: boolean
 }
 
-//   headers?: HttpHeaders | {
-//     [header: string]: string | string[];
-// };
-// observe: 'response';
-// params?: HttpParams | {
-//     [param: string]: string | string[];
-// };
-// reportProgress?: boolean;
-// responseType: 'text';
-// withCredentials?: boolean;
-
 export interface UserRegisterDto {
   user: UserLoginDto
   claim: ManageBusinessData

@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 
@@ -25,7 +24,7 @@ import {
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   businessList$: Observable<BusinessData[]>
   fecthOptions$: Observable<FetchVerificationResponse>
@@ -69,10 +68,6 @@ export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
     this.listingStatus = false
   }
 
-  ngOnChanges(): void {
-    // const aux = this.fecthOptions$.subscribe(x => console.log('x', x.options))
-  }
-
   setStatus() {
     this.listingStatus = this.listingStatus = !this.listingStatus
   }
@@ -98,8 +93,6 @@ export class DashboardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private initVerificationOptions(optionEvent: InitVerificationEvent) {
-    // console.log('initVerificationOptions', optionEvent)
-
     this.store.dispatch(new Actions.InitVerification(optionEvent.id, optionEvent.request))
   }
 

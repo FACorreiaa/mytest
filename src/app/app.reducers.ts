@@ -17,17 +17,17 @@ const reducersDefinition: ActionReducerMap<AppState> = {
 export const appReducers = reducersDefinition
 
 // Routing
-
 export const getRouter = (state: AppState) => state.router
 
 export const getRouterPath = (state: AppState) => state.router.state.url
 
-// Auth
-
+// OnBoarding
 export const getAuthState = (state: AppState) => state.auth
 
 export const language = createSelector(getAuthState, fromAuth.getLanguage)
 
-export const loginLoading = createSelector(getAuthState, fromAuth.getLoading)
+export const restaurantAssistent = createSelector(getAuthState, fromAuth.getRestaurantAssistent)
+
+export const loading = createSelector(getAuthState, fromAuth.getLoading)
 
 export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)

@@ -3,6 +3,7 @@ import { ManageBusinessData } from '@app/api/models/api-models'
 
 export interface AuthState {
   claimData: ManageBusinessData
+  restaurantAssistent: IHydraRestaurant
   loading: boolean
   hasManageError: boolean
   errorMessage: string
@@ -11,6 +12,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   claimData: null,
+  restaurantAssistent: null,
   loading: false,
   hasManageError: false,
   errorMessage: null,
@@ -36,6 +38,19 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
       return Object.assign({}, state, {
         hasManageError: true,
         loading: false,
+      })
+    }
+
+    case AuthActionTypes.RESTAURANT_ASSISTENT_ATTEMPT: {
+      return Object.assign({}, state, {
+        loading: true,
+      })
+    }
+
+    case AuthActionTypes.RESTAURANT_ASSISTENT_SUCCESS: {
+      return Object.assign({}, state, {
+        loading: false,
+        restaurantAssistent: action.payload,
       })
     }
 

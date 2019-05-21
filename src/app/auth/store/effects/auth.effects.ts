@@ -13,10 +13,17 @@ import { reducerName } from '../../auth.reducer'
 import { Action as ActionDispatched } from '../../../api/models/api-models'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { IAuthorizationService } from '../../../api/interfaces/i.authorization.service'
+import { IRestaurantAssistentService } from '../../../api/interfaces/i.restaurant-assistent.service'
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private auth: IAuthorizationService, private router: Router, private store$: Store<fromModule.AuthState>) {}
+  constructor(
+    private actions$: Actions,
+    private auth: IAuthorizationService,
+    private restaurant: IRestaurantAssistentService,
+    private router: Router,
+    private store$: Store<fromModule.AuthState>
+  ) {}
 
   // ----------------- Manage Business -----------------
 
@@ -48,5 +55,20 @@ export class AuthEffects {
     tap(() => {
       // this.router.navigate([AuthRoutes.MAIN])
     })
+  )
+
+  // ----------------- Restaurant Assistent -----------------
+
+  @Effect()
+  public restaurantAssistent$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.RESTAURANT_ASSISTENT_ATTEMPT),
+    switchMap((action: any) =>
+      this.restaurant.restaurantData().pipe(
+        map((response: IHydraRestaurantDetailsResponse) => {
+          return response.establishment === null ? new AuthActions.RestaurantAssistentFailure({}) : new AuthActions.RestaurantAssistentSuccess(response.establishment)
+        }),
+        catchError(error => of(new AuthActions.RestaurantAssistentFailure({ error })))
+      )
+    )
   )
 }
