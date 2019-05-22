@@ -1,5 +1,6 @@
 import { AuthActions, AuthActionTypes } from '../actions/auth.action'
-import { ManageBusinessData } from '@app/api/models/api-models'
+import { ManageBusinessData, BusinessData, OpeningTimes } from '@app/api/models/api-models'
+import { isEmpty } from 'rxjs/operators'
 
 export interface AuthState {
   claimData: ManageBusinessData
@@ -48,9 +49,53 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.RESTAURANT_ASSISTENT_SUCCESS: {
+      const restaurantAssistent = Object.assign({}, action.payload)
+
+      const openingTimesData: OpeningTimes = { monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: [] }
+      let businessData: BusinessData = null
+      if (Object.values(restaurantAssistent).length !== 0) {
+        restaurantAssistent.openingTimes.forEach((day: IHydraOpeningTime) => {
+          if (day.weekday === 1) {
+            openingTimesData.monday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 2) {
+            openingTimesData.tuesday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 3) {
+            openingTimesData.wednesday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 4) {
+            openingTimesData.thursday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 5) {
+            openingTimesData.friday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 6) {
+            openingTimesData.saturday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+          if (day.weekday === 7) {
+            openingTimesData.sunday.push({ startTime: day.timeIntervals[0].startTime, endTime: day.timeIntervals[0].endTime })
+          }
+        })
+
+        businessData = {
+          name: restaurantAssistent.name,
+          description: restaurantAssistent.description,
+          street: restaurantAssistent.address1,
+          zipCode: restaurantAssistent.zipCode,
+          city: restaurantAssistent.city,
+          contactPhoneNumber: restaurantAssistent.phone,
+          contactEmail: restaurantAssistent.email,
+          url: restaurantAssistent.url,
+          countryCode: restaurantAssistent.country,
+          openingTimes: openingTimesData,
+        }
+      }
+
       return Object.assign({}, state, {
         loading: false,
-        restaurantAssistent: action.payload,
+        restaurantAssistent: restaurantAssistent,
+        claimData: businessData,
       })
     }
 

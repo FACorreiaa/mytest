@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs'
 import { Action, Store } from '@ngrx/store'
 
 import * as dashBoardActions from '../actions/dashboard.actions'
-import * as fromModuleFeature from '../../dashboard.reducer'
+import * as fromModuleFeature from '../../dashboard.selector'
 
 import { IDashBoardService } from '@app/api/interfaces/i.dashboard.service'
 import { switchMap, catchError, map, tap } from 'rxjs/operators'

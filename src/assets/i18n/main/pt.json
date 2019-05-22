@@ -53,5 +53,6 @@
 	"csa.receive-code-postcard": "Receive your code with a postcard send to your locations address",
 	"csa.may-required": "This may require up to four days",
 	"csa.request": "Request",
-	"csa.enter-value": "Please enter a value"
+	"csa.enter-value": "Please enter a value",
+	"csa.loading": "Loading..."
 }

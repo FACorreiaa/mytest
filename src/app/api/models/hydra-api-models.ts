@@ -33,6 +33,7 @@ interface IHydraRestaurant {
   address2: string
   zipCode: string
   city: string
+  phone: string
   latitude: string
   longitude: string
   welcomeTitle: string

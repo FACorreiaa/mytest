@@ -9,7 +9,7 @@ export interface DashBoardState {
 }
 
 export const reducers: ActionReducerMap<DashBoardState> = {
-  dashboard: fromDocuments.DashBoardReducer,
+  dashboard: fromDocuments.dashBoardReducer,
 }
 
 // DashBoard

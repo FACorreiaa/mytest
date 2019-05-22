@@ -28,6 +28,8 @@ export const language = createSelector(getAuthState, fromAuth.getLanguage)
 
 export const restaurantAssistent = createSelector(getAuthState, fromAuth.getRestaurantAssistent)
 
+export const claimData = createSelector(getAuthState, fromAuth.getClaimData)
+
 export const loading = createSelector(getAuthState, fromAuth.getLoading)
 
 export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)

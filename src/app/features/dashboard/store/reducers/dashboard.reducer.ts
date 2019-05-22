@@ -12,7 +12,7 @@ export interface DashBoardState {
   errorMessage: string
 }
 
-const initialState: DashBoardState = {
+export const initialState: DashBoardState = {
   isLoading: false,
   selectedBusiness: null,
   business: [],
@@ -22,7 +22,7 @@ const initialState: DashBoardState = {
   errorMessage: null,
 }
 
-export function DashBoardReducer(state = initialState, action: Actions.DashBoardAction): DashBoardState {
+export function dashBoardReducer(state: DashBoardState = initialState, action: Actions.DashBoardAction): DashBoardState {
   switch (action.type) {
     case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
       return { ...state, business: action.payload }

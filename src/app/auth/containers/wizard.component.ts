@@ -7,7 +7,7 @@ import * as AuthActions from '../store/actions/auth.action'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import { CategoriesService } from '@app/core/services/categories.service'
-import { UserRegisterDto, Countries, ICategory } from '@app/api/models/api-models'
+import { UserRegisterDto, Countries, ICategory, ManageBusinessData } from '@app/api/models/api-models'
 import { CountriesService } from '@app/core/services/countries.service'
 import { delay, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
@@ -24,6 +24,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   authorized: boolean
   loading$: Observable<boolean>
   restaurant$: Observable<IHydraRestaurant>
+  claimData$: Observable<ManageBusinessData>
   offerings$: Observable<ICategory[]>
   services$: Observable<ICategory[]>
   payments$: Observable<ICategory[]>
@@ -38,6 +39,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   ) {
     this.loading$ = this.store.select(fromApp.loading)
     this.restaurant$ = this.store.select(fromApp.restaurantAssistent)
+    this.claimData$ = this.store.select(fromApp.claimData)
   }
 
   async ngOnInit() {
@@ -60,8 +62,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))
-
-    // console.log('Componenttt Init', this.restaurant$)
   }
 
   ngOnChanges() {

@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { DashBoardEffects } from './store/effects/dashboard.effects'
 
-import { reducers, reducerName } from './dashboard.reducer'
+import { reducers, reducerName } from './dashboard.selector'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpClient } from '@angular/common/http'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'

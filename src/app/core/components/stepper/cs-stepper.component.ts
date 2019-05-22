@@ -59,12 +59,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   offeringsArray: ICategory[] = []
   addressFocus = false
 
-  @Input() authorized: any
-  @Input() editForm: false
   @Input() newBusiness: false
-  @Input() businessToEdit: BusinessData
-  @Input() businessToEditId: number
-  @Input() business: BusinessData[]
+  @Input() businessFromHydra: BusinessData
   @Input() offerings: any[]
   @Input() services: any[]
   @Input() payments: any[]
@@ -96,6 +92,29 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     if (changes.payments && this.payments && this.newBusiness) {
       this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
     }
+
+    if (this.businessFromHydra) {
+      this.firstFormGroup = this.formBuilder.group({
+        location: [this.businessFromHydra.name, Validators.required],
+        address: [this.businessFromHydra.street, Validators.required],
+        postal: new FormControl(this.businessFromHydra.zipCode, ZipCodeValidation),
+        city: [this.businessFromHydra.city, Validators.required],
+        phone: [this.businessFromHydra.contactPhoneNumber, PhoneNumberValidation],
+        area: ['+49', PhoneNumberPrefixValidation],
+        country: ['Italy', Validators.required],
+      })
+
+      this.secondFormGroup.get('email').setValue(this.businessFromHydra.contactEmail)
+      this.secondFormGroup.get('website').setValue(
+        this.businessFromHydra.url
+          .replace('https://', '')
+          .replace('http://', '')
+          .replace('www.', '')
+      )
+
+      const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(this.businessFromHydra.openingTimes)).value
+      this.secondFormGroup.get('openHours').setValue(formBuilder)
+    }
   }
 
   ngAfterViewChecked() {
@@ -103,7 +122,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.addressInput.nativeElement.focus()
       this.addressFocus = false
     }
-
     this.change.detectChanges()
   }
 

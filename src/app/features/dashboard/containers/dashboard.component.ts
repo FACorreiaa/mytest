@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 
 import * as Actions from '../store/actions/dashboard.actions'
-import * as fromDashboard from '../dashboard.reducer'
+import * as fromDashboard from '../dashboard.selector'
 import * as fromApp from '../../../app.reducers'
 
 import { Subject, Observable } from 'rxjs'

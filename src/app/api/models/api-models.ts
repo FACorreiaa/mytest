@@ -149,26 +149,26 @@ export interface DeleteBusinessData {
 }
 
 export interface BusinessData {
-  channels: Channels
+  channels?: Channels
   id?: number
   zipCode: string
   city: string
   street: string
-  additional: string
-  category: string
+  additional?: string
+  category?: string
   name: string
   description: string
-  userFirstName: string
-  userLastName: string
+  userFirstName?: string
+  userLastName?: string
   countryCode: string
-  languageCode: string
+  languageCode?: string
   url: string
   contactEmail: string
   contactPhoneNumber: string
   openingTimes: OpeningTimes
-  offers: string[]
-  services: string[]
-  paymentMethods: string[]
+  offers?: string[]
+  services?: string[]
+  paymentMethods?: string[]
 }
 
 export interface Channels {
@@ -229,30 +229,125 @@ export interface IHours {
 }
 
 const Hours = [
-  { key: '1:00', value: '1:00' },
-  { key: '2:00', value: '2:00' },
-  { key: '3:00', value: '3:00' },
-  { key: '4:00', value: '4:00' },
-  { key: '5:00', value: '5:00' },
-  { key: '6:00', value: '6:00' },
-  { key: '7:00', value: '7:00' },
-  { key: '8:00', value: '8:00' },
-  { key: '9:00', value: '9:00' },
+  { key: '01:00', value: '01:00' },
+  { key: '01:15', value: '01:15' },
+  { key: '01:30', value: '01:30' },
+  { key: '01:45', value: '01:45' },
+
+  { key: '02:00', value: '02:00' },
+  { key: '02:15', value: '02:15' },
+  { key: '02:30', value: '02:30' },
+  { key: '02:45', value: '02:45' },
+
+  { key: '03:00', value: '03:00' },
+  { key: '03:15', value: '03:15' },
+  { key: '03:30', value: '03:30' },
+  { key: '03:45', value: '03:45' },
+
+  { key: '04:00', value: '04:00' },
+  { key: '04:15', value: '04:15' },
+  { key: '04:30', value: '04:30' },
+  { key: '04:45', value: '04:45' },
+
+  { key: '05:00', value: '05:00' },
+  { key: '05:15', value: '05:15' },
+  { key: '05:30', value: '05:30' },
+  { key: '05:45', value: '05:45' },
+
+  { key: '06:00', value: '06:00' },
+  { key: '06:15', value: '06:15' },
+  { key: '06:30', value: '06:30' },
+  { key: '06:45', value: '06:45' },
+
+  { key: '07:00', value: '07:00' },
+  { key: '07:15', value: '07:15' },
+  { key: '07:30', value: '07:30' },
+  { key: '07:45', value: '07:45' },
+
+  { key: '08:00', value: '08:00' },
+  { key: '08:15', value: '08:15' },
+  { key: '08:30', value: '08:30' },
+  { key: '08:45', value: '08:45' },
+
+  { key: '09:00', value: '09:00' },
+  { key: '09:15', value: '09:15' },
+  { key: '09:30', value: '09:30' },
+  { key: '09:45', value: '09:45' },
+
   { key: '10:00', value: '10:00' },
+  { key: '10:15', value: '10:15' },
+  { key: '10:30', value: '10:30' },
+  { key: '10:45', value: '10:45' },
+
   { key: '11:00', value: '11:00' },
+  { key: '11:15', value: '11:15' },
+  { key: '11:30', value: '11:30' },
+  { key: '11:45', value: '11:45' },
+
   { key: '12:00', value: '12:00' },
+  { key: '12:15', value: '12:15' },
+  { key: '12:30', value: '12:30' },
+  { key: '12:45', value: '12:45' },
+
   { key: '13:00', value: '13:00' },
+  { key: '13:15', value: '13:15' },
+  { key: '13:30', value: '13:30' },
+  { key: '13:45', value: '13:45' },
+
   { key: '14:00', value: '14:00' },
+  { key: '14:15', value: '14:15' },
+  { key: '14:30', value: '14:30' },
+  { key: '14:45', value: '14:45' },
+
   { key: '15:00', value: '15:00' },
+  { key: '15:15', value: '15:15' },
+  { key: '15:30', value: '15:30' },
+  { key: '15:45', value: '15:45' },
+
   { key: '16:00', value: '16:00' },
+  { key: '16:15', value: '16:15' },
+  { key: '16:30', value: '16:30' },
+  { key: '16:45', value: '16:45' },
+
   { key: '17:00', value: '17:00' },
+  { key: '17:15', value: '17:15' },
+  { key: '17:30', value: '17:30' },
+  { key: '17:45', value: '17:45' },
+
   { key: '18:00', value: '18:00' },
+  { key: '18:15', value: '18:15' },
+  { key: '18:30', value: '18:30' },
+  { key: '18:45', value: '18:45' },
+
   { key: '19:00', value: '19:00' },
+  { key: '19:15', value: '19:15' },
+  { key: '19:30', value: '19:30' },
+  { key: '19:45', value: '19:45' },
+
   { key: '20:00', value: '20:00' },
+  { key: '20:15', value: '20:15' },
+  { key: '20:30', value: '20:30' },
+  { key: '20:45', value: '20:45' },
+
   { key: '21:00', value: '21:00' },
+  { key: '21:15', value: '21:15' },
+  { key: '21:30', value: '21:30' },
+  { key: '21:45', value: '21:45' },
+
   { key: '22:00', value: '22:00' },
+  { key: '22:15', value: '22:15' },
+  { key: '22:30', value: '22:30' },
+  { key: '22:45', value: '22:45' },
+
   { key: '23:00', value: '23:00' },
+  { key: '23:15', value: '23:15' },
+  { key: '23:30', value: '23:30' },
+  { key: '23:45', value: '23:45' },
+
   { key: '24:00', value: '24:00' },
+  { key: '24:15', value: '24:15' },
+  { key: '24:30', value: '24:30' },
+  { key: '24:45', value: '24:45' },
 ]
 
 export interface ICategory {
