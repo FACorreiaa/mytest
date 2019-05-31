@@ -1,4 +1,4 @@
-@import '../../../styles-variables.scss';
+@import "../../../styles-variables.scss";
 
 mat-sidenav-container {
   margin-top: 75px;
@@ -7,16 +7,18 @@ mat-sidenav-container {
 .background {
   padding: 40px 0 40px 0;
   position: relative;
+  background: url("../../../assets/images/background/Muster.png") no-repeat center bottom;
+  background-size: cover;
+  background-color: #c9c9c9;
 
   > .container {
     position: relative;
   }
-  
+
   @media (max-width: map-get($grid-breakpoints, lg)) {
     .container {
-       max-width: none;
-       min-width: $toolbar-breakpoint;
+      max-width: none;
+      min-width: $toolbar-breakpoint;
     }
   }
-  
 }

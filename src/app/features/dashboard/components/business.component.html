@@ -30,13 +30,12 @@
             </div>
         </div>
         <div class="row">
-            <div *ngIf="selectedBusiness && !selectedBusiness.channels[0].verificationNeeded"
-                 class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center">
+                <!-- *ngIf="!listingStatus" -->
                 <button type="button"
                         *ngIf="!listingStatus"
                         class="btn btn-secondary"
                         (click)="setStatus()">
-                    <!-- {{!listingStatus}} ? {{'csa.activate' | translate}} : {{'csa.deactivate' | translate}} -->
                     {{'csa.activate' | translate}}
                 </button>
                 <button type="button"
@@ -46,7 +45,6 @@
                     {{'csa.deactivate' | translate}}
                 </button>
             </div>
-            <!-- *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded" -->
             <div *ngIf="selectedBusiness && selectedBusiness.channels[0].verificationNeeded"
                  class="col-12 d-flex justify-content-center pt-4">
                 <button type="button"
@@ -261,9 +259,13 @@
                 <div>{{'csa.type-digits' | translate}}</div>
                 <div class="row type-code-form pb-5">
                     <div class="col-lg-4 col-12">
-                        <img *ngIf="verificationCodeForm.invalid" src="../../../../assets/images/icons/check_circle_gray.svg"
+                        <img *ngIf="verificationCodeForm.invalid"
+                             src="../../../../assets/images/icons/check_circle_gray.svg"
                              alt="">
-                        <img width="20px" height="20px" *ngIf="verificationCodeForm.valid" src="../../../../assets/images/icons/check_circle_green.svg"
+                        <img width="20px"
+                             height="20px"
+                             *ngIf="verificationCodeForm.valid"
+                             src="../../../../assets/images/icons/check_circle_green.svg"
                              alt="">
                         <mat-form-field class="">
                             <input matInput

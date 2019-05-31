@@ -1,0 +1,51 @@
+.section-title {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  padding-inline-start: 20px;
+
+  > span {
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.section-content {
+  border-radius: 3px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+
+  .popup-title {
+    height: 30%;
+    padding: 20px 20px 20px;
+    z-index: 2;
+    position: relative;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  .close-popup {
+    position: absolute;
+    right: 20px;
+    z-index: 2;
+  }
+
+  .popup-content {
+    height: 70%;
+    padding: 20px 20px 20px;
+    background-color: #fff;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .login-google-example {
+      justify-content: center;
+      display: flex;
+    }
+  }
+}

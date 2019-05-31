@@ -13,7 +13,8 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
             checkLoginIframe: false,
           },
           enableBearerInterceptor: true,
-          bearerExcludedUrls: ['/assets', '/clients/public'],
+          bearerExcludedUrls: ['/assets', '/clients/public', '/google'],
+          bearerPrefix: '',
         })
         resolve()
       } catch (error) {

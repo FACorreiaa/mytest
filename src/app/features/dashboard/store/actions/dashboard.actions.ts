@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { ManageBusinessData, FetchVerificationRequest, FetchVerificationResponse } from '@app/api/models/api-models'
+import { FetchVerificationRequest } from '@app/api/models/api-models'
 
 export const ActionTypes = {
   GET_BUSINESS_UNITS: '[GetBusinessUnits] Get All Business Units',

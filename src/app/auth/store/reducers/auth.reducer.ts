@@ -1,6 +1,5 @@
 import { AuthActions, AuthActionTypes } from '../actions/auth.action'
 import { ManageBusinessData, BusinessData, OpeningTimes } from '@app/api/models/api-models'
-import { isEmpty } from 'rxjs/operators'
 
 export interface AuthState {
   claimData: ManageBusinessData
@@ -29,10 +28,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.MANAGE_BUSINESS_SUCCESS: {
-      return Object.assign({}, state, {
-        loading: false,
-        hasManageError: false,
-      })
+      return { ...state, loading: false, hasManageError: false }
     }
 
     case AuthActionTypes.MANAGE_BUSINESS_FAILURE: {
@@ -100,7 +96,6 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.ERROR_LAYOUT_SHOW: {
-      // console.log('reducer', action.payload.payload.error)
       return {
         ...state,
         errorMessage: action.payload.payload.error,

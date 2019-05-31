@@ -45,8 +45,8 @@ export class BusinessComponent implements OnInit, OnChanges {
   IsInsertCode: boolean
   IsSuccess: boolean
 
-  selectedOptionType: OptionsVerificationType
-  selectedVerificationOption: any
+  selectedOptionType: any
+  selectedVerificationOption: VerificationOptions
   businessName: string
   businessAddressLine: string
 
@@ -98,6 +98,24 @@ export class BusinessComponent implements OnInit, OnChanges {
     this.listingStatus = this.listingStatus = !this.listingStatus
     if (this.listingStatus) {
       window.open(this.gmbUrl, '_blank')
+    }
+  }
+
+  openWindowActivation() {
+    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX
+    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY
+
+    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
+    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
+
+    const systemZoom = width / window.screen.availWidth
+    const left = (width - 500) / 2 / systemZoom + dualScreenLeft
+    const top = (height - 700) / 2 / systemZoom + dualScreenTop
+    const newWindow = window.open('#/google', '', 'scrollbars=yes, width=' + 600 / systemZoom + ', height=' + 700 / systemZoom + ', top=' + 300 + ', left=' + left)
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+      newWindow.focus()
     }
   }
 
@@ -172,7 +190,7 @@ export class BusinessComponent implements OnInit, OnChanges {
    * @param type of the verifications.
    */
   initProcess(type: string) {
-    this.selectedOptionType = type as OptionsVerificationType
+    this.selectedOptionType = type
     this.selectedVerificationOption = this.verificationOptions.find(item => item.verificationMethod === type)
     // console.log('initProcess', this.selectedVerificationOption)
 
@@ -200,6 +218,7 @@ export class BusinessComponent implements OnInit, OnChanges {
     this.IsPostCard = false
     this.IsInsertCode = true
   }
+
   /**
    * Event to confirm code of verification.
    */

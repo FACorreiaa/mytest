@@ -1,4 +1,57 @@
-<div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
+<mat-sidenav-container>
+    <div class="wrapper">
+      <div *ngIf="!headerService.webview" class="toolbar">
+        <mat-toolbar color="primary">
+          <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
+          <span class="example-spacer"></span>
+  
+          <div [matMenuTriggerFor]="toolbarUserMenu">
+            <mat-icon aria-label="User icon">person</mat-icon>
+          </div>
+  
+          <mat-menu #toolbarUserMenu="matMenu">
+            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
+              <mat-icon>account_circle</mat-icon>
+              <span>Log out</span>
+            </button>
+          </mat-menu>
+  
+          <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
+            <mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
+              <mat-option *ngFor="let l of languages" [value]="l">
+                {{ l.toUpperCase() }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-toolbar>
+      </div>
+  
+      <div class="content">
+          <div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
+
+              <mat-sidenav-container class="sidenav-container">
+            
+                <nav-bar></nav-bar>
+            
+                <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
+                  <mat-card class="col">
+                    <mat-card-content>
+                      <div class="row justify-content-center">
+                        <cs-loading [show]="true"></cs-loading>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <main class="main-container" *ngIf="!(this.loading$ | async)">
+                  <router-outlet></router-outlet>
+                </main>
+              </mat-sidenav-container>
+            </div>
+      </div>
+    </div>
+  </mat-sidenav-container>
+
+<!-- <div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
 
   <mat-sidenav-container class="sidenav-container">
 
@@ -17,4 +70,4 @@
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-container>
-</div>
+</div> -->

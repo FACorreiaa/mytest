@@ -1,0 +1,71 @@
+<section class="section-title">
+    <span>Claiming service</span>
+</section>
+
+<section class="section-content">
+    <div class="popup-title">
+        <a href="JavaScript:window.close()"
+           class="close-popup">
+            <img src="../../../../assets/images/icons/close_x.svg"
+                 width="30">
+        </a>
+        <h5 *ngIf="firstStep">Claiming already exists</h5>
+        <h5 *ngIf="secondStep">Preview: Google process</h5>
+    </div>
+
+    <div *ngIf="firstStep"
+         class="popup-content">
+        <span class="pt-3">The location you entered is already managed by another person. if you are the owner
+            of the location you need to claim the admin privileges at Google.
+        </span>
+        <span class="pt-5 pb-5">Please make sure that you request the owner privileges.
+            Click continue to start this process at Google or <a href="#"
+               target="_blank">read more</a> on Google about it.
+        </span>
+
+        <button type="button"
+                class="btn btn-secondary"
+                (click)="continue()">
+            Continue
+        </button>
+    </div>
+
+    <div *ngIf="secondStep"
+         class="popup-content">
+        <span class="pt-3 pb-5">In order to claim your location, you will have to go through the following steps on
+            Google</span>
+
+        <div class="col-sm-6">
+            <div class="login-google-example">
+                <span>1.</span>
+                <img src="../../../../assets/images/icons/google_Login_ex.png"
+                     width="150"
+                     height="200">
+            </div>
+            <span style="font-size: 12px;">
+                Select your Google Account or create a new one
+                in case you do not have one yet
+            </span>
+        </div>
+        <div class="col-sm-6">
+            <div class="login-google-example">
+                <span>2.</span>
+                <img src="../../../../assets/images/icons/google_ex_2.png"
+                     width="150"
+                     height="200">
+            </div>
+            <span style="font-size: 12px;">
+                You need to allow us to manage the listing
+                for you by clicking on 'accept'
+            </span>
+        </div>
+
+        <div class="pt-5">
+            <a type="button"
+            href="https://business.google.com/arc/p/ChIJ4aIK2xS1uEcR0zbWgBIIVmY"
+               class="btn btn-secondary">
+                Start now
+            </a>
+        </div>
+    </div>
+</section>

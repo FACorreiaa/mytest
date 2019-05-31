@@ -34,6 +34,7 @@ import { initializer } from './core/utils/app-init'
 import { TokenInterceptor } from './api/http/http-token.interceptor'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { HeaderService } from './api/services/core/header.service'
+import { GoogleComponent } from './directories/google/containers/google.container'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -74,7 +75,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, GoogleComponent],
   exports: [MaterialModule],
   providers: [
     HeaderService,
