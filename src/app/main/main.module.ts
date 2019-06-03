@@ -3,24 +3,12 @@ import { CommonModule } from '@angular/common'
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CoreModule } from '@app/core/core.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { EffectsModule } from '@ngrx/effects'
-import { StoreModule } from '@ngrx/store'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
-// CONTAINERS
-import { MainComponent } from './main.component'
-import { DashboardComponent } from './containers/dashboard.component'
-import { BusinessDetailComponent } from './containers/business-detail.component'
-import { AddBusinessComponent } from './containers/add-business.component'
-
-// COMPONENTS
-import { BusinnessComponent } from './components/business.component'
-
-// import { reducers, reducerName } from './main.reducers'
 import { MainRoutingModule } from './main.routing'
-// import { DashBoardEffects } from './store/effects/dashboard.effects'
 import { environment } from '@env/environment'
+import { MainComponent } from './main.component'
 
 @NgModule({
   imports: [
@@ -36,8 +24,8 @@ import { environment } from '@env/environment'
       isolate: true,
     }),
   ],
-  declarations: [MainComponent, DashboardComponent, BusinnessComponent, BusinessDetailComponent, AddBusinessComponent],
-  exports: [MainComponent],
+  declarations: [MainComponent],
+  exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MainModule {}

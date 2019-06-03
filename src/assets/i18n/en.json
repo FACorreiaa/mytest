@@ -1,5 +1,6 @@
 {
 	"csa.title.short": "Claiming service",
 	"csa.login": "login",
-	"csa.logout": "logout"
+	"csa.logout": "logout",
+	"csa.google.claiming-exists": "Claiming already exists"
 }

@@ -69,7 +69,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onLanguageSelect({ value: language }) {
-    console.log('entreiii', language)
     this.store.dispatch(new AuthActions.ChangeLanguage({ language }))
   }
 }

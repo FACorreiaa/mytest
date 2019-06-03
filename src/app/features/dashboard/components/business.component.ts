@@ -55,6 +55,7 @@ export class BusinessComponent implements OnInit, OnChanges {
   gMapsUrl: string
   selectedBusiness: BusinessData
   verificationOptions: VerificationOptions[]
+  newWindow: Window
 
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal, public activeModal: NgbActiveModal) {
     this.verificationCodeForm = this.formBuilder.group({
@@ -102,20 +103,16 @@ export class BusinessComponent implements OnInit, OnChanges {
   }
 
   openWindowActivation() {
-    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX
-    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY
+    if (this.newWindow) {
+      this.newWindow.close()
+    }
 
-    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
-    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
+    this.newWindow = window.open('#/google', '', 'scrollbars=yes, width=' + 600 + ', height=' + 700 + ', top=' + 100 + ', left=' + 500)
 
-    const systemZoom = width / window.screen.availWidth
-    const left = (width - 500) / 2 / systemZoom + dualScreenLeft
-    const top = (height - 700) / 2 / systemZoom + dualScreenTop
-    const newWindow = window.open('#/google', '', 'scrollbars=yes, width=' + 600 / systemZoom + ', height=' + 700 / systemZoom + ', top=' + 300 + ', left=' + left)
+    // console.log('openWindowActivation',)
 
-    // Puts focus on the newWindow
     if (window.focus) {
-      newWindow.focus()
+      this.newWindow.focus()
     }
   }
 

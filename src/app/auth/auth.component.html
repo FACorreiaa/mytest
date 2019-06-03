@@ -1,6 +1,6 @@
 <mat-sidenav-container>
     <div class="wrapper">
-      <div class="toolbar">
+      <div *ngIf="!headerService.webview" class="toolbar">
         <mat-toolbar color="primary">
           <a ><span style="color: white">{{'csa.title.short' | translate}}</span></a>
           <span class="example-spacer"></span>
@@ -10,12 +10,19 @@
           </div>
   
           <mat-menu #toolbarUserMenu="matMenu">
-            <button mat-menu-item  class="remove-outline">
+            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
               <mat-icon>account_circle</mat-icon>
               <span>Log out</span>
             </button>
           </mat-menu>
-  
+          
+          <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
+            <mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
+              <mat-option *ngFor="let l of languages" [value]="l">
+                {{ l.toUpperCase() }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
          
         </mat-toolbar>
       </div>
