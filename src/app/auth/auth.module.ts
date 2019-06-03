@@ -40,7 +40,7 @@ import { AuthRoutingModule } from './auth.routing'
   ],
   declarations: [AuthComponent, WizardComponent, ErrorComponent],
   entryComponents: [ModalTermsConditionsComponent],
-  providers: [AuthGuard],
+  // providers: [AuthGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'google-comp',
@@ -9,9 +10,10 @@ export class GoogleComponent implements OnInit {
   firstStep: boolean
   secondStep: boolean
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
+    this.translate.setDefaultLang('en')
     this.firstStep = true
   }
 

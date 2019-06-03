@@ -16,25 +16,25 @@ import { AppRoutingModule } from './app.routing'
 // Components
 import { AppComponent } from './app.component'
 
-// Material
-import { MaterialModule } from './material.module'
-
 // Redux
 import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store'
 import { appReducers } from '@app/app.reducers'
 import { localStorageSync } from 'ngrx-store-localstorage'
-import { HttpModule } from '@angular/http'
 import { EffectsModule } from '@ngrx/effects'
+
+// Http
+import { HttpModule } from '@angular/http'
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { TokenInterceptor } from './api/http/http-token.interceptor'
+
 import { GlobalEnvironmentService } from './global.environment.service'
 import { environment } from '@env/environment'
 import { debug } from '@app/debug.reducer'
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CoreModule } from './core/core.module'
 import { initializer } from './core/utils/app-init'
-import { TokenInterceptor } from './api/http/http-token.interceptor'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { HeaderService } from './api/services/core/header.service'
-import { GoogleComponent } from './directories/google/containers/google.container'
+import { DirectoriesModule } from './directories/directories.module'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -58,6 +58,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    DirectoriesModule,
     NgxPermissionsModule.forRoot(),
     // ngx-translate
     TranslateModule.forRoot({
@@ -67,16 +68,19 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
         deps: [HttpClient],
       },
     }),
-    EffectsModule.forRoot([]),
     AppRoutingModule,
-    MaterialModule,
     KeycloakAngularModule,
     // ngrx
+    EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 15 }),
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+          maxAge: 15,
+        }),
   ],
-  declarations: [AppComponent, GoogleComponent],
-  exports: [MaterialModule],
+  declarations: [AppComponent],
+  exports: [],
   providers: [
     HeaderService,
     GlobalEnvironmentService,

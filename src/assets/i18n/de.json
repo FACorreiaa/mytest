@@ -1,5 +1,11 @@
 {
 	"csa.title.short": "Service anfordern",
 	"csa.login": "Anmeldung",
-	"csa.logout": "Ausloggen"
+	"csa.logout": "Ausloggen",
+	"csa.google.claiming-exists": "Claiming already exists",
+	"csa.google.preview-process": "Preview: Google process",
+	"csa.google.location-description": "The location you entered is already managed by another person. if you are the owner of the location you need to claim the admin privileges at Google.",
+	"csa.google.privileges-1" : "Please make sure that you request the owner privileges. Click continue to start this process at Google or",
+	"csa.google.privileges-2": " on Google about it.",
+	"csa.google.read-more": "read more"
 }

@@ -36,6 +36,7 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     ProgressBarComponent,
     MaterialModule,
     RouterModule,
+    TranslateModule,
   ],
   declarations: [
     CsStepperComponent,

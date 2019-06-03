@@ -1,18 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { AppRoutes as AuthRoutes } from './app.routing'
-import { Router } from '@angular/router'
-import { Subject } from 'rxjs'
-import { Store, select } from '@ngrx/store'
+import { Component, OnInit } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
+import { delay, takeUntil } from 'rxjs/operators'
+import { select, Store } from '@ngrx/store'
 
 import * as fromApp from './app.reducers'
-import * as AuthActions from './auth/store/actions/auth.action'
-import { takeUntil, delay } from 'rxjs/operators'
-import { TranslateService } from '@ngx-translate/core'
-import { KeycloakService } from 'keycloak-angular'
-import { KeycloakProfile } from 'keycloak-js'
-import { NgxPermissionsService } from 'ngx-permissions'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { HeaderService } from './api/services/core/header.service'
+import { Subject } from 'rxjs'
 
 /**
  * The app component.
@@ -23,7 +15,24 @@ import { HeaderService } from './api/services/core/header.service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  private language$: Subject<void> = new Subject<void>()
+  selectedLang: string
 
-  ngOnInit() {}
+  constructor(private store: Store<fromApp.AppState>, private translate: TranslateService) {}
+
+  ngOnInit() {
+    this.translate.setDefaultLang('en')
+
+    this.store
+      .pipe(
+        delay(0),
+        select(fromApp.language),
+        takeUntil(this.language$)
+      )
+      .subscribe(lang => {
+        lang = !lang ? 'en' : lang
+        this.translate.use(lang)
+        this.selectedLang = lang
+      })
+  }
 }

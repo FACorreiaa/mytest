@@ -1,5 +1,5 @@
 <section class="section-title">
-    <span>Claiming service</span>
+    <span>{{'csa.title.short' | translate}}</span>
 </section>
 
 <section class="section-content">
@@ -9,31 +9,30 @@
             <img src="../../../../assets/images/icons/close_x.svg"
                  width="30">
         </a>
-        <h5 *ngIf="firstStep">Claiming already exists</h5>
-        <h5 *ngIf="secondStep">Preview: Google process</h5>
+        <h5 *ngIf="firstStep">{{'csa.google.claiming-exists' | translate}}</h5>
+        <h5 *ngIf="secondStep">{{'csa.google.preview-process' | translate}}</h5>
     </div>
 
     <div *ngIf="firstStep"
          class="popup-content">
-        <span class="pt-3">The location you entered is already managed by another person. if you are the owner
-            of the location you need to claim the admin privileges at Google.
+        <span class="pt-3">{{'csa.google.location-description' | translate}}
         </span>
-        <span class="pt-5 pb-5">Please make sure that you request the owner privileges.
-            Click continue to start this process at Google or <a href="#"
-               target="_blank">read more</a> on Google about it.
+        <span class="pt-5 pb-5">
+            {{'csa.google.privileges-1' | translate}}
+            <a href="#" [routerLink]="">{{'csa.google.read-more' | translate}}</a>
+            {{'csa.google.privileges-2' | translate}}
         </span>
 
         <button type="button"
                 class="btn btn-secondary"
                 (click)="continue()">
-            Continue
+            {{'csa.google.continue' | translate}}
         </button>
     </div>
 
     <div *ngIf="secondStep"
          class="popup-content">
-        <span class="pt-3 pb-5">In order to claim your location, you will have to go through the following steps on
-            Google</span>
+        <span class="pt-3 pb-5">{{ 'In order to claim your location, you will have to go through the following steps on Google' | translate }}</span>
 
         <div class="col-sm-6">
             <div class="login-google-example">
@@ -43,8 +42,7 @@
                      height="200">
             </div>
             <span style="font-size: 12px;">
-                Select your Google Account or create a new one
-                in case you do not have one yet
+               {{'csa.google.select-account' | translate}}
             </span>
         </div>
         <div class="col-sm-6">
@@ -55,8 +53,7 @@
                      height="200">
             </div>
             <span style="font-size: 12px;">
-                You need to allow us to manage the listing
-                for you by clicking on 'accept'
+               {{'csa.google.allow-to-manage' | translate}}
             </span>
         </div>
 
@@ -64,7 +61,7 @@
             <button type="button"
                     class="btn btn-secondary">
                 <a class="btn-secondary" href="https://business.google.com/arc/p/ChIJ4aIK2xS1uEcR0zbWgBIIVmY">
-                    Start now
+                    {{'csa.google.start' | translate}}
                 </a>
             </button>
         </div>
