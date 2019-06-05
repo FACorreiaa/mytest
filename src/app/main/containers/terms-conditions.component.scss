@@ -1,0 +1,30 @@
+@import "../../../styles-variables.scss";
+
+.container {
+  .title {
+    padding: 40px 0 60px 0;
+  }
+
+  .card-template {
+    height: 399px;
+    background-color: white;
+    overflow-y: scroll;
+    border: 2px solid #e9ecef;
+  }
+
+  .div-acceptd-terms{
+    padding: 20px 20px 20px 0px
+  }
+
+  .form-display{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.btn-secondary-terms {
+  color: #000000de;
+  background-color: #d9d9d9;
+  padding: 0.3rem 1.5rem;
+  height: 40px;
+}

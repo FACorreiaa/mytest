@@ -6,14 +6,14 @@ import { GoogleComponent } from './directories/google/containers/google.containe
 // ROUTING
 export const AppRoutes = {
   MAIN: 'main/dashboard',
-  NEW: 'main/new',
-  WIZARD: 'wizard',
+  WIZARD: 'main/wizard',
   ERROR: 'error',
 }
 
 const Paths: Routes = [
-  // { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: '', canActivate: [AppAuthGuard], loadChildren: './auth/auth.module#AuthModule' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  // { path: '', canActivate: [AppAuthGuard], loadChildren: './auth/auth.module#AuthModule' },
+  // { path: '', canActivate: [AppAuthGuard], loadChildren: './main/main.module#MainModule' },
   { path: 'main', canActivate: [AppAuthGuard], loadChildren: './main/main.module#MainModule' },
   { path: 'google', component: GoogleComponent },
   { path: '**', redirectTo: '' },

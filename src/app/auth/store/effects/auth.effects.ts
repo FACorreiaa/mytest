@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { tap, switchMap, map, catchError } from 'rxjs/operators'
-import { of, throwError } from 'rxjs'
+import { tap, switchMap, map, catchError, mergeMap } from 'rxjs/operators'
+import { of } from 'rxjs'
 import { Router } from '@angular/router'
 
 import * as AuthActions from '../actions/auth.action'
@@ -59,7 +59,7 @@ export class AuthEffects {
   @Effect()
   public restaurantAssistent$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.RESTAURANT_ASSISTENT_ATTEMPT),
-    switchMap((action: any) =>
+    mergeMap((action: any) =>
       this.restaurant.restaurantData().pipe(
         map((response: IHydraRestaurantDetailsResponse) => {
           return response.establishment === null ? new AuthActions.RestaurantAssistentFailure({}) : new AuthActions.RestaurantAssistentSuccess(response.establishment)

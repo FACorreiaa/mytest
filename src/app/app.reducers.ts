@@ -1,6 +1,7 @@
 import { combineReducers, createSelector, ActionReducer, ActionReducerMap } from '@ngrx/store'
 import * as fromRouter from '@ngrx/router-store'
 import * as fromAuth from './auth/auth.reducer'
+import * as fromMain from './main/main.selectors'
 
 export default interface AppState {
   router: fromRouter.RouterReducerState

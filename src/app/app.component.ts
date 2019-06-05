@@ -5,6 +5,7 @@ import { select, Store } from '@ngrx/store'
 
 import * as fromApp from './app.reducers'
 import { Subject } from 'rxjs'
+import * as AuthActions from './auth/store/actions/auth.action'
 
 /**
  * The app component.

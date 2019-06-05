@@ -5,20 +5,13 @@ import { ErrorComponent } from './containers/error.component'
 import { NgxPermissionsGuard } from 'ngx-permissions'
 import { AppAuthGuard } from '@app/app.authguard'
 import { NgModule } from '@angular/core'
-import { AuthComponent } from './auth.component'
 
 // Routing
 const AuthRoutes = [
-  { path: '', redirectTo: AppRoutes.WIZARD, pathMatch: 'full' },
   {
     path: '',
-    component: AuthComponent,
-    children: [
-      {
-        path: AppRoutes.WIZARD,
-        component: WizardComponent,
-      },
-    ],
+    component: WizardComponent,
+    canActivate: [AppAuthGuard],
   },
   {
     path: AppRoutes.ERROR,

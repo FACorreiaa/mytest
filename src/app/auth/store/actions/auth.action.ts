@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { UserRegisterDto, ManageBusinessData } from '@app/api/models/api-models'
+import { ManageBusinessData } from '@app/api/models/api-models'
 
 export const AuthActionTypes = {
   MANAGE_BUSINESS_ATTEMPT: '[Auth] Manaege Business Attempt',

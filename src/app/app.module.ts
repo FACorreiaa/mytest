@@ -72,7 +72,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     KeycloakAngularModule,
     // ngrx
     EffectsModule.forRoot([]),
-    StoreModule.forRoot(appReducers, { metaReducers }),
+    StoreModule.forRoot(appReducers),
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({

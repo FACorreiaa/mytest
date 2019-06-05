@@ -6,8 +6,18 @@ export interface BaseServiceResponse<T> {
   data: T[]
 }
 
+export interface TermsConditionsGetResponse {
+  userId: string
+  accepted: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface TermsConditionsPostRequest {
+  accepted: boolean
+}
+
 export interface FetchVerificationRequest {
-  // id: number
   languageCode: string
 }
 

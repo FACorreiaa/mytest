@@ -12,7 +12,6 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.keycloakService.addTokenToHeader(req.headers).pipe(
       mergeMap(headersWithBearer => {
-        // .replace('bearer', '')
         const kcReq = req.clone({ setHeaders: { Authorization: headersWithBearer.get('authorization') } })
         return next.handle(kcReq)
       })

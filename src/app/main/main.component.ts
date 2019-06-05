@@ -3,14 +3,18 @@ import { Store, select } from '@ngrx/store'
 import { Observable, Subject } from 'rxjs'
 
 import * as fromApp from '../app.reducers'
+import * as fromMain from './main.selectors'
+
 import { AppRoutes as AuthRoutes } from '../app.routing'
 import * as AuthActions from '../auth/store/actions/auth.action'
+import * as TermsActions from './store/actions/terms-cond.action'
 
 import { TranslateService } from '@ngx-translate/core'
 import { delay, takeUntil } from 'rxjs/operators'
 import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
+import { TermsConditionsGetResponse } from '@app/api/models/api-models'
 
 @Component({
   selector: 'app-main',
@@ -20,23 +24,22 @@ import { KeycloakService } from 'keycloak-angular'
 export class MainComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
   private userSubscription$: Subject<void> = new Subject<void>()
-  navbarOpen = false
-  sideNavMode: 'side' | 'over' = 'side'
-  loade = false
   loading$: Observable<boolean>
-  selectedLanguage: string
   selectedLang: string
-  userDetails: any
   token: any
+  showNavBar$: Observable<TermsConditionsGetResponse>
   languages = ['en', 'pt', 'de']
 
   constructor(
     private keycloakService: KeycloakService,
     private router: Router,
     private store: Store<fromApp.AppState>,
+    private mainStore: Store<fromMain.MainState>,
     private translate: TranslateService,
     public headerService: HeaderService
-  ) {}
+  ) {
+    this.showNavBar$ = this.mainStore.select(fromMain.getTermsConditionsState)
+  }
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
@@ -52,6 +55,8 @@ export class MainComponent implements OnInit, OnDestroy {
         this.translate.use(lang)
         this.selectedLang = lang
       })
+
+    this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
 
     // this.onLanguageSelect({ value: this.keycloakService.getKeycloakInstance().tokenParsed['locale'] })
   }
