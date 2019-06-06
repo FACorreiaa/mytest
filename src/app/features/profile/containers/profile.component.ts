@@ -1,14 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
+
+import * as Actions from '../store/actions/profile.actions'
+import * as fromProfile from '../profile.selector'
+import * as fromApp from '../../../app.reducers'
+
 import { Observable, Subject } from 'rxjs'
-import { ICategory, Countries, UserRegisterDto } from '@app/api/models/api-models'
+import { delay, takeUntil } from 'rxjs/operators'
+
+import { ICategory, Countries, BusinessData } from '@app/api/models/api-models'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
-import { Router, Data } from '@angular/router'
-import { Store, select } from '@ngrx/store'
-import { delay, takeUntil } from 'rxjs/operators'
-import * as AuthActions from '../../../auth/store/actions/auth.action'
-import * as fromApp from '../../../app.reducers'
+
+import { Router } from '@angular/router'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 
 @Component({
@@ -19,7 +24,7 @@ import { AppRoutes as AuthRoutes } from '../../../app.routing'
 export class ProfileComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
 
-  profileData$: Observable<Data[]>
+  profileData$: Observable<BusinessData[]>
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -31,23 +36,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private store: Store<fromApp.AppState>,
+    private appstore: Store<fromApp.AppState>,
+    private store: Store<fromProfile.ProfileState>,
     private translate: TranslateService,
     private categoriesService: CategoriesService,
     private countriesService: CountriesService
   ) {
-    // this.loading$ = this.store.select(fromApp.loginLoading)
+    this.loading$ = this.appstore.select(fromApp.loading)
+    this.profileData$ = this.store.select(fromProfile.getProfileBusinessList)
   }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
+
+    this.store.dispatch(new Actions.GetAllBusinessAction())
 
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
     this.offerings$ = this.categoriesService.getOfferings()
 
-    this.store
+    this.appstore
       .pipe(
         delay(0),
         select(fromApp.language),
@@ -66,10 +75,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     this.language$.unsubscribe()
-  }
-
-  register(object: UserRegisterDto): void {
-    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
   }
 
   GoToMainPage() {

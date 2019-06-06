@@ -5,6 +5,8 @@ import { HttpModule, RequestOptions, Http, Headers, XHRBackend } from '@angular/
 import { ApiHttpService, applicationHttpClientCreator } from './http/http.service'
 import { IDashBoardService } from './interfaces/i.dashboard.service'
 import { DashBoardService } from './services/core/dashboard.service'
+import { IProfileService } from './interfaces/i.profile.service'
+import { ProfileService } from './services/core/profile.service'
 import { IAuthorizationService } from './interfaces/i.authorization.service'
 import { AuthorizationService } from './services/core/authorization.service'
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http'
@@ -56,6 +58,10 @@ export class ApiModule {
         {
           provide: IDashBoardService,
           useClass: DashBoardService,
+        },
+        {
+          provide: IProfileService,
+          useClass: ProfileService,
         },
         {
           provide: IRestaurantAssistentService,
