@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { Router } from '@angular/router'
+import { BusinessData } from '@app/api/models/api-models'
 
 @Component({
   selector: 'nav-bar',
   templateUrl: 'nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent implements OnInit, OnChanges {
   navbarOpen = false
   navBarMenu = [
     { id: 'dashboard', link: '/main/dashboard', label: 'csa.navmenu-dashboard', isActive: true },
     { id: 'profile', link: '/main/profile', label: 'csa.navmenu-profile', isActive: false },
   ]
+  businessName: string
+  businessAddress: string
+
+  @Input() business: BusinessData[]
 
   constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  ngOnChanges() {
+    if (this.business.length) {
+      this.businessName = this.business[this.business.length - 1].name
+      this.businessAddress = this.business[this.business.length - 1].street
+    }
+  }
 
   toggleNavBar() {
     this.navbarOpen = !this.navbarOpen

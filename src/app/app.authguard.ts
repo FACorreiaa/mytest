@@ -7,6 +7,7 @@ import { Store, select } from '@ngrx/store'
 import * as fromMain from '@app/main/main.selectors'
 import { Subject } from 'rxjs'
 import { takeUntil, delay } from 'rxjs/operators'
+import { AppRoutes } from './app.routing'
 
 @Injectable()
 export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
@@ -70,6 +71,6 @@ export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
   }
 
   private navigateToTermsConditions(): void {
-    this.router.navigate(['main/terms'])
+    this.router.navigate([AppRoutes.TERMS])
   }
 }

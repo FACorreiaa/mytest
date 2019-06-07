@@ -358,7 +358,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Hospitality form
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -399,7 +399,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Meal Time
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -419,7 +419,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Buffet
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -436,7 +436,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Sweets
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -459,7 +459,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Meals
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -506,7 +506,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Specials
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -532,7 +532,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Extras
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -552,7 +552,7 @@
                             </div>
                         </mat-button-toggle>
                         <mat-button-toggle class="col-3">
-                            <button (click)="toggle()" type="button" class="mat-button-toggle-button">
+                            <button  type="button" class="mat-button-toggle-button">
                                 Cuisine
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
@@ -721,7 +721,9 @@
                     <button type="submit" class="btn btn-primary">
                         {{'csa.save' | translate}}
                     </button>
-                    <button type="button" class="btn btn-secondary" (click)="reset(firstFormGroup, secondFormGroup)">
+
+                    <!-- ToDo: (click)="reset(firstFormGroup, secondFormGroup)" -->
+                    <button type="button" class="btn btn-secondary" >
                         {{'csa.delete' | translate}}
                     </button>
                 </form>

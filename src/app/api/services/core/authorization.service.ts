@@ -22,7 +22,6 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
   }
 
   public termsConditionsSave(acceptance: TermsConditionsPostRequest): Observable<any> {
-    console.log('service', acceptance)
     return this.getObjectsPUT(acceptance, `${this.termsandconditionsControllerRoute}/`)
   }
 }

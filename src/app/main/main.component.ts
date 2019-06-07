@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core'
 import { Store, select } from '@ngrx/store'
-import { Observable, Subject } from 'rxjs'
+import { Observable, Subject, of } from 'rxjs'
 
 import * as fromApp from '../app.reducers'
 import * as fromMain from './main.selectors'
@@ -14,20 +14,21 @@ import { delay, takeUntil } from 'rxjs/operators'
 import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
-import { TermsConditionsGetResponse } from '@app/api/models/api-models'
+import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
 
 @Component({
   selector: 'app-main',
   templateUrl: 'main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit, OnChanges, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
   private userSubscription$: Subject<void> = new Subject<void>()
   loading$: Observable<boolean>
   selectedLang: string
   token: any
   showNavBar$: Observable<TermsConditionsGetResponse>
+  businessData$: Observable<BusinessData[]>
   languages = ['en', 'pt', 'de']
 
   constructor(
@@ -39,6 +40,7 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
     public headerService: HeaderService
   ) {
     this.showNavBar$ = this.mainStore.select(fromMain.getTermsConditionsState)
+    this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
   }
 
   ngOnInit() {
@@ -57,11 +59,8 @@ export class MainComponent implements OnInit, OnChanges, OnDestroy {
       })
 
     this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
-
     // this.onLanguageSelect({ value: this.keycloakService.getKeycloakInstance().tokenParsed['locale'] })
   }
-
-  ngOnChanges() {}
 
   ngOnDestroy() {
     this.userSubscription$.unsubscribe()
