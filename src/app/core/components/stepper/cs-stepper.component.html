@@ -112,6 +112,7 @@
                 <div class="row buttons d-flex justify-content-end pad">
                     <button mat-raised-button
                             matStepperNext
+                            (click)="goToStepContactInfo()"
                             class="btn-color-primary">{{'csa.next' | translate}}</button>
                 </div>
             </form>
@@ -161,7 +162,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12 margin-bottom-40">
+                    <div class="col-md-12 margin-bottom-40" *ngIf="this.showOpenHoursLayout">
                         <div formArrayName="openHours">
                             <div class="row justify-content-center margin-bottom-40 margin-top-20">
                                 <span class="col-sm-8 label-title">{{'csa.openhours-title' | translate}}</span>
@@ -387,103 +388,6 @@
         <div class="progress-border-final-step"></div>
         <div class="container">
             <form (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
-                <!-- <div *ngIf="!authorized && !editForm"
-                             class="row justify-content-center">
-        
-                            <div class="col-md-8 margin-bottom-40 margin-top-20"
-                                 style="display: flex;
-                                justify-content: center !important;">
-                                <span class="col-md-8 label-title">{{'csa.register' | translate}}</span>
-                            </div>
-        
-                            <div class="col-md-8 marginBottom">
-                                <mat-form-field class="col">
-                                    <input matInput
-                                           placeholder="E-mail"
-                                           autocomplete="off"
-                                           aria-label="E-mail"
-                                           formControlName="email"
-                                           [(ngModel)]="this.businessEmail">
-                                    <mat-error *ngIf="formConclusion.get('email').hasError('required')">
-                                        {{'csa.email-required' | translate}}
-                                    </mat-error>
-                                    <mat-error
-                                               *ngIf="formConclusion.get('email').invalid && !formConclusion.get('email').hasError('required')">
-                                        {{'csa.email-not-valid' | translate}}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-        
-        
-                            <div class="col-md-8 marginBottom">
-                                <mat-form-field class="col ">
-                                    <input matInput
-                                           placeholder="{{'csa.password' | translate}}"
-                                           autocomplete="current-password"
-                                           aria-label="Password"
-                                           type="password"
-                                           formControlName="password">
-                                    <mat-hint>{{'csa.password-min' | translate}}</mat-hint>
-                                    <mat-error *ngIf="formConclusion.get('password').hasError('required')">
-                                        {{'csa.password-required' | translate}}
-                                    </mat-error>
-                                    <mat-error *ngIf="formConclusion.get('password').hasError('minlength')">
-                                        {{'csa.password-at-least-8' | translate}}
-                                    </mat-error>
-                                    <mat-error *ngIf="formConclusion.get('password').hasError('maxlength')">
-                                        {{'csa.password-can-not-be-long' | translate}}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-        
-                            <div class="col-md-8 marginBottom">
-                                <mat-form-field class="col">
-                                    <input matInput
-                                           placeholder="{{'csa.confirm-password' | translate}}"
-                                           autocomplete="new-password"
-                                           aria-label="confirm password"
-                                           type="password"
-                                           formControlName="confirmPassword"
-                                           [errorStateMatcher]="matcher">
-                                    <mat-hint>{{'csa.password-min' | translate}}</mat-hint>
-                                    <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('required')">
-                                        {{'csa.password-required' | translate}}
-                                    </mat-error>
-                                    <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('minlength')">
-                                        {{'csa.password-at-least-8' | translate}}
-                                    </mat-error>
-                                    <mat-error *ngIf="formConclusion.get('confirmPassword').hasError('maxlength')">
-                                        {{'csa.password-can-not-be-long' | translate}}
-                                    </mat-error>
-                                    <mat-error *ngIf="formConclusion.hasError('mismatch')">
-                                        {{'csa.password-dont-match' | translate}}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-        
-                            <div class="col-md-8 margin-bottom-40 padding-left-30 margin-top-20">
-                                <mat-checkbox [checked]="false"
-                                              formControlName="termsConditions">
-                                </mat-checkbox>
-                                <span class="label-underline"
-                                      (click)="openDialog()">{{'csa.accept-terms' | translate}}</span>
-                                <mat-error
-                                           *ngIf="this.showTermConditiValidation && !formConclusion.get('termsConditions').value">
-                                    {{'csa.accept-terms.valid' | translate}}
-                                </mat-error>
-                            </div>
-        
-                            <div class="col-md-8 padding-left-30">
-                                <button mat-raised-button
-                                        matStepperPrevious
-                                        class="btn-color-secondary col-md-12"
-                                        style="margin-bottom: 10px;">{{'csa.back' | translate}}</button>
-                                <button mat-raised-button
-                                        class="btn-color-primary col-md-12"
-                                        [disabled]="!formConclusion.valid"
-                                        type="submit">{{'csa.register' | translate}}</button>
-                            </div>
-                        </div> -->
                 <div class="row justify-content-center">
         
                     <div class="col-md-8">

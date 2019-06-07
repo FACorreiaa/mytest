@@ -58,6 +58,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   paymentsArray: ICategory[] = []
   offeringsArray: ICategory[] = []
   addressFocus = false
+  showOpenHoursLayout = false
 
   @Input() newBusiness: false
   @Input() businessFromHydra: BusinessData
@@ -82,7 +83,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.buildInitalFormGroup()
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services && this.newBusiness) {
@@ -317,6 +318,10 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.goToProfileEvent.emit()
   }
 
+  goToStepContactInfo() {
+    this.showOpenHoursLayout = true
+  }
+
   /**
    * This method save the claim and registration information.
    */
@@ -460,15 +465,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   /**
-   * Modal to show terms and conditions.
-   */
-  // openDialog(): void {
-  //   this.dialog.open(ModalTermsConditionsComponent, {
-  //     width: '550px',
-  //   })
-  // }
-
-  /**
    * Method to build information retrieved form google places api.
    */
   setAddress(addrObj: any) {
@@ -564,20 +560,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
 
     return null
   }
-}
-
-/**
- * Custom validator to check if user enters correct password.
- * @param formGroup to be validated.
- */
-function passwordMatchValidator(formGroup: FormGroup): any {
-  const pass = formGroup.controls.password.value
-  const confirmPass = formGroup.controls.confirmPassword.value
-
-  if (pass.length < 8 || confirmPass.length < 8) {
-    return null
-  }
-  return pass === confirmPass ? null : { mismatch: true }
 }
 
 /**

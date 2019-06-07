@@ -14,7 +14,7 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
   }
 
   public manageBusiness(manageData: ManageBusinessData): Observable<any> {
-    return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage?testMode=verification`)
+    return this.getObjectsPOST(manageData, `${this.businessControllerRoute}/manage?testMode=true`)
   }
 
   public termsConditions(): Observable<TermsConditionsGetResponse> {

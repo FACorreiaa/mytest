@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { Observable, Subject } from 'rxjs'
 
@@ -21,7 +21,7 @@ import { TermsConditionsGetResponse } from '@app/api/models/api-models'
   templateUrl: 'main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnChanges, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
   private userSubscription$: Subject<void> = new Subject<void>()
   loading$: Observable<boolean>
@@ -61,7 +61,9 @@ export class MainComponent implements OnInit, OnDestroy {
     // this.onLanguageSelect({ value: this.keycloakService.getKeycloakInstance().tokenParsed['locale'] })
   }
 
-  public ngOnDestroy() {
+  ngOnChanges() {}
+
+  ngOnDestroy() {
     this.userSubscription$.unsubscribe()
   }
 

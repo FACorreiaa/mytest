@@ -64,9 +64,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(lang => this.translate.use(lang))
   }
 
-  ngOnChanges() {
-    // console.log('Componenttt', this.restaurant$)
-  }
+  ngOnChanges() {}
 
   public ngOnDestroy() {
     this.language$.unsubscribe()

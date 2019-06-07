@@ -11,7 +11,6 @@ import * as AuthActions from '../../../auth/store/actions/auth.action'
 import * as fromApp from '../../../app.reducers'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 
-
 @Component({
   selector: 'profile-feature',
   templateUrl: 'profile.component.html',
@@ -37,7 +36,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private categoriesService: CategoriesService,
     private countriesService: CountriesService
   ) {
-    this.loading$ = this.store.select(fromApp.loginLoading)
+    // this.loading$ = this.store.select(fromApp.loginLoading)
   }
 
   async ngOnInit() {
@@ -55,7 +54,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))
-
   }
 
   public setActiveTab(tabId: string) {

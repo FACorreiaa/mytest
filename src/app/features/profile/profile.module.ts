@@ -12,6 +12,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
 import { CoreModule } from '@app/core/core.module'
 import { ProfileFormComponent } from '@app/core/components/profile-form/profile-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ProfileDeprecatedComponent } from './profile.component'
 
 @NgModule({
   imports: [
@@ -27,11 +28,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     }),
   ],
   exports: [RouterModule],
-  declarations: [ProfileComponent, ProfileFormComponent],
+  declarations: [ProfileComponent, ProfileFormComponent, ProfileDeprecatedComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ProfileModule { }
+export class ProfileModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

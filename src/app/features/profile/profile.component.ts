@@ -4,9 +4,8 @@ import { TranslateService } from '@ngx-translate/core'
 @Component({
   selector: 'profile-feature',
   templateUrl: 'profile.component.html',
-  styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileDeprecatedComponent implements OnInit {
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {

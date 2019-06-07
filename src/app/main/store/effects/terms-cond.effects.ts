@@ -32,7 +32,7 @@ export class TermsConditionsEffects {
   termsConditionsSuccess$ = this.actions$.pipe(
     ofType(TermsActions.TermsActionTypes.TERMS_CONDITIONS_SUCCESS),
     tap(() => {
-      this.router.navigate([AuthRoutes.WIZARD])
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -53,7 +53,7 @@ export class TermsConditionsEffects {
   termsConditionsUpdateSuccess$ = this.actions$.pipe(
     ofType(TermsActions.TermsActionTypes.TERMS_CONDITIONS_UPDATE_SUCCESS),
     tap(() => {
-      this.router.navigate([AuthRoutes.WIZARD])
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 }
