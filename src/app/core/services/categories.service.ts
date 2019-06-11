@@ -4,7 +4,7 @@ import { map } from 'rxjs/internal/operators/map'
 
 @Injectable()
 export class CategoriesService {
-  constructor(public http: Http) {}
+  constructor(public http: Http) { }
 
   public getOfferings() {
     return this.http.get('assets/categories/category-offering.json').pipe(map((response: any) => response.json().category))
@@ -19,10 +19,8 @@ export class CategoriesService {
   }
 
   public getProfileOfferings() {
-    return this.http.get('assets/categories/offerings.json').pipe(
-      map((response: any) => {
-        return response.json().offerings
-      })
-    )
+    return this.http.get('assets/categories/offerings.json').pipe(map((response: any) => {
+      return response.json().offerings
+    }))
   }
 }

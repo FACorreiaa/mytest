@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { ICategoryDto } from '@app/api/models/api-models'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
     selector: 'checklist',
@@ -7,8 +6,6 @@ import { ICategoryDto } from '@app/api/models/api-models'
     styleUrls: ['./checklist.component.scss'],
 })
 export class ChecklistComponent implements OnInit {
-    @Input() items: ICategoryDto
-    @Input() toggleButton: boolean
 
     constructor() { }
 

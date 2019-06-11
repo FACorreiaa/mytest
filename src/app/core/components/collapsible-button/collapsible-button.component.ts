@@ -9,14 +9,8 @@ import { ICategoryDto } from '@app/api/models/api-models'
 export class CollapsibleButtonComponent implements OnInit {
     @Input() offerings: ICategoryDto[]
 
-    imgPathOfferings = '../../../../assets/images/icons_offerings/'
-    toggleButton = false
-
     constructor() { }
 
     ngOnInit() { }
 
-    toggleOfferings() {
-        this.toggleButton = !this.toggleButton
-    }
 }

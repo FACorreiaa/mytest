@@ -305,10 +305,9 @@
                         </div>
                     </div>
                     <!--
-                    <collapsible-button [offerings]="offerings">
+                    <collapsible-button [offerings]="this.offerings | async">
                         <checklist></checklist>
                     </collapsible-button>
-                    
                     <mat-button-toggle-group class="row" name="offerings">
                         <mat-button-toggle class="col-3" *ngFor="let offering of this.offerings">
                             <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}">
