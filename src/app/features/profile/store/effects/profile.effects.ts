@@ -12,7 +12,6 @@ import { IProfileService } from '@app/api/interfaces/i.profile.service'
 
 @Injectable()
 export class ProfileEffects {
-
   // ----------------- Get Business -----------------
 
   @Effect()
