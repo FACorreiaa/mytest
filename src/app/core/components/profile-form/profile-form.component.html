@@ -61,7 +61,7 @@
                         <mat-select placeholder="{{'csa.categories' | translate}}">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option name="categoryCusine" *ngFor="let category of this.categories"
-                                [value]="category.name" (change)="onChangeCategory($event, category)">
+                                [value]="category.name" >
                                 {{category.name | translate}}
                             </mat-option>
                         </mat-select>

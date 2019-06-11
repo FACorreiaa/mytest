@@ -56,6 +56,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   ],
   providers: [CategoriesService, CountriesService, NgbActiveModal],
   entryComponents: [ModalOtherVerifiComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CoreModule { }
+export class CoreModule {}
