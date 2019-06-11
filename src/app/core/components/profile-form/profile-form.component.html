@@ -61,7 +61,7 @@
                         <mat-select placeholder="{{'csa.categories' | translate}}">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option name="categoryCusine" *ngFor="let category of this.categories"
-                                [value]="category.name" >
+                                [value]="category.name">
                                 {{category.name | translate}}
                             </mat-option>
                         </mat-select>
@@ -305,8 +305,8 @@
                         </div>
                     </div>
                     <!--
-                    <collapsible-button [offerings]="this.offerings | async">
-                        <checklist></checklist>
+                    <collapsible-button [offerings]="offerings">
+                        <checklist [items]="offerings.value"></checklist>
                     </collapsible-button>
                     
                     <mat-button-toggle-group class="row" name="offerings">

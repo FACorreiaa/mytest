@@ -1,0 +1,39 @@
+mat-button-toggle-group {
+    padding: 0 15px;
+
+    mat-button-toggle {
+
+        button {
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 10px;
+            background-color: #f3f3f3;
+            border: solid 1px #f3f3f3;
+            cursor: pointer;
+
+            mat-icon {
+                transition: all .2s ease-out;
+                display: block;
+                margin: 0 auto;
+                color: #0000008a;
+            }
+
+            &.clicked {
+                mat-icon {
+                    transform: rotate(180deg);
+                }
+            }
+
+            img {
+                width: 2rem;
+                max-height: 2rem;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        button:focus {
+            outline: none;  
+        }
+    }
+}
