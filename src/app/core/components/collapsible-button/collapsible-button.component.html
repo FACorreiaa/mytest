@@ -1,0 +1,9 @@
+<mat-button-toggle-group class="row" name="offerings">
+    <mat-button-toggle class="col-3" *ngFor="let offering of this.offerings">
+        <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}">
+            <img class="img-fluid" src="{{imgPathOfferings}}{{offering.category}}.png" alt="{{offering.category}}">
+            {{offering.category | translate}}
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+    </mat-button-toggle>
+</mat-button-toggle-group>

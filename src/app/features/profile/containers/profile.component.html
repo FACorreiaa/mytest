@@ -40,3 +40,20 @@
         </div>
     </div>
 </div>
+
+<mat-card class="save-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-8">
+                <form (ngSubmit)="save(firstFormGroup, secondFormGroup)">
+                    <button type="submit" class="btn btn-primary">
+                        {{'csa.save' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="reset(firstFormGroup, secondFormGroup)">
+                        {{'csa.delete' | translate}}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-card>

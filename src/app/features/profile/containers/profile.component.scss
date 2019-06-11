@@ -51,4 +51,12 @@
 
 .save-bar {
   margin: 0 -15px;
+
+  form {
+    float: right;
+  }
+
+  button {
+    margin-left: 15px;
+  }
 }

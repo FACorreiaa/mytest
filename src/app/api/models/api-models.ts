@@ -185,11 +185,13 @@ export interface BusinessData {
   description: string
   userFirstName?: string
   userLastName?: string
+  country?: string
   countryCode: string
   languageCode?: string
   url: string
   contactEmail: string
   contactPhoneNumber: string
+  contactMobileNumber?: string
   openingTimes: OpeningTimes
   offers?: string[]
   services?: string[]
@@ -376,6 +378,13 @@ const Hours = [
   { key: '24:30', value: '24:30' },
   { key: '24:45', value: '24:45' },
 ]
+
+export interface ICategoryDto {
+  id: string
+  category: string
+  value: string[]
+  selected: boolean
+}
 
 export interface ICategory {
   name: string
