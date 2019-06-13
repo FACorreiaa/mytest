@@ -1,10 +1,16 @@
 <mat-button-toggle-group class="row" name="offerings">
-    <mat-button-toggle class="col-3" *ngFor="let offering of offerings">
-        <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}">
+    <mat-button-toggle class="col-3" *ngFor="let offering of offerings; let i = index">
+        <button (click)="toggleOfferings(i)" type="button" [ngClass]="{'clicked': toggleState[i]}">
             <img class="img-fluid" src="{{imgPathOfferings}}{{offering.category}}.png" alt="{{offering.category}}">
             {{offering.category | translate}}
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
-        <ng-content></ng-content>
+
+        <div *ngIf="toggleState[i]" class="toggle-checkbox">
+            <mat-checkbox *ngFor="let item of offering.value" class="col-4" [value]="item"
+                [checked]="offeringState[item]" (change)="onOfferingsChange($event, item)">
+                {{item | translate}}
+            </mat-checkbox>
+        </div>
     </mat-button-toggle>
 </mat-button-toggle-group>

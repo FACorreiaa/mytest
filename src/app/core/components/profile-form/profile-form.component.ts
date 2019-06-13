@@ -15,7 +15,6 @@ import {
 } from '@app/api/models/api-models'
 
 import { ErrorStateMatcher, MatDialog, MatChipInputEvent } from '@angular/material'
-import { Observable } from 'rxjs'
 import { TranslateService } from '@ngx-translate/core'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -91,6 +90,8 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
         if (changes.services && this.services) {
             this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
         }
+
+        console.log(this.profileData)
 
         if (this.profileData.length) {
             this.firstFormGroup = this.formBuilder.group({

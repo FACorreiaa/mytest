@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { MainComponent } from './main.component'
 import { AppAuthGuard } from '@app/app.authguard'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
+import { ImprintComponent } from './containers/imprint/imprint.component'
 
 const MainRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -31,6 +32,11 @@ const MainRoutes: Routes = [
         canActivate: [AppAuthGuard],
         component: TermsConditionsComponent,
       },
+      {
+        path: 'imprint',
+        canActivate: [AppAuthGuard],
+        component: ImprintComponent,
+      },
     ],
   },
 ]
@@ -39,4 +45,4 @@ const MainRoutes: Routes = [
   imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class MainRoutingModule { }

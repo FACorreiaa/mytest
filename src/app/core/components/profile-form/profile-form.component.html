@@ -4,13 +4,13 @@
         <form [formGroup]="firstFormGroup" (keydown.enter)="$event.preventDefault()">
             <div class="row">
                 <div class="col">
-                    <h4>General Information</h4>
+                    <h4>{{'csa.general-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <input matInput formControlName="location" placeholder="{{'csa.enter-business' | translate}}"
+                        <input matInput formControlName="location" placeholder="{{'csa.enter-location' | translate}}"
                             autocomplete="off">
                         <mat-error *ngIf="firstFormGroup.get('location').invalid">
                             {{'csa.enter-value' | translate}}
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <mat-select formControlName="country" placeholder="{{'csa.country' | translate}}"
+                        <mat-select formControlName="country" placeholder="{{'csa.enter-country' | translate}}"
                             (selectionChange)="changeCountry($event)">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option *ngFor="let state of countries" [value]="state.name">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <mat-select placeholder="{{'csa.categories' | translate}}">
+                        <mat-select placeholder="{{'csa.enter-category' | translate}}">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option name="categoryCusine" *ngFor="let category of this.categories"
                                 [value]="category.name">
@@ -70,7 +70,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h4>Contact Information</h4>
+                    <h4>{{'csa.contact-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
@@ -79,7 +79,7 @@
                         <input class="text-right" matInput formControlName="area" maxlength="6" autocomplete="off">
                     </mat-form-field>
                     <span class="col-1">&ndash;</span>
-                    <mat-form-field class="col-7 col-sm-8 col-md-9">
+                    <mat-form-field class="col-8 col-sm-8 col-md-9">
                         <input matInput formControlName="phone" placeholder="{{'csa.enter-phone' | translate}}"
                             autocomplete="off" required>
                         <mat-error *ngIf="firstFormGroup.get('phone').invalid">
@@ -89,17 +89,10 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <input matInput formControlName="mobile" placeholder="{{'csa.enter-mobile' | translate}}"
-                            autocomplete="off">
-                    </mat-form-field>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <mat-form-field class="col">
-                        <input matInput placeholder="{{'csa.enter-site' | translate}}" formControlName="website"
+                        <input matInput placeholder="{{'csa.enter-website' | translate}}" formControlName="website"
                             autocomplete="off">
                         <span matPrefix>www.&nbsp;</span>
                         <mat-hint>{{'csa.example' | translate}}: www.yoursite.com</mat-hint>
-
                         <mat-error *ngIf="firstFormGroup.get('website').hasError('required')">
                             {{'csa.enter-value' | translate}}
                         </mat-error>
@@ -145,7 +138,7 @@
                                             <mat-select placeholder="{{'csa.from' | translate}}" formControlName="from"
                                                 [value]="position.value.from"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -160,7 +153,7 @@
                                             <mat-select placeholder="{{'csa.to' | translate}}" formControlName="to"
                                                 [value]="position.value.to"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -181,7 +174,7 @@
                                             <mat-select placeholder="{{'csa.from' | translate}}"
                                                 formControlName="splitedFrom" [value]="position.value.splitedFrom"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -200,7 +193,7 @@
                                             <mat-select placeholder="{{'csa.to' | translate}}"
                                                 formControlName="splitedTo" [value]="position.value.splitedTo"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -223,7 +216,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h4>Business Information</h4>
+                    <h4>{{'csa.business-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
@@ -257,7 +250,7 @@
         <form [formGroup]="secondFormGroup" (keydown.enter)="$event.preventDefault()">
             <div class="row">
                 <div class="col">
-                    <h4>Additional Information</h4>
+                    <h4>{{'csa.additional-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
@@ -304,27 +297,7 @@
                             <h5>{{'csa.offerings-title' | translate}}</h5>
                         </div>
                     </div>
-                    <!--
-                    <collapsible-button [offerings]="offerings">
-                        <checklist></checklist>
-                    </collapsible-button>
-                    <mat-button-toggle-group class="row" name="offerings">
-                        <mat-button-toggle class="col-3" *ngFor="let offering of this.offerings">
-                            <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}">
-                                <img class="img-fluid" src="{{imgPathOfferings}}{{offering.category}}.png"
-                                    alt="{{offering.category}}">
-                                {{offering.category | translate}}
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="toggleButton" class="toggle-checkbox">
-                                <mat-checkbox *ngFor="let item of offering.value" class="col-4" [value]="item"
-                                    [checked]="item.selected" (change)="onOfferingsChange($event, item)">
-                                    {{item | translate}}
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
-                    -->
+                    <collapsible-button [offerings]="offerings"></collapsible-button>
                 </div>
                 <div class="col-md-12 mb-3">
                     <div class="row">

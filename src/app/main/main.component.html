@@ -45,6 +45,26 @@
           <main class="main-container" *ngIf="!(this.loading$ | async)">
             <router-outlet></router-outlet>
           </main>
+          <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <ul>
+                    <li><a [routerLink]="['/main/imprint/']" fragment="imprint">{{'csa.footer.imprint' | translate}}</a>
+                    </li>
+                    <li><a (click)="openTerms()">{{'csa.footer.terms' | translate}}</a></li>
+                    <li><a href="">{{'csa.footer.privacy' | translate}}</a></li>
+                    <li><a href="">{{'csa.footer.cookies' | translate}}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>{{'csa.footer.rights' | translate}}</p>
+                </div>
+              </div>
+            </div>
+          </footer>
         </mat-sidenav-container>
       </div>
     </div>

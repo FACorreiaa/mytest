@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <h2>{{'cs.navmenu-profile' | translate}}</h2>
+        <h2>{{'csa.profile-title' | translate}}</h2>
     </div>
     <div class="row">
         <div class="col-12 order-2 order-lg-1">
@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-12 col-lg-4 order-1 order-lg-3">
             <div class="card">
-                <h5>{{'cs.profile-completeness' | translate}}</h5>
+                <h5>{{'csa.profile-completeness' | translate}}</h5>
                 <div class="percentage-complete">
                     <!-- {{this.percentageToComplete}} {{'csa.to-complete' | translate}} -->
                 </div>
@@ -46,11 +46,13 @@
         <div class="row">
             <div class="col col-lg-8">
                 <form (ngSubmit)="save(firstFormGroup, secondFormGroup)">
-                    <button type="submit" class="btn btn-primary">
-                        {{'csa.save' | translate}}
+                    <button type="submit" class="btn btn-save">
+                        <mat-icon>check_circle</mat-icon>
+                        {{'csa.profile-save' | translate}}
                     </button>
-                    <button type="button" class="btn btn-secondary" (click)="reset(firstFormGroup, secondFormGroup)">
-                        {{'csa.delete' | translate}}
+                    <button type="button" class="btn btn-discard" (click)="reset(firstFormGroup, secondFormGroup)">
+                        <mat-icon>highlight_off</mat-icon>
+                        {{'csa.profile-discard' | translate}}
                     </button>
                 </form>
             </div>

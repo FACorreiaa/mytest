@@ -14,6 +14,7 @@ import { MainComponent } from './main.component'
 import { TermsConditionsEffects } from './store/effects/terms-cond.effects'
 import { reducers, reducerName } from './main.selectors'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
+import { ImprintComponent } from './containers/imprint/imprint.component'
 
 @NgModule({
   imports: [
@@ -29,11 +30,11 @@ import { TermsConditionsComponent } from './containers/terms-conditions.componen
       isolate: true,
     }),
   ],
-  declarations: [MainComponent, TermsConditionsComponent],
+  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule {}
+export class MainModule { }
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

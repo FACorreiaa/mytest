@@ -57,5 +57,10 @@
 	"csa.enter-value": "Bitte füge einen Eintrag hinzu",
 	"csa.loading": "Loading...",
 	"csa.accept-terms": "I accept terms and conditions",
-	"csa.accept-terms.valid": "You need to accept terms and conditions to go forward."
+	"csa.accept-terms.valid": "You need to accept terms and conditions to go forward.",
+	"csa.footer.rights": "Designed by Hospitality Digital GmbH. All rights reserved.",
+	"csa.footer.imprint": "Impressum",
+	"csa.footer.terms": "Nutzungsbedingungen",
+	"csa.footer.privacy": "Datenschutzerklärung",
+	"csa.footer.cookies": "Cookie Einstellungen ändern"
 }

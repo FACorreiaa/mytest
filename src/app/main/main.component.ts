@@ -15,6 +15,9 @@ import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
 import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
+import { MatDialog } from '@angular/material'
+import { TermsConditionsComponent } from './containers/terms-conditions.component'
+
 
 @Component({
   selector: 'app-main',
@@ -37,7 +40,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>,
     private mainStore: Store<fromMain.MainState>,
     private translate: TranslateService,
-    public headerService: HeaderService
+    public headerService: HeaderService,
+    public dialog: MatDialog
   ) {
     this.showNavBar$ = this.mainStore.select(fromMain.getTermsConditionsState)
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
@@ -77,5 +81,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onLanguageSelect({ value: language }) {
     this.store.dispatch(new AuthActions.ChangeLanguage({ language }))
+  }
+
+  openTerms() {
+    this.dialog.open(TermsConditionsComponent)
   }
 }
