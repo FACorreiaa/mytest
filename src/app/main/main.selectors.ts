@@ -17,6 +17,9 @@ export const reducers: ActionReducerMap<MainState> = {
 
 const getModuleState = createFeatureSelector<MainState>(reducerName)
 
+// Loading
+export const getLoading = createSelector(getModuleState, (stateMain: MainState) => stateMain.termsConditions.loading)
+
 // Terms & Conditions
 export const getTermsConditionsState = createSelector(getModuleState, (stateMain: MainState) => stateMain.termsConditions.termsConditions)
 

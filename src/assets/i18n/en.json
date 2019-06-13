@@ -12,6 +12,9 @@
 	"csa.google.in-order-claim": "In order to claim your location, you will have to go through the following steps on Google",
 	"csa.google.select-account": "Select your Google Account or create a new one in case you do not have one yet",
 	"csa.google.allow-to-manage": "You need to allow us to manage the listing for you by clicking on 'accept'",
-	"csa.google.start": "Start now"
+	"csa.google.start": "Start now",
+	"csa.google.success": "Successfully claimed",
+	"csa.google.success-description": "You successfully claim the admin privileges at Google.",
+	"csa.close": "Close"
 
 }

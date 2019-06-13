@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router'
 import { AppAuthGuard } from './app.authguard'
 import { GoogleComponent } from './directories/google/containers/google.container'
+import { FinishComponent } from './directories/google/containers/finish.container'
 
 // ROUTING
 export const AppRoutes = {
@@ -15,7 +16,8 @@ const Paths: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', canActivate: [AppAuthGuard], loadChildren: './main/main.module#MainModule' },
   { path: 'google', component: GoogleComponent },
-  { path: '**', redirectTo: '' },
+  { path: 'google/finish', component: FinishComponent },
+  { path: '**', redirectTo: 'main' },
 ]
 
 @NgModule({

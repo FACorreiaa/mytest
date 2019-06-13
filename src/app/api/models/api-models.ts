@@ -6,6 +6,21 @@ export interface BaseServiceResponse<T> {
   data: T[]
 }
 
+export interface RequestAdminRightsBusinessId {
+  businessUnitId: number
+  channel: string
+}
+
+export interface RequestAdminRightsBusinessData {
+  businessUnit: BusinessData
+  suppressAutoVerify: boolean
+  locationName: string
+  placeId: string
+  requestAdminRightsUrl: string
+  channel: string
+  zipCode: string
+}
+
 export interface TermsConditionsGetResponse {
   userId: string
   accepted: boolean

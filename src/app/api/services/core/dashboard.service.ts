@@ -25,8 +25,6 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
   }
 
   public fetchVerificationOptions(id: number, req: FetchVerificationRequest): Observable<any> {
-    // console.log('object', obj)
-
     return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/fetchOptions?testMode=true`)
   }
 

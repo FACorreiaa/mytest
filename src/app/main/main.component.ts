@@ -41,6 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
   ) {
     this.showNavBar$ = this.mainStore.select(fromMain.getTermsConditionsState)
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
+    this.loading$ = this.mainStore.select(fromMain.getLoading)
   }
 
   ngOnInit() {

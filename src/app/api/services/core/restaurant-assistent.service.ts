@@ -12,6 +12,7 @@ export class RestaurantAssistentService extends BaseApi implements IRestaurantAs
   }
 
   public restaurantData(): Observable<IHydraResponse> {
+    // ToDO - mocked id just for testing purposes
     const id = '1085698'
     return this.getObjects(`${this.restaurantControllerRoute}/${id}`)
   }
