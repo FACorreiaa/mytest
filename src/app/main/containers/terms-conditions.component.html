@@ -86,22 +86,21 @@
 
 
         </div>
-        <div class="col-md-12 d-flex justify-content-end pad div-acceptd-terms">
+        <div *ngIf="showTermConditiValidation" class="col-md-12 d-flex justify-content-end pad div-acceptd-terms">
             <form class="form-display" [formGroup]="formAcceptTermsConditions"
-                  (ngSubmit)="confirm(formAcceptTermsConditions)">
+                (ngSubmit)="confirm(formAcceptTermsConditions)">
                 <div class="pr-3">
-                    <mat-checkbox [checked]="false"
-                                  formControlName="termsConditions">{{'csa.accept-terms' | translate}}</mat-checkbox>
-                    <mat-error *ngIf="this.showTermConditiValidation && !formAcceptTermsConditions.get('termsConditions').value">
+                    <mat-checkbox [checked]="false" formControlName="termsConditions">{{'csa.accept-terms' | translate}}
+                    </mat-checkbox>
+                    <mat-error
+                        *ngIf="this.showTermConditiValidation && !formAcceptTermsConditions.get('termsConditions').value">
                         {{'csa.accept-terms.valid' | translate}}
                     </mat-error>
                 </div>
 
 
-                <button type="button"
-                        class="btn btn-secondary-terms"
-                        [disabled]="!formAcceptTermsConditions.valid"
-                        type="submit">Confirm</button>
+                <button type="button" class="btn btn-secondary-terms" [disabled]="!formAcceptTermsConditions.valid"
+                    type="submit">Confirm</button>
             </form>
         </div>
     </div>

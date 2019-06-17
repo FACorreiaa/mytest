@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h3 class="mb-4">{{'csa.cookieSettings.title' | translate}}</h3>
+        </div>
+        <div class="col-4">
+            <button type="button" class="close" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="row cookie-section">
+            <div class="col pt-3 pb-3">
+                <div class="row">
+                    <div class="col-8">
+                        <h4>{{'csa.cookieSettings.session-title' | translate}}</h4>
+                        <p>Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo.
+                            Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada,
+                            integer vivamus elit eu mauris eus, cum eros quis aliquam wisi.
+                            Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi,
+                            mi mattis pariatur aliquam pharetra eget.
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <mat-slide-toggle aria-label="{{'csa.cookieSettings.session-title' | translate}}">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row cookie-section">
+            <div class="col pt-3 pb-3">
+                <div class="row">
+                    <div class="col-8">
+                        <h4>{{'csa.cookieSettings.additional-title' | translate}}</h4>
+                        <p>Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo.
+                            Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada,
+                            integer vivamus elit eu mauris eus, cum eros quis aliquam wisi.
+                            Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi,
+                            mi mattis pariatur aliquam pharetra eget.
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <mat-slide-toggle aria-label="{{'csa.cookieSettings.additional-title' | translate}}">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-close>
+        <button type="button" class="btn btn-secondary">{{'csa.cookieSettings.confirm' | translate}}</button>
+    </mat-dialog-close>
+</div>

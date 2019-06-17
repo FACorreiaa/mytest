@@ -50,11 +50,10 @@
               <div class="row">
                 <div class="col">
                   <ul>
-                    <li><a [routerLink]="['/main/imprint/']" fragment="imprint">{{'csa.footer.imprint' | translate}}</a>
-                    </li>
+                    <li><a routerLink="/main/imprint">{{'csa.footer.imprint' | translate}}</a></li>
                     <li><a (click)="openTerms()">{{'csa.footer.terms' | translate}}</a></li>
-                    <li><a href="">{{'csa.footer.privacy' | translate}}</a></li>
-                    <li><a href="">{{'csa.footer.cookies' | translate}}</a></li>
+                    <li><a routerLink="/main/data_privacy">{{'csa.footer.privacy' | translate}}</a></li>
+                    <li><a (click)="openCookies()">{{'csa.footer.cookies' | translate}}</a></li>
                   </ul>
                 </div>
               </div>

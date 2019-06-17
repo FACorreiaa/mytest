@@ -19,6 +19,7 @@ import {
   MatListModule,
   MatDialogModule,
   MatRadioModule,
+  MatSlideToggleModule,
 } from '@angular/material'
 
 import { NgModule } from '@angular/core'
@@ -45,6 +46,7 @@ import { NgModule } from '@angular/core'
     MatDialogModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -67,6 +69,7 @@ import { NgModule } from '@angular/core'
     MatListModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatSlideToggleModule,
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

@@ -17,7 +17,7 @@ import { KeycloakService } from 'keycloak-angular'
 import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
-
+import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 
 @Component({
   selector: 'app-main',
@@ -85,5 +85,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   openTerms() {
     this.dialog.open(TermsConditionsComponent)
+  }
+
+  openCookies() {
+    this.dialog.open(CookieSettingsComponent)
   }
 }

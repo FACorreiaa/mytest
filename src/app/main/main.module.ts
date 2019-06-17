@@ -1,6 +1,6 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { CoreModule } from '@app/core/core.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
@@ -14,7 +14,9 @@ import { MainComponent } from './main.component'
 import { TermsConditionsEffects } from './store/effects/terms-cond.effects'
 import { reducers, reducerName } from './main.selectors'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
-import { ImprintComponent } from './containers/imprint/imprint.component'
+import { ImprintComponent } from './components/imprint/imprint.component'
+import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
+import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ import { ImprintComponent } from './containers/imprint/imprint.component'
       isolate: true,
     }),
   ],
-  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent],
+  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent, DataPrivacyComponent, CookieSettingsComponent],
+  entryComponents: [CookieSettingsComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
