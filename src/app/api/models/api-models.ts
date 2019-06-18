@@ -4,6 +4,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http'
 export interface BaseServiceResponse<T> {
   status: number
   data: T[]
+  message?: string
 }
 
 export interface RequestAdminRightsBusinessId {
@@ -148,16 +149,6 @@ export interface IRequestOptionsText {
   withCredentials?: boolean
 }
 
-export interface UserRegisterDto {
-  user: UserLoginDto
-  claim: ManageBusinessData
-}
-
-export interface UserLoginDto {
-  email: string
-  password: string
-}
-
 export interface Action extends StoreAction {
   payload: any
 }
@@ -165,6 +156,25 @@ export interface Action extends StoreAction {
 export interface ManageBusinessData {
   data: BusinessData
   channels: string[]
+}
+
+export interface BusinessUnitManageResponse {
+  GOOGLE_MY_BUSINESS: BusinessUnitManageGoogle
+}
+
+export interface BusinessUnitManageGoogle {
+  status: number
+  message: string
+  requestBody: LocationData
+}
+
+export interface LocationData {
+  locationName: string
+  placeId: string
+  requestAdminRightsUrl: string
+  channel: string
+  zipCode: string
+  businessUnit: ManageBusinessData
 }
 
 export interface DeleteBusinessData {
@@ -179,23 +189,35 @@ export interface BusinessData {
   zipCode: string
   city: string
   street: string
-  additional?: string
-  category?: string
+  additional: string
+  category: string
   name: string
-  description: string
-  userFirstName?: string
-  userLastName?: string
+  description?: string
+  userFirstName: string
+  userLastName: string
   countryCode: string
-  languageCode?: string
-  url: string
-  contactEmail: string
+  languageCode: string
+  url?: string
+  contactEmail?: string
   contactPhoneNumber: string
-  openingTimes: OpeningTimes
+  reservationUri?: string
+  menuUri?: string
+  profileImageUri?: string
+  titleImageUri?: string
+  keywords?: string[]
+  languages?: string[]
   offers?: string[]
   services?: string[]
   paymentMethods?: string[]
-  keywords?: string[]
-  languages?: string[]
+  openingTimes?: OpeningTimes
+  stories?: Stories[]
+}
+
+export interface Stories {
+  headline: string
+  text: string
+  mediaUri: string
+  createdStoryAt: string
 }
 
 export interface Channels {

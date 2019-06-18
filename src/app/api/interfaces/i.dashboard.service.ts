@@ -1,17 +1,12 @@
 import { Observable } from 'rxjs'
-import {
-  BusinessData,
-  ManageBusinessData,
-  DeleteBusinessData,
-  FetchVerificationResponse,
-  BaseServiceResponse,
-  FetchVerificationRequest,
-  InitVerificationRequest,
-  CompleteVerificationRequest,
-} from '../models/api-models'
+import { BusinessData, FetchVerificationRequest, InitVerificationRequest, CompleteVerificationRequest, LocationData, RequestAdminRightsBusinessId } from '../models/api-models'
 
 export abstract class IDashBoardService {
   public abstract businessData(): Observable<BusinessData>
+
+  public abstract requestAdminRights(locationData: LocationData): Observable<any>
+
+  public abstract oAuthTokens(business: RequestAdminRightsBusinessId): Observable<any>
 
   public abstract fetchVerificationOptions(id: number, obj: FetchVerificationRequest): Observable<any>
 

@@ -31,7 +31,7 @@
 
               <mat-sidenav-container class="sidenav-container">
             
-                <nav-bar *ngIf="(this.showNavBar$ | async)?.accepted" [business]="(this.businessData$ | async)"></nav-bar>
+                <nav-bar *ngIf="this.showNavBar$" [business]="(this.businessData$ | async)"></nav-bar>
             
                 <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
                   <mat-card class="col">

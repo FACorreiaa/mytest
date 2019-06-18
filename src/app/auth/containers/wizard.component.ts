@@ -7,7 +7,7 @@ import * as AuthActions from '../store/actions/auth.action'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
 import * as fromApp from '../../app.reducers'
 import { CategoriesService } from '@app/core/services/categories.service'
-import { UserRegisterDto, Countries, ICategory, ManageBusinessData } from '@app/api/models/api-models'
+import { Countries, ICategory, ManageBusinessData } from '@app/api/models/api-models'
 import { CountriesService } from '@app/core/services/countries.service'
 import { delay, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
@@ -40,12 +40,15 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
     this.loading$ = this.store.select(fromApp.loading)
     this.restaurant$ = this.store.select(fromApp.restaurantAssistent)
     this.claimData$ = this.store.select(fromApp.claimData)
+
+    this.store.dispatch(new AuthActions.NavMenuLayoutHide())
   }
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    this.store.dispatch(new AuthActions.RestaurantAssistentAttempt())
+    // ToDo, now the logic for the business to apply this call
+    // this.store.dispatch(new AuthActions.RestaurantAssistentAttempt())
 
     // ToDo - isLoggedIn can be use to get roles information in the future
     // this.authorized = await this.keycloakService.isLoggedIn()
@@ -67,11 +70,14 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges() {}
 
   public ngOnDestroy() {
+    this.store.dispatch(new AuthActions.NavMenuLayoutShow())
+
     this.language$.unsubscribe()
   }
 
-  manageBusiness(object: UserRegisterDto): void {
-    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object.claim))
+  manageBusiness(object: ManageBusinessData): void {
+    console.log('Pai', object)
+    this.store.dispatch(new AuthActions.ManageBusinessAttempt(object))
   }
 
   GoToMainPage() {

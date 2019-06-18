@@ -9,12 +9,15 @@ import {
   FetchVerificationRequest,
   InitVerificationRequest,
   CompleteVerificationRequest,
+  LocationData,
+  RequestAdminRightsBusinessId,
 } from '@app/api/models/api-models'
 
 @Injectable()
 export class DashBoardService extends BaseApi implements IDashBoardService {
   private businessControllerRoute = 'businessUnit'
   private businessVerificationControllerRoute = 'businessUnit/verification'
+  private businessRequestAdminControllerRoute = 'businessUnit/requestAdminRights'
 
   constructor(injector: Injector) {
     super(injector)
@@ -24,6 +27,13 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
     return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=verification`)
   }
 
+  public requestAdminRights(locationData: LocationData): Observable<any> {
+    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}?testMode=true`)
+  }
+
+  public oAuthTokens(business: RequestAdminRightsBusinessId): Observable<any> {
+    return this.getObjectsPOST(business, `${this.businessRequestAdminControllerRoute}/oAuth?testMode=true`)
+  }
   public fetchVerificationOptions(id: number, req: FetchVerificationRequest): Observable<any> {
     return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/fetchOptions?testMode=true`)
   }

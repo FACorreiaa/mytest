@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core'
+import { Component, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { Observable, Subject, of } from 'rxjs'
 
@@ -10,7 +10,7 @@ import * as AuthActions from '../auth/store/actions/auth.action'
 import * as TermsActions from './store/actions/terms-cond.action'
 
 import { TranslateService } from '@ngx-translate/core'
-import { delay, takeUntil } from 'rxjs/operators'
+import { delay, takeUntil, startWith, tap } from 'rxjs/operators'
 import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
@@ -21,13 +21,13 @@ import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-mo
   templateUrl: 'main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   private language$: Subject<void> = new Subject<void>()
   private userSubscription$: Subject<void> = new Subject<void>()
   loading$: Observable<boolean>
   selectedLang: string
   token: any
-  showNavBar$: Observable<TermsConditionsGetResponse>
+  showNavBar$: boolean
   businessData$: Observable<BusinessData[]>
   languages = ['en', 'pt', 'de']
 
@@ -39,12 +39,13 @@ export class MainComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     public headerService: HeaderService
   ) {
-    this.showNavBar$ = this.mainStore.select(fromMain.getTermsConditionsState)
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
     this.loading$ = this.mainStore.select(fromMain.getLoading)
   }
 
   ngOnInit() {
+    this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
+
     this.translate.setDefaultLang('en')
 
     this.store
@@ -58,13 +59,25 @@ export class MainComponent implements OnInit, OnDestroy {
         this.translate.use(lang)
         this.selectedLang = lang
       })
-
-    this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
-    // this.onLanguageSelect({ value: this.keycloakService.getKeycloakInstance().tokenParsed['locale'] })
   }
 
   ngOnDestroy() {
     this.userSubscription$.unsubscribe()
+    this.language$.unsubscribe()
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.mainStore
+        .select(fromMain.getNavBarState)
+        .pipe(
+          startWith(null),
+          delay(0),
+          tap(showNavBar => (this.showNavBar$ = showNavBar)),
+          takeUntil(this.userSubscription$)
+        )
+        .subscribe()
+    })
   }
 
   async onLogOutClick() {

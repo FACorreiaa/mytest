@@ -4,9 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { NgxPermissionsModule, NgxPermissionsGuard } from 'ngx-permissions'
 
-import { AppRoutes } from '../app.routing'
-import { AuthGuard } from './auth.guard'
-
 // COMPONENTS
 import { AuthComponent } from './auth.component'
 import { WizardComponent } from './containers/wizard.component'

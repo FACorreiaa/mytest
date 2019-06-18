@@ -104,7 +104,7 @@
                                    autocomplete="off"
                                    required>
                             <mat-error *ngIf="firstFormGroup.get('phone').invalid">
-                                {{'csa.enter-phone' | translate}}
+                                {{'csa.enter-phone-invalid' | translate}}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -162,7 +162,8 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12 margin-bottom-40" *ngIf="this.showOpenHoursLayout">
+                    <div class="col-md-12 margin-bottom-40"
+                         *ngIf="this.showOpenHoursLayout">
                         <div formArrayName="openHours">
                             <div class="row justify-content-center margin-bottom-40 margin-top-20">
                                 <span class="col-sm-8 label-title">{{'csa.openhours-title' | translate}}</span>
@@ -389,7 +390,7 @@
         <div class="container">
             <form (ngSubmit)="save(firstFormGroup, secondFormGroup, formConclusion)">
                 <div class="row justify-content-center">
-        
+
                     <div class="col-md-8">
                         <div class="row justify-content-center margin-bottom-40 margin-top-20">
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -414,7 +415,7 @@
                             </svg>
                         </div>
                     </div>
-        
+
                     <div class="row justify-content-center margin-bottom-40 margin-top-20">
                         <span class="col-md-8 label-title">{{'csa.confirm' | translate}}</span>
                         <span class="col-md-8 margin-top-20 text-center">

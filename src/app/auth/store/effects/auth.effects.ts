@@ -7,10 +7,11 @@ import { Router } from '@angular/router'
 
 import * as AuthActions from '../actions/auth.action'
 
-import * as fromModule from '../../auth.reducer'
+import * as fromModule from '../../auth.selector'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { IAuthorizationService } from '../../../api/interfaces/i.authorization.service'
 import { IRestaurantAssistentService } from '../../../api/interfaces/i.restaurant-assistent.service'
+import { BusinessUnitManageResponse, BaseServiceResponse } from '@app/api/models/api-models'
 
 @Injectable()
 export class AuthEffects {
@@ -29,8 +30,8 @@ export class AuthEffects {
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_ATTEMPT),
     switchMap((action: any) =>
       this.auth.manageBusiness(action.payload).pipe(
-        map(response => {
-          return response == null ? new AuthActions.ManageBusinessFailure({}) : new AuthActions.ManageBusinessSuccess(response)
+        map((response: BaseServiceResponse<BusinessUnitManageResponse>) => {
+          return response === null ? new AuthActions.ManageBusinessFailure({}) : new AuthActions.ManageBusinessSuccess({ manageResponse: response.data[0] })
         }),
         catchError(error => of(new AuthActions.ManageBusinessFailure({ error })))
       )
@@ -41,7 +42,7 @@ export class AuthEffects {
   manageBusinessFailure$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_FAILURE),
     tap(payload => {
-      this.store$.dispatch(new AuthActions.ErrorLayoutShow(payload))
+      this.store$.dispatch(new AuthActions.ErrorLayoutShow({ error: payload }))
       this.router.navigate([AuthRoutes.ERROR])
     })
   )
@@ -49,8 +50,45 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   manageBusinessSuccess$ = this.actions$.pipe(
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_SUCCESS),
-    tap(() => {
-      // this.router.navigate([AuthRoutes.MAIN])
+    tap((action: AuthActions.ManageBusinessSuccess) => {
+      if (action.payload.manageResponse.GOOGLE_MY_BUSINESS.status === 409) {
+        this.store$.dispatch(new AuthActions.RequestAdminRightsAttempt(action.payload.manageResponse.GOOGLE_MY_BUSINESS.requestBody))
+      } else {
+        this.router.navigate([AuthRoutes.MAIN])
+      }
+    })
+  )
+
+  // ----------------- Request Admin Rights -----------------
+
+  @Effect()
+  requestAdminRightsAttempt$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT),
+    mergeMap((action: AuthActions.RequestAdminRightsAttempt) =>
+      this.auth.requestAdminRights(action.payload).pipe(
+        map((response: any) => {
+          return response === null ? new AuthActions.RequestAdminRightsFailure({}) : new AuthActions.RequestAdminRightsSuccess(response)
+        }),
+        catchError(error => of(new AuthActions.RequestAdminRightsFailure({ error })))
+      )
+    )
+  )
+
+  @Effect({ dispatch: false })
+  requestAdminRightsFailure$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.REQUEST_ADMIN_RIGHTS_FAILURE),
+    tap(payload => {
+      console.log('error', payload)
+      this.store$.dispatch(new AuthActions.ErrorLayoutShow({ error: payload }))
+      this.router.navigate([AuthRoutes.ERROR])
+    })
+  )
+
+  @Effect({ dispatch: false })
+  requestAdminRightsSuccess$ = this.actions$.pipe(
+    ofType(AuthActions.AuthActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS),
+    tap((action: AuthActions.RequestAdminRightsSuccess) => {
+      this.router.navigate([AuthRoutes.MAIN])
     })
   )
 
@@ -62,7 +100,9 @@ export class AuthEffects {
     mergeMap((action: any) =>
       this.restaurant.restaurantData().pipe(
         map((response: IHydraRestaurantDetailsResponse) => {
-          return response.establishment === null ? new AuthActions.RestaurantAssistentFailure({}) : new AuthActions.RestaurantAssistentSuccess(response.establishment)
+          return response.establishment === null
+            ? new AuthActions.RestaurantAssistentFailure({})
+            : new AuthActions.RestaurantAssistentSuccess({ restaurant: response.establishment })
         }),
         catchError(error => of(new AuthActions.RestaurantAssistentFailure({ error })))
       )

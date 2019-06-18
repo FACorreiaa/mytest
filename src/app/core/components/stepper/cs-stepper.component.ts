@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
+import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
 import { ModalTermsConditionsComponent } from '../modal/model-term-conditions'
@@ -363,8 +363,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       zipCode: firstForm.postal,
       city: firstForm.city,
       countryCode: 'DE',
-      url: secondFormGroup.website,
       languageCode: 'de',
+      url: secondFormGroup.website,
       contactEmail: secondFormGroup.email,
       contactPhoneNumber: firstForm.phone,
       openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
@@ -380,13 +380,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       channels: ['GOOGLE_MY_BUSINESS'],
     }
 
-    const claimObject: UserRegisterDto = {
-      user: null,
-      claim: manageBusinessData,
-    }
-
-    // console.log('claimObject', claimObject)
-    return claimObject
+    return manageBusinessData
   }
 
   /**
@@ -484,6 +478,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.secondFormGroup.get('website').setValue(addrObj.website)
 
     const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(addrObj.openingHours)).value
+
     this.secondFormGroup.get('openHours').setValue(formBuilder)
 
     this.addressFocus = true

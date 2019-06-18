@@ -9,7 +9,7 @@
                                         [payments]="this.payments$ | async"
                                         [countries]="this.countries$ | async"
                                         [newBusiness]="true"
-                                        [businessFromHydra]="this.claimData$ | async"
+                                        [businessFromHydra]="false"
                                         (registerEvent)="manageBusiness($event)"
                                         (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>

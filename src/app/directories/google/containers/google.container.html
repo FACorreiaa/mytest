@@ -60,10 +60,11 @@
         <div class="pt-5">
             <button type="button"
                     class="btn btn-secondary">
-                <a class="btn-secondary" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fbusiness.manage&state=eyJjbGFpbWluZ0NsaWVudElkIjoyLCJleHRlcm5hbElkIjoiSERDTEFJTUlOR0RFVi0xOSIsInJlcXVlc3RBZG1pblJpZ2h0c1VybCI6Imh0dHBzOi8vYnVzaW5lc3MuZ29vZ2xlLmNvbS9hcmMvcC9DaElKUTE1ZE5ReGR4MGNSc0VEQXZaU0ZZdnciLCJsb2NhdGlvbk5hbWUiOiJLYWkgQ29jdXMgVGVzdCIsInBsYWNlSWQiOiJDaElKUTE1ZE5ReGR4MGNSc0VEQXZaU0ZZdnciLCJsYW5ndWFnZUNvZGUiOiJkZSIsInRvQWNjb3VudCI6ImFjY291bnRzLzEwMTkwNjU2OTI2MzUxNTQ2MTgyMiJ9&access_type=offline&prompt=consent&response_type=code&client_id=793983774149-fptq1rkg68k8c45dmmidraveshse32m4.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fstage.claiming.be.hd.digital%2Fchannel%2FGOOGLE_MY_BUSINESS%2Fauth%2Fresult">
+                <a class="btn-secondary" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fbusiness.manage&state=eyJjbGFpbWluZ0NsaWVudElkIjoyLCJleHRlcm5hbElkIjoiSERDTEFJTUlOR0RFVi02OSIsInJlcXVlc3RBZG1pblJpZ2h0c1VybCI6Imh0dHBzOi8vYnVzaW5lc3MuZ29vZ2xlLmNvbS9hcmMvcC9Ob3RGb3VuZCIsImxvY2F0aW9uTmFtZSI6IkxpYnJhcnkgU3RvcmUiLCJwbGFjZUlkIjoiTm90IGZvdW5kIiwibGFuZ3VhZ2VDb2RlIjoiZGUiLCJ0b0FjY291bnQiOiJhY2NvdW50cy8xMDE5MDY1NjkyNjM1MTU0NjE4MjIiLCJzdXBwcmVzc0F1dG9WZXJpZnkiOnRydWV9&access_type=offline&prompt=consent&response_type=code&client_id=793983774149-fptq1rkg68k8c45dmmidraveshse32m4.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fstage.claiming.be.hd.digital%2Fchannel%2FGOOGLE_MY_BUSINESS%2Fauth%2Fresult">
                     {{'csa.google.start' | translate}}
                 </a>
             </button>
         </div>
+        <span>{{(this.businessData$ | async) }}</span>
     </div>
 </section>

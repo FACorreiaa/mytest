@@ -78,7 +78,6 @@ export class GooglePlacesDirective implements AfterViewInit {
 
     for (let index = 0; index <= 6; index++) {
       const days = openingHours.filter((x: any) => x.open.day === index)
-      console.log('days google', days)
       switch (index) {
         case DaysCodes.sunday:
           if (days.length === 0) {

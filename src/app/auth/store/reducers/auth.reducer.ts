@@ -1,21 +1,28 @@
 import { AuthActions, AuthActionTypes } from '../actions/auth.action'
-import { ManageBusinessData, BusinessData, OpeningTimes } from '@app/api/models/api-models'
+import { ManageBusinessData, BusinessData, OpeningTimes, LocationData } from '@app/api/models/api-models'
+import { loading } from '@app/app.reducers'
 
 export interface AuthState {
   claimData: ManageBusinessData
+  requestBody: LocationData
   restaurantAssistent: IHydraRestaurant
   loading: boolean
+  redirectUrl: any
   hasManageError: boolean
   errorMessage: string
   language: string
+  showNavMenu: boolean
 }
 
 const initialState: AuthState = {
   claimData: null,
+  requestBody: null,
   restaurantAssistent: null,
   loading: false,
+  redirectUrl: null,
   hasManageError: false,
   errorMessage: null,
+  showNavMenu: true,
   language: 'en',
 }
 
@@ -28,14 +35,30 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.MANAGE_BUSINESS_SUCCESS: {
-      return { ...state, loading: false, hasManageError: false }
+      return {
+        ...state,
+        loading: false,
+        hasManageError: false,
+        claimData: action.payload.manageResponse.GOOGLE_MY_BUSINESS.status === 409 ? action.payload.manageResponse.GOOGLE_MY_BUSINESS.requestBody.businessUnit : null,
+        requestBody: action.payload.manageResponse.GOOGLE_MY_BUSINESS.status === 409 ? action.payload.manageResponse.GOOGLE_MY_BUSINESS.requestBody : null,
+      }
     }
 
     case AuthActionTypes.MANAGE_BUSINESS_FAILURE: {
-      return Object.assign({}, state, {
-        hasManageError: true,
-        loading: false,
-      })
+      return { ...state, hasManageError: true, loading: false }
+    }
+
+    case AuthActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT: {
+      console.log('entreiii reducer')
+      return { ...state, loading: true }
+    }
+
+    case AuthActionTypes.REQUEST_ADMIN_RIGHTS_FAILURE: {
+      return { ...state, loading: false }
+    }
+
+    case AuthActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS: {
+      return { ...state, loading: false, redirectUrl: action.payload }
     }
 
     case AuthActionTypes.RESTAURANT_ASSISTENT_ATTEMPT: {
@@ -45,7 +68,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.RESTAURANT_ASSISTENT_SUCCESS: {
-      const restaurantAssistent = Object.assign({}, action.payload)
+      const restaurantAssistent = Object.assign({}, action.payload.restaurant)
 
       const openingTimesData: OpeningTimes = { monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: [] }
       let businessData: BusinessData = null
@@ -85,6 +108,12 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
           url: restaurantAssistent.url,
           countryCode: restaurantAssistent.country,
           openingTimes: openingTimesData,
+          languageCode: restaurantAssistent.country,
+          // ToDo: check why this values are not in hydra service data
+          category: '',
+          additional: '',
+          userFirstName: '',
+          userLastName: '',
         }
       }
 
@@ -96,9 +125,10 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.ERROR_LAYOUT_SHOW: {
+      console.log('entreiii reducer error', action.payload.error)
       return {
         ...state,
-        errorMessage: action.payload.payload.error,
+        errorMessage: action.payload.error,
       }
     }
 
@@ -108,6 +138,20 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
         errorStatus: 0,
         errorLabel: '',
       })
+    }
+
+    case AuthActionTypes.NAV_MENU_LAYOUT_SHOW: {
+      return {
+        ...state,
+        showNavMenu: true,
+      }
+    }
+
+    case AuthActionTypes.NAV_MENU_LAYOUT_HIDE: {
+      return {
+        ...state,
+        showNavMenu: false,
+      }
     }
 
     case AuthActionTypes.CHANGE_LANGUAGE: {

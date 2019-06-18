@@ -33,13 +33,13 @@
             <div class="col-12 d-flex justify-content-center">
                 <!-- *ngIf="!listingStatus" -->
                 <button type="button"
-                        *ngIf="!listingStatus"
+                        *ngIf="selectedBusiness && selectedBusiness.channels[0].awaitingOwnership === 'YES'"
                         class="btn btn-secondary"
                         (click)="openWindowActivation()">
                     {{'csa.activate' | translate}}
                 </button>
                 <button type="button"
-                        *ngIf="listingStatus"
+                        *ngIf="selectedBusiness && selectedBusiness.channels[0].awaitingOwnership === 'NO'"
                         class="btn btn-secondary"
                         (click)="setStatus()">
                     {{'csa.deactivate' | translate}}

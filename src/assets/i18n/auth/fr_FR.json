@@ -14,6 +14,7 @@
 	"csa.None": "None",
 	"csa.wrong-prefix": "wrong prefix",
 	"csa.enter-phone": "Phone",
+	"csa.enter-phone-invalid": "Invalid phone number",
 	"csa.next": "Next",
 	"csa.contact-info": "Contact Information",
 	"csa.contact-info-second": "How can we contact your restaurant?",

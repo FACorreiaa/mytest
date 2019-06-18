@@ -14,6 +14,7 @@
 	"csa.None": "Vazio",
 	"csa.wrong-prefix": "Prefixo errado",
 	"csa.enter-phone": "Introduza numero",
+	"csa.enter-phone-invalid": "Invalid phone number",
 	"csa.next": "Proximo",
 	"csa.contact-info": "Informação do contacto",
 	"csa.contact-info-second": "Como podemos contactar o seu restaurante?",

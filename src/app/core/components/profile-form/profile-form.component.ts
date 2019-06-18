@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, EventEmitter, Output, OnChanges, S
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, UserRegisterDto, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
+import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog, MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material'
 import { Observable } from 'rxjs'
@@ -486,12 +486,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       channels: ['GOOGLE_MY_BUSINESS'],
     }
 
-    const claimObject: UserRegisterDto = {
-      user: null,
-      claim: manageBusinessData,
-    }
-
-    return claimObject
+    return manageBusinessData
   }
 
   /**

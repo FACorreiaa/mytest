@@ -4,7 +4,9 @@ import { FetchVerificationResponse, BusinessData } from '@app/api/models/api-mod
 
 export interface DashBoardState {
   selectedBusiness: any
+  redirectUrl: string
   isLoading: boolean
+  oauthToken: boolean
   business: BusinessData[]
   fetchVerificationOptions: FetchVerificationResponse
   initVerification: any
@@ -15,6 +17,8 @@ export interface DashBoardState {
 export const initialState: DashBoardState = {
   isLoading: false,
   selectedBusiness: null,
+  redirectUrl: null,
+  oauthToken: null,
   business: [],
   fetchVerificationOptions: null,
   initVerification: null,
@@ -26,6 +30,18 @@ export function dashBoardReducer(state: DashBoardState = initialState, action: A
   switch (action.type) {
     case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
       return { ...state, business: action.payload }
+    }
+
+    case Actions.ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS: {
+      return { ...state, redirectUrl: action.payload }
+    }
+
+    case Actions.ActionTypes.OAUTH_TOKEN_FAILURE: {
+      return { ...state, oauthToken: false }
+    }
+
+    case Actions.ActionTypes.OAUTH_TOKEN_SUCCESS: {
+      return { ...state, oauthToken: true }
     }
 
     case Actions.ActionTypes.FETCH_VERIFICATION_OPTIONS_SUCCESS: {
@@ -43,7 +59,6 @@ export function dashBoardReducer(state: DashBoardState = initialState, action: A
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
       return {
         ...state,
-        errorMessage: action.payload.payload.error ? action.payload.payload.error._body : '',
         isLoading: false,
       }
     }
