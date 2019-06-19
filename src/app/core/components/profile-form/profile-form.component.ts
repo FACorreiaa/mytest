@@ -91,8 +91,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
             this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
         }
 
-        console.log(this.profileData)
-
         if (this.profileData.length) {
             this.firstFormGroup = this.formBuilder.group({
                 location: [this.profileData[0].name, Validators.required],

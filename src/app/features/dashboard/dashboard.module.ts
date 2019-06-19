@@ -17,6 +17,7 @@ import { environment } from '@env/environment'
 import { CoreModule } from '@app/core/core.module'
 
 // Ng-bootstrap
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
 
 @NgModule({
@@ -25,6 +26,7 @@ import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstra
     ReactiveFormsModule,
     NgbRatingModule,
     NgbProgressbarModule,
+    NgbPopoverModule,
     DashboardRoutingModule,
     StoreModule.forFeature(reducerName, reducers),
     EffectsModule.forFeature([DashBoardEffects]),
@@ -38,7 +40,7 @@ import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstra
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardModule {}
+export class DashboardModule { }
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

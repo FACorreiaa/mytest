@@ -15,7 +15,7 @@ import { CountriesService } from '@app/core/services/countries.service'
 
 import { CsStepperComponent } from '@app/core/components/stepper/cs-stepper.component'
 import { CollapsibleButtonComponent } from '@app/core/components/collapsible-button/collapsible-button.component'
-import { ChecklistComponent } from '@app/core/components/checklist/checklist.component'
+import { PaymentsButtonComponent } from '@app/core/components/payments-button/payments-button.component'
 import { CellGroupComponent } from '@app/core/components/cell-group/cell-group.component'
 import { ModalTermsConditionsComponent } from '@app/core/components/modal/model-term-conditions'
 import { DisableControlDirective } from '@app/core/directives/disable-control.directive'
@@ -32,7 +32,7 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   exports: [
     CsStepperComponent,
     CollapsibleButtonComponent,
-    ChecklistComponent,
+    PaymentsButtonComponent,
     CellGroupComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
@@ -47,7 +47,7 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   declarations: [
     CsStepperComponent,
     CollapsibleButtonComponent,
-    ChecklistComponent,
+    PaymentsButtonComponent,
     CellGroupComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
@@ -61,4 +61,4 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   entryComponents: [ModalOtherVerifiComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CoreModule {}
+export class CoreModule { }

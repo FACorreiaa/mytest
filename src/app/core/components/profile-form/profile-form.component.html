@@ -222,6 +222,7 @@
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
+                        <mat-icon ngbPopover="Test" triggers="mouseenter:mouseleave" placement="right">info</mat-icon>
                         <mat-chip-list #chipListKeyword>
                             <mat-chip *ngFor="let keyword of this.keywordsArray; let i = index"
                                 [selectable]="selectable" [removable]="removable" (removed)="removeKeywords(keyword)">
@@ -294,6 +295,14 @@
                 <div class="col-md-12 mb-3">
                     <div class="row">
                         <div class="col">
+                            <h5>{{'csa.payments-title' | translate}}</h5>
+                        </div>
+                    </div>
+                    <!-- <payments-button [payments]="payments"></payments-button> -->
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="row">
+                        <div class="col">
                             <h5>{{'csa.offerings-title' | translate}}</h5>
                         </div>
                     </div>
@@ -306,7 +315,7 @@
                         </div>
                     </div>
                     <mat-button-toggle-group class="row" name="services">
-                        <mat-button-toggle class="col-3" *ngFor="let service of this.servicesArray" [value]="service">
+                        <mat-button-toggle class="col-3" *ngFor="let service of this.servicesArray">
                             <button type="button" class="mat-button-toggle-button" [class.selected]="service.selected"
                                 (click)="toggleService(service)">
                                 <img class="img-fluid" src="{{imgPathServices}}{{service.name}}.png"

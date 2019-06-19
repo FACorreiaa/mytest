@@ -18,6 +18,7 @@ import { environment } from '@env/environment'
 import { CoreModule } from '@app/core/core.module'
 
 // Ng-bootstrap
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
     CoreModule,
     FormsModule,
     NgbProgressbarModule,
+    NgbPopoverModule,
     ProfileRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature(reducerName, reducers),
@@ -40,7 +42,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ProfileModule {}
+export class ProfileModule { }
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

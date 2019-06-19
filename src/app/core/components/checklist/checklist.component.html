@@ -1,6 +1,0 @@
-<div *ngIf="toggleButton" class="toggle-checkbox">
-    <mat-checkbox *ngFor="let item of items" class="col-4" [value]="item" [checked]="item.selected"
-        (change)="onOfferingsChange($event, item)">
-        {{item | translate}}
-    </mat-checkbox>
-</div>
