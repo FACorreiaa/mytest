@@ -16,7 +16,6 @@ import { CountriesService } from '@app/core/services/countries.service'
 import { CsStepperComponent } from '@app/core/components/stepper/cs-stepper.component'
 import { CollapsibleButtonComponent } from '@app/core/components/collapsible-button/collapsible-button.component'
 import { PaymentsButtonComponent } from '@app/core/components/payments-button/payments-button.component'
-import { CellGroupComponent } from '@app/core/components/cell-group/cell-group.component'
 import { ModalTermsConditionsComponent } from '@app/core/components/modal/model-term-conditions'
 import { DisableControlDirective } from '@app/core/directives/disable-control.directive'
 import { LoadingRequestComponent } from './components/spinners/loading.component'
@@ -33,7 +32,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     CsStepperComponent,
     CollapsibleButtonComponent,
     PaymentsButtonComponent,
-    CellGroupComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     CommonModule,
@@ -48,7 +46,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     CsStepperComponent,
     CollapsibleButtonComponent,
     PaymentsButtonComponent,
-    CellGroupComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     DisableControlDirective,

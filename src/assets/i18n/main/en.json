@@ -91,6 +91,7 @@
 	"csa.dataPrivacy.title": "Data Privacy",
 	"csa.accept-terms": "I accept terms and conditions",
 	"csa.accept-terms.valid": "You need to accept terms and conditions to go forward.",
+	"csa.tcDialog.title": "Terms and Conditions",
 	"csa.cookieSettings.title": "Cookie Settings",
 	"csa.cookieSettings.session-title": "Session Cookies",
 	"csa.cookieSettings.additional-title": "Additional Cookies",

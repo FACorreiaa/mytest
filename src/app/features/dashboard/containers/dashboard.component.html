@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row justify-content-center mt-5">
+	<div class="row justify-content-center title">
 		<h2>{{ 'csa.navmenu-welcome' | translate }} <span>{{this.userName}}</span></h2>
 	</div>
 
@@ -13,12 +13,10 @@
 		</div>
 	</div>
 
-	<business-comp [businessData$]="(this.businessList$ | async)" 
-				[fecthOptions$]="(this.fecthOptions$ | async)" 
-				[userNames]="(this.userFirstLastName)"
-				(fetchOptionsEvent)="fetchOptions($event)"
-				(InitializeVerificationEvent)="initializeOption($event)"
-				(CompleteVerificationEvent)="completeVerification($event)"></business-comp>
+	<business-comp [businessData$]="(this.businessList$ | async)" [fecthOptions$]="(this.fecthOptions$ | async)"
+		[userNames]="(this.userFirstLastName)" (fetchOptionsEvent)="fetchOptions($event)"
+		(InitializeVerificationEvent)="initializeOption($event)"
+		(CompleteVerificationEvent)="completeVerification($event)"></business-comp>
 
 	<!-- <div class="row justify-content-between">
 		<div class="col-md-5 mb-5 card-template">

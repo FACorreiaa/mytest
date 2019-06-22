@@ -1,9 +1,11 @@
 @import "../../../styles-variables.scss";
 
+.title {
+  margin-top: 3rem;
+  padding: 4rem 0 6rem 0;
+}
+
 .container {
-  .title {
-    padding: 40px 0 60px 0;
-  }
 
   .card-template {
     height: 399px;

@@ -17,6 +17,7 @@ import { TermsConditionsComponent } from './containers/terms-conditions.componen
 import { ImprintComponent } from './components/imprint/imprint.component'
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
+import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
 
 @NgModule({
   imports: [
@@ -32,8 +33,15 @@ import { CookieSettingsComponent } from './components/cookie-settings/cookie-set
       isolate: true,
     }),
   ],
-  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent, DataPrivacyComponent, CookieSettingsComponent],
-  entryComponents: [CookieSettingsComponent],
+  declarations: [
+    MainComponent,
+    TermsConditionsComponent,
+    ImprintComponent,
+    DataPrivacyComponent,
+    CookieSettingsComponent,
+    TcDialogComponent
+  ],
+  entryComponents: [CookieSettingsComponent, TcDialogComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

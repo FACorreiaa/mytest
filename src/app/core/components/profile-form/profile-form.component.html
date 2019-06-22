@@ -255,28 +255,6 @@
                 </div>
             </div>
             <div class="row">
-                <!--
-                <div class="col-md-12 mb-3">
-                    <mat-form-field class="col">
-                        <mat-chip-list #chipListPayment>
-                            <mat-chip *ngFor="let payment of this.selectedPayments" [selectable]="selectable"
-                                [removable]="removable" (removed)="removePayments(payment)">
-                                {{payment | translate}}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                            </mat-chip>
-                            <input #paymentInput placeholder="{{'csa.enter-payments' | translate}}"
-                                [formControl]="paymentCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipListPayment"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                                (matChipInputTokenEnd)="addPayments($event)">
-                        </mat-chip-list>
-                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                            <mat-option *ngFor="let payment of filteredPayments | async" [value]="payment">
-                                {{payment | translate}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                </div>
-                -->
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
                         <mat-chip-list #chipListLanguage>
