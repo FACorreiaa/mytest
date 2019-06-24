@@ -444,3 +444,9 @@ export interface Countries {
   code: string
   name: string
 }
+
+export enum Role {
+  user,
+  admin,
+  superadmin
+}

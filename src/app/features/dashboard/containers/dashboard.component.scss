@@ -3,6 +3,7 @@
 .title {
   margin-top: 3rem;
   padding: 4rem 0 6rem 0;
+  text-align: center;
 }
 
 .container {
@@ -93,6 +94,10 @@
   }
 }
 
+.btn-admin {
+  background-color: #fff;
+  border: 1px solid #d9d9d9
+}
 // .btn-secondary {
 //   color: #000000de;
 //   background-color: #d9d9d9;
@@ -105,3 +110,13 @@
 //   color: white;
 //   font-size: 18px;
 // }
+
+@media (min-width:768px) {
+  .sub-title {
+    text-align: right;
+  }
+
+  .btn-admin {
+    float: right;
+  }
+}
