@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core'
 import { Store, select } from '@ngrx/store'
-import { Observable, Subject, of } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
+import { faBroom } from '@fortawesome/free-solid-svg-icons'
 
 import * as fromApp from '../app.reducers'
 import * as fromMain from './main.selectors'
@@ -8,6 +9,7 @@ import * as fromMain from './main.selectors'
 import { AppRoutes as AuthRoutes } from '../app.routing'
 import * as AuthActions from '../auth/store/actions/auth.action'
 import * as TermsActions from './store/actions/terms-cond.action'
+import { Role } from '@app/api/models/api-models'
 
 import { TranslateService } from '@ngx-translate/core'
 import { delay, takeUntil, startWith, tap } from 'rxjs/operators'
@@ -33,6 +35,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   showNavBar$: boolean
   businessData$: Observable<BusinessData[]>
   languages = ['en', 'pt', 'de']
+  myRole: Role
+  Role = Role
+  faBroom = faBroom
 
   constructor(
     private keycloakService: KeycloakService,
@@ -45,6 +50,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
     this.loading$ = this.mainStore.select(fromMain.getLoading)
+    this.myRole = Role.admin
   }
 
   ngOnInit() {

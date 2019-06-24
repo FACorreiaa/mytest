@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core'
 import * as Actions from '../store/actions/dashboard.actions'
 import * as fromDashboard from '../dashboard.selector'
 import * as fromApp from '../../../app.reducers'
+import { Role } from '@app/api/models/api-models'
 
 import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
@@ -38,6 +39,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   services: string[] = ['All', 'Google', 'Other']
   currentRate = 4
   listingStatus: boolean
+  myRole: Role
+  Role = Role
 
   constructor(
     private appStore: Store<fromApp.AppState>,
@@ -49,6 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.fecthOptions$ = this.store.select(fromDashboard.getfecthVerificationOptions)
     this.oAuthTokenStatus$ = this.store.select(fromDashboard.getOauthTokenStatus)
     this.redirectURL$ = this.store.select(fromDashboard.redirectURL)
+    this.myRole = Role.admin
   }
 
   async ngOnInit() {

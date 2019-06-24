@@ -1,30 +1,50 @@
 <mat-sidenav-container>
   <div class="wrapper">
-    <div *ngIf="!headerService.webview"
-         class="toolbar">
+    <div *ngIf="!headerService.webview" class="toolbar">
       <mat-toolbar color="primary">
         <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
         <span class="example-spacer"></span>
 
         <div [matMenuTriggerFor]="toolbarUserMenu">
-          <mat-icon aria-label="User icon">person</mat-icon>
+          <mat-icon *ngIf="myRole == Role.user" aria-label="User icon">person</mat-icon>
+          <mat-icon *ngIf="myRole == Role.admin || Role.superadmin" aria-label="supervisor account">supervisor_account
+          </mat-icon>
         </div>
 
         <mat-menu #toolbarUserMenu="matMenu">
-          <button mat-menu-item
-                  (click)="onLogOutClick()"
-                  class="remove-outline">
-            <mat-icon>account_circle</mat-icon>
-            <span>Log out</span>
-          </button>
+          <ng-container *ngIf="myRole == Role.user">
+            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
+              <mat-icon>account_circle</mat-icon>
+              <span>{{'csa.nav.logout' | translate}}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="myRole == Role.admin">
+            <button mat-menu-item class="remove-outline">
+              <mat-icon>settings</mat-icon>
+              <span>{{'csa.nav.acc-settings' | translate}}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="myRole == Role.admin || Role.superadmin">
+            <button mat-menu-item class="remove-outline">
+              <mat-icon>compare_arrows</mat-icon>
+              <span>{{'csa.nav.trans-gmb' | translate}}</span>
+            </button>
+            <button mat-menu-item class="remove-outline">
+              <mat-icon>description</mat-icon>
+              <span>{{'csa.nav.status-log' | translate}}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="myRole == Role.superadmin">
+            <button mat-menu-item class="remove-outline">
+              <fa-icon style="font-size:24px" [icon]="faBroom"></fa-icon>
+              <span>{{'csa.nav.clear' | translate}}</span>
+            </button>
+          </ng-container>
         </mat-menu>
 
-        <mat-form-field class="col-3 col-md-2 col-lg-1"
-                        style="max-width: 88px;">
-          <mat-select (selectionChange)="onLanguageSelect($event)"
-                      [value]="this.selectedLang">
-            <mat-option *ngFor="let l of languages"
-                        [value]="l">
+        <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
+          <mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
+            <mat-option *ngFor="let l of languages" [value]="l">
               {{ l.toUpperCase() }}
             </mat-option>
           </mat-select>
@@ -33,16 +53,13 @@
     </div>
 
     <div class="content">
-      <div class="layout-container"
-           [ngClass]="{'mobile-layout-container': headerService.webview === false}">
+      <div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
 
         <mat-sidenav-container class="sidenav-container">
 
-          <nav-bar *ngIf="this.showNavBar$"
-                   [business]="(this.businessData$ | async)"></nav-bar>
+          <nav-bar *ngIf="this.showNavBar$" [business]="(this.businessData$ | async)"></nav-bar>
 
-          <div *ngIf="(this.loading$ | async)"
-               style="display: flex; padding: 50px">
+          <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
             <mat-card class="col">
               <mat-card-content>
                 <div class="row justify-content-center">
@@ -51,8 +68,7 @@
               </mat-card-content>
             </mat-card>
           </div>
-          <main class="main-container"
-                *ngIf="!(this.loading$ | async)">
+          <main class="main-container" *ngIf="!(this.loading$ | async)">
             <router-outlet></router-outlet>
           </main>
           <footer>

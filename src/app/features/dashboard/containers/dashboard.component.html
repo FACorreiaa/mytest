@@ -1,6 +1,17 @@
 <div class="container">
 	<div class="row justify-content-center title">
-		<h2>{{ 'csa.navmenu-welcome' | translate }} <span>{{this.userName}}</span></h2>
+		<div class="col-12">
+			<h2>{{ 'csa.navmenu-welcome' | translate }} <span>{{this.userName}}</span></h2>
+		</div>
+		<div class="col-sm-12 col-md-8 sub-title">
+			<h4 *ngIf="myRole == Role.admin">{{'csa.dashboard.admin' | translate}}</h4>
+			<h4 *ngIf="myRole == Role.superadmin">{{'csa.dashboard.superadmin' | translate}}</h4>
+		</div>
+		<div class="col-sm-12 col-md-4">
+			<button class="btn btn-admin" *ngIf="myRole == Role.admin">
+				{{'csa.dashboard.admin-button' | translate}}
+			</button>
+		</div>
 	</div>
 
 	<div class="row justify-content-center mb-5">

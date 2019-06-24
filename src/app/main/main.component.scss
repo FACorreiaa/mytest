@@ -19,6 +19,7 @@ mat-sidenav-container {
         font-size: 35px;
         padding: 10px 0;
         margin-right: 16px;
+        cursor: pointer;
       }
 
       a {
@@ -43,6 +44,16 @@ mat-sidenav-container {
       z-index: 0;
     }
   }
+}
+
+fa-icon {
+  color: rgba(10, 6, 6, 0.54);
+  margin-right: 16px;
+  vertical-align: middle;
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: 400px !important;
 }
 
 .layout-container {

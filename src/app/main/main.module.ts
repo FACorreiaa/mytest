@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { CoreModule } from '@app/core/core.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
@@ -21,6 +22,7 @@ import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
 
 @NgModule({
   imports: [
+    FontAwesomeModule,
     MainRoutingModule,
     CommonModule,
     FormsModule,
