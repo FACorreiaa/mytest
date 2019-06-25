@@ -15,6 +15,9 @@ import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
 import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
+import { MatDialog } from '@angular/material'
+import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
+import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
 
 @Component({
   selector: 'app-main',
@@ -37,7 +40,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     private store: Store<fromApp.AppState>,
     private mainStore: Store<fromMain.MainState>,
     private translate: TranslateService,
-    public headerService: HeaderService
+    public headerService: HeaderService,
+    public dialog: MatDialog
   ) {
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
     this.loading$ = this.mainStore.select(fromMain.getLoading)
@@ -90,5 +94,13 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onLanguageSelect({ value: language }) {
     this.store.dispatch(new AuthActions.ChangeLanguage({ language }))
+  }
+
+  openTerms() {
+    this.dialog.open(TcDialogComponent)
+  }
+
+  openCookies() {
+    this.dialog.open(CookieSettingsComponent)
   }
 }

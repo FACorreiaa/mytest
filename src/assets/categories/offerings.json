@@ -1,0 +1,164 @@
+{
+    "offerings": [
+        {
+            "id": "enter",
+            "category": "Entertainment",
+            "value": [
+                "Live Music",
+                "Karaoke",
+                "Club",
+                "Disco"
+            ]
+        },
+        {
+            "id": "diet",
+            "category": "Diet",
+            "value": [
+                "Halal",
+                "Vegan",
+                "Vegetarisch",
+                "Kosher",
+                "Gluten free",
+                "Lactose free"
+            ]
+        },
+        {
+            "id": "hospital",
+            "category": "Hospitality form",
+            "value": [
+                "Bar",
+                "Sportbar",
+                "Pub",
+                "Cafe",
+                "Bakery",
+                "Coffeehouse",
+                "Bistro",
+                "Heuriger",
+                "Brewery",
+                "Tea Shop",
+                "Steak House"
+            ]
+        },
+        {
+            "id": "mealtime",
+            "category": "Meal Time",
+            "value": [
+                "Breakfast",
+                "Brunch",
+                "Lunch",
+                "Dinner"
+            ]
+        },
+        {
+            "id": "buffet",
+            "category": "Buffet",
+            "value": [
+                "Pasta Bar",
+                "Salad Bar",
+                "Fruits Bar"
+            ]
+        },
+        {
+            "id": "sweets",
+            "category": "Sweets",
+            "value": [
+                "Cake and Tarts",
+                "Pastry",
+                "Donuts",
+                "Ice Cream",
+                "Chocolate"
+            ]
+        },
+        {
+            "id": "meals",
+            "category": "Meals",
+            "value": [
+                "Fish",
+                "Burger",
+                "Pizza",
+                "Pasta",
+                "Kebab",
+                "Tapas",
+                "Sushi",
+                "Seafood",
+                "Schnitzel",
+                "Pierogi",
+                "Fruits & Vegetables",
+                "Pancakes",
+                "Fresh Bread"
+            ]
+        },
+        {
+            "id": "specials",
+            "category": "Meal Specials",
+            "value": [
+                "Regional Products",
+                "Local Products",
+                "Gourmet Food",
+                "BBG",
+                "Craft Beer",
+                "Delicatessen"
+            ]
+        },
+        {
+            "id": "extras",
+            "category": "Extras",
+            "value": [
+                "Journals",
+                "Newspaper",
+                "Tobaco",
+                "BnB"
+            ]
+        },
+        {
+            "id": "cuisine",
+            "category": "Cuisine",
+            "value": [
+                "African",
+                "Argentinean",
+                "Corsican",
+                "Czech",
+                "Fusion",
+                "Homemade",
+                "Indian",
+                "Italian",
+                "Mediterranean",
+                "Moroccan",
+                "South American",
+                "Traditional",
+                "American",
+                "Asian",
+                "German",
+                "Greek",
+                "Healthy",
+                "Hungarian",
+                "International",
+                "Japanese",
+                "Mexican",
+                "Persian",
+                "Polish",
+                "Spanish",
+                "Thai",
+                "Turkish",
+                "Arabian",
+                "Austrian",
+                "Belgian",
+                "Brazilian",
+                "British",
+                "Chinese",
+                "Croatian",
+                "Dutch",
+                "French",
+                "Israell",
+                "Korean",
+                "Lebanese",
+                "Mongolian",
+                "Oriental",
+                "Portugese",
+                "Russian",
+                "Ukrainian",
+                "Vietnamese"
+            ]
+        }
+    ]
+}

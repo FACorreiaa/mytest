@@ -17,4 +17,12 @@ export class CategoriesService {
   public getPayments() {
     return this.http.get('assets/categories/payment-methods.json').pipe(map((response: any) => response.json().payments))
   }
+
+  public getProfileOfferings() {
+    return this.http.get('assets/categories/offerings.json').pipe(
+      map((response: any) => {
+        return response.json().offerings
+      })
+    )
+  }
 }

@@ -59,5 +59,10 @@
 	"csa.accept-terms": "I accept terms and conditions",
 	"csa.accept-terms.valid": "You need to accept terms and conditions to go forward.",
 	"csa.google.last-step":"The last step you have to take is to actually claim your business.",
-	"csa.google.request-ownership": "Here you need to request ownership for the listing. Please make sure, that you request ownership as an owner in the options"
+	"csa.google.request-ownership": "Here you need to request ownership for the listing. Please make sure, that you request ownership as an owner in the options",
+	"csa.footer.rights": "Designed by Hospitality Digital GmbH. All rights reserved.",
+	"csa.footer.imprint": "Impressum",
+	"csa.footer.terms": "Nutzungsbedingungen",
+	"csa.footer.privacy": "Datenschutzerklärung",
+	"csa.footer.cookies": "Cookie Einstellungen ändern"
 }

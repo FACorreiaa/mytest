@@ -1,9 +1,8 @@
 @import "../../../../styles-variables.scss";
 
-.container {  
-    h2 {
-      padding: 60px 0 100px 0;
-    }
+.title {
+  margin-top: 3rem;
+  padding: 4rem 0 6rem 0;
 }
 
 .nav-tabs {
@@ -50,5 +49,59 @@
 }
 
 .save-bar {
-  margin: 0 -15px;
+  margin: 0 -15px -16px -15px;
+  bottom: 0;
+
+  form {
+    float: right;
+
+    button {
+      margin: 0 15px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      mat-icon {
+        margin: 0 5px 0 0;
+        vertical-align: bottom;
+      }
+    }
+
+    .btn-save {
+      background-color: #fff;
+      border: 1px solid #88B958;
+
+      &:hover {
+        background-color: #88B958;
+        color: #fff;
+
+        mat-icon {
+          color: #fff;
+        }
+      }
+
+      mat-icon{
+        color: #88B958;
+      }
+    }
+
+    .btn-discard {
+      background-color: #fff;
+      border: 1px solid #f44336;
+      
+      &:hover {
+        background-color: #f44336;
+        color: #fff;
+
+        mat-icon {
+          color: #fff;
+        }
+      }
+
+      mat-icon {
+        color: #f44336;
+      }
+    }
+  }
 }

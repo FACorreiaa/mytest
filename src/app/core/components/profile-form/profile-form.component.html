@@ -4,15 +4,14 @@
         <form [formGroup]="firstFormGroup" (keydown.enter)="$event.preventDefault()">
             <div class="row">
                 <div class="col">
-                    <h4>General Information</h4>
+                    <h4>{{'csa.general-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <input matInput google-place formControlName="location"
-                            placeholder="{{'csa.enter-business' | translate}}" autocomplete="off"
-                            (onSelect)="setAddress($event)">
+                        <input matInput formControlName="location" placeholder="{{'csa.enter-location' | translate}}"
+                            autocomplete="off">
                         <mat-error *ngIf="firstFormGroup.get('location').invalid">
                             {{'csa.enter-value' | translate}}
                         </mat-error>
@@ -45,7 +44,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <mat-select formControlName="country" placeholder="{{'csa.country' | translate}}"
+                        <mat-select formControlName="country" placeholder="{{'csa.enter-country' | translate}}"
                             (selectionChange)="changeCountry($event)">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option *ngFor="let state of countries" [value]="state.name">
@@ -59,10 +58,10 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <mat-select placeholder="{{'csa.categories' | translate}}">
+                        <mat-select placeholder="{{'csa.enter-category' | translate}}">
                             <mat-option>--{{'csa.None' | translate}}--</mat-option>
                             <mat-option name="categoryCusine" *ngFor="let category of this.categories"
-                                [value]="category.name" (change)="onChangeCategory($event, category)">
+                                [value]="category.name">
                                 {{category.name | translate}}
                             </mat-option>
                         </mat-select>
@@ -71,19 +70,16 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h4>Contact Information</h4>
+                    <h4>{{'csa.contact-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col-3 col-sm-3 col-md-2">
                         <input class="text-right" matInput formControlName="area" maxlength="6" autocomplete="off">
-                        <mat-error *ngIf="firstFormGroup.get('area').invalid">
-                            {{'csa.wrong-prefix' | translate}}
-                        </mat-error>
                     </mat-form-field>
                     <span class="col-1">&ndash;</span>
-                    <mat-form-field class="col-7 col-sm-8 col-md-9">
+                    <mat-form-field class="col-8 col-sm-8 col-md-9">
                         <input matInput formControlName="phone" placeholder="{{'csa.enter-phone' | translate}}"
                             autocomplete="off" required>
                         <mat-error *ngIf="firstFormGroup.get('phone').invalid">
@@ -93,20 +89,10 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <input matInput formControlName="mobile" placeholder="{{'csa.enter-mobile' | translate}}"
-                            autocomplete="off">
-                        <mat-error *ngIf="firstFormGroup.get('mobile').invalid">
-                            {{'csa.enter-mobile' | translate}}
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <mat-form-field class="col">
-                        <input matInput placeholder="{{'csa.enter-site' | translate}}" formControlName="website"
+                        <input matInput placeholder="{{'csa.enter-website' | translate}}" formControlName="website"
                             autocomplete="off">
                         <span matPrefix>www.&nbsp;</span>
                         <mat-hint>{{'csa.example' | translate}}: www.yoursite.com</mat-hint>
-
                         <mat-error *ngIf="firstFormGroup.get('website').hasError('required')">
                             {{'csa.enter-value' | translate}}
                         </mat-error>
@@ -152,7 +138,7 @@
                                             <mat-select placeholder="{{'csa.from' | translate}}" formControlName="from"
                                                 [value]="position.value.from"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -167,7 +153,7 @@
                                             <mat-select placeholder="{{'csa.to' | translate}}" formControlName="to"
                                                 [value]="position.value.to"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -188,7 +174,7 @@
                                             <mat-select placeholder="{{'csa.from' | translate}}"
                                                 formControlName="splitedFrom" [value]="position.value.splitedFrom"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -207,7 +193,7 @@
                                             <mat-select placeholder="{{'csa.to' | translate}}"
                                                 formControlName="splitedTo" [value]="position.value.splitedTo"
                                                 [disableControl]="!position.value.isSelected">
-                                                <mat-option>{{'csa.None' | translate}}</mat-option>
+                                                <mat-option>{{'csa.none' | translate}}</mat-option>
                                                 <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
                                                     {{hour.value}}
                                                 </mat-option>
@@ -230,12 +216,13 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h4>Business Information</h4>
+                    <h4>{{'csa.business-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
+                        <mat-icon ngbPopover="Test" triggers="mouseenter:mouseleave" placement="right">info</mat-icon>
                         <mat-chip-list #chipListKeyword>
                             <mat-chip *ngFor="let keyword of this.keywordsArray; let i = index"
                                 [selectable]="selectable" [removable]="removable" (removed)="removeKeywords(keyword)">
@@ -250,8 +237,9 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
-                        <textarea matInput maxlength="750" placeholder="{{'csa.enter-description' | translate}}"
-                            autocomplete="off"></textarea>
+                        <textarea matInput formControlName="description" maxlength="750"
+                            placeholder="{{'csa.enter-description' | translate}}" autocomplete="off">
+                        </textarea>
                     </mat-form-field>
                 </div>
             </div>
@@ -263,30 +251,10 @@
         <form [formGroup]="secondFormGroup" (keydown.enter)="$event.preventDefault()">
             <div class="row">
                 <div class="col">
-                    <h4>Additional Information</h4>
+                    <h4>{{'csa.additional-info' | translate}}</h4>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mb-3">
-                    <mat-form-field class="col">
-                        <mat-chip-list #chipListPayment>
-                            <mat-chip *ngFor="let payment of this.selectedPayments" [selectable]="selectable"
-                                [removable]="removable" (removed)="removePayments(payment)">
-                                {{payment | translate}}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                            </mat-chip>
-                            <input #paymentInput placeholder="{{'csa.enter-payments' | translate}}"
-                                [formControl]="paymentCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipListPayment"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                                (matChipInputTokenEnd)="addPayments($event)">
-                        </mat-chip-list>
-                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                            <mat-option *ngFor="let payment of filteredPayments | async" [value]="payment">
-                                {{payment | translate}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                </div>
                 <div class="col-md-12 mb-3">
                     <mat-form-field class="col">
                         <mat-chip-list #chipListLanguage>
@@ -305,393 +273,18 @@
                 <div class="col-md-12 mb-3">
                     <div class="row">
                         <div class="col">
+                            <h5>{{'csa.payments-title' | translate}}</h5>
+                        </div>
+                    </div>
+                    <!-- <payments-button [payments]="payments"></payments-button> -->
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="row">
+                        <div class="col">
                             <h5>{{'csa.offerings-title' | translate}}</h5>
                         </div>
                     </div>
-                    <mat-button-toggle-group class="row" name="offerings">
-                        <mat-button-toggle class="col-3">
-                            <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}"
-                                class="mat-button-toggle-button">
-                                Entertainment
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="toggleButton" class="toggle-checkbox">
-                                <mat-checkbox class="col-4">
-                                    Live Music
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Karaoke
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Club
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Disco
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button (click)="toggleOfferings()" type="button" [ngClass]="{'clicked': toggleButton}"
-                                class="mat-button-toggle-button">
-                                Diet
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox">
-                                <mat-checkbox class="col-4">
-                                    Halal
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Vegan
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Vegetarisch
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Kosher
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Gluten free
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Lactose free
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Hospitality form
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Bar
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Sportbar
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pub
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Cafe
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Bakery
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Coffeehouse
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Bistro
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Heuriger
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Brewery
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Tea Shop
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Stake House
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Meal Time
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Breakfast
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Brunch
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Lunch
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Dinner
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Buffet
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Pasta Bar
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Salad Bar
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Fruits Bar
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Sweets
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Cakes and Tarts
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pastry
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Donuts
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Ice Cream
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Chocolate
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Meals
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Fish
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Burger
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pizza
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pasta
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Kebab
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Tapas
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Sushi
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Seafood
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Schnitzel
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pierogi
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Fruits & Vegetables
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Pancakes
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Fresh Bread
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Specials
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Regional Products
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Local Products
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Gourmet Food
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    BBQ
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Craft Beer
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Delicatessen
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Extras
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    Journals
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Newspaper
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Tobaco
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    BnB
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                        <mat-button-toggle class="col-3">
-                            <button  type="button" class="mat-button-toggle-button">
-                                Cuisine
-                                <mat-icon>keyboard_arrow_down</mat-icon>
-                            </button>
-                            <div *ngIf="" class="toggle-checkbox col-12">
-                                <mat-checkbox class="col-4">
-                                    African
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Argentinean
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Corsican
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Czech
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Fusion
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Homemade
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Indian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Italian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Mediterranean
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Moroccan
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    South American
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Traditional
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    American
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Asian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    German
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Greek
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Healthy
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Hungarian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    International
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Japanese
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Mexican
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Persian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Polish
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Spanish
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Thai
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Turkish
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Arabian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Austrian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Belgian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Brazilian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    British
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Chinese
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Croatian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Dutch
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    French
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Israell
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Korean
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Lebanese
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Mongolian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Oriental
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Portugese
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Russian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Ukrainian
-                                </mat-checkbox>
-                                <mat-checkbox class="col-4">
-                                    Vietnamese
-                                </mat-checkbox>
-                            </div>
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
+                    <collapsible-button [offerings]="offerings"></collapsible-button>
                 </div>
                 <div class="col-md-12 mb-3">
                     <div class="row">
@@ -700,9 +293,11 @@
                         </div>
                     </div>
                     <mat-button-toggle-group class="row" name="services">
-                        <mat-button-toggle class="col-3" *ngFor="let service of this.servicesArray" [value]="service">
+                        <mat-button-toggle class="col-3" *ngFor="let service of this.servicesArray">
                             <button type="button" class="mat-button-toggle-button" [class.selected]="service.selected"
                                 (click)="toggleService(service)">
+                                <img class="img-fluid" src="{{imgPathServices}}{{service.name}}.png"
+                                    alt="{{service.name}}">
                                 {{service.name | translate}}
                             </button>
                         </mat-button-toggle>
@@ -712,22 +307,3 @@
         </form>
     </div>
 </ng-container>
-
-<mat-card class="save-bar">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form (ngSubmit)="save(firstFormGroup, secondFormGroup)">
-                    <button type="submit" class="btn btn-primary">
-                        {{'csa.save' | translate}}
-                    </button>
-
-                    <!-- ToDo: (click)="reset(firstFormGroup, secondFormGroup)" -->
-                    <button type="button" class="btn btn-secondary" >
-                        {{'csa.delete' | translate}}
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</mat-card>

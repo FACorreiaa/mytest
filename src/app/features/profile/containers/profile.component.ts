@@ -9,7 +9,7 @@ import * as fromApp from '../../../app.reducers'
 import { Observable, Subject } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 
-import { ICategory, Countries, BusinessData } from '@app/api/models/api-models'
+import { ICategory, Countries, BusinessData, ICategoryDto } from '@app/api/models/api-models'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
 
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
   services$: Observable<ICategory[]>
-  payments$: Observable<ICategory[]>
+  payments$: Observable<ICategoryDto[]>
   countries$: Observable<Countries[]>
 
   activeTab = 'basic'
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
     this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getOfferings()
+    this.offerings$ = this.categoriesService.getProfileOfferings()
 
     this.appstore
       .pipe(

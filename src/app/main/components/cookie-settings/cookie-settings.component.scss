@@ -1,0 +1,25 @@
+.close {
+    background: transparent;
+    border: transparent;
+    float: right;
+    vertical-align: middle;
+}
+
+mat-dialog-content {
+    .cookie-section {
+        border-top: 1px solid #6c757d;
+        border-bottom: 1px solid #6c757d;
+        margin: 0;
+
+        &:last-of-type{
+            border-top: none;
+        }
+    }
+}
+
+mat-dialog-close {
+
+    button {
+        margin-top: 2rem;
+    }
+}

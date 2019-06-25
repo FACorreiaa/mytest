@@ -1,34 +1,32 @@
 <mat-sidenav-container>
-    <div class="wrapper">
-      <div *ngIf="!headerService.webview" class="toolbar">
-        <mat-toolbar color="primary">
-          <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
-          <span class="example-spacer"></span>
-  
-          <div [matMenuTriggerFor]="toolbarUserMenu">
-            <mat-icon aria-label="User icon">person</mat-icon>
-          </div>
-  
-          <mat-menu #toolbarUserMenu="matMenu">
-            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
-              <mat-icon>account_circle</mat-icon>
-              <span>Log out</span>
-            </button>
-          </mat-menu>
-  
-          <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
-            <mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
-              <mat-option *ngFor="let l of languages" [value]="l">
-                {{ l.toUpperCase() }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-toolbar>
-      </div>
-  
-      <div class="content">
-          <div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
+  <div class="wrapper">
+    <div *ngIf="!headerService.webview" class="toolbar">
+      <mat-toolbar color="primary">
+        <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
+        <span class="example-spacer"></span>
 
+        <div [matMenuTriggerFor]="toolbarUserMenu">
+          <mat-icon aria-label="User icon">person</mat-icon>
+        </div>
+
+        <mat-menu #toolbarUserMenu="matMenu">
+          <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
+            <mat-icon>account_circle</mat-icon>
+            <span>Log out</span>
+          </button>
+        </mat-menu>
+
+        <mat-form-field class="col-3 col-md-2 col-lg-1" style="max-width: 88px;">
+          <mat-select (selectionChange)="onLanguageSelect($event)" [value]="this.selectedLang">
+            <mat-option *ngFor="let l of languages" [value]="l">
+              {{ l.toUpperCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-toolbar>
+    </div>
+
+<<<<<<< HEAD
               <mat-sidenav-container class="sidenav-container">
             
                 <nav-bar *ngIf="this.showNavBar$" [business]="(this.businessData$ | async)"></nav-bar>
@@ -41,12 +39,48 @@
                       </div>
                     </mat-card-content>
                   </mat-card>
+=======
+    <div class="content">
+      <div class="layout-container" [ngClass]="{'mobile-layout-container': headerService.webview === false}">
+
+        <mat-sidenav-container class="sidenav-container">
+
+          <nav-bar *ngIf="(this.showNavBar$ | async)?.accepted"></nav-bar>
+
+          <div *ngIf="(this.loading$ | async)" style="display: flex; padding: 50px">
+            <mat-card class="col">
+              <mat-card-content>
+                <div class="row justify-content-center">
+                  <cs-loading [show]="true"></cs-loading>
                 </div>
-                <main class="main-container" *ngIf="!(this.loading$ | async)">
-                  <router-outlet></router-outlet>
-                </main>
-              </mat-sidenav-container>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <main class="main-container" *ngIf="!(this.loading$ | async)">
+            <router-outlet></router-outlet>
+          </main>
+          <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <ul>
+                    <li><a routerLink="/main/imprint">{{'csa.footer.imprint' | translate}}</a></li>
+                    <li><a (click)="openTerms()">{{'csa.footer.terms' | translate}}</a></li>
+                    <li><a routerLink="/main/data_privacy">{{'csa.footer.privacy' | translate}}</a></li>
+                    <li><a (click)="openCookies()">{{'csa.footer.cookies' | translate}}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>{{'csa.footer.rights' | translate}}</p>
+>>>>>>> master
+                </div>
+              </div>
             </div>
+          </footer>
+        </mat-sidenav-container>
       </div>
     </div>
-  </mat-sidenav-container>
+  </div>
+</mat-sidenav-container>

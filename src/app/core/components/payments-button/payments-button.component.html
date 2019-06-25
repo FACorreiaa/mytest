@@ -1,0 +1,15 @@
+<mat-button-toggle-group class="row" name="payments">
+    <mat-button-toggle class="col">
+        <button (click)="togglePayments()" type="button" [ngClass]="{'clicked': toggleState}">
+            <mat-icon aria-label="{{'csa.payments-title' | translate}}">payments</mat-icon>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+
+        <div *ngIf="toggleState" class="toggle-checkbox">
+            <mat-checkbox *ngFor="let payment of payments" class="col-3" [value]="payment.name"
+                [checked]="paymentState[payment]" (change)="onPaymentsChange($event, payment)">
+                {{payment.name | translate}}
+            </mat-checkbox>
+        </div>
+    </mat-button-toggle>
+</mat-button-toggle-group>

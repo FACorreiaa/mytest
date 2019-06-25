@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { HttpModule } from '@angular/http'
@@ -14,11 +14,13 @@ import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
 
 import { CsStepperComponent } from '@app/core/components/stepper/cs-stepper.component'
+import { CollapsibleButtonComponent } from '@app/core/components/collapsible-button/collapsible-button.component'
+import { PaymentsButtonComponent } from '@app/core/components/payments-button/payments-button.component'
 import { ModalTermsConditionsComponent } from '@app/core/components/modal/model-term-conditions'
 import { DisableControlDirective } from '@app/core/directives/disable-control.directive'
 import { LoadingRequestComponent } from './components/spinners/loading.component'
 import { GooglePlacesDirective } from './directives/google-places.directive'
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { TranslateModule } from '@ngx-translate/core'
 import { NavigationBarComponent } from './components/navigation-bar/nav-bar.component'
 import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component'
@@ -28,6 +30,8 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbPopoverModule, NgbModalModule],
   exports: [
     CsStepperComponent,
+    CollapsibleButtonComponent,
+    PaymentsButtonComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     CommonModule,
@@ -40,6 +44,8 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   ],
   declarations: [
     CsStepperComponent,
+    CollapsibleButtonComponent,
+    PaymentsButtonComponent,
     ModalOtherVerifiComponent,
     ModalTermsConditionsComponent,
     DisableControlDirective,
@@ -50,5 +56,6 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   ],
   providers: [CategoriesService, CountriesService, NgbActiveModal],
   entryComponents: [ModalOtherVerifiComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CoreModule {}
+export class CoreModule { }
