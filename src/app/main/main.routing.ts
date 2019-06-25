@@ -42,14 +42,13 @@ const MainRoutes: Routes = [
         path: 'data_privacy',
         canActivate: [AppAuthGuard],
         component: DataPrivacyComponent,
-      }
+      },
     ],
   },
 ]
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(MainRoutes)],
+  imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

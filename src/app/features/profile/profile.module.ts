@@ -42,7 +42,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap'
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ProfileModule { }
+export class ProfileModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

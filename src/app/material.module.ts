@@ -72,4 +72,4 @@ import { NgModule } from '@angular/core'
     MatSlideToggleModule,
   ],
 })
-export class MaterialModule { }
+export class MaterialModule {}

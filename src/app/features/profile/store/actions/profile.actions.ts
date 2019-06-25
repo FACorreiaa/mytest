@@ -12,32 +12,27 @@ export const ActionTypes = {
 /* Get all business*/
 export class GetAllBusinessAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 export class GetAllBusinessSuccessAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS_SUCCESS
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 export class GetAllBusinessFailureAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS_FAILURE
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 export class ErrorLayoutShow implements Action {
   public type = ActionTypes.ERROR_LAYOUT_SHOW
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class ErrorLayoutHide implements Action {
   public type = ActionTypes.ERROR_LAYOUT_HIDE
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
-export type ProfileAction =
-  | GetAllBusinessAction
-  | GetAllBusinessSuccessAction
-  | GetAllBusinessFailureAction
-  | ErrorLayoutShow
-  | ErrorLayoutHide
+export type ProfileAction = GetAllBusinessAction | GetAllBusinessSuccessAction | GetAllBusinessFailureAction | ErrorLayoutShow | ErrorLayoutHide

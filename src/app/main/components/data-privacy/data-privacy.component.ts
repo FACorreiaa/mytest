@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-    selector: 'data-privacy',
-    templateUrl: 'data-privacy.component.html',
-    styleUrls: ['./data-privacy.component.scss'],
+  selector: 'data-privacy',
+  templateUrl: 'data-privacy.component.html',
+  styleUrls: ['./data-privacy.component.scss'],
 })
 export class DataPrivacyComponent implements OnInit {
+  constructor() {}
 
-    constructor() { }
-
-    ngOnInit() {
-        window.scrollTo(0, 0)
-    }
+  ngOnInit() {
+    window.scrollTo(0, 0)
+  }
 }

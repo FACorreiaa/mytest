@@ -40,7 +40,7 @@ import { NgbRatingModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstra
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardModule { }
+export class DashboardModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

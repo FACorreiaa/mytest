@@ -33,19 +33,12 @@ import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
       isolate: true,
     }),
   ],
-  declarations: [
-    MainComponent,
-    TermsConditionsComponent,
-    ImprintComponent,
-    DataPrivacyComponent,
-    CookieSettingsComponent,
-    TcDialogComponent
-  ],
+  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent, DataPrivacyComponent, CookieSettingsComponent, TcDialogComponent],
   entryComponents: [CookieSettingsComponent, TcDialogComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule { }
+export class MainModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

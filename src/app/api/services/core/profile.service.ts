@@ -15,5 +15,4 @@ export class ProfileService extends BaseApi implements IProfileService {
   public businessData(): Observable<BusinessData> {
     return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=verification`)
   }
-
 }

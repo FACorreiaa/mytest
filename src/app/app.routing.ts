@@ -21,12 +21,14 @@ const Paths: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(Paths, {
-    useHash: true,
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled'
-  })],
+  imports: [
+    RouterModule.forRoot(Paths, {
+      useHash: true,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
   providers: [AppAuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -12,7 +12,6 @@ import { IProfileService } from '@app/api/interfaces/i.profile.service'
 
 @Injectable()
 export class ProfileEffects {
-
   // ----------------- Get Business -----------------
 
   @Effect()
@@ -44,9 +43,5 @@ export class ProfileEffects {
     })
   )
 
-  constructor(
-    private actions$: Actions,
-    private router: Router,
-    private storeProfile$: Store<fromModuleFeature.ProfileState>,
-    private profileService: IProfileService) { }
+  constructor(private actions$: Actions, private router: Router, private storeProfile$: Store<fromModuleFeature.ProfileState>, private profileService: IProfileService) {}
 }

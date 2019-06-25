@@ -49,7 +49,6 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT: {
-      console.log('entreiii reducer')
       return { ...state, loading: true }
     }
 
@@ -125,7 +124,6 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
     }
 
     case AuthActionTypes.ERROR_LAYOUT_SHOW: {
-      console.log('entreiii reducer error', action.payload.error)
       return {
         ...state,
         errorMessage: action.payload.error,

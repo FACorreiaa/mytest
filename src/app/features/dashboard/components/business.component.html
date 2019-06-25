@@ -32,7 +32,7 @@
                         class="btn btn-secondary"
                         (click)="openWindowActivation()">
                     <span
-                          *ngIf="this.awaitingOwnership && !this.needsVerification">{{'csa.activate' | translate}}</span>
+                          *ngIf="this.awaitingOwnership && !this.oAuthStatus">{{'csa.activate' | translate}}</span>
                     <span *ngIf="this.awaitingOwnership && this.oAuthStatus">{{'csa.check-status' | translate}}</span>
                 </button>
 

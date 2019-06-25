@@ -76,7 +76,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   manageBusiness(object: ManageBusinessData): void {
-    console.log('Pai', object)
     this.store.dispatch(new AuthActions.ManageBusinessAttempt(object))
   }
 
