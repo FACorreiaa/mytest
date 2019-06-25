@@ -27,6 +27,9 @@ import {
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   businessList$: Observable<BusinessData[]>
+  oAuthTokenStatus$: Observable<boolean>
+  redirectURL$: Observable<string>
+
   fecthOptions$: Observable<FetchVerificationResponse>
   userName: string
   userFirstLastName: string
@@ -44,6 +47,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {
     this.businessList$ = this.store.select(fromDashboard.getDashBoardBusinessList)
     this.fecthOptions$ = this.store.select(fromDashboard.getfecthVerificationOptions)
+    this.oAuthTokenStatus$ = this.store.select(fromDashboard.getOauthTokenStatus)
+    this.redirectURL$ = this.store.select(fromDashboard.redirectURL)
   }
 
   async ngOnInit() {
@@ -74,6 +79,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe$.unsubscribe()
+  }
+
+  updateDashboard() {
+    this.store.dispatch(new Actions.GetAllBusinessAction())
   }
 
   async fetchOptions(businessId: number) {

@@ -184,7 +184,7 @@ export interface DeleteBusinessData {
 }
 
 export interface BusinessData {
-  channels?: Channels
+  channels?: Channels[]
   id?: number
   zipCode: string
   city: string
@@ -222,6 +222,7 @@ export interface Stories {
 
 export interface Channels {
   awaitingOwnership: string
+  requestAdminRightsUrl?: string
   callbackUrl: string
   channel: string
   errorCode: string

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core'
+import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef, HostListener } from '@angular/core'
 import { NgbModal, NgbModalOptions, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import {
   BusinessData,
@@ -13,6 +13,7 @@ import {
 } from '@app/api/models/api-models'
 import { ModalOtherVerifiComponent } from '@app/core/components/modal/modal-other-verifi-component'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { redirectURL } from '../dashboard.selector'
 
 @Component({
   selector: 'business-comp',
@@ -22,9 +23,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class BusinessComponent implements OnInit, OnChanges {
   @Input() businessData$: any[]
+  @Input() oAuthStatus: boolean
+  @Input() redirectURL: string
   @Input() fecthOptions$: FetchVerificationResponse
   @Input() userNames: string
 
+  @Output() getAllEvent: EventEmitter<any> = new EventEmitter()
   @Output() fetchOptionsEvent: EventEmitter<any> = new EventEmitter()
   @Output() InitializeVerificationEvent: EventEmitter<any> = new EventEmitter()
   @Output() CompleteVerificationEvent: EventEmitter<any> = new EventEmitter()
@@ -32,6 +36,10 @@ export class BusinessComponent implements OnInit, OnChanges {
   @ViewChild('content') _templateModal: ElementRef
 
   verificationCodeForm: FormGroup
+  awaitingOwnership: boolean
+  needsVerification: boolean
+  oAuthStepRoute: string
+  updateDashboard: boolean
 
   hasEmailOption: boolean
   hasPhoneOption: boolean
@@ -64,6 +72,7 @@ export class BusinessComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.updateDashboard = false
     this.IsSelectVerification = true
     this.listingStatus = false
     this.gmbUrl = 'https://www.google.com/intl/de_de/business/'
@@ -74,6 +83,17 @@ export class BusinessComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.businessData$[this.businessData$.length - 1]) {
       this.selectedBusiness = this.businessData$[this.businessData$.length - 1]
+
+      if (this.oAuthStatus && this.selectedBusiness.channels[0].requestAdminRightsUrl) {
+        this.oAuthStepRoute = '#/google/finish'
+      } else {
+        this.oAuthStepRoute = '#/google'
+      }
+
+      this.gSearchUrl = this.selectedBusiness.channels[0].callbackUrl
+      this.gMapsUrl = this.selectedBusiness.channels[0].callbackUrl
+
+      this.checkGMBStatus(this.selectedBusiness)
     }
 
     if (this.fecthOptions$) {
@@ -96,10 +116,17 @@ export class BusinessComponent implements OnInit, OnChanges {
   }
 
   setStatus() {
-    this.listingStatus = this.listingStatus = !this.listingStatus
-    if (this.listingStatus) {
-      window.open(this.gmbUrl, '_blank')
+    window.open(this.gmbUrl, '_blank')
+  }
+
+  @HostListener('window:focus', ['$event'])
+  onFocus(event: any): void {
+    if (this.updateDashboard) {
+      console.log('focuss')
+
+      this.getAllEvent.emit()
     }
+    this.updateDashboard = false
   }
 
   openWindowActivation() {
@@ -107,13 +134,13 @@ export class BusinessComponent implements OnInit, OnChanges {
       this.newWindow.close()
     }
 
-    this.newWindow = window.open('#/google', '', 'scrollbars=yes, width=' + 600 + ', height=' + 700 + ', top=' + 100 + ', left=' + 500)
-
-    // console.log('openWindowActivation',)
+    this.newWindow = window.open(this.oAuthStepRoute, '', 'scrollbars=yes, width=' + 600 + ', height=' + 700 + ', top=' + 100 + ', left=' + 500)
 
     if (window.focus) {
       this.newWindow.focus()
     }
+
+    this.updateDashboard = true
   }
 
   googleSearch() {
@@ -126,7 +153,6 @@ export class BusinessComponent implements OnInit, OnChanges {
 
   closeModal() {
     this.modalService.dismissAll()
-    // this.activeModal.close()
   }
 
   /**
@@ -284,5 +310,15 @@ export class BusinessComponent implements OnInit, OnChanges {
 
       return eventReq
     }
+  }
+
+  /**
+   * This method checks the status of the business
+   * @param business the business information to handle
+   */
+  private checkGMBStatus(business: BusinessData) {
+    // ToDo: still missing pending
+    this.awaitingOwnership = business.channels[0].awaitingOwnership === 'YES'
+    this.needsVerification = business.channels[0].verificationNeeded
   }
 }

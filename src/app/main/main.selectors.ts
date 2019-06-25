@@ -3,8 +3,6 @@ import * as fromTermsConditions from './store/reducers/terms-cond.reducers'
 import * as fromDashboard from '@app/features/dashboard/store/reducers/dashboard.reducer'
 import * as fromAuth from '@app/auth/store/reducers/auth.reducer'
 
-import { state } from '@angular/animations'
-
 export const reducerName = 'main'
 
 export interface MainState {

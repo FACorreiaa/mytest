@@ -1,4 +1,4 @@
-<section class="section-title">
+<!-- <section class="section-title">
   <span>{{'csa.title.short' | translate}}</span>
 </section>
 
@@ -9,18 +9,37 @@
       <img src="../../../../assets/images/icons/close_x.svg"
            width="30">
     </a>
-    <h5>{{'csa.google.success' | translate}}</h5>
+    <h5>{{'csa.google.preview-process' | translate}}</h5>
   </div>
 
   <div class="popup-content">
-    <span class="pt-3 pb-5" style="width: 100%;">{{'csa.google.success-description' | translate}}
+    <span class="pt-3 pb-5"
+          style="width: 100%;">{{'csa.google.last-step' | translate}}
     </span>
 
-    <br/>
+    <div class="col-sm-offset-4 col-sm-6">
+      <div class="content-center">
+        <span>3.</span>
+        <img src="../../../../assets/images/icons/oauth_lastStep.png"
+             width="150"
+             height="200">
+      </div>
+      <span style="font-size: 12px;">
+        {{'csa.google.request-ownership' | translate}}
+      </span>
+    </div>
 
-    <button type="button"
-            class="btn btn-secondary">
-      {{'csa.close' | translate}}
-    </button>
+    <div class="pt-5 col-sm-12 content-center">
+      <button type="button"
+              class="btn btn-secondary">
+        {{'csa.google.continue' | translate}}
+      </button>
+    </div>
+
   </div>
-</section>
+</section> -->
+
+<finish-oauth [businessData]="(this.businessData$ | async)"
+             [oAuthStatus]="(this.oAuthTokenStatus$ | async)"
+             [redirectURL]="(this.redirectURL$ | async)"
+             [loading]="(this.loading$ | async)"></finish-oauth>

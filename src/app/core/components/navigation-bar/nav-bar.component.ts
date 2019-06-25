@@ -23,7 +23,7 @@ export class NavigationBarComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() {
-    if (this.business.length) {
+    if (this.business && this.business.length) {
       this.businessName = this.business[this.business.length - 1].name
       this.businessAddress = this.business[this.business.length - 1].street
     }

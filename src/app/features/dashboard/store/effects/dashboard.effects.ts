@@ -31,9 +31,16 @@ export class DashBoardEffects {
   @Effect({ dispatch: false })
   getBusinessSuccess$ = this.actions$.pipe(
     ofType(dashBoardActions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS),
-    tap(() => {
-      this.storeDashBoard$.dispatch(new dashBoardActions.OauthAttempt({ request: { businessUnitId: 86, channel: 'GOOGLE_MY_BUSINESS' } }))
-      // this.router.navigate([AuthRoutes.MAIN])
+    tap((action: dashBoardActions.GetAllBusinessSuccessAction) => {
+      if (action.payload.length === 0) {
+        this.router.navigate([AuthRoutes.WIZARD])
+      } else {
+        const selectBusiness = action.payload[action.payload.length - 1]
+
+        if (selectBusiness.channels[0].awaitingOwnership === 'YES') {
+          this.storeDashBoard$.dispatch(new dashBoardActions.OauthAttempt({ request: { businessUnitId: selectBusiness.id, channel: 'GOOGLE_MY_BUSINESS' } }))
+        }
+      }
     })
   )
 
@@ -84,32 +91,12 @@ export class DashBoardEffects {
     switchMap((action: dashBoardActions.OauthAttempt) =>
       this.dashBoardService.oAuthTokens(action.payload.request).pipe(
         map((response: any) => {
-          console.log('response')
           return response === null ? new dashBoardActions.OauthFailure() : new dashBoardActions.OauthSuccess()
         }),
         catchError(error => of(new dashBoardActions.OauthFailure({ error })))
       )
     )
   )
-
-  // @Effect({ dispatch: false })
-  // OauthTokenFailure$ = this.actions$.pipe(
-  //   ofType(dashBoardActions.ActionTypes.OAUTH_TOKEN_FAILURE),
-  //   tap(payload => {
-  //     this.storeDashBoard$.dispatch(new dashBoardActions.OauthFailure({ error: payload }))
-  //     console.log('oauth failure', payload)
-  //     // this.router.navigate([AuthRoutes.ERROR])
-  //   })
-  // )
-
-  // @Effect({ dispatch: false })
-  // OauthTokenSuccess$ = this.actions$.pipe(
-  //   ofType(dashBoardActions.ActionTypes.OAUTH_TOKEN_SUCCESS),
-  //   tap((action: dashBoardActions.RequestAdminRightsSuccess) => {
-  //     console.log('oauth success')
-  //     // this.router.navigate([AuthRoutes.MAIN])
-  //   })
-  // )
 
   // ----------------- Fetch Verification Options-----------------
 

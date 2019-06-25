@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store'
 import * as Actions from '../actions/dashboard.actions'
 import { FetchVerificationResponse, BusinessData } from '@app/api/models/api-models'
 
@@ -29,7 +28,7 @@ export const initialState: DashBoardState = {
 export function dashBoardReducer(state: DashBoardState = initialState, action: Actions.DashBoardAction): DashBoardState {
   switch (action.type) {
     case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
-      return { ...state, business: action.payload }
+      return { ...state, business: action.payload, oauthToken: null }
     }
 
     case Actions.ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS: {

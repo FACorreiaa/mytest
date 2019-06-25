@@ -15,8 +15,8 @@ export const AppRoutes = {
 const Paths: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', canActivate: [AppAuthGuard], loadChildren: './main/main.module#MainModule' },
-  { path: 'google', component: GoogleComponent },
-  { path: 'google/finish', component: FinishComponent },
+  { path: 'google', loadChildren: './directories/directories.module#DirectoriesModule' },
+  // { path: 'google/finish', component: FinishComponent },
   { path: '**', redirectTo: 'main' },
 ]
 

@@ -1,10 +1,11 @@
-<section class="section-title">
+<!-- <section class="section-title">
     <span>{{'csa.title.short' | translate}}</span>
 </section>
 
-<section class="section-content">
+<section class="section-content"
+         *ngIf="firstStep">
     <div class="popup-title">
-        <a href="JavaScript:window.close()"
+        <a (click)="closeWindow()"
            class="close-popup">
             <img src="../../../../assets/images/icons/close_x.svg"
                  width="30">
@@ -13,13 +14,13 @@
         <h5 *ngIf="secondStep">{{'csa.google.preview-process' | translate}}</h5>
     </div>
 
-    <div *ngIf="firstStep"
-         class="popup-content">
+    <div class="popup-content">
         <span class="pt-3">{{'csa.google.location-description' | translate}}
         </span>
         <span class="pt-5 pb-5">
             {{'csa.google.privileges-1' | translate}}
-            <a href="#" [routerLink]="">{{'csa.google.read-more' | translate}}</a>
+            <a href="#"
+               [routerLink]="">{{'csa.google.read-more' | translate}}</a>
             {{'csa.google.privileges-2' | translate}}
         </span>
 
@@ -29,42 +30,9 @@
             {{'csa.google.continue' | translate}}
         </button>
     </div>
+</section> -->
 
-    <div *ngIf="secondStep"
-         class="popup-content">
-        <span class="pt-3 pb-5">{{ 'In order to claim your location, you will have to go through the following steps on Google' | translate }}</span>
-
-        <div class="col-sm-6">
-            <div class="login-google-example">
-                <span>1.</span>
-                <img src="../../../../assets/images/icons/google_Login_ex.png"
-                     width="150"
-                     height="200">
-            </div>
-            <span style="font-size: 12px;">
-               {{'csa.google.select-account' | translate}}
-            </span>
-        </div>
-        <div class="col-sm-6">
-            <div class="login-google-example">
-                <span>2.</span>
-                <img src="../../../../assets/images/icons/google_ex_2.png"
-                     width="150"
-                     height="200">
-            </div>
-            <span style="font-size: 12px;">
-               {{'csa.google.allow-to-manage' | translate}}
-            </span>
-        </div>
-
-        <div class="pt-5">
-            <button type="button"
-                    class="btn btn-secondary">
-                <a class="btn-secondary" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fbusiness.manage&state=eyJjbGFpbWluZ0NsaWVudElkIjoyLCJleHRlcm5hbElkIjoiSERDTEFJTUlOR0RFVi02OSIsInJlcXVlc3RBZG1pblJpZ2h0c1VybCI6Imh0dHBzOi8vYnVzaW5lc3MuZ29vZ2xlLmNvbS9hcmMvcC9Ob3RGb3VuZCIsImxvY2F0aW9uTmFtZSI6IkxpYnJhcnkgU3RvcmUiLCJwbGFjZUlkIjoiTm90IGZvdW5kIiwibGFuZ3VhZ2VDb2RlIjoiZGUiLCJ0b0FjY291bnQiOiJhY2NvdW50cy8xMDE5MDY1NjkyNjM1MTU0NjE4MjIiLCJzdXBwcmVzc0F1dG9WZXJpZnkiOnRydWV9&access_type=offline&prompt=consent&response_type=code&client_id=793983774149-fptq1rkg68k8c45dmmidraveshse32m4.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fstage.claiming.be.hd.digital%2Fchannel%2FGOOGLE_MY_BUSINESS%2Fauth%2Fresult">
-                    {{'csa.google.start' | translate}}
-                </a>
-            </button>
-        </div>
-        <span>{{(this.businessData$ | async) }}</span>
-    </div>
-</section>
+<start-oauth [businessData]="(this.businessData$ | async)"
+             [oAuthStatus]="(this.oAuthTokenStatus$ | async)"
+             [redirectURL]="(this.redirectURL$ | async)"
+             [loading]="(this.loading$ | async)"></start-oauth>

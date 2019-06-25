@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { FetchVerificationRequest, LocationData, RequestAdminRightsBusinessId } from '@app/api/models/api-models'
+import { FetchVerificationRequest, LocationData, RequestAdminRightsBusinessId, BusinessData } from '@app/api/models/api-models'
 
 export enum ActionTypes {
   GET_BUSINESS_UNITS = '[GetBusinessUnits] Get All Business Units',
@@ -38,7 +38,7 @@ export class GetAllBusinessAction implements Action {
 
 export class GetAllBusinessSuccessAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS_SUCCESS
-  constructor(public payload?: any) {}
+  constructor(public payload?: BusinessData[]) {}
 }
 
 export class GetAllBusinessFailureAction implements Action {

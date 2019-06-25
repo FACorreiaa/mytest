@@ -1,0 +1,91 @@
+<section class="section-title">
+    <span>{{'csa.title.short' | translate}}</span>
+</section>
+
+<section class="section-content"
+         *ngIf="firstStep">
+    <div class="popup-title">
+        <a (click)="closeWindow()"
+           class="close-popup">
+            <img src="../../../../assets/images/icons/close_x.svg"
+                 width="30">
+        </a>
+        <h5 *ngIf="firstStep">{{'csa.google.claiming-exists' | translate}}</h5>
+        <h5 *ngIf="secondStep">{{'csa.google.preview-process' | translate}}</h5>
+    </div>
+
+    <div class="popup-content">
+        <span class="pt-3">{{'csa.google.location-description' | translate}}
+        </span>
+        <span class="pt-5 pb-5">
+            {{'csa.google.privileges-1' | translate}}
+            <a href="#"
+               [routerLink]="">{{'csa.google.read-more' | translate}}</a>
+            {{'csa.google.privileges-2' | translate}}
+        </span>
+
+        <button type="button"
+                class="btn btn-secondary"
+                (click)="continue()">
+            {{'csa.google.continue' | translate}}
+        </button>
+    </div>
+</section>
+
+<section *ngIf="secondStep"
+         class="section-content">
+    <div class="popup-title">
+        <a href="JavaScript:window.close()"
+           class="close-popup">
+            <img src="../../../../assets/images/icons/close_x.svg"
+                 width="30">
+        </a>
+
+        <h5>{{'csa.google.preview-process' | translate}}</h5>
+    </div>
+
+    <div *ngIf="this.loading"
+         class="pt-5">
+        <cs-loading [show]="true"></cs-loading>
+    </div>
+
+    <div *ngIf="!this.loading"
+         class="popup-content">
+        <span
+              class="pt-3 pb-5">{{ 'In order to claim your location, you will have to go through the following steps on Google' | translate }}
+        </span>
+
+        <div class="col-sm-6">
+            <div class="login-google-example">
+                <span>1.</span>
+                <img src="../../../../assets/images/icons/google_Login_ex.png"
+                     width="150"
+                     height="200">
+            </div>
+            <span style="font-size: 12px;">
+                {{'csa.google.select-account' | translate}}
+            </span>
+        </div>
+        <div class="col-sm-6">
+            <div class="login-google-example">
+                <span>2.</span>
+                <img src="../../../../assets/images/icons/google_ex_2.png"
+                     width="150"
+                     height="200">
+            </div>
+            <span style="font-size: 12px;">
+                {{'csa.google.allow-to-manage' | translate}}
+            </span>
+        </div>
+
+        <div class="pt-5">
+            <button type="button"
+                    class="btn btn-secondary">
+                <a class="btn-secondary"
+                   href="{{this.redirectURL}}">
+                    {{'csa.google.start' | translate}}
+                </a>
+            </button>
+        </div>
+    </div>
+</section>
