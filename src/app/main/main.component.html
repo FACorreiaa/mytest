@@ -19,7 +19,7 @@
             </button>
           </ng-container>
           <ng-container *ngIf="myRole == Role.admin">
-            <button mat-menu-item class="remove-outline">
+            <button routerLink="/main/acc_settings" mat-menu-item class="remove-outline">
               <mat-icon>settings</mat-icon>
               <span>{{'csa.nav.acc-settings' | translate}}</span>
             </button>

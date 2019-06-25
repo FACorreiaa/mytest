@@ -6,6 +6,7 @@ import { AppAuthGuard } from '@app/app.authguard'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
 import { ImprintComponent } from './components/imprint/imprint.component'
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
+import { AccManagementComponent } from './containers/acc-management/acc-management.component'
 
 const MainRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -43,6 +44,11 @@ const MainRoutes: Routes = [
         canActivate: [AppAuthGuard],
         component: DataPrivacyComponent,
       },
+      {
+        path: 'acc_settings',
+        canActivate: [AppAuthGuard],
+        component: AccManagementComponent
+      }
     ],
   },
 ]
@@ -51,4 +57,4 @@ const MainRoutes: Routes = [
   imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class MainRoutingModule { }

@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row justify-content-center title">
+        <h2>{{'csa.accManagement.title' | translate}}</h2>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 card-template">
+            <h4>
+                <mat-icon>person</mat-icon>
+                {{'csa.accManagement.user' | translate}}
+            </h4>
+            <form [formGroup]="userFormGroup">
+                <div class="row">
+                    <mat-form-field class="col-12">
+                        <input matInput formControlName="firstName" placeholder="{{'csa.enter-firstName' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field class="col-12">
+                        <input matInput formControlName="lastName" placeholder="{{'csa.enter-lastName' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field class="col-12">
+                        <input matInput formControlName="email" placeholder="{{'csa.enter-email' | translate}}">
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 card-template">
+            <h4>
+                <mat-icon>lock</mat-icon>
+                {{'csa.accManagement.password' | translate}}
+            </h4>
+            <p>{{'csa.accManagement.password-text' | translate}}</p>
+            <button type="button" class="btn btn-secondary" (click)="gotoDish()">
+                {{'csa.accManagement.password' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 card-template">
+            <h4>
+                <mat-icon>description</mat-icon>
+                {{'csa.accManagement.export' | translate}}
+            </h4>
+            <p>{{'csa.accManagement.export-text' | translate}}</p>
+            <button type="button" class="btn btn-secondary">
+                {{'csa.accManagement.export-button' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 card-template">
+            <h4>
+                <mat-icon>delete_forever</mat-icon>
+                {{'csa.accManagement.delete' | translate}}
+            </h4>
+            <p>{{'csa.accManagement.delete-text' | translate}}</p>
+            <a (click)="openDeleteAcc()">{{'csa.accManagement.delete-link' | translate}}</a>
+        </div>
+    </div>
+</div>

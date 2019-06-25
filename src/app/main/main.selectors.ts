@@ -2,6 +2,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import * as fromTermsConditions from './store/reducers/terms-cond.reducers'
 import * as fromDashboard from '@app/features/dashboard/store/reducers/dashboard.reducer'
 import * as fromAuth from '@app/auth/store/reducers/auth.reducer'
+import * as fromDocuments from '@app/features/profile/store/reducers/profile.reducer'
 
 export const reducerName = 'main'
 
@@ -9,12 +10,14 @@ export interface MainState {
   termsConditions: fromTermsConditions.TermsState
   dashboard: fromDashboard.DashBoardState
   auth: fromAuth.AuthState
+  profile: fromDocuments.ProfileState
 }
 
 export const reducers: ActionReducerMap<MainState> = {
   termsConditions: fromTermsConditions.TermsReducer,
   dashboard: fromDashboard.dashBoardReducer,
   auth: fromAuth.AuthReducer,
+  profile: fromDocuments.profileReducer,
 }
 
 const getModuleState = createFeatureSelector<MainState>(reducerName)
@@ -47,3 +50,6 @@ export const getNavBarState = createSelector(
   getModuleState,
   (stateMain: MainState) => stateMain.auth.showNavMenu
 )
+
+// Account Settings (Admin)
+export const getProfileBusinessList = createSelector(getModuleState, (state: MainState) => state.profile.business)

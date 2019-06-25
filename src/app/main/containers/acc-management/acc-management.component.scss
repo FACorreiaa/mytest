@@ -1,0 +1,42 @@
+.title {
+    margin-top: 3rem;
+    padding: 4rem 0 6rem 0;
+}
+
+.card-template {
+    padding: 30px;
+    background: white;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+
+.container {
+    
+    mat-icon {
+        vertical-align: top;
+        font-size: 26px;
+        margin-right: 5px;
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: underline;
+
+        &:hover {
+            color: #f20000;
+        }
+    }
+
+}
+
+::ng-deep .mat-form-field-label {
+    overflow: visible;
+}
+
+::ng-deep .mat-select-value {
+    overflow: visible;
+}
+
+::ng-deep .mat-input-element {
+    height: 22px;
+}

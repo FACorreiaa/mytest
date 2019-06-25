@@ -1,0 +1,18 @@
+.close {
+    background: transparent;
+    border: transparent;
+    float: right;
+    vertical-align: middle;
+}
+
+::ng-deep .mat-form-field-label {
+    overflow: visible;
+}
+
+::ng-deep .mat-select-value {
+    overflow: visible;
+}
+
+::ng-deep .mat-input-element {
+    height: 22px;
+}
