@@ -16,8 +16,8 @@
                 <span *ngIf="!this.awaitingOwnership && !this.needsVerification">{{'csa.activate' | translate}}</span>
                 <span *ngIf="this.awaitingOwnership && !this.oAuthStatus">{{'csa.deactivated' | translate}}</span>
                 <span *ngIf="this.awaitingOwnership && this.oAuthStatus">{{'csa.pending' | translate}}</span>
-                <span *ngIf="!this.awaitingOwnership && this.needsVerification">{{'csa.verification-required' | translate}}</span>
-
+                <span
+                      *ngIf="!this.awaitingOwnership && this.needsVerification">{{'csa.verification-required' | translate}}</span>
                 <img src="../../../../assets/images/icons/info_icon.svg"
                      alt="Info icon"
                      placement="right"
@@ -27,13 +27,27 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <button type="button"                        
+                <button *ngIf="this.awaitingOwnership"
+                        type="button"
                         class="btn btn-secondary"
                         (click)="openWindowActivation()">
-                        <span *ngIf="this.awaitingOwnership && !this.needsVerification">{{'csa.activate' | translate}}</span>
-                        <span *ngIf="!this.awaitingOwnership && !this.oAuthStatus"> {{'csa.deactivate' | translate}}</span>
-                        <span *ngIf="this.awaitingOwnership && this.oAuthStatus">{{'csa.check-status' | translate}}</span>
-                        <span *ngIf="!this.awaitingOwnership && this.needsVerification">{{'csa.verify' | translate}}</span>
+                    <span
+                          *ngIf="this.awaitingOwnership && !this.needsVerification">{{'csa.activate' | translate}}</span>
+                    <span *ngIf="this.awaitingOwnership && this.oAuthStatus">{{'csa.check-status' | translate}}</span>
+                </button>
+
+                <button *ngIf="!this.awaitingOwnership && !this.oAuthStatus"
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="setStatus()">
+                    <span>{{'csa.deactivate' | translate}}</span>
+                </button>
+
+                <button *ngIf="!this.awaitingOwnership && this.needsVerification"
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="verifyBusiness()">
+                    <span>{{'csa.verify' | translate}}</span>
                 </button>
             </div>
         </div>

@@ -122,8 +122,6 @@ export class BusinessComponent implements OnInit, OnChanges {
   @HostListener('window:focus', ['$event'])
   onFocus(event: any): void {
     if (this.updateDashboard) {
-      console.log('focuss')
-
       this.getAllEvent.emit()
     }
     this.updateDashboard = false

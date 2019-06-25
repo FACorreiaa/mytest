@@ -24,6 +24,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         if (environment.production) {
+          console.log('rollbar')
           rollbar.error(error)
         }
 
