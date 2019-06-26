@@ -72,7 +72,8 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   public ngOnDestroy() {
     this.store.dispatch(new AuthActions.NavMenuLayoutShow())
 
-    this.language$.unsubscribe()
+    this.language$.next()
+    this.language$.complete()
   }
 
   manageBusiness(object: ManageBusinessData): void {

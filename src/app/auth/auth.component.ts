@@ -19,7 +19,6 @@ import { delay, takeUntil } from 'rxjs/operators'
 })
 export class AuthComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
-  private userSubscription$: Subject<void> = new Subject<void>()
 
   selectedLang: string
   languages = ['en', 'pt', 'de']
@@ -51,7 +50,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.userSubscription$.unsubscribe()
+    this.language$.next()
+    this.language$.complete()
   }
 
   async onLogOutClick() {
