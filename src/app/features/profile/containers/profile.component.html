@@ -33,7 +33,7 @@
             <div class="card">
                 <h5>{{'csa.profile-completeness' | translate}}</h5>
                 <div class="percentage-complete">
-                    {{this.percentageToComplete}} {{'csa.to-complete' | translate}}
+                   {{'csa.to-complete' | translate}}
                 </div>
                 <progress-bar></progress-bar>
             </div>
@@ -45,12 +45,12 @@
     <div class="container">
         <div class="row">
             <div class="col col-lg-8">
-                <form (ngSubmit)="save(firstFormGroup, secondFormGroup)">
+                <form >
                     <button type="submit" class="btn btn-save">
                         <mat-icon>check_circle</mat-icon>
                         {{'csa.profile.save' | translate}}
                     </button>
-                    <button type="button" class="btn btn-discard" (click)="reset(firstFormGroup, secondFormGroup)">
+                    <button type="button" class="btn btn-discard">
                         <mat-icon>highlight_off</mat-icon>
                         {{'csa.profile.discard' | translate}}
                     </button>

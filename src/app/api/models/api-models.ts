@@ -448,5 +448,5 @@ export interface Countries {
 export enum Role {
   user,
   admin,
-  superadmin
+  superadmin,
 }
