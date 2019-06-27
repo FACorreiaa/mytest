@@ -21,6 +21,7 @@ import { DataPrivacyComponent } from './components/data-privacy/data-privacy.com
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 import { DeleteAccComponent } from './components/delete-acc/delete-acc.component'
 import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component'
+import { StatusLogComponent } from './containers/status-log/status-log.component'
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { DeleteConfirmComponent } from './components/delete-confirm/delete-confi
     TermsConditionsComponent,
     ImprintComponent,
     DataPrivacyComponent,
-    CookieSettingsComponent
+    CookieSettingsComponent,
+    StatusLogComponent
   ],
   entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
   exports: [],
