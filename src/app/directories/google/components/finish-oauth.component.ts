@@ -11,6 +11,8 @@ export class FinishOauthComponent implements OnInit, OnChanges {
   @Input() oAuthStatus: boolean
   @Input() redirectURL: string
   @Input() loading: boolean
+  @Input() hasError: boolean
+
   selectedBusiness: BusinessData
   requestAdminRightsUrl: string
 

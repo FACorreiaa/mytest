@@ -86,8 +86,6 @@ export class BusinessComponent implements OnInit, OnChanges {
     if (this.businessData$[this.businessData$.length - 1]) {
       this.selectedBusiness = this.businessData$[this.businessData$.length - 1]
 
-      console.log('lang', this.language)
-
       if (this.oAuthStatus && this.selectedBusiness.channels[0].requestAdminRightsUrl) {
         this.oAuthStepRoute = '#/google/finish?lang=' + this.language
       } else {

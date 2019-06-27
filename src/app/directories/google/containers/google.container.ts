@@ -9,7 +9,7 @@ import * as fromApp from '../../../app.reducers'
 
 import { BusinessData } from '@app/api/models/api-models'
 import { delay, takeUntil } from 'rxjs/operators'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'google-comp',
@@ -25,6 +25,7 @@ export class GoogleComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>
 
   constructor(
+    private router: Router,
     private appStore: Store<fromApp.AppState>,
     private translate: TranslateService,
     private directoryStore: Store<fromDirectories.DirectoriesState>,
@@ -39,13 +40,13 @@ export class GoogleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    this.appStore
-      .pipe(
-        delay(0),
-        select(fromApp.language),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe(lang => this.translate.use(this.route.snapshot.queryParams['lang']))
+    if (this.route.snapshot.queryParams['error']) {
+      this.router.navigate(['/google'])
+    }
+
+    if (this.route.snapshot.queryParams['lang']) {
+      this.translate.use(this.route.snapshot.queryParams['lang'])
+    }
 
     this.directoryStore.dispatch(new Actions.GetAllBusinessAction())
   }

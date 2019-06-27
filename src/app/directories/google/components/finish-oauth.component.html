@@ -19,30 +19,50 @@
 
     <div *ngIf="!this.loading"
          class="popup-content">
-        <span class="pt-3 pb-5"
-              style="width: 100%;">{{'csa.google.last-step' | translate}}
-        </span>
 
-        <div class="col-sm-offset-4 col-sm-6">
-            <div class="content-center">
-                <span>3.</span>
-                <img src="../../../../assets/images/icons/oauth_lastStep.png"
-                     width="150"
-                     height="200">
-            </div>
-            <span style="font-size: 12px;">
-                {{'csa.google.request-ownership' | translate}}
+        <div *ngIf="!hasError">
+            <span class="pt-3 pb-5"
+                  style="width: 100%;">{{'csa.google.last-step' | translate}}
             </span>
+
+            <div class="col-sm-offset-4 col-sm-6">
+                <div class="content-center">
+                    <span>3.</span>
+                    <img src="../../../../assets/images/icons/oauth_lastStep.png"
+                         width="150"
+                         height="200">
+                </div>
+                <span style="font-size: 12px;">
+                    {{'csa.google.request-ownership' | translate}}
+                </span>
+            </div>
+
+            <div class="pt-5 col-sm-12 content-center">
+                <button type="button"
+                        class="btn btn-secondary">
+                    <a class="btn-secondary"
+                       href="{{this.requestAdminRightsUrl}}">
+                        {{'csa.google.continue' | translate}}
+                    </a>
+                </button>
+            </div>
         </div>
 
-        <div class="pt-5 col-sm-12 content-center">
-            <button type="button"
-                    class="btn btn-secondary">
-                <a class="btn-secondary"
-                   href="{{this.requestAdminRightsUrl}}">
-                    {{'csa.google.continue' | translate}}
-                </a>
-            </button>
+        <div *ngIf="hasError">
+            <h3 class="pt-3 pb-5 content-center"> {{'csa.google.error' | translate}}
+            </h3>
+
+            <span class="pt-3 pb-5"
+                  style="width: 100%;">{{'csa.google.error-description' | translate}}
+            </span>
+
+            <div class="pt-5 col-sm-12 content-center">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="closeWindow()">
+                    <span>{{'csa.close' | translate}}</span>
+                </button>
+            </div>
         </div>
 
     </div>
