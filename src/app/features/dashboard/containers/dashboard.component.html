@@ -8,7 +8,7 @@
 			<h4 *ngIf="myRole == Role.superadmin">{{'csa.dashboard.superadmin' | translate}}</h4>
 		</div>
 		<div class="col-sm-12 col-md-4">
-			<button class="btn btn-admin" *ngIf="myRole == Role.admin">
+			<button class="btn btn-admin" *ngIf="myRole == Role.admin || myRole == Role.superadmin">
 				{{'csa.dashboard.admin-button' | translate}}
 			</button>
 		</div>

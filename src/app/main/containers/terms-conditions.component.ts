@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store'
 import * as fromMain from '../main.selectors'
 import * as TermsActions from '../store/actions/terms-cond.action'
 import * as AuthActions from '../../auth/store/actions/auth.action'
+import { TermsConditionsGetResponse } from '@app/api/models/api-models'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'terms-conditions',
@@ -14,14 +16,20 @@ import * as AuthActions from '../../auth/store/actions/auth.action'
 export class TermsConditionsComponent implements OnInit, OnDestroy {
   formAcceptTermsConditions: FormGroup
   showTermConditiValidation = false
+  checkAcceptens: boolean
+  getResponse: Observable<TermsConditionsGetResponse>
 
   constructor(private formBuilder: FormBuilder, private mainStore: Store<fromMain.MainState>) {
     this.mainStore.dispatch(new AuthActions.NavMenuLayoutHide())
+    this.getResponse = this.mainStore.select(fromMain.getTermsConditionsState)
   }
 
   ngOnInit() {
     this.formAcceptTermsConditions = this.formBuilder.group({
       termsConditions: [''],
+    })
+    this.getResponse.subscribe((getResponse: TermsConditionsGetResponse) => {
+      this.checkAcceptens = getResponse.accepted
     })
   }
 

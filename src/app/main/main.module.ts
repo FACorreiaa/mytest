@@ -19,7 +19,6 @@ import { AccManagementComponent } from './containers/acc-management/acc-manageme
 import { ImprintComponent } from './components/imprint/imprint.component'
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
-import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
 import { DeleteAccComponent } from './components/delete-acc/delete-acc.component'
 import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component'
 
@@ -46,10 +45,9 @@ import { DeleteConfirmComponent } from './components/delete-confirm/delete-confi
     TermsConditionsComponent,
     ImprintComponent,
     DataPrivacyComponent,
-    CookieSettingsComponent,
-    TcDialogComponent
+    CookieSettingsComponent
   ],
-  entryComponents: [CookieSettingsComponent, TcDialogComponent, DeleteAccComponent, DeleteConfirmComponent],
+  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

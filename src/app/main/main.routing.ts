@@ -40,7 +40,7 @@ const MainRoutes: Routes = [
         component: ImprintComponent,
       },
       {
-        path: 'data_privacy',
+        path: 'privacy',
         canActivate: [AppAuthGuard],
         component: DataPrivacyComponent,
       },
