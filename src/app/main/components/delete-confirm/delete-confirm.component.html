@@ -17,22 +17,37 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form [formGroup]="deleteConfirmFormGroup">
+                <!--
+                <form [formGroup]="deleteConfirmFormGroup" (ngSubmit)="delete()">
                     <div class="row">
                         <mat-form-field class="col-12">
-                            <input matInput placeholder="{{'csa.deleteConfirm.email' | translate}}">
+                            <input matInput formControlName="email"
+                                placeholder="{{'csa.deleteConfirm.email' | translate}}">
                         </mat-form-field>
+                        <mat-error *ngIf="deleteConfirmFormGroup.hasError('required')">
+                            {{'csa.deleteAcc.email-error' | translate}}
+                        </mat-error>
+                        <mat-error *ngIf="deleteConfirmFormGroup.hasError('emailMatch')">
+                            {{'csa.deleteAcc.email-match' | translate}}
+                        </mat-error>
                     </div>
                 </form>
+                -->
             </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button type="button" class="btn btn-secondary" mat-dialog-close>
-            {{'csa.deleteConfirm.cancel' | translate}}
-        </button>
-        <button type="button" class="btn btn-primary">
-            {{'csa.deleteConfirm.confirm' | translate}}
-        </button>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-secondary" mat-dialog-close>
+                    {{'csa.deleteConfirm.cancel' | translate}}
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">
+                    {{'csa.deleteConfirm.confirm' | translate}}
+                </button>
+            </div>
+        </div>
     </mat-dialog-actions>
 </div>

@@ -20,19 +20,20 @@
                 <form [formGroup]="deleteFormGroup">
                     <div class="row">
                         <mat-form-field class="col-12">
-                            <mat-select [formControl]="reasonControl" required
+                            <mat-select formControlName="reason" required
                                 placeholder="{{'csa.deleteAcc.reason' | translate}}">
                                 <mat-option value="noNeed">I no longer need it</mat-option>
                                 <mat-option value="foundBetter">I found a better tool</mat-option>
                                 <mat-option value="notWhatINeed">The product doesn't do what i need</mat-option>
                                 <mat-option value="other">Other</mat-option>
                             </mat-select>
-                            <mat-error *ngIf="reasonControl.hasError('required')">
+                            <mat-error *ngIf="deleteFormGroup.get('reason').invalid">
                                 {{'csa.deleteAcc.reason-error' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-12">
-                            <textarea matInput placeholder="{{'csa.deleteAcc.comment' | translate}}"></textarea>
+                            <textarea matInput formControlName="comment"
+                                placeholder="{{'csa.deleteAcc.comment' | translate}}"></textarea>
                         </mat-form-field>
                     </div>
                 </form>
@@ -40,11 +41,18 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button type="button" class="btn btn-secondary" mat-dialog-close>
-            {{'csa.deleteAcc.cancel' | translate}}
-        </button>
-        <button type="button" class="btn btn-primary" (click)="openDeleteConfirm()">
-            {{'csa.deleteAcc.submit' | translate}}
-        </button>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-secondary" mat-dialog-close>
+                    {{'csa.deleteAcc.cancel' | translate}}
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-primary" [disabled]="deleteFormGroup.invalid"
+                    (click)="openDeleteConfirm()">
+                    {{'csa.deleteAcc.submit' | translate}}
+                </button>
+            </div>
+        </div>
     </mat-dialog-actions>
 </div>

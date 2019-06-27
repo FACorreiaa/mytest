@@ -1,14 +1,43 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
+import { Observable } from 'rxjs'
+
+import * as fromMain from '../../main.selectors'
+
+import { BusinessData } from '@app/api/models/api-models'
+import { Store } from '@ngrx/store'
 
 @Component({
     selector: 'delete-confirm',
     templateUrl: 'delete-confirm.component.html',
     styleUrls: ['./delete-confirm.component.scss'],
 })
-export class DeleteConfirmComponent implements OnInit {
+export class DeleteConfirmComponent implements OnInit, OnDestroy {
+    profileData: Observable<BusinessData[]>
 
-    constructor() { }
+    deleteConfirmFormGroup: FormGroup
+    userEmail: string
 
-    ngOnInit() { }
+    constructor(private formBuilder: FormBuilder, private store: Store<fromMain.MainState>) {
+        this.profileData = this.store.select(fromMain.getProfileBusinessList)
+    }
 
+    ngOnInit() {
+        this.profileData.subscribe((userData: BusinessData[]) => {
+            this.userEmail = userData[0].contactEmail
+        })
+        /*
+        this.deleteConfirmFormGroup = this.formBuilder.group({
+            email: ['', [Validators.required]]
+        }, { validator: this.emailMatchValidator })*/
+    }
+    /*
+    emailMatchValidator(group: FormGroup): any {
+        const enteredEmail = group.controls.email.value
+        console.log(this.userEmail)
+        return enteredEmail === this.userEmail ? null : { emailMatch: true }
+    }
+    */
+    ngOnDestroy() {
+    }
 }

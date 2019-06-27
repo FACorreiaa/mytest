@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatDialogConfig } from '@angular/material'
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
-import { FormGroup } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
     selector: 'delete-acc',
@@ -11,11 +11,23 @@ import { FormGroup } from '@angular/forms'
 export class DeleteAccComponent implements OnInit {
     deleteFormGroup: FormGroup
 
-    constructor(public dialog: MatDialog) { }
+    constructor(private formBuilder: FormBuilder, public dialog: MatDialog) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.deleteFormGroup = this.formBuilder.group({
+            reason: ['', Validators.required],
+            comment: ''
+        })
+    }
 
     openDeleteConfirm() {
-        this.dialog.open(DeleteConfirmComponent)
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.data = {
+            reason: '',
+            comment: ''
+        }
+
+        this.dialog.open(DeleteConfirmComponent, dialogConfig)
     }
 }

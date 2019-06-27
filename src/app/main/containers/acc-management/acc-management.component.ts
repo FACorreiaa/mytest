@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 
 import * as fromMain from '../../main.selectors'
@@ -44,6 +44,8 @@ export class AccManagementComponent implements OnInit {
     }
 
     gotoDish() {
-        window.open('https://www.dish.co/DE/de/user/account')
+        this.profileData.subscribe((data: BusinessData[]) => {
+            window.open('https://www.dish.co/' + data[0].countryCode + '/' + data[0].languageCode + '/user/profile/')
+        })
     }
 }
