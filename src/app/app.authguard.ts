@@ -67,7 +67,8 @@ export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.unsubscribe()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
   private navigateToTermsConditions(): void {

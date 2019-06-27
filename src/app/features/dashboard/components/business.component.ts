@@ -14,6 +14,7 @@ import {
 import { ModalOtherVerifiComponent } from '@app/core/components/modal/modal-other-verifi-component'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { redirectURL } from '../dashboard.selector'
+import { language } from '@app/app.reducers'
 
 @Component({
   selector: 'business-comp',
@@ -27,6 +28,7 @@ export class BusinessComponent implements OnInit, OnChanges {
   @Input() redirectURL: string
   @Input() fecthOptions$: FetchVerificationResponse
   @Input() userNames: string
+  @Input() language: string
 
   @Output() getAllEvent: EventEmitter<any> = new EventEmitter()
   @Output() fetchOptionsEvent: EventEmitter<any> = new EventEmitter()
@@ -85,9 +87,9 @@ export class BusinessComponent implements OnInit, OnChanges {
       this.selectedBusiness = this.businessData$[this.businessData$.length - 1]
 
       if (this.oAuthStatus && this.selectedBusiness.channels[0].requestAdminRightsUrl) {
-        this.oAuthStepRoute = '#/google/finish'
+        this.oAuthStepRoute = '#/google/finish?lang=' + this.language
       } else {
-        this.oAuthStepRoute = '#/google'
+        this.oAuthStepRoute = '#/google?lang=' + this.language
       }
 
       this.gSearchUrl = this.selectedBusiness.channels[0].callbackUrl

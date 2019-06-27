@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   businessList$: Observable<BusinessData[]>
   oAuthTokenStatus$: Observable<boolean>
   redirectURL$: Observable<string>
+  language: string
 
   fecthOptions$: Observable<FetchVerificationResponse>
   userName: string
@@ -72,7 +73,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         select(fromApp.language),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe(lang => this.translate.use(lang))
+      .subscribe(lang => {
+        this.language = lang
+        this.translate.use(lang)
+      })
 
     this.listingStatus = false
   }
@@ -82,7 +86,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.unsubscribe()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
   updateDashboard() {

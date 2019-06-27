@@ -72,8 +72,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.userSubscription$.unsubscribe()
-    this.language$.unsubscribe()
+    this.userSubscription$.next()
+    this.userSubscription$.complete()
+
+    this.language$.next()
+    this.language$.complete()
   }
 
   ngAfterViewInit() {
