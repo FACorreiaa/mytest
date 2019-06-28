@@ -1,0 +1,85 @@
+.close {
+    background: transparent;
+    border: transparent;
+    float: right;
+    vertical-align: middle;
+}
+
+h4 {
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+}
+
+mat-dialog-content {
+
+    section {
+        margin-bottom: 2rem;
+    }
+
+    span {
+        display: block;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    a { 
+        display: block;
+    }
+
+    ul {
+        padding: 0 0 0 20px;
+        list-style-type: decimal;
+    }
+
+    .table {
+        border: 1px solid #ccc;
+        background-color: #f3f3f3;
+        margin: 0;
+        display: table;
+
+        .table-header {
+            border-bottom: 2px solid #ccc;
+            
+            div {
+                
+                &:first-of-type {
+                    border-right: 2px solid #ccc;
+                }
+            }
+        }
+
+        .table-body {
+
+            div {
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+            }
+
+            .table-row {
+                border-bottom: 1px solid #ccc;
+
+                div {
+
+                    &:first-of-type {
+                        border-right: 2px solid #ccc;
+                    }
+                }
+
+                .table-cell {
+                    display: table-cell;
+                }
+            } 
+        }
+    }
+
+
+
+    
+}
