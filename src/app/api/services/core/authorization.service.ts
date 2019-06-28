@@ -20,7 +20,7 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
   }
 
   public requestAdminRights(locationData: LocationData): Observable<any> {
-    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}?testMode=true`)
+    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}`)
   }
 
   public termsConditions(): Observable<TermsConditionsGetResponse> {

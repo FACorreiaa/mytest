@@ -36,7 +36,7 @@
                     <span *ngIf="this.awaitingOwnership && this.oAuthStatus">{{'csa.check-status' | translate}}</span>
                 </button>
 
-                <button *ngIf="!this.awaitingOwnership && !this.oAuthStatus"
+                <button *ngIf="!this.awaitingOwnership && !this.oAuthStatus && !this.needsVerification"
                         type="button"
                         class="btn btn-secondary"
                         (click)="setStatus()">

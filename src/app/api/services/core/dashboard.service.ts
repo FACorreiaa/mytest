@@ -24,29 +24,29 @@ export class DashBoardService extends BaseApi implements IDashBoardService {
   }
 
   public businessData(): Observable<BusinessData> {
-    return this.getObjects(`${this.businessControllerRoute}/getAll?testMode=true`)
+    return this.getObjects(`${this.businessControllerRoute}/getAll`)
   }
 
   public requestAdminRights(locationData: LocationData): Observable<any> {
-    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}?testMode=true`)
+    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}`)
   }
 
   public requestAdminRightsById(locationData: RequestAdminRightsBusinessId): Observable<any> {
-    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}?testMode=true`)
+    return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}`)
   }
 
   public oAuthTokens(business: RequestAdminRightsBusinessId): Observable<any> {
-    return this.getObjectsPOST_Text(business, `${this.businessRequestAdminControllerRoute}/oAuth?testMode=true`)
+    return this.getObjectsPOST_Text(business, `${this.businessRequestAdminControllerRoute}/oAuth`)
   }
   public fetchVerificationOptions(id: number, req: FetchVerificationRequest): Observable<any> {
-    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/fetchOptions?testMode=true`)
+    return this.getObjectsPOST(req, `${this.businessVerificationControllerRoute}/${id}/fetchOptions`)
   }
 
   public initializeVerification(id: number, req: InitVerificationRequest): Observable<any> {
-    return this.getObjectsPOST_Text(req, `${this.businessVerificationControllerRoute}/${id}/init?testMode=true`)
+    return this.getObjectsPOST_Text(req, `${this.businessVerificationControllerRoute}/${id}/init`)
   }
 
   public completeVerification(id: number, req: CompleteVerificationRequest): Observable<any> {
-    return this.getObjectsPOST_Text(req, `${this.businessVerificationControllerRoute}/${id}/complete?testMode=true`)
+    return this.getObjectsPOST_Text(req, `${this.businessVerificationControllerRoute}/${id}/complete`)
   }
 }
