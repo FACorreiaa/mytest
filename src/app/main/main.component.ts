@@ -105,6 +105,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openCookies() {
-    this.dialog.open(CookieSettingsComponent)
+    this.dialog.open(CookieSettingsComponent, {
+      width: '800px'
+    })
   }
 }
