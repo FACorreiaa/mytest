@@ -13,7 +13,19 @@ export const reducers: ActionReducerMap<DirectoriesState> = {
 
 const getModuleState = createFeatureSelector<DirectoriesState>(reducerName)
 
-export const getBusinessState = createSelector(getModuleState, (state: DirectoriesState) => state.google.business)
-export const getOauthTokenStatus = createSelector(getModuleState, (state: DirectoriesState) => state.google.oauthToken)
-export const getRedirectURL = createSelector(getModuleState, (state: DirectoriesState) => state.google.redirectUrl)
-export const getLoading = createSelector(getModuleState, (state: DirectoriesState) => state.google.loading)
+export const getBusinessState = createSelector(
+  getModuleState,
+  (state: DirectoriesState) => state.google.business
+)
+export const getOauthTokenStatus = createSelector(
+  getModuleState,
+  (state: DirectoriesState) => state.google.oauthToken
+)
+export const getRedirectURL = createSelector(
+  getModuleState,
+  (state: DirectoriesState) => state.google.redirectUrl
+)
+export const getLoading = createSelector(
+  getModuleState,
+  (state: DirectoriesState) => state.google.loading
+)

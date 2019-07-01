@@ -18,15 +18,33 @@ export const reducers: ActionReducerMap<DashBoardState> = {
 // DashBoard
 export const getDashBoardState = createFeatureSelector<DashBoardState>(reducerName)
 
-export const getDashBoardBusinessList = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.business)
-export const getOauthTokenStatus = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.oauthToken)
+export const getDashBoardBusinessList = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.dashboard.business
+)
+export const getOauthTokenStatus = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.dashboard.oauthToken
+)
 
-export const getfecthVerificationOptions = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.fetchVerificationOptions)
+export const getfecthVerificationOptions = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.dashboard.fetchVerificationOptions
+)
 
-export const initVerification = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.initVerification)
+export const initVerification = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.dashboard.initVerification
+)
 
-export const completeVerification = createSelector(getDashBoardState, (state: DashBoardState) => state.dashboard.completeVerification)
+export const completeVerification = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.dashboard.completeVerification
+)
 
 // Directories
 
-export const redirectURL = createSelector(getDashBoardState, (state: DashBoardState) => state.directories.redirectUrl)
+export const redirectURL = createSelector(
+  getDashBoardState,
+  (state: DashBoardState) => state.directories.redirectUrl
+)

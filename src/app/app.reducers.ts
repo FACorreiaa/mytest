@@ -25,12 +25,27 @@ export const getRouterPath = (state: AppState) => state.router.state.url
 // OnBoarding
 export const getAuthState = (state: AppState) => state.auth
 
-export const language = createSelector(getAuthState, fromAuth.getLanguage)
+export const language = createSelector(
+  getAuthState,
+  fromAuth.getLanguage
+)
 
-export const restaurantAssistent = createSelector(getAuthState, fromAuth.getRestaurantAssistent)
+export const restaurantAssistent = createSelector(
+  getAuthState,
+  fromAuth.getRestaurantAssistent
+)
 
-export const claimData = createSelector(getAuthState, fromAuth.getClaimData)
+export const claimData = createSelector(
+  getAuthState,
+  fromAuth.getClaimData
+)
 
-export const loading = createSelector(getAuthState, fromAuth.getLoading)
+export const loading = createSelector(
+  getAuthState,
+  fromAuth.getLoading
+)
 
-export const errorMessage = createSelector(getAuthState, fromAuth.getErrorMessage)
+export const errorMessage = createSelector(
+  getAuthState,
+  fromAuth.getErrorMessage
+)

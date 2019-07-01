@@ -20,15 +20,30 @@ export const reducers: ActionReducerMap<MainState> = {
 const getModuleState = createFeatureSelector<MainState>(reducerName)
 
 // Loading
-export const getLoading = createSelector(getModuleState, (stateMain: MainState) => stateMain.termsConditions.loading)
+export const getLoading = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.termsConditions.loading
+)
 
 // Terms & Conditions
-export const getTermsConditionsState = createSelector(getModuleState, (stateMain: MainState) => stateMain.termsConditions.termsConditions)
+export const getTermsConditionsState = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.termsConditions.termsConditions
+)
 
 // Dashboard
-export const getDashboardState = createSelector(getModuleState, (stateMain: MainState) => stateMain.dashboard.business)
+export const getDashboardState = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.dashboard.business
+)
 
 // Auth - OnBoarding
-export const getAuth = createSelector(getModuleState, (stateMain: MainState) => stateMain.auth.hasManageError)
+export const getAuth = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.hasManageError
+)
 
-export const getNavBarState = createSelector(getModuleState, (stateMain: MainState) => stateMain.auth.showNavMenu)
+export const getNavBarState = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.showNavMenu
+)
