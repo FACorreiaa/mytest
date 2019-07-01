@@ -6,6 +6,7 @@ import * as fromMain from '../../main.selectors'
 
 import { BusinessData } from '@app/api/models/api-models'
 import { Store } from '@ngrx/store'
+import { ISubscription } from 'rxjs/Subscription'
 
 @Component({
     selector: 'delete-confirm',
@@ -13,6 +14,8 @@ import { Store } from '@ngrx/store'
     styleUrls: ['./delete-confirm.component.scss'],
 })
 export class DeleteConfirmComponent implements OnInit, OnDestroy {
+    private subscription: ISubscription
+
     profileData: Observable<BusinessData[]>
 
     deleteConfirmFormGroup: FormGroup
@@ -23,7 +26,7 @@ export class DeleteConfirmComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.profileData.subscribe((userData: BusinessData[]) => {
+        this.subscription = this.profileData.subscribe((userData: BusinessData[]) => {
             this.userEmail = userData[0].contactEmail
         })
         /*
@@ -39,5 +42,6 @@ export class DeleteConfirmComponent implements OnInit, OnDestroy {
     }
     */
     ngOnDestroy() {
+        this.subscription.unsubscribe()
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Observable } from 'rxjs'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { MatDialog } from '@angular/material'
@@ -9,14 +9,23 @@ import { BusinessData } from '@app/api/models/api-models'
 import { Store } from '@ngrx/store'
 
 import { DeleteAccComponent } from '@app/main/components/delete-acc/delete-acc.component'
+import { ISubscription } from 'rxjs/Subscription'
 
 @Component({
     selector: 'acc-management',
     templateUrl: 'acc-management.component.html',
     styleUrls: ['./acc-management.component.scss'],
 })
-export class AccManagementComponent implements OnInit {
+export class AccManagementComponent implements OnInit, OnDestroy {
+    private subscription: ISubscription
+
     profileData: Observable<BusinessData[]>
+
+    firstName: string
+    lastName: string
+    email: string
+    countryCode: string
+    languageCode: string
 
     userFormGroup: FormGroup
 
@@ -29,14 +38,20 @@ export class AccManagementComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.profileData.subscribe((data: BusinessData[]) => {
-            this.userFormGroup = this.formBuilder.group({
-                firstName: data[0].userFirstName,
-                lastName: data[0].userLastName,
-                email: data[0].contactEmail
-            })
-            this.userFormGroup.disable()
+        this.subscription = this.profileData.subscribe((settingsData: BusinessData[]) => {
+            this.firstName = settingsData[0].userFirstName
+            this.lastName = settingsData[0].userLastName
+            this.email = settingsData[0].contactEmail
+            this.countryCode = settingsData[0].countryCode
+            this.languageCode = settingsData[0].languageCode
         })
+
+        this.userFormGroup = this.formBuilder.group({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email
+        })
+        this.userFormGroup.disable()
     }
 
     openDeleteAcc() {
@@ -44,8 +59,10 @@ export class AccManagementComponent implements OnInit {
     }
 
     gotoDish() {
-        this.profileData.subscribe((data: BusinessData[]) => {
-            window.open('https://www.dish.co/' + data[0].countryCode + '/' + data[0].languageCode + '/user/profile/')
-        })
+        window.open('https://www.dish.co/' + this.countryCode + '/' + this.languageCode + '/user/profile/')
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe()
     }
 }
