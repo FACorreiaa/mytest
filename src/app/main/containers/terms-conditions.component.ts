@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store } from '@ngrx/store'
 
 import * as fromMain from '../main.selectors'
@@ -7,6 +7,7 @@ import * as TermsActions from '../store/actions/terms-cond.action'
 import * as AuthActions from '../../auth/store/actions/auth.action'
 import { TermsConditionsGetResponse } from '@app/api/models/api-models'
 import { Observable } from 'rxjs'
+import { ISubscription } from 'rxjs/Subscription'
 
 @Component({
   selector: 'terms-conditions',
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs'
   styleUrls: ['./terms-conditions.component.scss'],
 })
 export class TermsConditionsComponent implements OnInit, OnDestroy {
+  private subscription: ISubscription
   formAcceptTermsConditions: FormGroup
   showTermConditiValidation = false
   checkAcceptens: boolean
@@ -28,13 +30,14 @@ export class TermsConditionsComponent implements OnInit, OnDestroy {
     this.formAcceptTermsConditions = this.formBuilder.group({
       termsConditions: [''],
     })
-    this.getResponse.subscribe((getResponse: TermsConditionsGetResponse) => {
+    this.subscription = this.getResponse.subscribe((getResponse: TermsConditionsGetResponse) => {
       this.checkAcceptens = getResponse.accepted
     })
   }
 
   ngOnDestroy() {
     this.mainStore.dispatch(new AuthActions.NavMenuLayoutShow())
+    this.subscription.unsubscribe()
   }
 
   /**

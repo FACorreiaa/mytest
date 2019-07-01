@@ -84,7 +84,6 @@
             <p>Sic enim censent, oportunitatis esse beate vivere. Sed ille, ut dixi, vitiose. Sed ego in hoc resisto;
                 Verum hoc idem saepe faciamus. Sed haec omittamus; </p>
 
-
         </div>
         <div *ngIf="!checkAcceptens" class="col-md-12 d-flex justify-content-end pad div-acceptd-terms">
             <form class="form-display" [formGroup]="formAcceptTermsConditions"
@@ -97,7 +96,6 @@
                         {{'csa.accept-terms.valid' | translate}}
                     </mat-error>
                 </div>
-
 
                 <button type="button" class="btn btn-secondary-terms" [disabled]="!formAcceptTermsConditions.valid"
                     type="submit">Confirm</button>
