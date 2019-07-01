@@ -69,8 +69,8 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   @Output() private registerEvent = new EventEmitter()
   @Output() private goToProfileEvent = new EventEmitter()
 
-  @ViewChild('expansionPanel') myPanels: MatExpansionPanel
-  @ViewChild('address') addressInput: ElementRef
+  @ViewChild('expansionPanel', { static: false }) myPanels: MatExpansionPanel
+  @ViewChild('address', { static: false }) addressInput: ElementRef
 
   /*
    * Method to get opening hours array in onboarding second step.

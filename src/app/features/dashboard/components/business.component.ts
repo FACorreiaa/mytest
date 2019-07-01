@@ -35,7 +35,7 @@ export class BusinessComponent implements OnInit, OnChanges {
   @Output() InitializeVerificationEvent: EventEmitter<any> = new EventEmitter()
   @Output() CompleteVerificationEvent: EventEmitter<any> = new EventEmitter()
 
-  @ViewChild('content') _templateModal: ElementRef
+  @ViewChild('content', { static: false }) _templateModal: ElementRef
 
   verificationCodeForm: FormGroup
   awaitingOwnership: boolean

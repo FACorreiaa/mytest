@@ -16,10 +16,22 @@ export const reducers: ActionReducerMap<ProfileState> = {
 
 export const getProfileState = createFeatureSelector<ProfileState>(reducerName)
 
-export const getProfileBusinessList = createSelector(getProfileState, (state: ProfileState) => state.profile.business)
+export const getProfileBusinessList = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.profile.business
+)
 
-export const getfecthVerificationOptions = createSelector(getProfileState, (state: ProfileState) => state.profile.fetchVerificationOptions)
+export const getfecthVerificationOptions = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.profile.fetchVerificationOptions
+)
 
-export const initVerification = createSelector(getProfileState, (state: ProfileState) => state.profile.initVerification)
+export const initVerification = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.profile.initVerification
+)
 
-export const completeVerification = createSelector(getProfileState, (state: ProfileState) => state.profile.completeVerification)
+export const completeVerification = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.profile.completeVerification
+)
