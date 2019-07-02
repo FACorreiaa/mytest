@@ -44,6 +44,8 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   allowFreeText = false
 
+  rendering = false
+  activeTab = 'basic'
   toggleButton = false
   imgPathServices = '../../../../assets/images/icons_services/'
 
@@ -55,6 +57,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   @Input() countries: Countries[]
   @Input() profileData: BusinessData[]
   @Output() private goToProfileEvent = new EventEmitter()
+  @Output() private updateBusinessEvent = new EventEmitter()
 
   /*
    * Method to get opening hours array in onboarding second step.
@@ -102,7 +105,16 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   ngAfterViewChecked() {
+    this.rendering = true
     this.change.detectChanges()
+  }
+
+  setActiveTab(tabId: string) {
+    this.formId = tabId
+  }
+
+  isActiveTab(tabId: string) {
+    return tabId === this.formId
   }
 
   /*
@@ -161,18 +173,14 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     this.goToProfileEvent.emit()
   }
 
-  /**
-   * When users changes country, a new area code needs to be set.
-   * @param event country selected
-   */
   changeCountry(event: any) {
     this.setAreaCode(event.value)
   }
 
-  /**
-   * Set new areacode for selected country.
-   * @param countryName the country name
-   */
+  save() {
+    this.updateBusinessEvent.emit()
+  }
+
   private setAreaCode(countryName: string) {
     if (!countryName) {
       return
@@ -307,81 +315,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
         }
       )
     }
-  }
-
-  /**
-   * Build opening hours dto model to send in service.
-   * @param openHours the opening hours array for each day of the week.
-   */
-  private buildOpenHoursModel(openHours: any): OpeningTimes {
-    let monday: Day[] = []
-    let tuesday: Day[] = []
-    let wednesday: Day[] = []
-    let thursday: Day[] = []
-    let friday: Day[] = []
-    let saturday: Day[] = []
-    let sunday: Day[] = []
-
-    openHours
-      .filter((x: any) => x.isSelected)
-      .forEach((element: any) => {
-        switch (element.name) {
-          case 'Monday':
-            monday = this.buildDayModel(element)
-            break
-          case 'Tuesday':
-            tuesday = this.buildDayModel(element)
-            break
-          case 'Wednesday':
-            wednesday = this.buildDayModel(element)
-            break
-          case 'Thursday':
-            thursday = this.buildDayModel(element)
-            break
-          case 'Friday':
-            friday = this.buildDayModel(element)
-            break
-          case 'Saturday':
-            saturday = this.buildDayModel(element)
-            break
-          case 'Sunday':
-            sunday = this.buildDayModel(element)
-            break
-          default:
-            break
-        }
-      })
-
-    const openingTimes: OpeningTimes = {
-      monday: monday,
-      tuesday: tuesday,
-      wednesday: wednesday,
-      thursday: thursday,
-      friday: friday,
-      saturday: saturday,
-      sunday: sunday,
-    }
-
-    return openingTimes
-  }
-
-  /**
-   * Build the day model to send in service.
-   * @param element the day data.
-   */
-  private buildDayModel(element: any): Day[] {
-    const dayArray: Day[] = []
-
-    let item: Day
-    item = Object.assign({}, item, { startTime: element.from, endTime: element.to })
-    dayArray.push(item)
-    if (element.splitedFrom && element.splitedTo) {
-      let splitedItem: Day
-      splitedItem = Object.assign({}, splitedItem, { startTime: element.splitedFrom, endTime: element.splitedTo })
-      dayArray.push(splitedItem)
-    }
-
-    return dayArray
   }
 }
 

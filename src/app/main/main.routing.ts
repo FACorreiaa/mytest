@@ -16,17 +16,17 @@ const MainRoutes: Routes = [
       {
         path: 'dashboard',
         canActivate: [AppAuthGuard],
-        loadChildren: '../features/dashboard/dashboard.module#DashboardModule',
+        loadChildren: () => import('../features/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
         path: 'profile',
         canActivate: [AppAuthGuard],
-        loadChildren: '../features/profile/profile.module#ProfileModule',
+        loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule),
       },
       {
         path: 'wizard',
         canActivate: [AppAuthGuard],
-        loadChildren: '../auth/auth.module#AuthModule',
+        loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule),
       },
       {
         path: 'terms',

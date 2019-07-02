@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { ProfileComponent } from './containers/profile.component'
-import { ProfileFormComponent } from '@app/core/components/profile-form/profile-form.component'
+import { ProfileFormComponent } from '@app/features/profile/components/profile-form.component'
 import { ProfileRoutingModule } from './profile.routing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'

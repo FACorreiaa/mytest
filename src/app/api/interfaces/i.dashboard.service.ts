@@ -5,6 +5,7 @@ export abstract class IDashBoardService {
   public abstract businessData(): Observable<BusinessData>
 
   public abstract requestAdminRights(locationData: LocationData): Observable<any>
+
   public abstract requestAdminRightsById(locationData: RequestAdminRightsBusinessId): Observable<any>
 
   public abstract oAuthTokens(business: RequestAdminRightsBusinessId): Observable<any>

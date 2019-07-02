@@ -65,13 +65,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(lang => this.translate.use(lang))
   }
 
-  public setActiveTab(tabId: string) {
-    this.activeTab = tabId
-  }
-
-  public isActiveTab(tabId: string) {
-    return tabId === this.activeTab
-  }
+  updateBusiness() {}
 
   public ngOnDestroy() {
     this.language$.unsubscribe()

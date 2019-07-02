@@ -24,7 +24,7 @@ const AuthRoutes = [
       },
     },
   },
-  { path: 'main', canActivate: [AppAuthGuard], loadChildren: '../main/main.module#MainModule' },
+  { path: 'main', canActivate: [AppAuthGuard], loadChildren: () => import('../main/main.module').then(m => m.MainModule) },
   { path: '**', redirectTo: 'PageNotFoundComponent' },
 ]
 
