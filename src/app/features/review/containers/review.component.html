@@ -1,18 +1,24 @@
 <div class="container">
     <div class="row justify-content-center title">
-        <h2>{{ 'csa.navmenu-welcome' | translate }} <span>{{this.userName}}</span></h2>
+        <h2>{{ 'csa.review.title' | translate }}</h2>
     </div>
 
     <div class="row">
-        <div class="col-md-12 col-lg-8 order-2 order-lg-1 card">
+        <div class="col-md-12 col-lg-8 order-2 order-lg-1">
+            <div class="card-template">
 
+            </div>
         </div>
 
         <div class="col-md-12 col-lg-4 order-1 order-lg-2">
-            <div class="card">
+            <div class="card-template answers">
                 <h5>{{'csa.review.left-answers' | translate}}</h5>
+                <progress-spinner></progress-spinner>
+                <span>{{'csa.review.more-reviews' | translate}}</span>
+                <button type="button" class="btn btn-secondary">
+                    {{'csa.review.upgrade' | translate}}
+                </button>
             </div>
         </div>
     </div>
-
 </div>

@@ -7,6 +7,8 @@ import { IDashBoardService } from './interfaces/i.dashboard.service'
 import { DashBoardService } from './services/core/dashboard.service'
 import { IProfileService } from './interfaces/i.profile.service'
 import { ProfileService } from './services/core/profile.service'
+import { IReviewService } from './interfaces/i.review.service'
+import { ReviewService } from './services/core/review.service'
 import { IAuthorizationService } from './interfaces/i.authorization.service'
 import { AuthorizationService } from './services/core/authorization.service'
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http'
@@ -62,6 +64,10 @@ export class ApiModule {
         {
           provide: IProfileService,
           useClass: ProfileService,
+        },
+        {
+          provide: IReviewService,
+          useClass: ReviewService,
         },
         {
           provide: IRestaurantAssistentService,

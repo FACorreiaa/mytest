@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 
+import * as Actions from '../store/actions/review.actions'
 import * as fromApp from '../../../app.reducers'
+import * as fromReview from '../review.selector'
 
-import { Subject } from 'rxjs'
+import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 
 @Component({
@@ -14,6 +16,8 @@ import { delay, takeUntil } from 'rxjs/operators'
 })
 export class ReviewComponent implements OnInit, OnDestroy {
     private unsubscribe$: Subject<void> = new Subject<void>()
+    oAuthTokenStatus$: Observable<boolean>
+    redirectURL$: Observable<string>
 
     language: string
     listingStatus: boolean
@@ -21,10 +25,16 @@ export class ReviewComponent implements OnInit, OnDestroy {
     constructor(
         private appStore: Store<fromApp.AppState>,
         private translate: TranslateService,
-    ) { }
+        private store: Store<fromReview.ReviewState>
+    ) {
+        this.oAuthTokenStatus$ = this.store.select(fromReview.getOauthTokenStatus)
+        this.redirectURL$ = this.store.select(fromReview.redirectURL)
+    }
 
     async ngOnInit() {
         this.translate.setDefaultLang('en')
+
+        this.store.dispatch(new Actions.GetAllBusinessAction())
 
         this.appStore
             .pipe(

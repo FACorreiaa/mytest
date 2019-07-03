@@ -1,0 +1,60 @@
+import * as Actions from '../actions/review.actions'
+import { FetchVerificationResponse, BusinessData } from '@app/api/models/api-models'
+
+export interface ReviewState {
+  selectedBusiness: any
+  redirectUrl: string
+  isLoading: boolean
+  oauthToken: boolean
+  business: BusinessData[]
+  fetchVerificationOptions: FetchVerificationResponse
+  initVerification: any
+  completeVerification: any
+  errorMessage: string
+}
+
+export const initialState: ReviewState = {
+  isLoading: false,
+  selectedBusiness: null,
+  redirectUrl: null,
+  oauthToken: null,
+  business: [],
+  fetchVerificationOptions: null,
+  initVerification: null,
+  completeVerification: null,
+  errorMessage: null,
+}
+
+export function reviewReducer(state: ReviewState = initialState, action: Actions.ReviewAction): ReviewState {
+  switch (action.type) {
+    case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
+      return { ...state, business: action.payload, oauthToken: null }
+    }
+
+    case Actions.ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS: {
+      return { ...state, redirectUrl: action.payload }
+    }
+
+    case Actions.ActionTypes.OAUTH_TOKEN_FAILURE: {
+      return { ...state, oauthToken: false }
+    }
+
+    case Actions.ActionTypes.OAUTH_TOKEN_SUCCESS: {
+      return { ...state, oauthToken: true }
+    }
+
+    case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
+      return {
+        ...state,
+        isLoading: false,
+      }
+    }
+
+    case Actions.ActionTypes.ERROR_LAYOUT_HIDE: {
+      return { ...state, errorMessage: '' }
+    }
+
+    default:
+      return state
+  }
+}

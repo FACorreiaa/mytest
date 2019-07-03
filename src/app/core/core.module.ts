@@ -24,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { NavigationBarComponent } from './components/navigation-bar/nav-bar.component'
 import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component'
+import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component'
 import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi-component'
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     LoadingRequestComponent,
     NavigationBarComponent,
     ProgressBarComponent,
+    ProgressSpinnerComponent,
     MaterialModule,
     RouterModule,
     TranslateModule,
@@ -52,10 +54,11 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     LoadingRequestComponent,
     NavigationBarComponent,
     ProgressBarComponent,
+    ProgressSpinnerComponent,
     GooglePlacesDirective,
   ],
   providers: [CategoriesService, CountriesService, NgbActiveModal],
   entryComponents: [ModalOtherVerifiComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CoreModule {}
+export class CoreModule { }
