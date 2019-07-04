@@ -45,13 +45,13 @@ import { DeleteConfirmComponent } from './components/delete-confirm/delete-confi
     TermsConditionsComponent,
     ImprintComponent,
     DataPrivacyComponent,
-    CookieSettingsComponent
+    CookieSettingsComponent,
   ],
   entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule { }
+export class MainModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

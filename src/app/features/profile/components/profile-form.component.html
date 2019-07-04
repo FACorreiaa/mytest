@@ -204,10 +204,13 @@
                                                         <mat-form-field class="col-md-12">
                                                             <mat-select placeholder="{{'csa.from' | translate}}"
                                                                         formControlName="from"
-                                                                        (opened)="openhour()"
+                                                                        (opened)="renderHours()"
                                                                         [value]="position.value.from"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
+                                                                <mat-option *ngIf="!this.rendering"
+                                                                            [value]="position.value.from">{{position.value.from}}</mat-option>
+                                                                
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
                                                                                 [value]="hour.key">
@@ -224,10 +227,12 @@
                                                         <mat-form-field class="col-md-12">
                                                             <mat-select placeholder="{{'csa.to' | translate}}"
                                                                         formControlName="to"
-                                                                        (opened)="openhour()"
+                                                                        (opened)="renderHours()"
                                                                         [value]="position.value.to"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
+                                                                <mat-option *ngIf="!this.rendering"
+                                                                            [value]="position.value.to">{{position.value.to}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
                                                                                 [value]="hour.key">
@@ -250,10 +255,12 @@
                                                         <mat-form-field class="col-md-12">
                                                             <mat-select placeholder="{{'csa.from' | translate}}"
                                                                         formControlName="splitedFrom"
-                                                                        (opened)="openhour()"
+                                                                        (opened)="renderHours()"
                                                                         [value]="position.value.splitedFrom"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
+                                                                <mat-option *ngIf="!this.rendering"
+                                                                            [value]="position.value.splitedFrom">{{position.value.splitedFrom}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
                                                                                 [value]="hour.key">
@@ -274,10 +281,12 @@
                                                         <mat-form-field class="col-md-12">
                                                             <mat-select placeholder="{{'csa.to' | translate}}"
                                                                         formControlName="splitedTo"
-                                                                        (opened)="openhour()"
+                                                                        (opened)="renderHours()"
                                                                         [value]="position.value.splitedTo"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
+                                                                <mat-option *ngIf="!this.rendering"
+                                                                [value]="position.value.splitedTo">{{position.value.splitedTo}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
                                                                                 [value]="hour.key">

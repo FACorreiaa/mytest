@@ -123,7 +123,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     this.change.detectChanges()
   }
 
-  openhour() {
+  renderHours() {
     this.rendering = true
   }
 
