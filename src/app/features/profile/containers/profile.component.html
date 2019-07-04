@@ -5,7 +5,7 @@
                   [services]="this.services$ | async"
                   [payments]="this.payments$ | async"
                   [countries]="this.countries$ | async"
-                  (updateBusinessEvent)="updateBusiness()"></app-profile-form>
+                  (updateBusinessEvent)="updateBusiness($event)"></app-profile-form>
 
 <!-- <div class="container">
     <div class="row justify-content-center title">

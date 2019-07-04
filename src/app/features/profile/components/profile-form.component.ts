@@ -2,7 +2,19 @@ import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChange
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, Countries, ICategoryDto } from '@app/api/models/api-models'
+import {
+  OpeningTimes,
+  Day,
+  IHours,
+  OpenHoursArray,
+  CategoriesArray,
+  ICategory,
+  BusinessData,
+  Countries,
+  ICategoryDto,
+  ManageBusinessData,
+  UpdateBusinessData,
+} from '@app/api/models/api-models'
 
 import { ErrorStateMatcher, MatDialog, MatChipInputEvent } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
@@ -27,6 +39,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   matcher = new MyErrorStateMatcher()
   hours: IHours[]
   categories: ICategory[]
+  lastBusiness: BusinessData
 
   selectedOffering: string[] = []
   selectedServices: string[] = []
@@ -66,12 +79,12 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     return <FormArray>this.firstFormGroup.get('openHours')
   }
 
-  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, public dialog: MatDialog) {
-    this.buildInitalFormGroup()
-  }
+  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
+
+    this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -80,33 +93,38 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     if (this.profileData.length) {
+      this.lastBusiness = this.profileData[this.profileData.length - 1]
+
       this.firstFormGroup = this.formBuilder.group({
-        location: [this.profileData[0].name, Validators.required],
-        address: [this.profileData[0].street, Validators.required],
-        postal: [this.profileData[0].zipCode, Validators.required],
-        city: [this.profileData[0].city, Validators.required],
+        location: [this.lastBusiness.name, Validators.required],
+        address: [this.lastBusiness.street, Validators.required],
+        postal: [this.lastBusiness.zipCode, Validators.required],
+        city: [this.lastBusiness.city, Validators.required],
         country: 'Germany',
-        category: this.profileData[0].category,
+        category: this.lastBusiness.category,
         area: '+49',
-        phone: [this.profileData[0].contactPhoneNumber, Validators.required],
-        website: [this.profileData[0].url, Validators.required],
-        email: [this.profileData[0].contactEmail, Validators.required],
-        openHours: this.formBuilder.array(this.buildOpenHoursArray(this.profileData[0].openingTimes)),
-        keyword: this.profileData[0].keywords,
-        description: [this.profileData[0].description, Validators.required],
+        phone: [this.lastBusiness.contactPhoneNumber, Validators.required],
+        website: [this.lastBusiness.url, Validators.required],
+        email: [this.lastBusiness.contactEmail, Validators.required],
+        openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
+        keyword: this.lastBusiness.keywords,
+        description: [this.lastBusiness.description, Validators.required],
       })
       this.secondFormGroup = this.formBuilder.group({
-        language: [this.profileData[0].languages],
-        payment: [this.profileData[0].paymentMethods],
-        offering: [this.profileData[0].offers],
-        service: [this.profileData[0].services],
+        language: [this.lastBusiness.languages],
+        payment: [this.lastBusiness.paymentMethods],
+        offering: [this.lastBusiness.offers],
+        service: [this.lastBusiness.services],
       })
     }
   }
 
   ngAfterViewChecked() {
-    this.rendering = true
     this.change.detectChanges()
+  }
+
+  openhour() {
+    this.rendering = true
   }
 
   setActiveTab(tabId: string) {
@@ -118,7 +136,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   /*
-   * Method to add and remove Chips in a MatChipInput field
+   * Method to add Chips in a MatChipInput field
    */
   addKeywords(event: MatChipInputEvent): void {
     const input = event.input
@@ -133,6 +151,9 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
   }
 
+  /*
+   * Method to remove Chips in a MatChipInput field
+   */
   removeKeywords(Keyword: string): void {
     const index = this.keywordsArray.indexOf(Keyword)
 
@@ -177,8 +198,45 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     this.setAreaCode(event.value)
   }
 
-  save() {
-    this.updateBusinessEvent.emit()
+  /**
+   * This method save the business to update the information.
+   */
+  save(basicDataForm: FormGroup) {
+    const updateData = this.createClaimToSave(basicDataForm.value)
+    this.updateBusinessEvent.emit(updateData)
+  }
+
+  /**
+   * This method creates the object dto for the middlware service
+   */
+  private createClaimToSave(basicDataForm: any) {
+    const updateData: BusinessData = {
+      name: basicDataForm.location,
+      userFirstName: this.lastBusiness.userFirstName,
+      userLastName: this.lastBusiness.userLastName,
+      contactEmail: this.lastBusiness.contactEmail,
+      contactPhoneNumber: basicDataForm.phone,
+      countryCode: this.lastBusiness.countryCode,
+      languageCode: this.lastBusiness.languageCode,
+      description: basicDataForm.description,
+      url: this.lastBusiness.url,
+      category: basicDataForm.category,
+      zipCode: basicDataForm.postal,
+      city: basicDataForm.city,
+      street: basicDataForm.address,
+      additional: '',
+      openingTimes: this.lastBusiness.openingTimes,
+      offers: this.lastBusiness.offers,
+      services: this.lastBusiness.services,
+      paymentMethods: this.lastBusiness.paymentMethods,
+    }
+
+    const updateBusinessData: UpdateBusinessData = {
+      id: this.lastBusiness.id,
+      businessUnit: { data: updateData, channels: ['GOOGLE_MY_BUSINESS'] } as ManageBusinessData,
+    }
+
+    return updateBusinessData
   }
 
   private setAreaCode(countryName: string) {
@@ -203,6 +261,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       mobile: ['', PhoneNumberValidation],
       area: ['+49', PhoneNumberPrefixValidation],
       country: ['Germany', Validators.required],
+      category: ['', Validators.required],
       email: ['', EmailValidation],
       description: ['', Validators.required],
       website: [
@@ -222,9 +281,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     })
 
     this.categories = CategoriesArray()
-    this.categories.map(x => {
-      x.selected = false
-    })
 
     this.hours = OpenHoursArray()
   }
