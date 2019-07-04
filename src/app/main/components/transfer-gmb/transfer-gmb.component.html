@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 mat-dialog-title class="mb-4">{{'csa.transferGmb.title' | translate}}</h2>
+        </div>
+        <div class="col-4">
+            <button type="button" class="close" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <h4>{{'csa.transferGmb.admins' | translate}}</h4>
+                </div>
+            </div>
+
+            <!-- Table without any functionality right now-->
+            <div class="row table">
+                <div class="col-12">
+                    <div class="row table-header">
+                        <div class="col-8">
+                            <span>{{'csa.transferGmb.name' | translate}}</span>
+                        </div>
+                        <div class="col-4">
+                            <span>{{'csa.transferGmb.status' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 table-body">
+                    <!-- For each entry there is a new row with name & status column -->
+                    <div class="row table-row">
+                        <div class="col-8 table-cell">
+                            <p>User XY</p>
+                        </div>
+                        <div class="col-4 table-cell">
+                            <p>Primary Admin</p>
+                        </div>
+                    </div>
+                    <div class="row table-row">
+                        <div class="col-8 table-cell">
+                            <p>owner@establishment.org</p>
+                        </div>
+                        <div class="col-4 table-cell">
+                            <p>Pending Invitation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-2">{{'csa.transferGmb.invitation' | translate}}</h4>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <p>{{'csa.transferGmb.email' | translate}}</p>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <form>
+                        <mat-form-field>
+                            <input matInput placeholder="{{'csa.enter-email' | translate}}" autocomplete="off">
+                        </mat-form-field>
+                    </form>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <button type="submit" class="btn btn-primary" (click)="openInvite()">
+                        {{'csa.transferGmb.send' | translate}}
+                    </button>
+                    <a routerLink="" (click)="openError()">{{'csa.transferGmb.error' | translate}}</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="row section">
+                <div class="col-12">
+                    <h4>{{'csa.transferGmb.steps' | translate}}</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <ul>
+                        <li>{{'csa.transferGmb.first-step' | translate}}</li>
+                        <li>{{'csa.transferGmb.second-step' | translate}}</li>
+                        <li>{{'csa.transferGmb.third-step' | translate}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </mat-dialog-content>
+</div>

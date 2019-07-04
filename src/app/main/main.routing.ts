@@ -7,6 +7,7 @@ import { TermsConditionsComponent } from './containers/terms-conditions.componen
 import { ImprintComponent } from './components/imprint/imprint.component'
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
 import { AccManagementComponent } from './containers/acc-management/acc-management.component'
+import { StatusLogComponent } from './containers/status-log/status-log.component'
 
 const MainRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -47,8 +48,13 @@ const MainRoutes: Routes = [
       {
         path: 'acc_settings',
         canActivate: [AppAuthGuard],
-        component: AccManagementComponent,
+        component: AccManagementComponent
       },
+      {
+        path: 'status_log',
+        canActivate: [AppAuthGuard],
+        component: StatusLogComponent
+      }
     ],
   },
 ]
@@ -57,4 +63,4 @@ const MainRoutes: Routes = [
   imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class MainRoutingModule { }

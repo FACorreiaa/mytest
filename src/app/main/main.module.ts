@@ -21,6 +21,10 @@ import { DataPrivacyComponent } from './components/data-privacy/data-privacy.com
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 import { DeleteAccComponent } from './components/delete-acc/delete-acc.component'
 import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component'
+import { StatusLogComponent } from './containers/status-log/status-log.component'
+import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
+import { SendInviteComponent } from './components/send-invite/send-invite.component'
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component'
 
 @NgModule({
   imports: [
@@ -46,12 +50,23 @@ import { DeleteConfirmComponent } from './components/delete-confirm/delete-confi
     ImprintComponent,
     DataPrivacyComponent,
     CookieSettingsComponent,
+    StatusLogComponent,
+    TransferGmbComponent,
+    SendInviteComponent,
+    ErrorDialogComponent
   ],
-  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
+  entryComponents: [
+    CookieSettingsComponent,
+    DeleteAccComponent,
+    DeleteConfirmComponent,
+    TransferGmbComponent,
+    SendInviteComponent,
+    ErrorDialogComponent
+  ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule {}
+export class MainModule { }
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')
