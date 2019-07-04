@@ -4,21 +4,20 @@ import { SendInviteComponent } from '../send-invite/send-invite.component'
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component'
 
 @Component({
-    selector: 'transfer-gmb',
-    templateUrl: 'transfer-gmb.component.html',
-    styleUrls: ['./transfer-gmb.component.scss'],
+  selector: 'transfer-gmb',
+  templateUrl: 'transfer-gmb.component.html',
+  styleUrls: ['./transfer-gmb.component.scss'],
 })
 export class TransferGmbComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
 
-    constructor(public dialog: MatDialog) { }
+  ngOnInit() {}
 
-    ngOnInit() { }
+  openInvite() {
+    this.dialog.open(SendInviteComponent)
+  }
 
-    openInvite() {
-        this.dialog.open(SendInviteComponent)
-    }
-
-    openError() {
-        this.dialog.open(ErrorDialogComponent)
-    }
+  openError() {
+    this.dialog.open(ErrorDialogComponent)
+  }
 }
