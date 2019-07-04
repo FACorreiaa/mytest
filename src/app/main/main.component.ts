@@ -19,7 +19,6 @@ import { KeycloakService } from 'keycloak-angular'
 import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
-import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
 
 @Component({
   selector: 'app-main',
@@ -105,11 +104,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.store.dispatch(new AuthActions.ChangeLanguage({ language }))
   }
 
-  openTerms() {
-    this.dialog.open(TcDialogComponent)
-  }
-
   openCookies() {
-    this.dialog.open(CookieSettingsComponent)
+    this.dialog.open(CookieSettingsComponent, {
+      width: '800px'
+    })
   }
 }

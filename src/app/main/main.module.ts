@@ -15,10 +15,12 @@ import { MainComponent } from './main.component'
 import { TermsConditionsEffects } from './store/effects/terms-cond.effects'
 import { reducers, reducerName } from './main.selectors'
 import { TermsConditionsComponent } from './containers/terms-conditions.component'
+import { AccManagementComponent } from './containers/acc-management/acc-management.component'
 import { ImprintComponent } from './components/imprint/imprint.component'
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
-import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
+import { DeleteAccComponent } from './components/delete-acc/delete-acc.component'
+import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component'
 
 @NgModule({
   imports: [
@@ -35,12 +37,21 @@ import { TcDialogComponent } from './components/tc-dialog/tc-dialog.component'
       isolate: true,
     }),
   ],
-  declarations: [MainComponent, TermsConditionsComponent, ImprintComponent, DataPrivacyComponent, CookieSettingsComponent, TcDialogComponent],
-  entryComponents: [CookieSettingsComponent, TcDialogComponent],
+  declarations: [
+    AccManagementComponent,
+    DeleteAccComponent,
+    DeleteConfirmComponent,
+    MainComponent,
+    TermsConditionsComponent,
+    ImprintComponent,
+    DataPrivacyComponent,
+    CookieSettingsComponent
+  ],
+  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule {}
+export class MainModule { }
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

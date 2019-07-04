@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 mat-dialog-title class="mb-4">{{'csa.deleteConfirm.title' | translate}}</h2>
+        </div>
+        <div class="col-4">
+            <button type="button" class="close" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-12">
+                <p>{{'csa.deleteConfirm.text' | translate}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!--
+                <form [formGroup]="deleteConfirmFormGroup" (ngSubmit)="delete()">
+                    <div class="row">
+                        <mat-form-field class="col-12">
+                            <input matInput formControlName="email"
+                                placeholder="{{'csa.deleteConfirm.email' | translate}}">
+                        </mat-form-field>
+                        <mat-error *ngIf="deleteConfirmFormGroup.hasError('required')">
+                            {{'csa.deleteAcc.email-error' | translate}}
+                        </mat-error>
+                        <mat-error *ngIf="deleteConfirmFormGroup.hasError('emailMatch')">
+                            {{'csa.deleteAcc.email-match' | translate}}
+                        </mat-error>
+                    </div>
+                </form>
+                -->
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-secondary" mat-dialog-close>
+                    {{'csa.deleteConfirm.cancel' | translate}}
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">
+                    {{'csa.deleteConfirm.confirm' | translate}}
+                </button>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</div>

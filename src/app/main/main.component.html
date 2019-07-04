@@ -7,7 +7,8 @@
 
         <div [matMenuTriggerFor]="toolbarUserMenu">
           <mat-icon *ngIf="myRole == Role.user" aria-label="User icon">person</mat-icon>
-          <mat-icon *ngIf="myRole == Role.admin || Role.superadmin" aria-label="supervisor account">supervisor_account
+          <mat-icon *ngIf="myRole == Role.admin || myRole == Role.superadmin" aria-label="supervisor account">
+            supervisor_account
           </mat-icon>
         </div>
 
@@ -19,12 +20,12 @@
             </button>
           </ng-container>
           <ng-container *ngIf="myRole == Role.admin">
-            <button mat-menu-item class="remove-outline">
+            <button routerLink="/main/acc_settings" mat-menu-item class="remove-outline">
               <mat-icon>settings</mat-icon>
               <span>{{'csa.nav.acc-settings' | translate}}</span>
             </button>
           </ng-container>
-          <ng-container *ngIf="myRole == Role.admin || Role.superadmin">
+          <ng-container *ngIf="myRole == Role.admin || myRole == Role.superadmin">
             <button mat-menu-item class="remove-outline">
               <mat-icon>compare_arrows</mat-icon>
               <span>{{'csa.nav.trans-gmb' | translate}}</span>
@@ -77,8 +78,8 @@
                 <div class="col">
                   <ul>
                     <li><a routerLink="/main/imprint">{{'csa.footer.imprint' | translate}}</a></li>
-                    <li><a (click)="openTerms()">{{'csa.footer.terms' | translate}}</a></li>
-                    <li><a routerLink="/main/data_privacy">{{'csa.footer.privacy' | translate}}</a></li>
+                    <li><a routerLink="/main/terms">{{'csa.footer.terms' | translate}}</a></li>
+                    <li><a routerLink="/main/privacy">{{'csa.footer.privacy' | translate}}</a></li>
                     <li><a (click)="openCookies()">{{'csa.footer.cookies' | translate}}</a></li>
                   </ul>
                 </div>
