@@ -450,7 +450,7 @@
                         <mat-icon>check_circle</mat-icon>
                         {{'csa.profile.save' | translate}}
                     </button>
-                    <button type="button"
+                    <button (click)="discardChanges()"
                             class="btn btn-discard">
                         <mat-icon>highlight_off</mat-icon>
                         {{'csa.profile.discard' | translate}}

@@ -16,7 +16,7 @@ import {
   UpdateBusinessData,
 } from '@app/api/models/api-models'
 
-import { ErrorStateMatcher, MatDialog, MatChipInputEvent } from '@angular/material'
+import { ErrorStateMatcher, MatChipInputEvent, MatSnackBar } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -79,7 +79,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     return <FormArray>this.firstFormGroup.get('openHours')
   }
 
-  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, public dialog: MatDialog) {}
+  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
@@ -93,29 +93,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     if (this.profileData.length) {
-      this.lastBusiness = this.profileData[this.profileData.length - 1]
-
-      this.firstFormGroup = this.formBuilder.group({
-        location: [this.lastBusiness.name, Validators.required],
-        address: [this.lastBusiness.street, Validators.required],
-        postal: [this.lastBusiness.zipCode, Validators.required],
-        city: [this.lastBusiness.city, Validators.required],
-        country: 'Germany',
-        category: this.lastBusiness.category,
-        area: '+49',
-        phone: [this.lastBusiness.contactPhoneNumber, Validators.required],
-        website: [this.lastBusiness.url, Validators.required],
-        email: [this.lastBusiness.contactEmail, Validators.required],
-        openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
-        keyword: this.lastBusiness.keywords,
-        description: [this.lastBusiness.description, Validators.required],
-      })
-      this.secondFormGroup = this.formBuilder.group({
-        language: [this.lastBusiness.languages],
-        payment: [this.lastBusiness.paymentMethods],
-        offering: [this.lastBusiness.offers],
-        service: [this.lastBusiness.services],
-      })
+      this.updateFormsWithBusinessData()
     }
   }
 
@@ -204,6 +182,57 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   save(basicDataForm: FormGroup) {
     const updateData = this.createClaimToSave(basicDataForm.value)
     this.updateBusinessEvent.emit(updateData)
+
+    // 'Business updated sucessfully!!
+    this._snackBar.open(this.translate.instant('csa.update-success'), '', {
+      duration: 4000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: 'toast-success',
+    })
+  }
+
+  /**
+   * This method will reset the business information in the inputs.
+   */
+  discardChanges() {
+    this.updateFormsWithBusinessData()
+
+    this._snackBar.open(this.translate.instant('csa.update-discard'), '', {
+      duration: 4000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: 'toast-warning',
+    })
+  }
+
+  /**
+   * Method that will put the business data in to the form fields
+   */
+  private updateFormsWithBusinessData() {
+    this.lastBusiness = this.profileData[this.profileData.length - 1]
+
+    this.firstFormGroup = this.formBuilder.group({
+      location: [this.lastBusiness.name, Validators.required],
+      address: [this.lastBusiness.street, Validators.required],
+      postal: [this.lastBusiness.zipCode, Validators.required],
+      city: [this.lastBusiness.city, Validators.required],
+      country: 'Germany',
+      category: this.lastBusiness.category,
+      area: '+49',
+      phone: [this.lastBusiness.contactPhoneNumber, Validators.required],
+      website: [this.lastBusiness.url, Validators.required],
+      email: [this.lastBusiness.contactEmail, Validators.required],
+      openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
+      keyword: this.lastBusiness.keywords,
+      description: [this.lastBusiness.description, Validators.required],
+    })
+    this.secondFormGroup = this.formBuilder.group({
+      language: [this.lastBusiness.languages],
+      payment: [this.lastBusiness.paymentMethods],
+      offering: [this.lastBusiness.offers],
+      service: [this.lastBusiness.services],
+    })
   }
 
   /**
@@ -237,15 +266,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     return updateBusinessData
-  }
-
-  private setAreaCode(countryName: string) {
-    if (!countryName) {
-      return
-    }
-
-    const newAreaValue = this.countries.find(c => c.name === countryName).code
-    this.firstFormGroup.get('area').setValue(newAreaValue)
   }
 
   /*
@@ -311,6 +331,15 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     return groups
+  }
+
+  private setAreaCode(countryName: string) {
+    if (!countryName) {
+      return
+    }
+
+    const newAreaValue = this.countries.find(c => c.name === countryName).code
+    this.firstFormGroup.get('area').setValue(newAreaValue)
   }
 
   /**

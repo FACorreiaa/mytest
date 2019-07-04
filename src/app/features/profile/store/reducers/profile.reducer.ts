@@ -21,7 +21,7 @@ export const initialState: ProfileState = {
   errorMessage: null,
 }
 
-export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileAction): ProfileState {
+export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileActions): ProfileState {
   switch (action.type) {
     case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
       return { ...state, business: action.payload }

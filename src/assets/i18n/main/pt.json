@@ -141,5 +141,7 @@
 	"csa.footer.imprint": "Imprint",
 	"csa.footer.terms": "Terms of Use",
 	"csa.footer.privacy": "Data Privacy",
-	"csa.footer.cookies": "Cookie Settings"
+	"csa.footer.cookies": "Cookie Settings",
+	"csa.update-success": "Business updated sucessfully!!",
+	"csa.update-discard": "All of your changes were discarded"
 }
