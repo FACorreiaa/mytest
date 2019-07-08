@@ -179,8 +179,12 @@ export interface LocationData {
 
 export interface DeleteBusinessData {
   id: number
-  data: BusinessData
-  channels: string[]
+  businessUnit: ManageBusinessData
+}
+
+export interface UpdateBusinessData {
+  id: number
+  businessUnit: ManageBusinessData
 }
 
 export interface BusinessData {
@@ -209,7 +213,6 @@ export interface BusinessData {
   titleImageUri?: string
   keywords?: string[]
   languages?: string[]
-  contactMobileNumber?: string
   openingTimes: OpeningTimes
   offers?: string[]
   services?: string[]

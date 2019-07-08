@@ -16,7 +16,7 @@ export class ProfileEffects {
 
   @Effect()
   getBusiness$: Observable<Action> = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS),
+    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_ATTEMPT),
     switchMap((payload: any) =>
       this.profileService.businessData().pipe(
         map((response: any) => {
@@ -40,6 +40,29 @@ export class ProfileEffects {
     ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
     tap(payload => {
       this.storeProfile$.dispatch(new profileActions.ErrorLayoutShow(payload))
+    })
+  )
+
+  // ----------------- Update Business -----------------
+
+  @Effect()
+  updateBusiness$: Observable<Action> = this.actions$.pipe(
+    ofType(profileActions.ActionTypes.UPDATE_BUSINESS_ATTEMPT),
+    switchMap((action: profileActions.UpdateBusinessAttempt) =>
+      this.profileService.updateBusinessData(action.payload.request).pipe(
+        map((response: any) => {
+          return new profileActions.UpdateBusinessSuccess(true)
+        }),
+        catchError(error => of(new profileActions.UpdateBusinessFailure(error)))
+      )
+    )
+  )
+
+  @Effect({ dispatch: false })
+  updateBusinessSuccess$ = this.actions$.pipe(
+    ofType(profileActions.ActionTypes.UPDATE_BUSINESS_SUCCESS),
+    tap(() => {
+      this.storeProfile$.dispatch(new profileActions.GetAllBusinessAction())
     })
   )
 

@@ -1,5 +1,6 @@
 import {
   MatAutocompleteModule,
+  MatSnackBarModule,
   MatFormFieldModule,
   MatButtonModule,
   MatCheckboxModule,
@@ -27,6 +28,7 @@ import { NgModule } from '@angular/core'
 @NgModule({
   imports: [
     MatAutocompleteModule,
+    MatSnackBarModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -50,6 +52,7 @@ import { NgModule } from '@angular/core'
   ],
   exports: [
     MatAutocompleteModule,
+    MatSnackBarModule,
     MatExpansionModule,
     MatButtonModule,
     MatCheckboxModule,

@@ -22,6 +22,9 @@ import { CookieSettingsComponent } from './components/cookie-settings/cookie-set
 import { DeleteAccComponent } from './components/delete-acc/delete-acc.component'
 import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component'
 import { StatusLogComponent } from './containers/status-log/status-log.component'
+import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
+import { SendInviteComponent } from './components/send-invite/send-invite.component'
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component'
 
 @NgModule({
   imports: [
@@ -48,8 +51,11 @@ import { StatusLogComponent } from './containers/status-log/status-log.component
     DataPrivacyComponent,
     CookieSettingsComponent,
     StatusLogComponent,
+    TransferGmbComponent,
+    SendInviteComponent,
+    ErrorDialogComponent,
   ],
-  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent],
+  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent, TransferGmbComponent, SendInviteComponent, ErrorDialogComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

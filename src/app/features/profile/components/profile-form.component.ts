@@ -1,10 +1,34 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ChangeDetectorRef, AfterViewChecked } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectorRef,
+  AfterViewChecked,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, Countries, ICategoryDto } from '@app/api/models/api-models'
+import {
+  OpeningTimes,
+  Day,
+  IHours,
+  OpenHoursArray,
+  CategoriesArray,
+  ICategory,
+  BusinessData,
+  Countries,
+  ICategoryDto,
+  ManageBusinessData,
+  UpdateBusinessData,
+} from '@app/api/models/api-models'
 
-import { ErrorStateMatcher, MatDialog, MatChipInputEvent } from '@angular/material'
+import { ErrorStateMatcher, MatChipInputEvent, MatSnackBar } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,6 +44,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-profile-form',
   templateUrl: 'profile-form.component.html',
   styleUrls: ['profile-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked {
   firstFormGroup: FormGroup
@@ -27,6 +52,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   matcher = new MyErrorStateMatcher()
   hours: IHours[]
   categories: ICategory[]
+  lastBusiness: BusinessData
 
   selectedOffering: string[] = []
   selectedServices: string[] = []
@@ -56,6 +82,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   @Input() payments: ICategory[]
   @Input() countries: Countries[]
   @Input() profileData: BusinessData[]
+  @Input() updateProfile: boolean
   @Output() private goToProfileEvent = new EventEmitter()
   @Output() private updateBusinessEvent = new EventEmitter()
 
@@ -66,12 +93,12 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     return <FormArray>this.firstFormGroup.get('openHours')
   }
 
-  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, public dialog: MatDialog) {
-    this.buildInitalFormGroup()
-  }
+  constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
+
+    this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -80,33 +107,27 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     if (this.profileData.length) {
-      this.firstFormGroup = this.formBuilder.group({
-        location: [this.profileData[0].name, Validators.required],
-        address: [this.profileData[0].street, Validators.required],
-        postal: [this.profileData[0].zipCode, Validators.required],
-        city: [this.profileData[0].city, Validators.required],
-        country: 'Germany',
-        category: this.profileData[0].category,
-        area: '+49',
-        phone: [this.profileData[0].contactPhoneNumber, Validators.required],
-        website: [this.profileData[0].url, Validators.required],
-        email: [this.profileData[0].contactEmail, Validators.required],
-        openHours: this.formBuilder.array(this.buildOpenHoursArray(this.profileData[0].openingTimes)),
-        keyword: this.profileData[0].keywords,
-        description: [this.profileData[0].description, Validators.required],
-      })
-      this.secondFormGroup = this.formBuilder.group({
-        language: [this.profileData[0].languages],
-        payment: [this.profileData[0].paymentMethods],
-        offering: [this.profileData[0].offers],
-        service: [this.profileData[0].services],
-      })
+      this.updateFormsWithBusinessData()
+    }
+
+    if (this.updateProfile !== null) {
+      if (this.updateProfile) {
+        this._snackBar.open(this.translate.instant('csa.update-success'), '', {
+          duration: 4000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: 'toast-success',
+        })
+      }
     }
   }
 
   ngAfterViewChecked() {
+    // this.change.detectChanges()
+  }
+
+  renderHours() {
     this.rendering = true
-    this.change.detectChanges()
   }
 
   setActiveTab(tabId: string) {
@@ -118,7 +139,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   /*
-   * Method to add and remove Chips in a MatChipInput field
+   * Method to add Chips in a MatChipInput field
    */
   addKeywords(event: MatChipInputEvent): void {
     const input = event.input
@@ -133,6 +154,9 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
   }
 
+  /*
+   * Method to remove Chips in a MatChipInput field
+   */
   removeKeywords(Keyword: string): void {
     const index = this.keywordsArray.indexOf(Keyword)
 
@@ -177,8 +201,88 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     this.setAreaCode(event.value)
   }
 
-  save() {
-    this.updateBusinessEvent.emit()
+  /**
+   * This method save the business to update the information.
+   */
+  save(basicDataForm: FormGroup) {
+    const updateData = this.createClaimToSave(basicDataForm.value)
+    this.updateBusinessEvent.emit(updateData)
+  }
+
+  /**
+   * This method will reset the business information in the inputs.
+   */
+  discardChanges() {
+    this.updateFormsWithBusinessData()
+
+    this._snackBar.open(this.translate.instant('csa.update-discard'), '', {
+      duration: 4000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: 'toast-warning',
+    })
+  }
+
+  /**
+   * Method that will put the business data in to the form fields
+   */
+  private updateFormsWithBusinessData() {
+    this.lastBusiness = this.profileData[this.profileData.length - 1]
+
+    this.firstFormGroup = this.formBuilder.group({
+      location: [this.lastBusiness.name, Validators.required],
+      address: [this.lastBusiness.street, Validators.required],
+      postal: [this.lastBusiness.zipCode, Validators.required],
+      city: [this.lastBusiness.city, Validators.required],
+      country: 'Germany',
+      category: this.lastBusiness.category,
+      area: '+49',
+      phone: [this.lastBusiness.contactPhoneNumber, Validators.required],
+      website: [this.lastBusiness.url, Validators.required],
+      email: [this.lastBusiness.contactEmail, Validators.required],
+      openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
+      keyword: this.lastBusiness.keywords,
+      description: [this.lastBusiness.description, Validators.required],
+    })
+    this.secondFormGroup = this.formBuilder.group({
+      language: [this.lastBusiness.languages],
+      payment: [this.lastBusiness.paymentMethods],
+      offering: [this.lastBusiness.offers],
+      service: [this.lastBusiness.services],
+    })
+  }
+
+  /**
+   * This method creates the object dto for the middlware service
+   */
+  private createClaimToSave(basicDataForm: any) {
+    const updateData: BusinessData = {
+      name: basicDataForm.location,
+      userFirstName: this.lastBusiness.userFirstName,
+      userLastName: this.lastBusiness.userLastName,
+      contactEmail: this.lastBusiness.contactEmail,
+      contactPhoneNumber: basicDataForm.phone,
+      countryCode: this.lastBusiness.countryCode,
+      languageCode: this.lastBusiness.languageCode,
+      description: basicDataForm.description,
+      url: this.lastBusiness.url,
+      category: basicDataForm.category,
+      zipCode: basicDataForm.postal,
+      city: basicDataForm.city,
+      street: basicDataForm.address,
+      additional: '',
+      openingTimes: this.buildOpenHoursModel(basicDataForm.openHours),
+      offers: this.lastBusiness.offers,
+      services: this.lastBusiness.services,
+      paymentMethods: this.lastBusiness.paymentMethods,
+    }
+
+    const updateBusinessData: UpdateBusinessData = {
+      id: this.lastBusiness.id,
+      businessUnit: { data: updateData, channels: ['GOOGLE_MY_BUSINESS'] } as ManageBusinessData,
+    }
+
+    return updateBusinessData
   }
 
   private setAreaCode(countryName: string) {
@@ -203,6 +307,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       mobile: ['', PhoneNumberValidation],
       area: ['+49', PhoneNumberPrefixValidation],
       country: ['Germany', Validators.required],
+      category: ['', Validators.required],
       email: ['', EmailValidation],
       description: ['', Validators.required],
       website: [
@@ -222,9 +327,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     })
 
     this.categories = CategoriesArray()
-    this.categories.map(x => {
-      x.selected = false
-    })
 
     this.hours = OpenHoursArray()
   }
@@ -315,6 +417,81 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
         }
       )
     }
+  }
+
+  /**
+   * Build opening hours dto model to send in service.
+   * @param openHours the opening hours array for each day of the week.
+   */
+  private buildOpenHoursModel(openHours: any): OpeningTimes {
+    let monday: Day[] = []
+    let tuesday: Day[] = []
+    let wednesday: Day[] = []
+    let thursday: Day[] = []
+    let friday: Day[] = []
+    let saturday: Day[] = []
+    let sunday: Day[] = []
+
+    openHours
+      .filter((x: any) => x.isSelected)
+      .forEach((element: any) => {
+        switch (element.name) {
+          case 'Monday':
+            monday = this.buildDayModel(element)
+            break
+          case 'Tuesday':
+            tuesday = this.buildDayModel(element)
+            break
+          case 'Wednesday':
+            wednesday = this.buildDayModel(element)
+            break
+          case 'Thursday':
+            thursday = this.buildDayModel(element)
+            break
+          case 'Friday':
+            friday = this.buildDayModel(element)
+            break
+          case 'Saturday':
+            saturday = this.buildDayModel(element)
+            break
+          case 'Sunday':
+            sunday = this.buildDayModel(element)
+            break
+          default:
+            break
+        }
+      })
+
+    const openingTimes: OpeningTimes = {
+      monday: monday,
+      tuesday: tuesday,
+      wednesday: wednesday,
+      thursday: thursday,
+      friday: friday,
+      saturday: saturday,
+      sunday: sunday,
+    }
+
+    return openingTimes
+  }
+
+  /**
+   * Build the day model to send in service.
+   * @param element the day data.
+   */
+  private buildDayModel(element: any): Day[] {
+    const dayArray: Day[] = []
+
+    let item: Day
+    item = Object.assign({}, item, { startTime: element.from, endTime: element.to })
+    dayArray.push(item)
+    if (element.splitedFrom && element.splitedTo) {
+      let splitedItem: Day
+      splitedItem = Object.assign({}, splitedItem, { startTime: element.splitedFrom, endTime: element.splitedTo })
+      dayArray.push(splitedItem)
+    }
+
+    return dayArray
   }
 }
 

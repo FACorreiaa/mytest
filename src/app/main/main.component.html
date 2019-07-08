@@ -26,7 +26,7 @@
             </button>
           </ng-container>
           <ng-container *ngIf="myRole == Role.admin || myRole == Role.superadmin">
-            <button mat-menu-item class="remove-outline">
+            <button mat-menu-item (click)="openTransfer()" class="remove-outline">
               <mat-icon>compare_arrows</mat-icon>
               <span>{{'csa.nav.trans-gmb' | translate}}</span>
             </button>

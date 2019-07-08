@@ -167,3 +167,13 @@ $cs-theme: mat-light-theme($cs-primary, $cs-accent, $cs-warn);
     display: none;
   }
 }
+
+.toast-success {
+  color: white;
+  background-color: green;
+}
+
+.toast-warning {
+  color: white;
+  background-color: orangered;
+}

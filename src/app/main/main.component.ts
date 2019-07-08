@@ -19,6 +19,7 @@ import { KeycloakService } from 'keycloak-angular'
 import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
+import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
 
 @Component({
   selector: 'app-main',
@@ -108,5 +109,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dialog.open(CookieSettingsComponent, {
       width: '800px',
     })
+  }
+
+  openTransfer() {
+    this.dialog.open(TransferGmbComponent)
   }
 }

@@ -5,11 +5,12 @@ import { TranslateService } from '@ngx-translate/core'
 import * as Actions from '../store/actions/profile.actions'
 import * as fromProfile from '../profile.selector'
 import * as fromApp from '../../../app.reducers'
+// import * as fromMain from '../../../main/main.selectors'
 
 import { Observable, Subject } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 
-import { ICategory, Countries, BusinessData, ICategoryDto } from '@app/api/models/api-models'
+import { ICategory, Countries, BusinessData, ICategoryDto, ManageBusinessData, UpdateBusinessData } from '@app/api/models/api-models'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
 
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
 
   profileData$: Observable<BusinessData[]>
+  updateProfile$: Observable<boolean>
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -37,6 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private appstore: Store<fromApp.AppState>,
+    // private mainStore: Store<fromMain.MainState>,
     private store: Store<fromProfile.ProfileState>,
     private translate: TranslateService,
     private categoriesService: CategoriesService,
@@ -44,9 +47,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {
     this.loading$ = this.appstore.select(fromApp.loading)
     this.profileData$ = this.store.select(fromProfile.getProfileBusinessList)
+    this.updateProfile$ = this.store.select(fromProfile.getUpdateProfile)
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.translate.setDefaultLang('en')
 
     this.store.dispatch(new Actions.GetAllBusinessAction())
@@ -65,10 +69,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(lang => this.translate.use(lang))
   }
 
-  updateBusiness() {}
-
   public ngOnDestroy() {
     this.language$.unsubscribe()
+  }
+
+  updateBusiness(updateBusiness: UpdateBusinessData) {
+    this.store.dispatch(new Actions.UpdateBusinessAttempt({ request: updateBusiness }))
   }
 
   GoToMainPage() {
