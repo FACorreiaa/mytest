@@ -4,30 +4,30 @@ import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.compone
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
-    selector: 'delete-acc',
-    templateUrl: 'delete-acc.component.html',
-    styleUrls: ['./delete-acc.component.scss'],
+  selector: 'delete-acc',
+  templateUrl: 'delete-acc.component.html',
+  styleUrls: ['./delete-acc.component.scss'],
 })
 export class DeleteAccComponent implements OnInit {
-    deleteFormGroup: FormGroup
+  deleteFormGroup: FormGroup
 
-    constructor(private formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
-    ngOnInit() {
-        this.deleteFormGroup = this.formBuilder.group({
-            reason: ['', Validators.required],
-            comment: ''
-        })
+  ngOnInit() {
+    this.deleteFormGroup = this.formBuilder.group({
+      reason: ['', Validators.required],
+      comment: '',
+    })
+  }
+
+  openDeleteConfirm() {
+    const dialogConfig = new MatDialogConfig()
+
+    dialogConfig.data = {
+      reason: '',
+      comment: '',
     }
 
-    openDeleteConfirm() {
-        const dialogConfig = new MatDialogConfig()
-
-        dialogConfig.data = {
-            reason: '',
-            comment: ''
-        }
-
-        this.dialog.open(DeleteConfirmComponent, dialogConfig)
-    }
+    this.dialog.open(DeleteConfirmComponent, dialogConfig)
+  }
 }

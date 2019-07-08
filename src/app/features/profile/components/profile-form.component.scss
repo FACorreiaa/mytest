@@ -133,7 +133,7 @@ mat-button-toggle-group {
 @import "../../../../styles-variables.scss";
 
 .title {
-  margin-top: 3rem;
+  margin-top: 0rem;
   padding: 4rem 0 6rem 0;
 }
 
@@ -231,5 +231,12 @@ mat-button-toggle-group {
         color: #f44336;
       }
     }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .title {
+    margin-top: 0rem;
+    padding: 3rem 0 3rem 0;
   }
 }

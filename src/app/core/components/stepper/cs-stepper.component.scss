@@ -129,3 +129,9 @@
 // .mat-expansion-panel-header:hover {
 //   background: none;
 // }
+
+@media screen and (max-width: 575px) {
+  mat-checkbox {
+    columns: 3;
+  }
+}

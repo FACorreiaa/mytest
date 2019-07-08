@@ -48,13 +48,13 @@ const MainRoutes: Routes = [
       {
         path: 'acc_settings',
         canActivate: [AppAuthGuard],
-        component: AccManagementComponent
+        component: AccManagementComponent,
       },
       {
         path: 'status_log',
         canActivate: [AppAuthGuard],
-        component: StatusLogComponent
-      }
+        component: StatusLogComponent,
+      },
     ],
   },
 ]
@@ -63,4 +63,4 @@ const MainRoutes: Routes = [
   imports: [RouterModule.forChild(MainRoutes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

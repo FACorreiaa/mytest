@@ -1,13 +1,14 @@
 @import "../../../../styles-variables.scss";
 
 .title {
-  margin-top: 3rem;
+  margin-top: 0rem;
   padding: 4rem 0 6rem 0;
   text-align: center;
 }
 
 .container {
   padding-bottom: 60px;
+
 
   .card-template {
     padding: 30px;
@@ -52,7 +53,7 @@
       border-color: #f3f3f3;
       background-color: #fff;
       display: block;
-      
+
       &:hover {
         border-color: #d9d9d9;
       }
@@ -62,7 +63,7 @@
       padding: 10px 0;
       background-color: #e9ecef;
       border-top-left-radius: 10px;
-      border-top-right-radius: 10px; 
+      border-top-right-radius: 10px;
 
       span {
         font-size: 20px;
@@ -98,6 +99,7 @@
   background-color: #fff;
   border: 1px solid #d9d9d9
 }
+
 // .btn-secondary {
 //   color: #000000de;
 //   background-color: #d9d9d9;
@@ -111,12 +113,21 @@
 //   font-size: 18px;
 // }
 
-@media (min-width:768px) {
+@media screen and (max-width:575px) {
   .sub-title {
-    text-align: right;
+    text-align: center;
   }
 
   .btn-admin {
-    float: right;
+    float: center;
   }
+
+  .title {
+    margin-top: 0rem;
+    padding: 3rem 0 3rem 0;
+    text-align: center;
+  }
+
+
+
 }

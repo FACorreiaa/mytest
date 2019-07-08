@@ -11,14 +11,18 @@ mat-sidenav-container {
   background-size: cover;
   background-color: #c9c9c9;
 
-  > .container {
+  >.container {
     position: relative;
   }
 
-  @media (max-width: map-get($grid-breakpoints, lg)) {
+  @media screen and (max-width: 575px) {
     .container {
-      max-width: none;
-      min-width: $toolbar-breakpoint;
+      width: 100vw;
+      position: relative;
+      margin-left: -50vw;
+      left: 50%;
+      padding-right: 0px;
+      padding-left: 0px;
     }
   }
 }
