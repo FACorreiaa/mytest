@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
 
   profileData$: Observable<BusinessData[]>
+  updateProfile$: Observable<boolean>
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -46,9 +47,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {
     this.loading$ = this.appstore.select(fromApp.loading)
     this.profileData$ = this.store.select(fromProfile.getProfileBusinessList)
+    this.updateProfile$ = this.store.select(fromProfile.getUpdateProfile)
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.translate.setDefaultLang('en')
 
     this.store.dispatch(new Actions.GetAllBusinessAction())
@@ -67,12 +69,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(lang => this.translate.use(lang))
   }
 
-  updateBusiness(updateBusiness: UpdateBusinessData) {
-    this.store.dispatch(new Actions.UpdateBusinessAttempt({ request: updateBusiness }))
-  }
-
   public ngOnDestroy() {
     this.language$.unsubscribe()
+  }
+
+  updateBusiness(updateBusiness: UpdateBusinessData) {
+    this.store.dispatch(new Actions.UpdateBusinessAttempt({ request: updateBusiness }))
   }
 
   GoToMainPage() {

@@ -21,17 +21,7 @@ export const getProfileBusinessList = createSelector(
   (state: ProfileState) => state.profile.business
 )
 
-export const getfecthVerificationOptions = createSelector(
+export const getUpdateProfile = createSelector(
   getProfileState,
-  (state: ProfileState) => state.profile.fetchVerificationOptions
-)
-
-export const initVerification = createSelector(
-  getProfileState,
-  (state: ProfileState) => state.profile.initVerification
-)
-
-export const completeVerification = createSelector(
-  getProfileState,
-  (state: ProfileState) => state.profile.completeVerification
+  (state: ProfileState) => state.profile.updateSucess
 )

@@ -1,4 +1,16 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ChangeDetectorRef, AfterViewChecked } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectorRef,
+  AfterViewChecked,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
@@ -32,6 +44,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-profile-form',
   templateUrl: 'profile-form.component.html',
   styleUrls: ['profile-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked {
   firstFormGroup: FormGroup
@@ -69,6 +82,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   @Input() payments: ICategory[]
   @Input() countries: Countries[]
   @Input() profileData: BusinessData[]
+  @Input() updateProfile: boolean
   @Output() private goToProfileEvent = new EventEmitter()
   @Output() private updateBusinessEvent = new EventEmitter()
 
@@ -95,10 +109,21 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.profileData.length) {
       this.updateFormsWithBusinessData()
     }
+
+    if (this.updateProfile !== null) {
+      if (this.updateProfile) {
+        this._snackBar.open(this.translate.instant('csa.update-success'), '', {
+          duration: 4000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: 'toast-success',
+        })
+      }
+    }
   }
 
   ngAfterViewChecked() {
-    this.change.detectChanges()
+    // this.change.detectChanges()
   }
 
   renderHours() {
@@ -182,14 +207,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
   save(basicDataForm: FormGroup) {
     const updateData = this.createClaimToSave(basicDataForm.value)
     this.updateBusinessEvent.emit(updateData)
-
-    // 'Business updated sucessfully!!
-    this._snackBar.open(this.translate.instant('csa.update-success'), '', {
-      duration: 4000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: 'toast-success',
-    })
   }
 
   /**
@@ -254,7 +271,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       city: basicDataForm.city,
       street: basicDataForm.address,
       additional: '',
-      openingTimes: this.lastBusiness.openingTimes,
+      openingTimes: this.buildOpenHoursModel(basicDataForm.openHours),
       offers: this.lastBusiness.offers,
       services: this.lastBusiness.services,
       paymentMethods: this.lastBusiness.paymentMethods,
@@ -266,6 +283,15 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     }
 
     return updateBusinessData
+  }
+
+  private setAreaCode(countryName: string) {
+    if (!countryName) {
+      return
+    }
+
+    const newAreaValue = this.countries.find(c => c.name === countryName).code
+    this.firstFormGroup.get('area').setValue(newAreaValue)
   }
 
   /*
@@ -333,15 +359,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
     return groups
   }
 
-  private setAreaCode(countryName: string) {
-    if (!countryName) {
-      return
-    }
-
-    const newAreaValue = this.countries.find(c => c.name === countryName).code
-    this.firstFormGroup.get('area').setValue(newAreaValue)
-  }
-
   /**
    * Build default opening hours data on the form.
    * @param dayName Description of the day
@@ -400,6 +417,81 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
         }
       )
     }
+  }
+
+  /**
+   * Build opening hours dto model to send in service.
+   * @param openHours the opening hours array for each day of the week.
+   */
+  private buildOpenHoursModel(openHours: any): OpeningTimes {
+    let monday: Day[] = []
+    let tuesday: Day[] = []
+    let wednesday: Day[] = []
+    let thursday: Day[] = []
+    let friday: Day[] = []
+    let saturday: Day[] = []
+    let sunday: Day[] = []
+
+    openHours
+      .filter((x: any) => x.isSelected)
+      .forEach((element: any) => {
+        switch (element.name) {
+          case 'Monday':
+            monday = this.buildDayModel(element)
+            break
+          case 'Tuesday':
+            tuesday = this.buildDayModel(element)
+            break
+          case 'Wednesday':
+            wednesday = this.buildDayModel(element)
+            break
+          case 'Thursday':
+            thursday = this.buildDayModel(element)
+            break
+          case 'Friday':
+            friday = this.buildDayModel(element)
+            break
+          case 'Saturday':
+            saturday = this.buildDayModel(element)
+            break
+          case 'Sunday':
+            sunday = this.buildDayModel(element)
+            break
+          default:
+            break
+        }
+      })
+
+    const openingTimes: OpeningTimes = {
+      monday: monday,
+      tuesday: tuesday,
+      wednesday: wednesday,
+      thursday: thursday,
+      friday: friday,
+      saturday: saturday,
+      sunday: sunday,
+    }
+
+    return openingTimes
+  }
+
+  /**
+   * Build the day model to send in service.
+   * @param element the day data.
+   */
+  private buildDayModel(element: any): Day[] {
+    const dayArray: Day[] = []
+
+    let item: Day
+    item = Object.assign({}, item, { startTime: element.from, endTime: element.to })
+    dayArray.push(item)
+    if (element.splitedFrom && element.splitedTo) {
+      let splitedItem: Day
+      splitedItem = Object.assign({}, splitedItem, { startTime: element.splitedFrom, endTime: element.splitedTo })
+      dayArray.push(splitedItem)
+    }
+
+    return dayArray
   }
 }
 

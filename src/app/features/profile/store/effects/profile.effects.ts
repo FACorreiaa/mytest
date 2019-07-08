@@ -51,7 +51,7 @@ export class ProfileEffects {
     switchMap((action: profileActions.UpdateBusinessAttempt) =>
       this.profileService.updateBusinessData(action.payload.request).pipe(
         map((response: any) => {
-          return new profileActions.UpdateBusinessSuccess(response)
+          return new profileActions.UpdateBusinessSuccess(true)
         }),
         catchError(error => of(new profileActions.UpdateBusinessFailure(error)))
       )

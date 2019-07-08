@@ -37,7 +37,7 @@ export class UpdateBusinessAttempt implements Action {
 
 export class UpdateBusinessSuccess implements Action {
   readonly type = ActionTypes.UPDATE_BUSINESS_SUCCESS
-  constructor(public payload: any) {}
+  constructor(public payload: boolean) {}
 }
 
 export class UpdateBusinessFailure implements Action {
