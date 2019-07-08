@@ -31,7 +31,7 @@ export class ProfileEffects {
   getBusinessSuccess$ = this.actions$.pipe(
     ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS),
     tap(() => {
-      // this.router.navigate([AuthRoutes.MAIN])
+      this.storeProfile$.dispatch(new profileActions.UpdateBusinessFailure())
     })
   )
 

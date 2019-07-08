@@ -46,7 +46,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['profile-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked {
+export class ProfileFormComponent implements OnInit, OnChanges {
   firstFormGroup: FormGroup
   secondFormGroup: FormGroup
   matcher = new MyErrorStateMatcher()
@@ -106,7 +106,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
     }
 
-    if (this.profileData.length) {
+    if (this.profileData.length && !this.updateProfile) {
       this.updateFormsWithBusinessData()
     }
 
@@ -120,10 +120,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
         })
       }
     }
-  }
-
-  ngAfterViewChecked() {
-    // this.change.detectChanges()
   }
 
   renderHours() {
@@ -241,7 +237,6 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       website: [this.lastBusiness.url, Validators.required],
       email: [this.lastBusiness.contactEmail, Validators.required],
       openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
-      keyword: this.lastBusiness.keywords,
       description: [this.lastBusiness.description, Validators.required],
     })
     this.secondFormGroup = this.formBuilder.group({
@@ -250,6 +245,8 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       offering: [this.lastBusiness.offers],
       service: [this.lastBusiness.services],
     })
+
+    this.keywordsArray = this.lastBusiness.keywords
   }
 
   /**
@@ -271,6 +268,7 @@ export class ProfileFormComponent implements OnInit, OnChanges, AfterViewChecked
       city: basicDataForm.city,
       street: basicDataForm.address,
       additional: '',
+      keywords: this.keywordsArray,
       openingTimes: this.buildOpenHoursModel(basicDataForm.openHours),
       offers: this.lastBusiness.offers,
       services: this.lastBusiness.services,
