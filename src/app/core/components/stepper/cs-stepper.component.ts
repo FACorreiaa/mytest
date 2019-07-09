@@ -59,6 +59,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   offeringsArray: ICategory[] = []
   addressFocus = false
   showOpenHoursLayout = false
+  show = false
 
   @Input() newBusiness: false
   @Input() businessFromHydra: BusinessData
