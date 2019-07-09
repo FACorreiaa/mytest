@@ -6,43 +6,14 @@ import { Action, Store } from '@ngrx/store'
 import * as profileActions from '../actions/profile.actions'
 import * as fromModuleFeature from '../../profile.selector'
 
+import * as dashboardActions from '../../../../features/dashboard/store/actions/dashboard.actions'
+import * as fromDashboard from '../../../../features/dashboard/dashboard.selector'
+
 import { switchMap, catchError, map, tap } from 'rxjs/operators'
-import { Router } from '@angular/router'
 import { IProfileService } from '@app/api/interfaces/i.profile.service'
 
 @Injectable()
 export class ProfileEffects {
-  // ----------------- Get Business -----------------
-
-  @Effect()
-  getBusiness$: Observable<Action> = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_ATTEMPT),
-    switchMap((payload: any) =>
-      this.profileService.businessData().pipe(
-        map((response: any) => {
-          return new profileActions.GetAllBusinessSuccessAction(response)
-        }),
-        catchError(error => of(new profileActions.GetAllBusinessFailureAction(error)))
-      )
-    )
-  )
-
-  @Effect({ dispatch: false })
-  getBusinessSuccess$ = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS),
-    tap(() => {
-      this.storeProfile$.dispatch(new profileActions.UpdateBusinessFailure())
-    })
-  )
-
-  @Effect({ dispatch: false })
-  getBusinessFailure$ = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
-    tap(payload => {
-      this.storeProfile$.dispatch(new profileActions.ErrorLayoutShow(payload))
-    })
-  )
-
   // ----------------- Update Business -----------------
 
   @Effect()
@@ -61,10 +32,15 @@ export class ProfileEffects {
   @Effect({ dispatch: false })
   updateBusinessSuccess$ = this.actions$.pipe(
     ofType(profileActions.ActionTypes.UPDATE_BUSINESS_SUCCESS),
-    tap(() => {
-      this.storeProfile$.dispatch(new profileActions.GetAllBusinessAction())
+    map(() => {
+      this.storeDashboard$.dispatch(new dashboardActions.GetAllBusinessAction())
     })
   )
 
-  constructor(private actions$: Actions, private router: Router, private storeProfile$: Store<fromModuleFeature.ProfileState>, private profileService: IProfileService) {}
+  constructor(
+    private actions$: Actions,
+    private storeDashboard$: Store<fromDashboard.DashBoardState>,
+    private storeProfile$: Store<fromModuleFeature.ProfileState>,
+    private profileService: IProfileService
+  ) {}
 }

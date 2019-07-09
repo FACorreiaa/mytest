@@ -67,6 +67,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   selectable = true
   removable = true
   addOnBlur = true
+  isNotificationOn = false
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   allowFreeText = false
 
@@ -111,13 +112,16 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     }
 
     if (this.updateProfile !== null) {
-      if (this.updateProfile) {
+      if (this.updateProfile && !this.isNotificationOn) {
+        this.isNotificationOn = true
         this._snackBar.open(this.translate.instant('csa.update-success'), '', {
           duration: 4000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
           panelClass: 'toast-success',
         })
+      } else {
+        this.isNotificationOn = false
       }
     }
   }

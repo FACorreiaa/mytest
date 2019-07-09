@@ -17,10 +17,6 @@ export const initialState: ProfileState = {
 
 export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileActions): ProfileState {
   switch (action.type) {
-    case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
-      return { ...state, business: action.payload, updateSucess: false }
-    }
-
     case Actions.ActionTypes.UPDATE_BUSINESS_SUCCESS: {
       return { ...state, updateSucess: action.payload }
     }
@@ -38,7 +34,7 @@ export function profileReducer(state: ProfileState = initialState, action: Actio
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_HIDE: {
-      return { ...state, errorMessage: '' }
+      return { ...state, errorMessage: '', updateSucess: false }
     }
 
     default:
