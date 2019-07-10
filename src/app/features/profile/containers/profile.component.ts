@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core'
 import * as Actions from '../store/actions/profile.actions'
 import * as fromProfile from '../profile.selector'
 import * as fromApp from '../../../app.reducers'
-// import * as fromMain from '../../../main/main.selectors'
+import * as fromMain from '../../../main/main.selectors'
 
 import { Observable, Subject } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
@@ -39,21 +39,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private appstore: Store<fromApp.AppState>,
-    // private mainStore: Store<fromMain.MainState>,
+    private mainStore: Store<fromMain.MainState>,
     private store: Store<fromProfile.ProfileState>,
     private translate: TranslateService,
     private categoriesService: CategoriesService,
     private countriesService: CountriesService
   ) {
     this.loading$ = this.appstore.select(fromApp.loading)
-    this.profileData$ = this.store.select(fromProfile.getProfileBusinessList)
+    this.profileData$ = this.mainStore.select(fromMain.getDashboardState)
     this.updateProfile$ = this.store.select(fromProfile.getUpdateProfile)
   }
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    this.store.dispatch(new Actions.GetAllBusinessAction())
+    this.store.dispatch(new Actions.ErrorLayoutHide())
 
     this.countries$ = this.countriesService.getCountries()
     this.services$ = this.categoriesService.getServices()
