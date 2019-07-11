@@ -5,7 +5,7 @@
     padding: 15px 0;
     margin-top: -30px;
     background-color: #fff;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 mat-icon {
@@ -58,7 +58,88 @@ mat-button-toggle-group {
         }
 
         button:focus {
-          outline: none;  
+            outline: none;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .toggle-checkbox {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        padding: 15px 0;
+        margin-top: -30px;
+        background-color: #fff;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    }
+
+    .col-4 {
+        display: table-row;
+
+        max-width: 45%;
+    }
+
+    mat-button-toggle-group {
+        padding: 0 15px;
+        width: 23em;
+
+        .col-3 {
+            display: -webkit-inline-box;
+
+            max-width: 45%;
+        }
+
+        // text-overflow: ellipsis;
+        // overflow: hidden;
+        // white-space: nowrap;
+        // display: inline-block;
+        // float: left;
+
+        mat-button-toggle {
+
+
+            button {
+                //width: 95px;
+                overflow: hidden;
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: smaller;
+                //width: 90px;
+                margin-bottom: 30px;
+                padding: 10px;
+                background-color: #f3f3f3;
+                border: solid 2px #f3f3f3;
+                cursor: pointer;
+
+                &.selected {
+                    border: solid 2px #f9ae00;
+                    background-color: #fdeecc;
+                }
+
+                mat-icon {
+                    transition: all 0.2s ease-out;
+                }
+
+                &.clicked {
+                    mat-icon {
+                        transform: rotate(180deg);
+                    }
+                }
+
+                img {
+                    max-height: 1.5rem;
+                    margin: 4em;
+                    //display: inline-block;
+                }
+            }
+
+            button:focus {
+                outline: none;
+            }
         }
     }
 }

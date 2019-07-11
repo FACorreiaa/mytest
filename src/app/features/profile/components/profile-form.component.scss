@@ -239,4 +239,69 @@ mat-button-toggle-group {
     margin-top: 0rem;
     padding: 3rem 0 3rem 0;
   }
+
+  mat-button-toggle-group {
+    padding: 0 15px;
+    width: 23em;
+
+    .col-3 {
+      display: -webkit-inline-box;
+
+      max-width: 45%;
+    }
+
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+    // display: inline-block;
+    // float: left;
+
+    mat-button-toggle {
+
+
+      button {
+        //width: 95px;
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: smaller;
+        //width: 90px;
+        margin-bottom: 30px;
+        padding: 10px;
+        background-color: #f3f3f3;
+        border: solid 2px #f3f3f3;
+        cursor: pointer;
+
+        &.selected {
+          border: solid 2px #f9ae00;
+          background-color: #fdeecc;
+        }
+
+        mat-icon {
+          transition: all 0.2s ease-out;
+        }
+
+        &.clicked {
+          mat-icon {
+            transform: rotate(180deg);
+          }
+        }
+
+        img {
+          max-height: 1.5rem;
+          margin: 4em;
+          //display: inline-block;
+
+
+        }
+      }
+
+      button:focus {
+        outline: none;
+      }
+    }
+  }
 }
