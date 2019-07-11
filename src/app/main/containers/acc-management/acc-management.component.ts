@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 
@@ -9,7 +10,6 @@ import { BusinessData } from '@app/api/models/api-models'
 import { Store } from '@ngrx/store'
 
 import { DeleteAccComponent } from '@app/main/components/delete-acc/delete-acc.component'
-import { ISubscription } from 'rxjs/Subscription'
 
 @Component({
   selector: 'acc-management',
@@ -17,7 +17,7 @@ import { ISubscription } from 'rxjs/Subscription'
   styleUrls: ['./acc-management.component.scss'],
 })
 export class AccManagementComponent implements OnInit, OnDestroy {
-  private subscription: ISubscription
+  private unsubscribe$: Subject<void> = new Subject<void>()
 
   profileData: Observable<BusinessData[]>
 
@@ -34,7 +34,7 @@ export class AccManagementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.profileData.subscribe((settingsData: BusinessData[]) => {
+    this.profileData.pipe(takeUntil(this.unsubscribe$)).subscribe((settingsData: BusinessData[]) => {
       this.firstName = settingsData[0].userFirstName
       this.lastName = settingsData[0].userLastName
       this.email = settingsData[0].contactEmail
@@ -59,6 +59,7 @@ export class AccManagementComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 }
