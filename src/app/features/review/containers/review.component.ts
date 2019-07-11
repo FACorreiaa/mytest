@@ -21,6 +21,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
     language: string
     listingStatus: boolean
+    starRating: number
 
     constructor(
         private appStore: Store<fromApp.AppState>,
@@ -48,6 +49,8 @@ export class ReviewComponent implements OnInit, OnDestroy {
             })
 
         this.listingStatus = false
+
+        this.starRating = 3
     }
 
     ngOnDestroy() {

@@ -28,7 +28,7 @@ const MainRoutes: Routes = [
       {
         path: 'review',
         canActivate: [AppAuthGuard],
-        loadChildren: '../features/review/review.module#ReviewModule',
+        loadChildren: () => import('../features/review/review.module').then(m => m.ReviewModule),
       },
       {
         path: 'wizard',

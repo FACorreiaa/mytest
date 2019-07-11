@@ -28,7 +28,7 @@
   <nav mat-tab-nav-bar class="global-header-link-icon-container">
     <a mat-tab-link *ngFor="let e of navBarMenu" [routerLink]="e.link" routerLinkActive="on" #rla="routerLinkActive"
       [active]="rla.isActive" style="flex-direction: column" [ngClass]="{'mn-active': isActive(e)}">
-      <span class="pb-2">
+      <span class="pt-2">
         <img class="img-fluid" src="../../../assets/images/icons/{{e.id}}.svg">
       </span>
       <span style="color:#333333;">
