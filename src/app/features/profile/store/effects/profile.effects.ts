@@ -6,42 +6,41 @@ import { Action, Store } from '@ngrx/store'
 import * as profileActions from '../actions/profile.actions'
 import * as fromModuleFeature from '../../profile.selector'
 
+import * as dashboardActions from '../../../../features/dashboard/store/actions/dashboard.actions'
+import * as fromDashboard from '../../../../features/dashboard/dashboard.selector'
+
 import { switchMap, catchError, map, tap } from 'rxjs/operators'
-import { Router } from '@angular/router'
 import { IProfileService } from '@app/api/interfaces/i.profile.service'
 
 @Injectable()
 export class ProfileEffects {
-  // ----------------- Get Business -----------------
+  // ----------------- Update Business -----------------
 
   @Effect()
-  getBusiness$: Observable<Action> = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS),
-    switchMap((payload: any) =>
-      this.profileService.businessData().pipe(
+  updateBusiness$: Observable<Action> = this.actions$.pipe(
+    ofType(profileActions.ActionTypes.UPDATE_BUSINESS_ATTEMPT),
+    switchMap((action: profileActions.UpdateBusinessAttempt) =>
+      this.profileService.updateBusinessData(action.payload.request).pipe(
         map((response: any) => {
-          return new profileActions.GetAllBusinessSuccessAction(response)
+          return new profileActions.UpdateBusinessSuccess(true)
         }),
-        catchError(error => of(new profileActions.GetAllBusinessFailureAction(error)))
+        catchError(error => of(new profileActions.UpdateBusinessFailure(error)))
       )
     )
   )
 
   @Effect({ dispatch: false })
-  getBusinessSuccess$ = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS),
-    tap(() => {
-      // this.router.navigate([AuthRoutes.MAIN])
+  updateBusinessSuccess$ = this.actions$.pipe(
+    ofType(profileActions.ActionTypes.UPDATE_BUSINESS_SUCCESS),
+    map(() => {
+      this.storeDashboard$.dispatch(new dashboardActions.GetAllBusinessAction())
     })
   )
 
-  @Effect({ dispatch: false })
-  getBusinessFailure$ = this.actions$.pipe(
-    ofType(profileActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
-    tap(payload => {
-      this.storeProfile$.dispatch(new profileActions.ErrorLayoutShow(payload))
-    })
-  )
-
-  constructor(private actions$: Actions, private router: Router, private storeProfile$: Store<fromModuleFeature.ProfileState>, private profileService: IProfileService) {}
+  constructor(
+    private actions$: Actions,
+    private storeDashboard$: Store<fromDashboard.DashBoardState>,
+    private storeProfile$: Store<fromModuleFeature.ProfileState>,
+    private profileService: IProfileService
+  ) {}
 }

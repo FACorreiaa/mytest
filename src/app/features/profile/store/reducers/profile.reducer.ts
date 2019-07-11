@@ -2,29 +2,27 @@ import * as Actions from '../actions/profile.actions'
 import { FetchVerificationResponse, BusinessData } from '@app/api/models/api-models'
 
 export interface ProfileState {
-  selectedBusiness: any
   isLoading: boolean
   business: BusinessData[]
-  fetchVerificationOptions: FetchVerificationResponse
-  initVerification: any
-  completeVerification: any
   errorMessage: string
+  updateSucess: boolean
 }
 
 export const initialState: ProfileState = {
   isLoading: false,
-  selectedBusiness: null,
   business: [],
-  fetchVerificationOptions: null,
-  initVerification: null,
-  completeVerification: null,
   errorMessage: null,
+  updateSucess: false,
 }
 
-export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileAction): ProfileState {
+export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileActions): ProfileState {
   switch (action.type) {
-    case Actions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS: {
-      return { ...state, business: action.payload }
+    case Actions.ActionTypes.UPDATE_BUSINESS_SUCCESS: {
+      return { ...state, updateSucess: action.payload }
+    }
+
+    case Actions.ActionTypes.UPDATE_BUSINESS_FAILURE: {
+      return { ...state, updateSucess: false }
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
@@ -36,7 +34,7 @@ export function profileReducer(state: ProfileState = initialState, action: Actio
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_HIDE: {
-      return { ...state, errorMessage: '' }
+      return { ...state, errorMessage: '', updateSucess: false }
     }
 
     default:
