@@ -28,5 +28,4 @@ export class ReviewService extends BaseApi implements IReviewService {
   public oAuthTokens(business: RequestAdminRightsBusinessId): Observable<any> {
     return this.getObjectsPOST_Text(business, `${this.businessRequestAdminControllerRoute}/oAuth`)
   }
-
 }

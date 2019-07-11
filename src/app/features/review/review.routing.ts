@@ -8,4 +8,4 @@ const ReviewRoutes: Routes = [{ path: '', component: ReviewComponent, children: 
   imports: [RouterModule.forChild(ReviewRoutes)],
   exports: [RouterModule],
 })
-export class ReviewRoutingModule { }
+export class ReviewRoutingModule {}

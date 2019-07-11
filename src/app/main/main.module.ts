@@ -53,20 +53,13 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     StatusLogComponent,
     TransferGmbComponent,
     SendInviteComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
   ],
-  entryComponents: [
-    CookieSettingsComponent,
-    DeleteAccComponent,
-    DeleteConfirmComponent,
-    TransferGmbComponent,
-    SendInviteComponent,
-    ErrorDialogComponent
-  ],
+  entryComponents: [CookieSettingsComponent, DeleteAccComponent, DeleteConfirmComponent, TransferGmbComponent, SendInviteComponent, ErrorDialogComponent],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MainModule { }
+export class MainModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

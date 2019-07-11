@@ -18,8 +18,17 @@ export const reducers: ActionReducerMap<ReviewState> = {
 // Review
 export const getReviewState = createFeatureSelector<ReviewState>(reducerName)
 
-export const getReviewBusinessList = createSelector(getReviewState, (state: ReviewState) => state.review.business)
-export const getOauthTokenStatus = createSelector(getReviewState, (state: ReviewState) => state.review.oauthToken)
+export const getReviewBusinessList = createSelector(
+  getReviewState,
+  (state: ReviewState) => state.review.business
+)
+export const getOauthTokenStatus = createSelector(
+  getReviewState,
+  (state: ReviewState) => state.review.oauthToken
+)
 
 // Directories
-export const redirectURL = createSelector(getReviewState, (state: ReviewState) => state.directories.redirectUrl)
+export const redirectURL = createSelector(
+  getReviewState,
+  (state: ReviewState) => state.directories.redirectUrl
+)

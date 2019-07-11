@@ -21,60 +21,60 @@ export enum ActionTypes {
 /*--- Get all business ---*/
 export class GetAllBusinessAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 export class GetAllBusinessSuccessAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS_SUCCESS
-  constructor(public payload?: BusinessData[]) { }
+  constructor(public payload?: BusinessData[]) {}
 }
 
 export class GetAllBusinessFailureAction implements Action {
   public type = ActionTypes.GET_BUSINESS_UNITS_FAILURE
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 /*--- Request admin rights ---*/
 export class RequestAdminRightsAttempt implements Action {
   readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT
-  constructor(public payload: LocationData) { }
+  constructor(public payload: LocationData) {}
 }
 
 export class RequestAdminRightsFailure implements Action {
   readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_FAILURE
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class RequestAdminRightsSuccess implements Action {
   readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 /*--- Oauth tokens ---*/
 export class OauthAttempt implements Action {
   readonly type = ActionTypes.OAUTH_TOKEN_ATTEMPT
-  constructor(public payload: { request: RequestAdminRightsBusinessId }) { }
+  constructor(public payload: { request: RequestAdminRightsBusinessId }) {}
 }
 
 export class OauthFailure implements Action {
   readonly type = ActionTypes.OAUTH_TOKEN_FAILURE
-  constructor(public payload?: any) { }
+  constructor(public payload?: any) {}
 }
 
 export class OauthSuccess implements Action {
   readonly type = ActionTypes.OAUTH_TOKEN_SUCCESS
-  constructor() { }
+  constructor() {}
 }
 
 /*--- Error layout ---*/
 export class ErrorLayoutShow implements Action {
   public type = ActionTypes.ERROR_LAYOUT_SHOW
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class ErrorLayoutHide implements Action {
   public type = ActionTypes.ERROR_LAYOUT_HIDE
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export type ReviewAction =

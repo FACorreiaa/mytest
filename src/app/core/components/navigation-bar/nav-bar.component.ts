@@ -19,9 +19,9 @@ export class NavigationBarComponent implements OnInit, OnChanges {
 
   @Input() business: BusinessData[]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges() {
     if (this.business && this.business.length) {

@@ -52,4 +52,7 @@ export const getNavBarState = createSelector(
 )
 
 // Account Settings (Admin)
-export const getProfileBusinessList = createSelector(getModuleState, (state: MainState) => state.profile.business)
+export const getProfileBusinessList = createSelector(
+  getModuleState,
+  (state: MainState) => state.profile.business
+)

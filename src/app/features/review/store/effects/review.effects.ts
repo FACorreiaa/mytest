@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
 import { Observable, of } from 'rxjs'
@@ -99,5 +98,5 @@ export class ReviewEffects {
     )
   )
 
-  constructor(private actions$: Actions, private router: Router, private storeReview$: Store<fromModuleFeature.ReviewState>, private reviewService: IReviewService) { }
+  constructor(private actions$: Actions, private router: Router, private storeReview$: Store<fromModuleFeature.ReviewState>, private reviewService: IReviewService) {}
 }

@@ -35,7 +35,7 @@ import { CoreModule } from '@app/core/core.module'
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ReviewModule { }
+export class ReviewModule {}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/main/`, '.json')

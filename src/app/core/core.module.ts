@@ -61,4 +61,4 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
   entryComponents: [ModalOtherVerifiComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CoreModule { }
+export class CoreModule {}
