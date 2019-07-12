@@ -118,6 +118,44 @@ export interface GoogleStatusResponse {
   state: string
 }
 
+export interface UpdateReview {
+  establishmentId: string
+  reviewId: string
+  comment: string
+}
+
+export interface DeleteReview {
+  establishmentId: string
+  reviewId: string
+}
+
+export interface ReviewsResponse {
+  reviews: Reviews
+  averageRating: string
+  totalReviewCount: string
+}
+
+export interface Reviews {
+  name: string
+  reviewId: string
+  reviewer: Reviewer
+  starRating: string
+  reviewReply?: ReviewReply
+  comment: string
+  createTime: string
+  updateTime: string
+}
+
+export interface Reviewer {
+  isAnonymous?: boolean
+  displayName?: string
+}
+
+export interface ReviewReply {
+  comment: string
+  updateTime: string
+}
+
 export interface KeycloakModel {
   readonly isLoggedIn: boolean
   readonly showLoading: boolean

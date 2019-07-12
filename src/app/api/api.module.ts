@@ -16,6 +16,8 @@ import { HttpErrorInterceptor } from './http/http-error.interceptor'
 import * as Rollbar from 'rollbar'
 import { IRestaurantAssistentService } from './interfaces/i.restaurant-assistent.service'
 import { RestaurantAssistentService } from './services/core/restaurant-assistent.service'
+import { IReviewService } from './interfaces/i.reviews.service'
+import { ReviewService } from './services/core/reviews.service'
 
 const rollbarConfig = {
   accessToken: '9138b9a5aa794f47b73712a51da0aca5',
@@ -72,6 +74,10 @@ export class ApiModule {
         {
           provide: IRestaurantAssistentService,
           useClass: RestaurantAssistentService,
+        },
+        {
+          provide: IReviewService,
+          useClass: ReviewService,
         },
       ],
     }
