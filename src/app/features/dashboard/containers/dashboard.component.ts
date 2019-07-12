@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.fecthOptions$ = this.store.select(fromDashboard.getfecthVerificationOptions)
     this.oAuthTokenStatus$ = this.store.select(fromDashboard.getOauthTokenStatus)
     this.redirectURL$ = this.store.select(fromDashboard.redirectURL)
-    this.myRole = Role.admin
+    this.myRole = Role.user
   }
 
   async ngOnInit() {

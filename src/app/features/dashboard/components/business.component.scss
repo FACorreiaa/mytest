@@ -27,6 +27,7 @@
   }
 
   .gmb-head {
+    margin: 0;
     padding: 10px 0;
     background-color: #e9ecef;
     border-top-left-radius: 10px;
@@ -43,6 +44,7 @@
   }
 
   .gmb-body {
+    margin: 0 0 15px 0;
     padding: 10px 0;
     margin-bottom: 16px;
     border: 1px solid #e9ecef;
@@ -59,6 +61,14 @@
       height: 15px;
     }
   }
+}
+
+.btn-primary{
+  background-color: #f9ae05;
+  border: 1px solid #f9ae05;
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem;
+  min-width: 150px;
 }
 
 .btn-secondary {
