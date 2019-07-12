@@ -12,7 +12,7 @@ export class ReviewService extends BaseApi implements IReviewService {
     super(injector)
   }
 
-  public reviews(): Observable<ReviewsResponse> {
+  public reviews(establishmentId: number): Observable<ReviewsResponse> {
     throw new Error('Method not implemented.')
   }
 

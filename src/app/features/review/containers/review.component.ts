@@ -23,15 +23,13 @@ export class ReviewComponent implements OnInit, OnDestroy {
   listingStatus: boolean
   starRating: number
 
-  constructor(private appStore: Store<fromApp.AppState>, private translate: TranslateService, private store: Store<fromReview.ReviewState>) {
-    this.oAuthTokenStatus$ = this.store.select(fromReview.getOauthTokenStatus)
-    this.redirectURL$ = this.store.select(fromReview.redirectURL)
-  }
+  constructor(private appStore: Store<fromApp.AppState>, private translate: TranslateService, private store: Store<fromReview.ReviewState>) {}
 
   async ngOnInit() {
-    this.translate.setDefaultLang('en')
+    this.translate.getBrowserLang()
 
-    this.store.dispatch(new Actions.GetAllBusinessAction())
+    // ToDo: how to get the establishmentId
+    // this.store.dispatch(new Actions.GetAllReviewsAttempt({ establishmentId: 12 }))
 
     this.appStore
       .pipe(

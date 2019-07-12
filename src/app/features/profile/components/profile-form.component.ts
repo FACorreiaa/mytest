@@ -251,6 +251,8 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     })
 
     this.keywordsArray = this.lastBusiness.keywords
+    this.categories = CategoriesArray()
+    this.hours = OpenHoursArray()
   }
 
   /**

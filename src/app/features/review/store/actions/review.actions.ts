@@ -1,91 +1,73 @@
 import { Action } from '@ngrx/store'
-import { LocationData, RequestAdminRightsBusinessId, BusinessData } from '@app/api/models/api-models'
+import { LocationData, RequestAdminRightsBusinessId, BusinessData, ReviewsResponse, UpdateReview, DeleteReview } from '@app/api/models/api-models'
 
 export enum ActionTypes {
-  GET_BUSINESS_UNITS = '[GetBusinessUnits] Get All Business Units',
-  GET_BUSINESS_UNITS_SUCCESS = '[GetBusinessUnits] Get All Business Units Success',
-  GET_BUSINESS_UNITS_FAILURE = '[GetBusinessUnits] Get All Business Units Failure',
+  GET_REVIEWS_ATTEMPT = '[Reviews] Get All Reviews Attempt',
+  GET_REVIEWS_SUCCESS = '[Reviews] Get All Reviews Success',
+  GET_REVIEWS_FAILURE = '[Reviews] Get All Reviews Failure',
 
-  REQUEST_ADMIN_RIGHTS_ATTEMPT = '[DashBoard] Request Admin Rights Attempt',
-  REQUEST_ADMIN_RIGHTS_FAILURE = '[DashBoard] Request Admin Rights Failure',
-  REQUEST_ADMIN_RIGHTS_SUCCESS = '[DashBoard] Request Admin Rights Success',
+  UPDATE_REVIEWS_ATTEMPT = '[Reviews] Update Review Attempt',
+  UPDATE_REVIEWS_SUCCESS = '[Reviews] Update Review Success',
+  UPDATE_REVIEWS_FAILURE = '[Reviews] Update Review Failure',
 
-  OAUTH_TOKEN_ATTEMPT = '[DashBoard] Request Oauth tokens Attempt',
-  OAUTH_TOKEN_FAILURE = '[DashBoard] Request Oauth tokens Failure',
-  OAUTH_TOKEN_SUCCESS = '[DashBoard] Request Oauth tokens Success',
-
-  ERROR_LAYOUT_SHOW = '[Dashboard Error] show',
-  ERROR_LAYOUT_HIDE = '[Dashboard Error] hide',
+  DELETE_REVIEWS_ATTEMPT = '[Reviews] Delete Review Attempt',
+  DELETE_REVIEWS_SUCCESS = '[Reviews] Delete Review Success',
+  DELETE_REVIEWS_FAILURE = '[Reviews] Delete Review Failure',
 }
 
 /*--- Get all business ---*/
-export class GetAllBusinessAction implements Action {
-  public type = ActionTypes.GET_BUSINESS_UNITS
+export class GetAllReviewsAttempt implements Action {
+  readonly type = ActionTypes.GET_REVIEWS_ATTEMPT
+  constructor(public payload: { establishmentId: number }) {}
+}
+
+export class GetAllReviewsSuccess implements Action {
+  readonly type = ActionTypes.GET_REVIEWS_SUCCESS
+  constructor(public payload: { response: ReviewsResponse }) {}
+}
+
+export class GetAllReviewsFailure implements Action {
+  readonly type = ActionTypes.GET_REVIEWS_FAILURE
   constructor(public payload?: any) {}
 }
 
-export class GetAllBusinessSuccessAction implements Action {
-  public type = ActionTypes.GET_BUSINESS_UNITS_SUCCESS
-  constructor(public payload?: BusinessData[]) {}
+export class UpdateReviewAttempt implements Action {
+  readonly type = ActionTypes.UPDATE_REVIEWS_ATTEMPT
+  constructor(public payload: { request: UpdateReview }) {}
 }
 
-export class GetAllBusinessFailureAction implements Action {
-  public type = ActionTypes.GET_BUSINESS_UNITS_FAILURE
+export class UpdateReviewSuccess implements Action {
+  readonly type = ActionTypes.UPDATE_REVIEWS_SUCCESS
   constructor(public payload?: any) {}
 }
 
-/*--- Request admin rights ---*/
-export class RequestAdminRightsAttempt implements Action {
-  readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT
-  constructor(public payload: LocationData) {}
-}
-
-export class RequestAdminRightsFailure implements Action {
-  readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_FAILURE
-  constructor(public payload: any) {}
-}
-
-export class RequestAdminRightsSuccess implements Action {
-  readonly type = ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS
-  constructor(public payload: any) {}
-}
-
-/*--- Oauth tokens ---*/
-export class OauthAttempt implements Action {
-  readonly type = ActionTypes.OAUTH_TOKEN_ATTEMPT
-  constructor(public payload: { request: RequestAdminRightsBusinessId }) {}
-}
-
-export class OauthFailure implements Action {
-  readonly type = ActionTypes.OAUTH_TOKEN_FAILURE
+export class UpdateReviewFailure implements Action {
+  readonly type = ActionTypes.UPDATE_REVIEWS_FAILURE
   constructor(public payload?: any) {}
 }
 
-export class OauthSuccess implements Action {
-  readonly type = ActionTypes.OAUTH_TOKEN_SUCCESS
-  constructor() {}
+export class DeleteReviewAttempt implements Action {
+  readonly type = ActionTypes.DELETE_REVIEWS_ATTEMPT
+  constructor(public payload: { request: DeleteReview }) {}
 }
 
-/*--- Error layout ---*/
-export class ErrorLayoutShow implements Action {
-  public type = ActionTypes.ERROR_LAYOUT_SHOW
-  constructor(public payload: any) {}
+export class DeleteReviewSuccess implements Action {
+  readonly type = ActionTypes.DELETE_REVIEWS_SUCCESS
+  constructor(public payload?: any) {}
 }
 
-export class ErrorLayoutHide implements Action {
-  public type = ActionTypes.ERROR_LAYOUT_HIDE
-  constructor(public payload: any) {}
+export class DeleteReviewFailure implements Action {
+  readonly type = ActionTypes.DELETE_REVIEWS_FAILURE
+  constructor(public payload?: any) {}
 }
 
 export type ReviewAction =
-  | GetAllBusinessAction
-  | GetAllBusinessSuccessAction
-  | GetAllBusinessFailureAction
-  | RequestAdminRightsAttempt
-  | RequestAdminRightsFailure
-  | RequestAdminRightsSuccess
-  | OauthAttempt
-  | OauthFailure
-  | OauthSuccess
-  | ErrorLayoutShow
-  | ErrorLayoutHide
+  | GetAllReviewsAttempt
+  | GetAllReviewsFailure
+  | GetAllReviewsSuccess
+  | UpdateReviewAttempt
+  | UpdateReviewSuccess
+  | UpdateReviewFailure
+  | DeleteReviewAttempt
+  | DeleteReviewSuccess
+  | DeleteReviewFailure

@@ -2,7 +2,7 @@ import { Observable } from 'rxjs'
 import { ReviewsResponse, UpdateReview, DeleteReview } from '../models/api-models'
 
 export abstract class IReviewService {
-  public abstract reviews(): Observable<ReviewsResponse>
+  public abstract reviews(establishmentId: number): Observable<ReviewsResponse>
 
   public abstract updateReview(update: UpdateReview): Observable<any>
 

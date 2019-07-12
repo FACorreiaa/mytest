@@ -10,93 +10,50 @@ import { AppRoutes as AuthRoutes } from '../../../../app.routing'
 import { IReviewService } from '@app/api/interfaces/i.reviews.service'
 import { switchMap, catchError, map, tap } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { ReviewsResponse } from '@app/api/models/api-models'
 
 @Injectable()
 export class ReviewEffects {
-  // ----------------- Get Business -----------------
+  // ----------------- Get Reviews -----------------
 
-  // @Effect()
-  // getBusiness$: Observable<Action> = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.GET_BUSINESS_UNITS),
-  //   switchMap((payload: any) =>
-  //     this.reviewService.businessData().pipe(
-  //       map((response: any) => {
-  //         return new reviewActions.GetAllBusinessSuccessAction(response)
-  //       }),
-  //       catchError(error => of(new reviewActions.GetAllBusinessFailureAction(error)))
-  //     )
-  //   )
-  // )
+  @Effect()
+  getReviews$: Observable<Action> = this.actions$.pipe(
+    ofType(reviewActions.ActionTypes.GET_REVIEWS_ATTEMPT),
+    switchMap((action: reviewActions.GetAllReviewsAttempt) =>
+      this.reviewService.reviews(action.payload.establishmentId).pipe(
+        map((payload: ReviewsResponse) => {
+          return new reviewActions.GetAllReviewsSuccess({ response: payload })
+        }),
+        catchError(error => of(new reviewActions.GetAllReviewsFailure(error)))
+      )
+    )
+  )
 
-  // @Effect({ dispatch: false })
-  // getBusinessSuccess$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.GET_BUSINESS_UNITS_SUCCESS),
-  //   tap((action: reviewActions.GetAllBusinessSuccessAction) => {
-  //     if (action.payload.length === 0) {
-  //       this.router.navigate([AuthRoutes.WIZARD])
-  //     } else {
-  //       const selectBusiness = action.payload[action.payload.length - 1]
+  @Effect()
+  updateReview$: Observable<Action> = this.actions$.pipe(
+    ofType(reviewActions.ActionTypes.UPDATE_REVIEWS_ATTEMPT),
+    switchMap((action: reviewActions.UpdateReviewAttempt) =>
+      this.reviewService.updateReview(action.payload.request).pipe(
+        map((payload: any) => {
+          return new reviewActions.UpdateReviewSuccess()
+        }),
+        catchError(error => of(new reviewActions.UpdateReviewFailure(error)))
+      )
+    )
+  )
 
-  //       if (selectBusiness.channels[0].awaitingOwnership === 'YES') {
-  //         this.storeReview$.dispatch(new reviewActions.OauthAttempt({ request: { businessUnitId: selectBusiness.id, channel: 'GOOGLE_MY_BUSINESS' } }))
-  //       }
-  //     }
-  //   })
-  // )
+  @Effect()
+  deleteReview$: Observable<Action> = this.actions$.pipe(
+    ofType(reviewActions.ActionTypes.DELETE_REVIEWS_ATTEMPT),
+    switchMap((action: reviewActions.DeleteReviewAttempt) =>
+      this.reviewService.deleteReview(action.payload.request).pipe(
+        map((payload: any) => {
+          return new reviewActions.DeleteReviewSuccess()
+        }),
+        catchError(error => of(new reviewActions.DeleteReviewFailure(error)))
+      )
+    )
+  )
 
-  // @Effect({ dispatch: false })
-  // getBusinessFailure$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.GET_BUSINESS_UNITS_FAILURE),
-  //   tap(payload => {
-  //     this.storeReview$.dispatch(new reviewActions.ErrorLayoutShow(payload))
-  //   })
-  // )
-
-  // // ----------------- Request Admin Rights -----------------
-
-  // @Effect()
-  // requestAdminRightsAttempt$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.REQUEST_ADMIN_RIGHTS_ATTEMPT),
-  //   switchMap((action: reviewActions.RequestAdminRightsAttempt) =>
-  //     this.reviewService.requestAdminRights(action.payload).pipe(
-  //       map((response: any) => {
-  //         return response === null ? new reviewActions.RequestAdminRightsFailure({}) : new reviewActions.RequestAdminRightsSuccess(response)
-  //       }),
-  //       catchError(error => of(new reviewActions.RequestAdminRightsFailure({ error })))
-  //     )
-  //   )
-  // )
-
-  // @Effect({ dispatch: false })
-  // requestAdminRightsFailure$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.REQUEST_ADMIN_RIGHTS_FAILURE),
-  //   tap(payload => {
-  //     this.storeReview$.dispatch(new reviewActions.ErrorLayoutShow({ error: payload }))
-  //     this.router.navigate([AuthRoutes.ERROR])
-  //   })
-  // )
-
-  // @Effect({ dispatch: false })
-  // requestAdminRightsSuccess$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.REQUEST_ADMIN_RIGHTS_SUCCESS),
-  //   tap((action: reviewActions.RequestAdminRightsSuccess) => {
-  //     // this.router.navigate([AuthRoutes.MAIN])
-  //   })
-  // )
-
-  // // ----------------- Oauth tokens-----------------
-  // @Effect()
-  // OauthTokenRequest$ = this.actions$.pipe(
-  //   ofType(reviewActions.ActionTypes.OAUTH_TOKEN_ATTEMPT),
-  //   switchMap((action: reviewActions.OauthAttempt) =>
-  //     this.reviewService.oAuthTokens(action.payload.request).pipe(
-  //       map((response: any) => {
-  //         return response === null ? new reviewActions.OauthFailure() : new reviewActions.OauthSuccess()
-  //       }),
-  //       catchError(error => of(new reviewActions.OauthFailure({ error })))
-  //     )
-  //   )
-  // )
-
-  constructor(private actions$: Actions, private router: Router, private storeReview$: Store<fromModuleFeature.ReviewState>, private reviewService: IReviewService) {}
+  constructor(private actions$: Actions, private storeReview$: Store<fromModuleFeature.ReviewState>, private reviewService: IReviewService) {}
 }
