@@ -99,7 +99,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    this.buildInitalFormGroup()
+    // this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
