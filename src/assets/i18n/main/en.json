@@ -162,5 +162,7 @@
 	"csa.footer.privacy": "Data Privacy",
 	"csa.footer.cookies": "Cookie Settings",
 	"csa.update-success": "Business updated successfully!!",
-	"csa.update-discard": "All of your changes were discarded"
+	"csa.update-discard": "All of your changes were discarded",
+	"csa.more": "Show more",
+	"csa.less": "Show less"
 }

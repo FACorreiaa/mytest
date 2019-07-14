@@ -12,7 +12,7 @@ export class CollapsibleButtonComponent implements OnInit {
   imgPathOfferings = '../../../../assets/images/icons_offerings/'
   toggleState: boolean[]
   offeringState: { [key: string]: boolean }
-
+  show = false
   constructor() {
     this.offeringState = {}
     this.toggleState = []
