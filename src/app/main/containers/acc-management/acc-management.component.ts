@@ -30,7 +30,7 @@ export class AccManagementComponent implements OnInit, OnDestroy {
   userFormGroup: FormGroup
 
   constructor(private store: Store<fromMain.MainState>, private formBuilder: FormBuilder, public dialog: MatDialog) {
-    this.profileData = this.store.select(fromMain.getProfileBusinessList)
+    this.profileData = this.store.select(fromMain.getDashboardState)
   }
 
   ngOnInit() {

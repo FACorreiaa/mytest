@@ -111,7 +111,7 @@
                                         <input matInput formControlName="phone"
                                             placeholder="{{'csa.enter-phone' | translate}}" autocomplete="off" required>
                                         <mat-error *ngIf="firstFormGroup.get('phone').invalid">
-                                            {{'csa.enter-phone' | translate}}
+                                            {{'csa.enter-valid-phone' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -125,7 +125,7 @@
                                             {{'csa.enter-value' | translate}}
                                         </mat-error>
                                         <mat-error *ngIf="firstFormGroup.get('website').hasError('invalidSite')">
-                                            {{'csa.enter-valid-site' | translate}}
+                                            {{'csa.enter-valid-website' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
