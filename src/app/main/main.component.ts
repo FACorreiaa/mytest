@@ -20,6 +20,7 @@ import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-mo
 import { MatDialog } from '@angular/material'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
+import { environment } from '@env/environment'
 
 @Component({
   selector: 'app-main',
@@ -57,6 +58,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
 
     this.translate.setDefaultLang('en')
+    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
+    this.selectedLang = this.translate.currentLang
+    this.store.dispatch(new AuthActions.ChangeLanguage({ language: this.selectedLang }))
 
     this.store
       .pipe(
@@ -65,9 +71,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
         takeUntil(this.language$)
       )
       .subscribe(lang => {
-        lang = !lang ? 'en' : lang
         this.translate.use(lang)
-        this.selectedLang = lang
       })
   }
 

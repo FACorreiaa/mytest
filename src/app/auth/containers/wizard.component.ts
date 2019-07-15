@@ -1,7 +1,11 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
-import { Subscription, Observable, Subject } from 'rxjs'
+import { delay, takeUntil } from 'rxjs/operators'
+import { TranslateService } from '@ngx-translate/core'
+import { Subject } from 'rxjs/internal/Subject'
+import { Observable } from 'rxjs/Observable'
+import { KeycloakService } from 'keycloak-angular'
 
 import * as AuthActions from '../store/actions/auth.action'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
@@ -9,16 +13,13 @@ import * as fromApp from '../../app.reducers'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { Countries, ICategory, ManageBusinessData } from '@app/api/models/api-models'
 import { CountriesService } from '@app/core/services/countries.service'
-import { delay, takeUntil } from 'rxjs/operators'
-import { TranslateService } from '@ngx-translate/core'
-import { KeycloakService } from 'keycloak-angular'
 
 @Component({
   selector: 'app-wizard',
   templateUrl: 'wizard.component.html',
   styleUrls: ['wizard.component.scss'],
 })
-export class WizardComponent implements OnInit, OnChanges, OnDestroy {
+export class WizardComponent implements OnInit, OnDestroy {
   private language$: Subject<void> = new Subject<void>()
 
   authorized: boolean
@@ -45,19 +46,16 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   async ngOnInit() {
-    this.translate.setDefaultLang('en')
-
     // ToDo, now the logic for the business to apply this call
     // this.store.dispatch(new AuthActions.RestaurantAssistentAttempt())
 
     // ToDo - isLoggedIn can be use to get roles information in the future
     // this.authorized = await this.keycloakService.isLoggedIn()
 
-    this.countries$ = this.countriesService.getCountries()
-    this.services$ = this.categoriesService.getServices()
-    this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getOfferings()
-
+    this.translate.setDefaultLang('en')
+    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
     this.store
       .pipe(
         delay(0),
@@ -65,9 +63,12 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))
-  }
 
-  ngOnChanges() {}
+    this.countries$ = this.countriesService.getCountries()
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
+    this.offerings$ = this.categoriesService.getOfferings()
+  }
 
   public ngOnDestroy() {
     this.store.dispatch(new AuthActions.NavMenuLayoutShow())
