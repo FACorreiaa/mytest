@@ -96,11 +96,10 @@
                                 <div class="col-md-12 mb-3">
                                     <mat-form-field class="col">
                                         <mat-select formControlName="country"
-                                                    placeholder="{{'csa.enter-country' | translate}}"
-                                                    (selectionChange)="changeCountry($event)">
-                                            <mat-option>--{{'csa.None' | translate}}--</mat-option>
-                                            <mat-option *ngFor="let state of countries"
-                                                        [value]="state.name">
+                                            placeholder="{{'csa.enter-country' | translate}}"
+                                            (selectionChange)="changeCountry($event)">
+                                            <mat-option>--{{'csa.none' | translate}}--</mat-option>
+                                            <mat-option *ngFor="let state of countries" [value]="state.name">
                                                 {{state.name}}
                                             </mat-option>
                                         </mat-select>
@@ -111,11 +110,9 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <mat-form-field class="col">
-                                        <mat-select formControlName="category"
-                                                    placeholder="{{'csa.enter-category' | translate}}">
+                                        <mat-select formControlName="category" placeholder="{{'csa.enter-category' | translate}}">
                                             <mat-option>--{{'csa.none' | translate}}--</mat-option>
-                                            <mat-option *ngFor="let category of this.categories"
-                                                        [value]="category.name">
+                                            <mat-option *ngFor="let category of this.categories" [value]="category.name">
                                                 {{category.name | translate}}
                                             </mat-option>
                                         </mat-select>
@@ -144,7 +141,7 @@
                                                autocomplete="off"
                                                required>
                                         <mat-error *ngIf="firstFormGroup.get('phone').invalid">
-                                            {{'csa.enter-phone' | translate}}
+                                            {{'csa.enter-valid-phone' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -160,7 +157,7 @@
                                             {{'csa.enter-value' | translate}}
                                         </mat-error>
                                         <mat-error *ngIf="firstFormGroup.get('website').hasError('invalidSite')">
-                                            {{'csa.enter-valid-site' | translate}}
+                                            {{'csa.enter-valid-website' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

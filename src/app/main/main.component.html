@@ -13,32 +13,30 @@
         </div>
 
         <mat-menu #toolbarUserMenu="matMenu">
-          <ng-container *ngIf="myRole == Role.user">
-            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
-              <mat-icon>account_circle</mat-icon>
-              <span>{{'csa.nav.logout' | translate}}</span>
-            </button>
-          </ng-container>
-          <ng-container *ngIf="myRole == Role.admin">
-            <button routerLink="/main/acc_settings" mat-menu-item class="remove-outline">
-              <mat-icon>settings</mat-icon>
-              <span>{{'csa.nav.acc-settings' | translate}}</span>
-            </button>
-          </ng-container>
+          <button routerLink="/main/acc_settings" mat-menu-item class="remove-outline">
+            <mat-icon>settings</mat-icon>
+            <span>{{'csa.nav.acc-settings' | translate}}</span>
+          </button>
+          <button routerLink="/main/status_log" mat-menu-item class="remove-outline">
+            <mat-icon>description</mat-icon>
+            <span>{{'csa.nav.status-log' | translate}}</span>
+          </button>
           <ng-container *ngIf="myRole == Role.admin || myRole == Role.superadmin">
             <button mat-menu-item (click)="openTransfer()" class="remove-outline">
               <mat-icon>compare_arrows</mat-icon>
               <span>{{'csa.nav.trans-gmb' | translate}}</span>
-            </button>
-            <button routerLink="/main/status_log" mat-menu-item class="remove-outline">
-              <mat-icon>description</mat-icon>
-              <span>{{'csa.nav.status-log' | translate}}</span>
             </button>
           </ng-container>
           <ng-container *ngIf="myRole == Role.superadmin">
             <button mat-menu-item class="remove-outline">
               <fa-icon style="font-size:24px" [icon]="faBroom"></fa-icon>
               <span>{{'csa.nav.clear' | translate}}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="myRole == Role.user">
+            <button mat-menu-item (click)="onLogOutClick()" class="remove-outline">
+              <mat-icon>account_circle</mat-icon>
+              <span>{{'csa.nav.logout' | translate}}</span>
             </button>
           </ng-container>
         </mat-menu>

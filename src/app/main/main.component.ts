@@ -51,7 +51,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
     this.businessData$ = this.mainStore.select(fromMain.getDashboardState)
     this.loading$ = this.mainStore.select(fromMain.getLoading)
-    this.myRole = Role.admin
+    this.myRole = Role.user
   }
 
   ngOnInit() {

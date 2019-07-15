@@ -30,6 +30,7 @@ import {
 
 import { ErrorStateMatcher, MatChipInputEvent, MatSnackBar } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
+import { invalid } from '@angular/compiler/src/render3/view/util'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -232,22 +233,30 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     this.firstFormGroup = this.formBuilder.group({
       location: [this.lastBusiness.name, Validators.required],
       address: [this.lastBusiness.street, Validators.required],
-      postal: [this.lastBusiness.zipCode, Validators.required],
+      postal: [this.lastBusiness.zipCode, ZipCodeValidation],
       city: [this.lastBusiness.city, Validators.required],
       country: 'Germany',
       category: this.lastBusiness.category,
-      area: '+49',
-      phone: [this.lastBusiness.contactPhoneNumber, Validators.required],
-      website: [this.lastBusiness.url, Validators.required],
-      email: [this.lastBusiness.contactEmail, Validators.required],
+      area: ['+49', PhoneNumberPrefixValidation],
+      phone: [this.lastBusiness.contactPhoneNumber, PhoneNumberValidation],
+      website: [
+        this.lastBusiness.url,
+        Validators.compose([
+          Validators.required,
+          CustomValidators.patternValidator({
+            invalidSite: true,
+          }),
+        ]),
+      ],
+      email: [this.lastBusiness.contactEmail, EmailValidation],
       openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
-      description: [this.lastBusiness.description, Validators.required],
+      description: this.lastBusiness.description,
     })
     this.secondFormGroup = this.formBuilder.group({
-      language: [this.lastBusiness.languages],
-      payment: [this.lastBusiness.paymentMethods],
-      offering: [this.lastBusiness.offers],
-      service: [this.lastBusiness.services],
+      language: this.lastBusiness.languages,
+      payment: this.lastBusiness.paymentMethods,
+      offering: this.lastBusiness.offers,
+      service: this.lastBusiness.services,
     })
 
     this.keywordsArray = this.lastBusiness.keywords
@@ -308,7 +317,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       postal: new FormControl('', ZipCodeValidation),
       city: ['', Validators.required],
       phone: ['', PhoneNumberValidation],
-      mobile: ['', PhoneNumberValidation],
       area: ['+49', PhoneNumberPrefixValidation],
       country: ['Germany', Validators.required],
       category: ['', Validators.required],

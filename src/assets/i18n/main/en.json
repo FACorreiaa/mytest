@@ -59,6 +59,7 @@
 	"csa.dashboard.admin-button": "Return to Admin Screen",
 	"csa.accManagement.title": "Account Settings",
 	"csa.accManagement.user": "User Profile provided by Dish",
+	"csa.accManagement.user-edit": "Edit Profile at Dish",
 	"csa.accManagement.password": "Change Password",
 	"csa.accManagement.password-text": "To change the password of your DISH account, please click the following Link. You will be redirected to the DISH account settings.",
 	"csa.accManagement.export": "Export personal Data",
