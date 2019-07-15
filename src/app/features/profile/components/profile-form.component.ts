@@ -99,17 +99,13 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.translate.setDefaultLang('en')
-
-    this.buildInitalFormGroup()
+    // this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services) {
       this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
     }
-
-    console.log('testing', this.errorUpdatingProfile)
 
     if (this.errorUpdatingProfile) {
       this._snackBar.open(this.translate.instant('csa.update-fail'), '', {
@@ -120,7 +116,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       })
     }
 
-    if (this.profileData.length && !this.updateProfile) {
+    if (this.profileData.length) {
       this.updateFormsWithBusinessData()
     }
 
