@@ -6,6 +6,7 @@ export interface ProfileState {
   business: BusinessData[]
   errorMessage: string
   updateSucess: boolean
+  errorUpdating: boolean
 }
 
 export const initialState: ProfileState = {
@@ -13,16 +14,22 @@ export const initialState: ProfileState = {
   business: [],
   errorMessage: null,
   updateSucess: false,
+  errorUpdating: false,
 }
 
 export function profileReducer(state: ProfileState = initialState, action: Actions.ProfileActions): ProfileState {
   switch (action.type) {
+    case Actions.ActionTypes.UPDATE_BUSINESS_ATTEMPT: {
+      return { ...state, updateSucess: false, errorUpdating: false }
+    }
+
     case Actions.ActionTypes.UPDATE_BUSINESS_SUCCESS: {
-      return { ...state, updateSucess: action.payload }
+      return { ...state, updateSucess: action.payload, errorUpdating: false }
     }
 
     case Actions.ActionTypes.UPDATE_BUSINESS_FAILURE: {
-      return { ...state, updateSucess: false }
+      console.log('reducer failure')
+      return { ...state, errorUpdating: true }
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_SHOW: {
@@ -34,7 +41,7 @@ export function profileReducer(state: ProfileState = initialState, action: Actio
     }
 
     case Actions.ActionTypes.ERROR_LAYOUT_HIDE: {
-      return { ...state, errorMessage: '', updateSucess: false }
+      return { ...state, errorMessage: '', updateSucess: false, errorUpdating: false }
     }
 
     default:

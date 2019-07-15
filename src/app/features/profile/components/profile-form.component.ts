@@ -85,6 +85,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   @Input() countries: Countries[]
   @Input() profileData: BusinessData[]
   @Input() updateProfile: boolean
+  @Input() errorUpdatingProfile: boolean
   @Output() private goToProfileEvent = new EventEmitter()
   @Output() private updateBusinessEvent = new EventEmitter()
 
@@ -100,12 +101,23 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.translate.setDefaultLang('en')
 
-    // this.buildInitalFormGroup()
+    this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.services && this.services) {
       this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
+    }
+
+    console.log('testing', this.errorUpdatingProfile)
+
+    if (this.errorUpdatingProfile) {
+      this._snackBar.open(this.translate.instant('csa.update-fail'), '', {
+        duration: 4000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'toast-fail',
+      })
     }
 
     if (this.profileData.length && !this.updateProfile) {

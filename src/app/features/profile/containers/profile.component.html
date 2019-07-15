@@ -6,4 +6,5 @@
                   [payments]="this.payments$ | async"
                   [countries]="this.countries$ | async"
                   [updateProfile]="(this.updateProfile$ | async)"
+                  [errorUpdatingProfile]="(this.errorUpdating$ | async)"
                   (updateBusinessEvent)="updateBusiness($event)"></app-profile-form>

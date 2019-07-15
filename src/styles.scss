@@ -177,3 +177,8 @@ $cs-theme: mat-light-theme($cs-primary, $cs-accent, $cs-warn);
   color: white;
   background-color: orangered;
 }
+
+.toast-fail {
+  color: white;
+  background-color: red;
+}

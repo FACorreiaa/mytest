@@ -11,7 +11,7 @@ import * as fromProfile from '../profile.selector'
 import * as fromApp from '../../../app.reducers'
 import * as fromMain from '../../../main/main.selectors'
 
-import { ICategory, Countries, BusinessData, ICategoryDto, ManageBusinessData, UpdateBusinessData } from '@app/api/models/api-models'
+import { ICategory, Countries, BusinessData, ICategoryDto, UpdateBusinessData } from '@app/api/models/api-models'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
 
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   profileData$: Observable<BusinessData[]>
   updateProfile$: Observable<boolean>
+  errorUpdating$: Observable<boolean>
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -48,11 +49,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.loading$ = this.appstore.select(fromApp.loading)
     this.profileData$ = this.mainStore.select(fromMain.getDashboardState)
     this.updateProfile$ = this.store.select(fromProfile.getUpdateProfile)
+    this.errorUpdating$ = this.store.select(fromProfile.getUpdateError)
   }
 
   ngOnInit() {
-    // this.translate.setDefaultLang('en')
-
     this.translate.setDefaultLang('en')
     this.translate.addLangs(['en', 'fr', 'de', 'pt'])
     const browserLang = this.translate.getBrowserLang()
