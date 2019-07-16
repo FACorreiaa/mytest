@@ -103,7 +103,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       })
     }
 
-    if (this.profileData.length) {
+    if (changes.profileData && this.profileData.length) {
       this.updateFormsWithBusinessData()
     }
 
