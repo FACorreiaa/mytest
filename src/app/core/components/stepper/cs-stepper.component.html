@@ -259,10 +259,10 @@
                             (change)="onChangeCategory($event, item)" [value]="item.name">{{item.name | translate}}
                         </mat-checkbox>
                     </div>
-                    <div class="col-sm-3">
+                    <!--<div class="col-sm-3">
                         <button (click)="show = !show" type="button"
                             class="btn btn btn-custom btn-sm checkBox-display-inline">{{ (show ? 'csa.more' : 'csa.less') | translate}}</button>
-                    </div>
+                    </div>-->
                 </mat-expansion-panel>
                 <br />
                 <mat-expansion-panel #expansionPanel [expanded]="this.OpenOfferings">

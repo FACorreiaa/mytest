@@ -22,10 +22,15 @@ mat-checkbox {
     }
 }
 
+.optbutton {
+    visibility: hidden;
+}
+
 mat-button-toggle-group {
     padding: 0 15px;
 
     mat-button-toggle {
+        position: relative;
 
         button {
             width: 100%;
@@ -65,8 +70,18 @@ mat-button-toggle-group {
 
 @media screen and (max-width: 575px) {
     .toggle-checkbox {
+
+        /*position: fixed;
+        width: 300px;
+        z-index: 15;
+        top: 30%;
+        left: 50%;
+        margin: -100px 0 -30px -150px;
+        background-color: #fff;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);*/
+
         position: absolute;
-        z-index: 1;
+        z-index: 15;
         width: 100%;
         padding: 15px 0;
         margin-top: -30px;
@@ -99,7 +114,7 @@ mat-button-toggle-group {
         font-size: 0.875em;
         margin-bottom: -16px;
         position: absolute;
-
+        visibility: visible;
     }
 
 
@@ -108,7 +123,7 @@ mat-button-toggle-group {
         width: 23em;
 
         .col-3 {
-            display: table;
+            display: -webkit-inline-box;
 
             max-width: 45%;
         }
@@ -154,10 +169,19 @@ mat-button-toggle-group {
                 }
 
                 img {
-                    max-height: 1.5rem;
+                    //max-height: 1.5rem;
+                    font-size: small;
                     margin: 4em;
                     //display: inline-block;
                 }
+
+                /*
+                img.img-mobile {
+                    max-height: 100%;
+                    margin: 4em;
+                }
+                */
+
             }
 
             .button:focus {

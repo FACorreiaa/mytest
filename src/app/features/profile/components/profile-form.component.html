@@ -359,7 +359,8 @@
                                         <mat-button-toggle class="col-3" *ngFor="let service of this.servicesArray">
                                             <button type="button" class="btn btn-lg" [class.selected]="service.selected"
                                                 (click)="toggleService(service)">
-                                                <img class="img-fluid" src="{{imgPathServices}}{{service.name}}.png"
+                                                <img class="img-fluid img-mobile"
+                                                    src="{{imgPathServices}}{{service.name}}.png"
                                                     alt="{{service.name}}">
                                                 {{service.name | translate}}
                                             </button>

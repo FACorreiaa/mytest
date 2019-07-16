@@ -101,6 +101,12 @@ mat-button-toggle-group {
       border: solid 2px #f3f3f3;
       cursor: pointer;
 
+      display: inline-block;
+      white-space: nowrap;
+      /* overflow: hidden; */
+      text-overflow: ellipsis;
+      overflow: hidden;
+
       &.selected {
         border: solid 2px #f9ae00;
         background-color: #fdeecc;
@@ -299,12 +305,9 @@ mat-button-toggle-group {
           }
         }
 
-        img {
-          max-height: 1.5rem;
+        img.img-mobile {
+          max-height: 100%;
           margin: 4em;
-          //display: inline-block;
-
-
         }
       }
 

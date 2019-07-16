@@ -1,5 +1,6 @@
 {
 	"csa.title.short": "Ubicus - the web listing service",
+	"csa.title.mobile": "Ubicus",
 	"csa.your-listing": "Your Listing",
 	"csa.gmb": "Google My Business",
 	"csa.status": "Status:",
@@ -164,5 +165,16 @@
 	"csa.update-success": "Business updated successfully!!",
 	"csa.update-discard": "All of your changes were discarded",
 	"csa.more": "Show more",
-	"csa.less": "Show less"
+	"csa.less": "Show less",
+	"csa.terms.title": "Terms and Conditions",
+	"csa.review.anonymous": "anonymous",
+	"csa.review.commentProvider": "via",
+	"csa.review.cancel": "Cancel",
+	"csa.review.post": "Post",
+	"csa.review.answer": "My Answer",
+	"csa.review.enterComment": "Type somthing...",
+	"csa.review.edit": "Edit",
+	"csa.review.delete": "Delete",
+	"csa.review.save": "Save",
+	"csa.review.editComment": "Edit your Comment"
 }

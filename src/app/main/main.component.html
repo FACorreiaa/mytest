@@ -2,7 +2,13 @@
   <div class="wrapper">
     <div *ngIf="!headerService.webview" class="toolbar">
       <mat-toolbar color="primary">
-        <a (click)="GoToMainPage()"><span style="color: white">{{'csa.title.short' | translate}}</span></a>
+        <a (click)="GoToMainPage()" id="fullWidth">
+          <span style="color: white">{{'csa.title.short' | translate}}</span>
+        </a>
+        <a (click)="GoToMainPage()" id="mobileWidth">
+          <span style="color: white">{{'csa.title.mobile' | translate}}</span>
+        </a>
+
         <span class="example-spacer"></span>
 
         <div [matMenuTriggerFor]="toolbarUserMenu">
