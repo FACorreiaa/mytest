@@ -9,6 +9,9 @@ import * as fromReview from '../review.selector'
 import { Subject, Observable } from 'rxjs'
 import { delay, takeUntil } from 'rxjs/operators'
 
+import { ReviewsResponse, UpdateReview, DeleteReview } from '@app/api/models/api-models'
+import { ReviewService } from '@app/api/services/core/reviews.service'
+
 @Component({
   selector: 'review',
   templateUrl: 'review.component.html',
@@ -18,10 +21,10 @@ export class ReviewComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>()
   oAuthTokenStatus$: Observable<boolean>
   redirectURL$: Observable<string>
+  reviews$: Observable<ReviewsResponse>
 
   language: string
   listingStatus: boolean
-  starRating: number
 
   constructor(private appStore: Store<fromApp.AppState>, private translate: TranslateService, private store: Store<fromReview.ReviewState>) {}
 
@@ -44,8 +47,12 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
     this.listingStatus = false
 
-    this.starRating = 3
+    // this.reviews$ = this.reviewService.reviews()
   }
+
+  updateReview(update: UpdateReview) {}
+
+  deleteReview(update: DeleteReview) {}
 
   ngOnDestroy() {
     this.unsubscribe$.next()
