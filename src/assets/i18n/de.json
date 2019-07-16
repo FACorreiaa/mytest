@@ -1,11 +1,11 @@
 {
-	"csa.title.short": "Service anfordern",
+	"csa.title.short": "Ubicus - the web listing service",
 	"csa.login": "Anmeldung",
 	"csa.logout": "Ausloggen",
 	"csa.google.claiming-exists": "Claiming already exists",
 	"csa.google.preview-process": "Preview: Google process",
 	"csa.google.location-description": "The location you entered is already managed by another person. if you are the owner of the location you need to claim the admin privileges at Google.",
-	"csa.google.privileges-1" : "Please make sure that you request the owner privileges. Click continue to start this process at Google or",
+	"csa.google.privileges-1": "Please make sure that you request the owner privileges. Click continue to start this process at Google or",
 	"csa.google.privileges-2": " on Google about it.",
 	"csa.google.read-more": "read more",
 	"csa.google.continue": "Continue",
@@ -17,9 +17,8 @@
 	"csa.google.success-description": "You successfully claim the admin privileges at Google.",
 	"csa.close": "Close",
 	"csa.loading": "Loading...",
-	"csa.google.last-step":"The last step you have to take is to actually claim your business.",
+	"csa.google.last-step": "The last step you have to take is to actually claim your business.",
 	"csa.google.request-ownership": "Here you need to request ownership for the listing. Please make sure, that you request ownership as an owner in the options",
 	"csa.google.error": "Error",
 	"csa.google.error-description": "There was an error on your google authentication"
-
 }

@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row justify-content-center title">
+        <h2>{{ 'csa.review.title' | translate }}</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-8 order-2 order-lg-1">
+            <div class="card-template">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div [matMenuTriggerFor]="sortMenu" class="review-menu">
+                            <mat-icon class="flip">sort</mat-icon>
+                        </div>
+
+                        <mat-menu #sortMenu="matMenu">
+                            <button mat-menu-item class="remove-outline">
+                                <mat-icon>done</mat-icon>
+                                <span>{{'csa.review.sort-latest' | translate}}</span>
+                            </button>
+                            <button mat-menu-item class="remove-outline">
+                                <mat-icon>done</mat-icon>
+                                <span>{{'csa.review.sort-oldest' | translate}}</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <!-- A Review entry -->
+                <ng-container>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="user-name">Place Name here!</span>
+                                </div>
+                                <div class="col-4">
+                                    <div [matMenuTriggerFor]="flagMenu" class="review-menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </div>
+
+                                    <mat-menu #flagMenu="matMenu">
+                                        <button mat-menu-item class="remove-outline">
+                                            <span>{{'csa.review.flag' | translate}}</span>
+                                        </button>
+                                    </mat-menu>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="rating">
+                                        <mat-icon>star_border</mat-icon>
+                                        <mat-icon>star_border</mat-icon>
+                                        <mat-icon>star_border</mat-icon>
+                                        <mat-icon>star_border</mat-icon>
+                                        <mat-icon>star_border</mat-icon>
+                                    </div>
+                                    <div class="timeAgo">
+                                        <span>1 day ago</span>
+                                    </div>
+                                    <mat-divider [vertical]="true"></mat-divider>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Place Review Content here! - Lorem ipsum dolor sit amet, consetetur sadipscing
+                                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                        erat, sed diam voluptua.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-secondary reply">
+                                        <mat-icon>reply</mat-icon>
+                                        <span>{{'csa.review.reply' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-4 order-1 order-lg-2">
+            <div class="card-template answers">
+                <h5>{{'csa.review.left-answers' | translate}}</h5>
+                <progress-spinner></progress-spinner>
+                <span>{{'csa.review.more-reviews' | translate}}</span>
+                <button type="button" class="btn btn-secondary">
+                    {{'csa.review.upgrade' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

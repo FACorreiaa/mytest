@@ -26,6 +26,11 @@ const MainRoutes: Routes = [
         loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule),
       },
       {
+        path: 'review',
+        canActivate: [AppAuthGuard],
+        loadChildren: () => import('../features/review/review.module').then(m => m.ReviewModule),
+      },
+      {
         path: 'wizard',
         canActivate: [AppAuthGuard],
         loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule),

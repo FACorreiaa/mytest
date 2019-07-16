@@ -3,16 +3,14 @@ import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/ro
 import { KeycloakService, KeycloakAuthGuard } from 'keycloak-angular'
 import { NgxPermissionsService } from 'ngx-permissions'
 import { Store, select } from '@ngrx/store'
+import { takeUntil, delay } from 'rxjs/operators'
+import { Subject } from 'rxjs/internal/Subject'
 
 import * as fromMain from '@app/main/main.selectors'
-import { Subject } from 'rxjs'
-import { takeUntil, delay } from 'rxjs/operators'
 import { AppRoutes } from './app.routing'
 
 @Injectable()
 export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
-  private hasTermsConditions: boolean
-
   private unsubscribe$: Subject<void> = new Subject<void>()
 
   constructor(
@@ -40,8 +38,7 @@ export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
           takeUntil(this.unsubscribe$)
         )
         .subscribe(terms => {
-          this.hasTermsConditions = terms ? terms.accepted : false
-          if (!this.hasTermsConditions) {
+          if (terms && !terms.accepted) {
             this.navigateToTermsConditions()
             resolve(true)
           }

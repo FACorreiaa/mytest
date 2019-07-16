@@ -16,11 +16,11 @@ export class GlobalEnvironmentService {
     return Environment.Prod
   }
 
-  public getApiUrl(): string {
+  getApiUrl(): string {
     return environment.API_URL
   }
 
-  public getTokenPath(): string {
+  getTokenPath(): string {
     return environment.TOKEN_PATH
   }
 }

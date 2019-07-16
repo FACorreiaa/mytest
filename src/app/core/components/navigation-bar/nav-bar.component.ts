@@ -12,6 +12,7 @@ export class NavigationBarComponent implements OnInit, OnChanges {
   navBarMenu = [
     { id: 'dashboard', link: '/main/dashboard', label: 'csa.navmenu-dashboard', isActive: true },
     { id: 'profile', link: '/main/profile', label: 'csa.navmenu-profile', isActive: false },
+    { id: 'review', link: '/main/review', label: 'csa.navmenu-review', isActive: false },
   ]
   businessName: string
   businessAddress: string

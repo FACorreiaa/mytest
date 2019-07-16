@@ -57,15 +57,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    // this.translate.setDefaultLang('en')
     this.translate.setDefaultLang('en')
-
-    this.store.dispatch(new Actions.GetAllBusinessAction())
-    const userProfile = await this.keycloakService.loadUserProfile(false)
-
-    this.userName = userProfile.firstName
-    this.userFirstLastName = userProfile.firstName + ' ' + userProfile.lastName
-
-    this.percentageToComplete = '60%'
+    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
 
     this.appStore
       .pipe(
@@ -77,6 +73,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.language = lang
         this.translate.use(lang)
       })
+
+    this.store.dispatch(new Actions.GetAllBusinessAction())
+    const userProfile = await this.keycloakService.loadUserProfile(false)
+
+    this.userName = userProfile.firstName
+    this.userFirstLastName = userProfile.firstName + ' ' + userProfile.lastName
+
+    this.percentageToComplete = '60%'
 
     this.listingStatus = false
   }

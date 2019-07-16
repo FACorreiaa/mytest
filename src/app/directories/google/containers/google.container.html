@@ -1,38 +1,5 @@
-<!-- <section class="section-title">
-    <span>{{'csa.title.short' | translate}}</span>
-</section>
-
-<section class="section-content"
-         *ngIf="firstStep">
-    <div class="popup-title">
-        <a (click)="closeWindow()"
-           class="close-popup">
-            <img src="../../../../assets/images/icons/close_x.svg"
-                 width="30">
-        </a>
-        <h5 *ngIf="firstStep">{{'csa.google.claiming-exists' | translate}}</h5>
-        <h5 *ngIf="secondStep">{{'csa.google.preview-process' | translate}}</h5>
-    </div>
-
-    <div class="popup-content">
-        <span class="pt-3">{{'csa.google.location-description' | translate}}
-        </span>
-        <span class="pt-5 pb-5">
-            {{'csa.google.privileges-1' | translate}}
-            <a href="#"
-               [routerLink]="">{{'csa.google.read-more' | translate}}</a>
-            {{'csa.google.privileges-2' | translate}}
-        </span>
-
-        <button type="button"
-                class="btn btn-secondary"
-                (click)="continue()">
-            {{'csa.google.continue' | translate}}
-        </button>
-    </div>
-</section> -->
-
 <start-oauth [businessData]="(this.businessData$ | async)"
              [oAuthStatus]="(this.oAuthTokenStatus$ | async)"
              [redirectURL]="(this.redirectURL$ | async)"
              [loading]="(this.loading$ | async)"></start-oauth>
+             

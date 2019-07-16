@@ -25,3 +25,8 @@ export const getUpdateProfile = createSelector(
   getProfileState,
   (state: ProfileState) => state.profile.updateSucess
 )
+
+export const getUpdateError = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.profile.errorUpdating
+)

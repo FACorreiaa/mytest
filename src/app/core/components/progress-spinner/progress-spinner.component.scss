@@ -1,0 +1,24 @@
+.spinner-container {
+    position: relative;
+    display: table;
+    margin: 15px auto;
+}
+
+.spinner-value {
+    position: absolute;
+    text-align: center;
+    line-height: 4.5;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+
+    span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #f9ae05;
+}

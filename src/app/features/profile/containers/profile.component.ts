@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
+import { delay, takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs/internal/Subject'
+import { Observable } from 'rxjs/Observable'
+import { Router } from '@angular/router'
 
 import * as Actions from '../store/actions/profile.actions'
 import * as fromProfile from '../profile.selector'
 import * as fromApp from '../../../app.reducers'
 import * as fromMain from '../../../main/main.selectors'
 
-import { Observable, Subject } from 'rxjs'
-import { delay, takeUntil } from 'rxjs/operators'
-
-import { ICategory, Countries, BusinessData, ICategoryDto, ManageBusinessData, UpdateBusinessData } from '@app/api/models/api-models'
+import { ICategory, Countries, BusinessData, ICategoryDto, UpdateBusinessData } from '@app/api/models/api-models'
 import { CategoriesService } from '@app/core/services/categories.service'
 import { CountriesService } from '@app/core/services/countries.service'
 
-import { Router } from '@angular/router'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 
 @Component({
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   profileData$: Observable<BusinessData[]>
   updateProfile$: Observable<boolean>
+  errorUpdating$: Observable<boolean>
   authorized: boolean
   loading$: Observable<boolean>
   offerings$: Observable<ICategory[]>
@@ -48,17 +49,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.loading$ = this.appstore.select(fromApp.loading)
     this.profileData$ = this.mainStore.select(fromMain.getDashboardState)
     this.updateProfile$ = this.store.select(fromProfile.getUpdateProfile)
+    this.errorUpdating$ = this.store.select(fromProfile.getUpdateError)
   }
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
-
-    this.store.dispatch(new Actions.ErrorLayoutHide())
-
-    this.countries$ = this.countriesService.getCountries()
-    this.services$ = this.categoriesService.getServices()
-    this.payments$ = this.categoriesService.getPayments()
-    this.offerings$ = this.categoriesService.getProfileOfferings()
+    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
 
     this.appstore
       .pipe(
@@ -67,10 +65,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))
+
+    this.store.dispatch(new Actions.ErrorLayoutHide())
+
+    this.countries$ = this.countriesService.getCountries()
+    this.services$ = this.categoriesService.getServices()
+    this.payments$ = this.categoriesService.getPayments()
+    this.offerings$ = this.categoriesService.getProfileOfferings()
   }
 
   public ngOnDestroy() {
-    this.language$.unsubscribe()
+    this.language$.next()
+    this.language$.complete()
   }
 
   updateBusiness(updateBusiness: UpdateBusinessData) {

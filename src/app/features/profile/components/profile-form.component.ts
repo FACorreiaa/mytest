@@ -1,16 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  EventEmitter,
-  Output,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectorRef,
-  AfterViewChecked,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
@@ -30,7 +18,6 @@ import {
 
 import { ErrorStateMatcher, MatChipInputEvent, MatSnackBar } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
-import { invalid } from '@angular/compiler/src/render3/view/util'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -85,6 +72,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   @Input() countries: Countries[]
   @Input() profileData: BusinessData[]
   @Input() updateProfile: boolean
+  @Input() errorUpdatingProfile: boolean
   @Output() private goToProfileEvent = new EventEmitter()
   @Output() private updateBusinessEvent = new EventEmitter()
 
@@ -98,9 +86,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder, private change: ChangeDetectorRef, private translate: TranslateService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.translate.setDefaultLang('en')
-
-    this.buildInitalFormGroup()
+    // this.buildInitalFormGroup()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -108,7 +94,16 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       this.services.map(x => this.servicesArray.push({ name: x, selected: false }))
     }
 
-    if (this.profileData.length && !this.updateProfile) {
+    if (this.errorUpdatingProfile) {
+      this._snackBar.open(this.translate.instant('csa.update-fail'), '', {
+        duration: 4000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'toast-fail',
+      })
+    }
+
+    if (changes.profileData && this.profileData.length) {
       this.updateFormsWithBusinessData()
     }
 
@@ -252,14 +247,17 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       openHours: this.formBuilder.array(this.buildOpenHoursArray(this.lastBusiness.openingTimes)),
       description: this.lastBusiness.description,
     })
+
     this.secondFormGroup = this.formBuilder.group({
-      language: this.lastBusiness.languages,
-      payment: this.lastBusiness.paymentMethods,
-      offering: this.lastBusiness.offers,
-      service: this.lastBusiness.services,
+      // language: this.lastBusiness.languages,
+      // payment: this.lastBusiness.paymentMethods,
+      // offering: this.lastBusiness.offers,
+      // service: this.lastBusiness.services,
     })
 
     this.keywordsArray = this.lastBusiness.keywords
+    this.categories = CategoriesArray()
+    this.hours = OpenHoursArray()
   }
 
   /**
