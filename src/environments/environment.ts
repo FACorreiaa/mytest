@@ -19,4 +19,5 @@ export const environment = {
   API_URL: 'https://backend-dot-hd-claimingfe-dev.appspot.com/api/v1',
   TOKEN_PATH: 'CSA_Token',
   keycloak: keycloakConfig,
+  testMode: true,
 }
