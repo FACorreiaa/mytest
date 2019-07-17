@@ -13,26 +13,26 @@
     margin-top: 7px;
 
     .progress-bar-template {
-      background-color: rgb(89, 193, 216);
+      background-color: #f9ae05;
       border-top-right-radius: 25px;
-      background-image: linear-gradient(-90deg, rgb(51, 139, 160), rgb(177, 219, 228));
+      background-image: linear-gradient(-90deg, rgb(249, 174, 5), rgb(252, 214, 130));
       border-bottom-right-radius: 25px;
     }
   }
 
   .percentage-popup {
-    background: orange;
+    background: #f9ae05;
     margin-left: 35px;
     margin-bottom: 15px;
 
     .popover-body {
-      color: white;
+      color: #fff;
       font-size: 16px;
       font-weight: bold;
     }
   }
   .percentage-popup .arrow::after {
-    border-top-color: orange;
+    border-top-color: #f9ae05;
   }
 
   // Progress bar middle points
@@ -74,24 +74,24 @@
   .type1 {
     width: 30px;
     height: 30px;
-    background: white;
-    border: 7px solid rgb(177, 219, 228);
+    background: #fff;
+    border: 7px solid #323a42;
     // z-index: 10;
   }
 
   .type2 {
     width: 30px;
     height: 30px;
-    background: white;
-    border: 7px solid rgb(51, 139, 160);
+    background: #fff;
+    border: 7px solid #323a42;
     // z-index: 10;
   }
 
   .type3 {
     width: 30px;
     height: 30px;
-    background: orange;
-    border: 7px solid rgb(51, 139, 160);
+    background: #f9ae05;
+    border: 7px solid #323a42;
     // z-index: 10;
   }
 
@@ -119,7 +119,7 @@
 
   ul li::before {
     content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
-    color: rgb(51, 139, 160);
+    color: #f9ae05;
     font-weight: bold;
     display: inline-block; /* Needed to add space between the bullet and the text */
     width: 1em;

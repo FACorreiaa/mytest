@@ -1,4 +1,5 @@
 @import "../../../../styles-variables.scss";
+@import "../../../app.component.scss";
 
 .card-template {
   padding: 30px;
@@ -24,6 +25,7 @@
     &:hover {
       border-color: #d9d9d9;
     }
+    
   }
 
   .gmb-head {
@@ -41,6 +43,7 @@
     img {
       height: 32px;
     }
+
   }
 
   .gmb-body {
@@ -60,22 +63,8 @@
       margin-left: 5px;
       height: 15px;
     }
+
   }
-}
-
-.btn-primary{
-  background-color: #f9ae05;
-  border: 1px solid #f9ae05;
-  border-radius: 2rem;
-  padding: 0.5rem 1.5rem;
-  min-width: 150px;
-}
-
-.btn-secondary {
-  color: #000000de;
-  background-color: #d9d9d9;
-  padding: 0.3rem 1.5rem;
-  border: none;
 }
 
 .btn-color-primary {
@@ -92,17 +81,18 @@
   .verification-option {
     display: flex;
     align-items: flex-start;
-    // padding: 1rem;
     max-width: 20rem;
-    // margin: 0 0 1rem 0;
   }
+
   .verification-option > img {
     width: 25px;
     margin: 0 2rem 0 0;
   }
+
   .verification-option > div {
     flex: 1;
   }
+
   .verification-option h5 {
     font-weight: 500;
     margin: 0 0 0.5rem 0;
@@ -132,6 +122,7 @@
       padding-left: 0px;
       padding-top: 30px;
     }
+
   }
 }
 
@@ -139,11 +130,10 @@
   padding-left: 25px;
 
   .type-code-form {
-    // display: flex;
-    // align-items: flex-start;
     align-items: center;
     padding-top: 60px;
   }
+
   .type-code-form > img {
     width: 30px;
     margin: 0 1rem 0 0;
@@ -158,6 +148,7 @@
     color: black;
     width: 120px;
   }
+
 }
 
 .processing {
@@ -166,6 +157,7 @@
   .padding-botton-100 {
     padding-bottom: 100px;
   }
+
 }
 
 .successful {
@@ -176,10 +168,6 @@
     padding-top: 100px;
   }
 
-  // .padding-100 > img {
-  //   width: 100px;
-  //   margin: 0 1rem 0 0;
-  // }
 }
 
 .btn-color-primary-modal {
@@ -191,6 +179,7 @@
   &:hover {
     background-color: #f5eded;
   }
+
 }
 
 .btn-secondary-modal {

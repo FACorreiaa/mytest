@@ -1,8 +1,14 @@
+@import '../../../app.component.scss';
+
 .close {
     background: transparent;
     border: transparent;
     float: right;
     vertical-align: middle;
+}
+
+mat-dialog-actions {
+    padding-bottom: 1.25rem;
 }
 
 ::ng-deep .mat-form-field-label {

@@ -1,3 +1,5 @@
+@import "../../../../app.component.scss";
+
 .title {
     margin-top: 3rem;
     padding: 4rem 0 6rem 0;
@@ -51,39 +53,12 @@
     }
 }
 
-.btn-primary {
-    background-color: #f9ae05;
-    color: #fff;
-    border: 1px solid #f9ae05;
-    min-width: 120px;
-    border-radius: 1rem;
-
-    &:hover{
-        background-color: #fff;
-        color: #f9ae05;
-    }
-}
-
 .btn-secondary {
-    border: 1px solid #666;   
-    background-color: #fff;
-    color: #666;
-    min-width: 120px;
-
-    &:hover {
-        color: #fff;
-        background-color: #666;
-    }
 
     mat-icon {
         vertical-align: text-bottom;
         margin-right: 5px;
     }
-}
-
-.no-btn {
-    text-decoration: underline;
-    margin: 0 1rem;
 }
 
 .container {
