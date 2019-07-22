@@ -15,7 +15,7 @@ export const reducers: ActionReducerMap<ReviewState> = {
 // Review
 export const getReviewState = createFeatureSelector<ReviewState>(reducerName)
 
-export const getReviewBusinessList = createSelector(
+export const getReviews = createSelector(
   getReviewState,
   (state: ReviewState) => state.review.reviews
 )

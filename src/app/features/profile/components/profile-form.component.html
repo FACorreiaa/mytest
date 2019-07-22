@@ -205,7 +205,7 @@
                                                                         [value]="position.value.from"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
-                                                                <mat-option *ngIf="!this.rendering"
+                                                                <mat-option *ngIf="!this.rendering && position.value.from"
                                                                             [value]="position.value.from">{{position.value.from}}</mat-option>
                                                                 
                                                                 <ng-container *ngIf="this.rendering">
@@ -228,7 +228,7 @@
                                                                         [value]="position.value.to"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
-                                                                <mat-option *ngIf="!this.rendering"
+                                                                <mat-option *ngIf="!this.rendering && position.value.to"
                                                                             [value]="position.value.to">{{position.value.to}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
@@ -256,7 +256,7 @@
                                                                         [value]="position.value.splitedFrom"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
-                                                                <mat-option *ngIf="!this.rendering"
+                                                                <mat-option *ngIf="!this.rendering && position.value.splitedFrom"
                                                                             [value]="position.value.splitedFrom">{{position.value.splitedFrom}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"
@@ -282,7 +282,7 @@
                                                                         [value]="position.value.splitedTo"
                                                                         [disableControl]="!position.value.isSelected">
                                                                 <mat-option>{{'csa.none' | translate}}</mat-option>
-                                                                <mat-option *ngIf="!this.rendering"
+                                                                <mat-option *ngIf="!this.rendering && position.value.splitedTo"
                                                                 [value]="position.value.splitedTo">{{position.value.splitedTo}}</mat-option>
                                                                 <ng-container *ngIf="this.rendering">
                                                                     <mat-option *ngFor="let hour of this.hours"

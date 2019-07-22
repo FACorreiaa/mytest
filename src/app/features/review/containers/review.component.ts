@@ -26,13 +26,15 @@ export class ReviewComponent implements OnInit, OnDestroy {
   language: string
   listingStatus: boolean
 
-  constructor(private appStore: Store<fromApp.AppState>, private translate: TranslateService, private store: Store<fromReview.ReviewState>) {}
+  constructor(private appStore: Store<fromApp.AppState>, private translate: TranslateService, private store: Store<fromReview.ReviewState>) {
+    this.reviews$ = this.store.select(fromReview.getReviews)
+  }
 
-  async ngOnInit() {
-    this.translate.getBrowserLang()
-
-    // ToDo: how to get the establishmentId
-    // this.store.dispatch(new Actions.GetAllReviewsAttempt({ establishmentId: 12 }))
+  ngOnInit() {
+    this.translate.setDefaultLang('en')
+    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
 
     this.appStore
       .pipe(
@@ -40,10 +42,21 @@ export class ReviewComponent implements OnInit, OnDestroy {
         select(fromApp.language),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe(lang => {
-        this.language = lang
-        this.translate.use(lang)
-      })
+      .subscribe(lang => this.translate.use(lang))
+
+    // ToDo: how to get the establishmentId
+    // this.store.dispatch(new Actions.GetAllReviewsAttempt({ establishmentId: 12 }))
+
+    // this.appStore
+    //   .pipe(
+    //     delay(0),
+    //     select(fromApp.language),
+    //     takeUntil(this.unsubscribe$)
+    //   )
+    //   .subscribe(lang => {
+    //     this.language = lang
+    //     this.translate.use(lang)
+    //   })
 
     this.listingStatus = false
 
