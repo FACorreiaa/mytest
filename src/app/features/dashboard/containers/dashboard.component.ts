@@ -57,7 +57,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    // this.translate.setDefaultLang('en')
     this.translate.setDefaultLang('en')
     this.translate.addLangs(['en', 'fr', 'de', 'pt'])
     const browserLang = this.translate.getBrowserLang()
