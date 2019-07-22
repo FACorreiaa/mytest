@@ -1,3 +1,8 @@
+.percentage-complete {
+  font-size: 20px;
+  padding-bottom: 1rem;
+}
+
 .progress-bar-root {
   height: 50px;
   position: relative;
@@ -22,8 +27,8 @@
 
   .percentage-popup {
     background: #f9ae05;
-    margin-left: 35px;
-    margin-bottom: 15px;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
 
     .popover-body {
       color: #fff;
@@ -33,6 +38,11 @@
   }
   .percentage-popup .arrow::after {
     border-top-color: #f9ae05;
+  }
+  
+  ngb-popover-window.bs-popover-bottom-right .arrow, 
+  ngb-popover-window.bs-popover-top-right .arrow {
+    right: 1rem;
   }
 
   // Progress bar middle points
@@ -44,25 +54,25 @@
 
   .second-position {
     position: absolute;
-    left: 25%;
+    left: 23%;
     z-index: 111;
   }
 
   .third-position {
     position: absolute;
-    left: 50%;
+    left: 48%;
     z-index: 111;
   }
 
   .fourth-position {
     position: absolute;
-    left: 75%;
+    left: 73%;
     z-index: 111;
   }
 
   .fifth-position {
     position: absolute;
-    left: 99%;
+    left: 98%;
     z-index: 111;
   }
 
@@ -114,7 +124,7 @@
   ul {
     list-style: none; /* Remove default bullets */
     margin-bottom: 0;
-    padding-left: 10px;
+    padding-left: 25px;
   }
 
   ul li::before {

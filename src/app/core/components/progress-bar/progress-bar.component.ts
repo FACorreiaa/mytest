@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef, Input } from '@angular/core'
+import { BusinessUnitCompleteness, BusinessData } from '@app/api/models/api-models'
+import { ProfileCompletenessService } from '@app/api/services/core/profile-completeness.service'
 
 @Component({
   selector: 'progress-bar',
@@ -8,13 +10,29 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input } 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent implements OnInit {
-  @Input() percentage: string
-  @Input() missingItems: string[]
+  incomplete: string[]
+  completeness: number
+  toComplete: number
 
-  constructor() {}
+  businessUnit: BusinessUnitCompleteness[]
+  establishmentId: string
+  selectedBusiness: BusinessData
+
+  @Input() businessData$: BusinessData[]
+
+  constructor(private profileCompletenessService: ProfileCompletenessService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.percentage = '40%'
-    this.missingItems = ['Category', 'Fax', 'Keywords', 'Short', 'Long', 'Imprint', 'Payment', 'Opening Hours']
+    /*
+    this.selectedBusiness = this.businessData$[this.businessData$.length - 1]
+    this.establishmentId = this.selectedBusiness.establishmentId
+    */
+    this.profileCompletenessService.businessUnitCompleteness('22').subscribe((profileCompleteness: BusinessUnitCompleteness) => {
+      this.incomplete = profileCompleteness.incomplete
+      this.completeness = profileCompleteness.completeness
+      this.toComplete = 100 - this.completeness
+
+      this.cdr.markForCheck()
+    })
   }
 }
