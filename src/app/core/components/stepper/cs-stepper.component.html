@@ -1,4 +1,5 @@
-<mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+<mat-horizontal-stepper linear
+                        #stepper="matHorizontalStepper">
     <ng-template matStepperIcon="edit">
         <mat-icon>check</mat-icon>
     </ng-template>
@@ -6,7 +7,8 @@
         <ng-template matStepLabel>{{'csa.your-restaurante' | translate}}</ng-template>
         <div class="progress-border-first-step"></div>
         <div class="container">
-            <form [formGroup]="firstFormGroup" (keydown.enter)="$event.preventDefault()">
+            <form [formGroup]="firstFormGroup"
+                  (keydown.enter)="$event.preventDefault()">
                 <div class="row justify-content-center">
                     <div class="col-md-8 margin-bottom-40 margin-top-20">
                         <div class="row justify-content-center">
@@ -16,8 +18,13 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <input matInput placeholder="{{'csa.enter-business' | translate}}" google-place
-                                formControlName="location" required autocomplete="off" (onSelect)="setAddress($event)">
+                            <input matInput
+                                   placeholder="{{'csa.enter-business' | translate}}"
+                                   google-place
+                                   formControlName="location"
+                                   required
+                                   autocomplete="off"
+                                   (onSelect)="setAddress($event)">
 
                             <mat-hint>{{'csa.start-typing' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('location').invalid">
@@ -27,8 +34,12 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <input matInput #address placeholder="{{'csa.enter-address' | translate}}"
-                                formControlName="address" autocomplete="off" required>
+                            <input matInput
+                                   #address
+                                   placeholder="{{'csa.enter-address' | translate}}"
+                                   formControlName="address"
+                                   autocomplete="off"
+                                   required>
 
                             <mat-error *ngIf="firstFormGroup.get('address').invalid">
                                 {{'csa.enter-value' | translate}}
@@ -37,16 +48,23 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col-sm-6">
-                            <input matInput placeholder="{{'csa.enter-postal-code' | translate}}" maxlength="5"
-                                formControlName="postal" autocomplete="off" required>
+                            <input matInput
+                                   placeholder="{{'csa.enter-postal-code' | translate}}"
+                                   maxlength="5"
+                                   formControlName="postal"
+                                   autocomplete="off"
+                                   required>
                             <mat-hint>{{'csa.enter-5characters' | translate}}</mat-hint>
                             <mat-error *ngIf="firstFormGroup.get('postal').invalid">
                                 {{'csa.enter-valid-postal' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-sm-6">
-                            <input matInput placeholder="{{'csa.enter-city' | translate}}" formControlName="city"
-                                autocomplete="off" required>
+                            <input matInput
+                                   placeholder="{{'csa.enter-city' | translate}}"
+                                   formControlName="city"
+                                   autocomplete="off"
+                                   required>
                             <mat-error *ngIf="firstFormGroup.get('city').invalid">
                                 {{'csa.enter-value' | translate}}
                             </mat-error>
@@ -54,10 +72,12 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <mat-select placeholder="{{'csa.country' | translate}}" formControlName="country"
-                                (selectionChange)="changeCountry($event)">
+                            <mat-select placeholder="{{'csa.country' | translate}}"
+                                        formControlName="country"
+                                        (selectionChange)="changeCountry($event)">
                                 <mat-option>--{{'csa.None' | translate}}--</mat-option>
-                                <mat-option *ngFor="let state of countries" [value]="state.name">{{state.name}}
+                                <mat-option *ngFor="let state of countries"
+                                            [value]="state.name">{{state.name}}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="firstFormGroup.get('country').invalid">
@@ -66,16 +86,24 @@
                         </mat-form-field>
                     </div>
                     <div class="col-12 col-md-8 marginBottom">
-                        <mat-form-field class="col-3 col-md-2" style="min-width: 70px">
-                            <input matInput formControlName="area" maxlength="6" autocomplete="off" class="text-right">
+                        <mat-form-field class="col-3 col-md-2"
+                                        style="min-width: 70px">
+                            <input matInput
+                                   formControlName="area"
+                                   maxlength="6"
+                                   autocomplete="off"
+                                   class="text-right">
                             <mat-error *ngIf="firstFormGroup.get('area').invalid">
                                 {{'csa.wrong-prefix' | translate}}
                             </mat-error>
                         </mat-form-field>
                         <span>&ndash;</span>
                         <mat-form-field class="col-8 col-md-9">
-                            <input matInput placeholder="{{'csa.enter-phone' | translate}}" formControlName="phone"
-                                autocomplete="off" required>
+                            <input matInput
+                                   placeholder="{{'csa.enter-phone' | translate}}"
+                                   formControlName="phone"
+                                   autocomplete="off"
+                                   required>
                             <mat-error *ngIf="firstFormGroup.get('phone').invalid">
                                 {{'csa.enter-phone-invalid' | translate}}
                             </mat-error>
@@ -83,8 +111,9 @@
                     </div>
                 </div>
                 <div class="row buttons d-flex justify-content-end pad">
-                    <button mat-raised-button matStepperNext (click)="goToStepContactInfo()"
-                        class="btn-color-primary">{{'csa.next' | translate}}</button>
+                    <button matStepperNext
+                            (click)="goToStepContactInfo()"
+                            class="btn btn-secondary">{{'csa.next' | translate}}</button>
                 </div>
             </form>
 
@@ -104,8 +133,11 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <input matInput placeholder="{{'csa.enter-email' | translate}}" formControlName="email"
-                                autocomplete="off" required>
+                            <input matInput
+                                   placeholder="{{'csa.enter-email' | translate}}"
+                                   formControlName="email"
+                                   autocomplete="off"
+                                   required>
 
                             <mat-error *ngIf="secondFormGroup.get('email').invalid">
                                 {{'csa.enter-valid-email' | translate}}
@@ -114,8 +146,11 @@
                     </div>
                     <div class="col-md-8 marginBottom">
                         <mat-form-field class="col">
-                            <input matInput placeholder="{{'csa.enter-site' | translate}}" formControlName="website"
-                                autocomplete="off" required>
+                            <input matInput
+                                   placeholder="{{'csa.enter-site' | translate}}"
+                                   formControlName="website"
+                                   autocomplete="off"
+                                   required>
                             <span matPrefix>www.&nbsp;</span>
                             <mat-hint>{{'csa.example' | translate}}: www.yoursite.com</mat-hint>
 
@@ -127,7 +162,8 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12 margin-bottom-40" *ngIf="this.showOpenHoursLayout">
+                    <div class="col-md-12 margin-bottom-40"
+                         *ngIf="this.showOpenHoursLayout">
                         <div formArrayName="openHours">
                             <div class="row justify-content-center margin-bottom-40 margin-top-20">
                                 <span class="col-sm-8 label-title">{{'csa.openhours-title' | translate}}</span>
@@ -136,9 +172,10 @@
 
                             <div class="row justify-content-center">
                                 <div *ngFor="let position of this.openHoursArray.controls let ph=index"
-                                    [formGroupName]="ph" class="max-width-OpenDay">
+                                     [formGroupName]="ph"
+                                     class="max-width-OpenDay">
                                     <div
-                                        [ngClass]="{selectedOpenDay: position.value.isSelected,
+                                         [ngClass]="{selectedOpenDay: position.value.isSelected,
                                         notSelectedOpenDay: !position.value.isSelected,
                                         selectedOpenDayError: this.openHoursArray.controls[ph].hasError('openDaysError') }">
 
@@ -147,38 +184,42 @@
                                                 <b>{{position.value.name}}</b>
                                             </mat-label>
                                             <mat-checkbox [checked]="position.value.isSelected"
-                                                formControlName="isSelected"></mat-checkbox>
+                                                          formControlName="isSelected"></mat-checkbox>
                                         </div>
 
                                         <mat-form-field class="col-md-12">
-                                            <mat-select placeholder="{{'csa.from' | translate}}" formControlName="from"
-                                                [value]="position.value.from"
-                                                [disableControl]="!position.value.isSelected">
+                                            <mat-select placeholder="{{'csa.from' | translate}}"
+                                                        formControlName="from"
+                                                        [value]="position.value.from"
+                                                        [disableControl]="!position.value.isSelected">
                                                 <mat-option>{{'csa.None' | translate}}</mat-option>
-                                                <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">
                                                     {{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('fromIsRequired')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('fromIsRequired')">
                                             {{ 'csa.hour-required' | translate}}
                                         </div>
 
                                         <mat-form-field class="col-md-12">
-                                            <mat-select placeholder="{{'csa.to' | translate}}" formControlName="to"
-                                                [value]="position.value.to"
-                                                [disableControl]="!position.value.isSelected">
+                                            <mat-select placeholder="{{'csa.to' | translate}}"
+                                                        formControlName="to"
+                                                        [value]="position.value.to"
+                                                        [disableControl]="!position.value.isSelected">
                                                 <mat-option>{{'csa.None' | translate}}</mat-option>
-                                                <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">
                                                     {{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('toHourOverlapping')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('toHourOverlapping')">
                                             {{ 'csa.overlapping-hours' | translate}}
                                         </div>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('toIsRequired')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('toIsRequired')">
                                             {{ 'csa.hour-required' | translate}}
                                         </div>
 
@@ -188,37 +229,41 @@
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="{{'csa.from' | translate}}"
-                                                formControlName="splitedFrom" [value]="position.value.splitedFrom"
-                                                [disableControl]="!position.value.isSelected">
+                                                        formControlName="splitedFrom"
+                                                        [value]="position.value.splitedFrom"
+                                                        [disableControl]="!position.value.isSelected">
                                                 <mat-option>{{'csa.None' | translate}}</mat-option>
-                                                <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">
                                                     {{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromHourOverlapping')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromHourOverlapping')">
                                             {{ 'csa.overlapping-hours' | translate}}
                                         </div>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromIsRequired')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedFromIsRequired')">
                                             {{ 'csa.hour-required' | translate}}
                                         </div>
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="{{'csa.to' | translate}}"
-                                                formControlName="splitedTo" [value]="position.value.splitedTo"
-                                                [disableControl]="!position.value.isSelected">
+                                                        formControlName="splitedTo"
+                                                        [value]="position.value.splitedTo"
+                                                        [disableControl]="!position.value.isSelected">
                                                 <mat-option>{{'csa.None' | translate}}</mat-option>
-                                                <mat-option *ngFor="let hour of this.hours" [value]="hour.key">
+                                                <mat-option *ngFor="let hour of this.hours"
+                                                            [value]="hour.key">
                                                     {{hour.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('splitedToHourOverlapping')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedToHourOverlapping')">
                                             {{ 'csa.overlapping-hours' | translate}}
                                         </div>
                                         <div class="overlapping-hours"
-                                            *ngIf="this.openHoursArray.controls[ph].hasError('splitedToIsRequired')">
+                                             *ngIf="this.openHoursArray.controls[ph].hasError('splitedToIsRequired')">
                                             {{ 'csa.hour-required' | translate}}
                                         </div>
                                     </div>
@@ -228,10 +273,10 @@
                     </div>
                 </div>
                 <div class="row buttons d-flex justify-content-between pad">
-                    <button mat-raised-button matStepperPrevious
-                        class="btn-color-secondary">{{'csa.back' | translate}}</button>
-                    <button mat-raised-button matStepperNext
-                        class="btn-color-primary">{{'csa.next' | translate}}</button>
+                    <button matStepperPrevious
+                            class="btn btn-secondary">{{'csa.back' | translate}}</button>
+                    <button matStepperNext
+                            class="btn btn-secondary">{{'csa.next' | translate}}</button>
                 </div>
             </form>
         </div>
@@ -245,18 +290,27 @@
                 <span class="col-sm-8 text-align-center">{{'csa.your-offer-title-second' | translate}}</span>
             </div>
             <form [formGroup]="thirdFormGroup">
-                <input matInput formControlName="hasSelection" type="text" required style="display: none">
+                <input matInput
+                       formControlName="hasSelection"
+                       type="text"
+                       required
+                       style="display: none">
             </form>
-            <mat-accordion [multi]="true" color="primary" [class.show]="show">
+            <mat-accordion [multi]="true"
+                           color="primary"
+                           [class.show]="show">
                 <mat-expansion-panel [expanded]="true">
                     <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.category' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="col-sm-3 checkBox-display-inline" *ngFor="let item of this.categories">
-                        <mat-checkbox name="categoryCusine" [checked]="item.selected"
-                            (change)="onChangeCategory($event, item)" [value]="item.name">{{item.name | translate}}
+                    <div class="col-sm-3 checkBox-display-inline"
+                         *ngFor="let item of this.categories">
+                        <mat-checkbox name="categoryCusine"
+                                      [checked]="item.selected"
+                                      (change)="onChangeCategory($event, item)"
+                                      [value]="item.name">{{item.name | translate}}
                         </mat-checkbox>
                     </div>
                     <!--<div class="col-sm-3">
@@ -265,7 +319,8 @@
                     </div>-->
                 </mat-expansion-panel>
                 <br />
-                <mat-expansion-panel #expansionPanel [expanded]="this.OpenOfferings">
+                <mat-expansion-panel #expansionPanel
+                                     [expanded]="this.OpenOfferings">
                     <mat-expansion-panel-header class="expansion-panel-color">
                         <mat-panel-title>
                             {{'csa.offerings' | translate}}
@@ -277,9 +332,10 @@
                     </div>
 
                     <div class="col-sm-3 checkBox-display-inline"
-                        *ngFor="let item of this.offeringsArray; let i = index">
-                        <mat-checkbox [value]="item" [checked]="item.selected"
-                            (change)="onOfferingsChange($event, item)">{{item.name | translate}}
+                         *ngFor="let item of this.offeringsArray; let i = index">
+                        <mat-checkbox [value]="item"
+                                      [checked]="item.selected"
+                                      (change)="onOfferingsChange($event, item)">{{item.name | translate}}
                         </mat-checkbox>
                     </div>
                 </mat-expansion-panel>
@@ -296,9 +352,10 @@
                     </div>
 
                     <div class="col-sm-3 checkBox-display-inline"
-                        *ngFor="let item of this.servicesArray; let i = index">
-                        <mat-checkbox [value]="item" [checked]="item.selected"
-                            (change)="onServicesChange($event, item)">{{item.name | translate}}</mat-checkbox>
+                         *ngFor="let item of this.servicesArray; let i = index">
+                        <mat-checkbox [value]="item"
+                                      [checked]="item.selected"
+                                      (change)="onServicesChange($event, item)">{{item.name | translate}}</mat-checkbox>
                     </div>
                 </mat-expansion-panel>
                 <br />
@@ -314,19 +371,22 @@
                     </div>
 
                     <div class="col-sm-3 checkBox-display-inline"
-                        *ngFor="let payment of this.paymentsArray; let i = index">
-                        <mat-checkbox [value]="payment" [checked]="payment.selected"
-                            (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}
+                         *ngFor="let payment of this.paymentsArray; let i = index">
+                        <mat-checkbox [value]="payment"
+                                      [checked]="payment.selected"
+                                      (change)="onPaymentsChange($event, payment)">{{payment.name | translate}}
                         </mat-checkbox>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
 
             <div class="row buttons d-flex justify-content-between pad padding-top-20">
-                <button mat-raised-button matStepperPrevious
-                    class="btn-color-secondary">{{'csa.back' | translate}}</button>
-                <button mat-raised-button matStepperNext class="btn-color-primary" type="submit"
-                    (click)="steperchange($event)">{{'csa.next' | translate}}</button>
+                <button matStepperPrevious
+                        class="btn btn-secondary">{{'csa.back' | translate}}</button>
+                <button matStepperNext
+                        class="btn btn-secondary"
+                        type="submit"
+                        (click)="steperchange($event)">{{'csa.next' | translate}}</button>
             </div>
         </div>
     </mat-step>
@@ -339,18 +399,24 @@
 
                     <div class="col-md-8">
                         <div class="row justify-content-center margin-bottom-40 margin-top-20">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="159" height="159" viewBox="0 0 159 159">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 width="159"
+                                 height="159"
+                                 viewBox="0 0 159 159">
                                 <defs>
-                                    <path id="a" d="M.001 158.318h158.317V.001H.001z" />
+                                    <path id="a"
+                                          d="M.001 158.318h158.317V.001H.001z" />
                                 </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <mask id="b" fill="#fff">
+                                <g fill="none"
+                                   fill-rule="evenodd">
+                                    <mask id="b"
+                                          fill="#fff">
                                         <use xlink:href="#a" />
                                     </mask>
                                     <path fill="#ff5100"
-                                        d="M151.958 48.821a3.597 3.597 0 0 0-5.088.043c-.99 1.008-1.234 2.443-.802 3.7l-.076.024c3.275 8.23 5.131 17.174 5.131 26.572 0 39.746-32.221 71.963-71.963 71.963-39.741 0-71.962-32.217-71.962-71.963 0-39.745 32.221-71.962 71.962-71.962 20.34 0 38.68 8.463 51.756 22.038l.047-.046c1.425 1.277 3.602 1.248 4.958-.13a3.597 3.597 0 0 0-.043-5.088c-.133-.133-.31-.19-.457-.298C121.09 9.098 101.221 0 79.161 0 35.44.001 0 35.44 0 79.161c0 43.717 35.439 79.159 79.16 79.159 43.717 0 79.159-35.442 79.159-79.16 0-10.175-1.99-19.872-5.491-28.81-.17-.554-.428-1.09-.871-1.529zM79.099 99.199L45.723 65.822a3.597 3.597 0 0 0-6.142 2.544c0 .993.4 1.893 1.054 2.548l35.982 35.977a3.58 3.58 0 0 0 2.543 1.055 3.55 3.55 0 0 0 2.591-1.127l.01.015 60.083-62.946c.003.007.01.014.014.022l5.138-5.39a.079.079 0 0 1-.01-.018l10.337-10.83-.01-.012a3.574 3.574 0 0 0 1.007-2.472 3.6 3.6 0 0 0-3.599-3.598c-1.029 0-1.939.44-2.594 1.123l-.007-.01-9.247 9.689c-.007-.01-.015-.022-.022-.029l-5.02 5.26c.008.011.012.022.019.03L79.1 99.198z"
-                                        mask="url(#b)" />
+                                          d="M151.958 48.821a3.597 3.597 0 0 0-5.088.043c-.99 1.008-1.234 2.443-.802 3.7l-.076.024c3.275 8.23 5.131 17.174 5.131 26.572 0 39.746-32.221 71.963-71.963 71.963-39.741 0-71.962-32.217-71.962-71.963 0-39.745 32.221-71.962 71.962-71.962 20.34 0 38.68 8.463 51.756 22.038l.047-.046c1.425 1.277 3.602 1.248 4.958-.13a3.597 3.597 0 0 0-.043-5.088c-.133-.133-.31-.19-.457-.298C121.09 9.098 101.221 0 79.161 0 35.44.001 0 35.44 0 79.161c0 43.717 35.439 79.159 79.16 79.159 43.717 0 79.159-35.442 79.159-79.16 0-10.175-1.99-19.872-5.491-28.81-.17-.554-.428-1.09-.871-1.529zM79.099 99.199L45.723 65.822a3.597 3.597 0 0 0-6.142 2.544c0 .993.4 1.893 1.054 2.548l35.982 35.977a3.58 3.58 0 0 0 2.543 1.055 3.55 3.55 0 0 0 2.591-1.127l.01.015 60.083-62.946c.003.007.01.014.014.022l5.138-5.39a.079.079 0 0 1-.01-.018l10.337-10.83-.01-.012a3.574 3.574 0 0 0 1.007-2.472 3.6 3.6 0 0 0-3.599-3.598c-1.029 0-1.939.44-2.594 1.123l-.007-.01-9.247 9.689c-.007-.01-.015-.022-.022-.029l-5.02 5.26c.008.011.012.022.019.03L79.1 99.198z"
+                                          mask="url(#b)" />
                                 </g>
                             </svg>
                         </div>
@@ -364,10 +430,11 @@
                     </div>
 
                     <div class="col-md-8 padding-left-30">
-                        <button mat-raised-button matStepperPrevious class="btn-color-secondary col-md-12"
-                            style="margin-bottom: 10px;">{{'csa.back' | translate}}</button>
-                        <button mat-raised-button class="btn-color-primary col-md-12"
-                            type="submit">{{'csa.register' | translate}}</button>
+                        <button matStepperPrevious
+                                class="btn btn-secondary col-md-12"
+                                style="margin-bottom: 10px;">{{'csa.back' | translate}}</button>
+                        <button class="btn btn-primary col-md-12"
+                                type="submit">{{'csa.register' | translate}}</button>
                     </div>
                 </div>
             </form>

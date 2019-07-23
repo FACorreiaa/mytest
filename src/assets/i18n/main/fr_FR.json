@@ -172,5 +172,6 @@
 	"csa.footer.privacy": "Data Privacy",
 	"csa.footer.cookies": "Cookie Settings",
 	"csa.update-success": "Business updated successfully!!",
+	"csa.update-fail": "Error during the update of this business!!",
 	"csa.update-discard": "All of your changes were discarded"
 }

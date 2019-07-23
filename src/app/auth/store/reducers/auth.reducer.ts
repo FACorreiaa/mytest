@@ -101,6 +101,7 @@ export function AuthReducer(state = initialState, action: AuthActions): AuthStat
           description: restaurantAssistent.description,
           street: restaurantAssistent.address1,
           zipCode: restaurantAssistent.zipCode,
+          establishmentId: restaurantAssistent.salesforceId,
           city: restaurantAssistent.city,
           contactPhoneNumber: restaurantAssistent.phone,
           contactEmail: restaurantAssistent.email,

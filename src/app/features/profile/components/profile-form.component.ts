@@ -273,6 +273,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       countryCode: this.lastBusiness.countryCode,
       languageCode: this.lastBusiness.languageCode,
       description: basicDataForm.description,
+      establishmentId: '44334',
       url: this.lastBusiness.url,
       category: basicDataForm.category,
       zipCode: basicDataForm.postal,

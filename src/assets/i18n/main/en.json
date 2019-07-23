@@ -185,17 +185,8 @@
 	"csa.footer.privacy": "Data Privacy",
 	"csa.footer.cookies": "Cookie Settings",
 	"csa.update-success": "Business updated successfully!!",
+	"csa.update-fail": "Error during the update of this business!!",
 	"csa.update-discard": "All of your changes were discarded",
 	"csa.more": "Show more",
-	"csa.less": "Show less",
-	"csa.review.anonymous": "anonymous",
-	"csa.review.commentProvider": "via",
-	"csa.review.cancel": "Cancel",
-	"csa.review.post": "Post",
-	"csa.review.answer": "My Answer",
-	"csa.review.enterComment": "Type somthing...",
-	"csa.review.edit": "Edit",
-	"csa.review.delete": "Delete",
-	"csa.review.save": "Save",
-	"csa.review.editComment": "Edit your Comment"
+	"csa.less": "Show less"
 }

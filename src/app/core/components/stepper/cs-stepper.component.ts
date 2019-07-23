@@ -360,6 +360,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       channels: null,
       name: firstForm.location,
       additional: '',
+      establishmentId: '44334',
       street: firstForm.address,
       zipCode: firstForm.postal,
       city: firstForm.city,

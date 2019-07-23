@@ -234,7 +234,7 @@ export interface BusinessData {
   additional: string
   category: string
   name: string
-
+  establishmentId: string
   description: string
   userFirstName?: string
   userLastName?: string

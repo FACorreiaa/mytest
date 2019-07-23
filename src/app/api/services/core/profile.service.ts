@@ -17,6 +17,6 @@ export class ProfileService extends BaseApi implements IProfileService {
   }
 
   public updateBusinessData(business: UpdateBusinessData): Observable<BaseServiceResponse<any>> {
-    return this.getObjectsPUT(business.businessUnit, `${this.businessControllerRoute}/manage/${business.id}`)
+    return this.getObjectsPUT(business.businessUnit, `${this.businessControllerRoute}/manage/`)
   }
 }
