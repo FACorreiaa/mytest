@@ -29,7 +29,7 @@
             <div class="col-12 d-flex justify-content-center">
                 <button *ngIf="this.awaitingOwnership"
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-primary"
                         (click)="openWindowActivation()">
                     <span
                           *ngIf="this.awaitingOwnership && !this.oAuthStatus">{{'csa.activate' | translate}}</span>
@@ -38,14 +38,14 @@
 
                 <button *ngIf="!this.awaitingOwnership && !this.oAuthStatus && !this.needsVerification"
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-primary"
                         (click)="setStatus()">
                     <span>{{'csa.deactivate' | translate}}</span>
                 </button>
 
                 <button *ngIf="!this.awaitingOwnership && this.needsVerification"
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-primary"
                         (click)="verifyBusiness()">
                     <span>{{'csa.verify' | translate}}</span>
                 </button>

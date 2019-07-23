@@ -1,0 +1,24 @@
+@import '../../../app.component.scss';
+
+.btn-primary {
+    background-color: #f20000;
+    border: 1px solid #f20000;
+
+    &:hover {
+        color: #f20000;
+    }
+
+    &:not(:disabled):not(.disabled):active {
+        color: #f20000;
+        border: 1px solid #f20000;
+    }
+
+    &:not(:disabled):not(.disabled):focus {
+        box-shadow: 0 0 0 0.2rem rgba(242, 0, 0, 0.5)
+    }
+    
+}
+
+mat-dialog-actions {
+    padding-bottom: 1.25rem;
+}

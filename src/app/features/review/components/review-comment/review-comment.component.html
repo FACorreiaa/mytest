@@ -1,0 +1,32 @@
+<div *ngIf="replyComment; else showCommenting" class="comment">
+    <h5>{{'csa.review.answer' | translate}} <span class="time-ago">{{updateTime | dateAgo | translate}}</span></h5>
+    <p *ngIf="!editMode">{{replyComment}}</p>
+    <ng-container *ngIf="editMode">
+        <form [formGroup]="replyFormGroup">
+            <mat-form-field class="mt-2">
+                <input matInput formControlName="replyComment" placeholder="{{'csa.review.editComment' | translate}}">
+            </mat-form-field>
+        </form>
+        <button type="submit" class="btn btn-primary" (click)="updateReview()">{{'csa.review.save' | translate}}</button>
+    </ng-container>
+
+    <button *ngIf="!editMode" type="button" class="btn btn-primary" (click)="activateEdit()">{{'csa.review.edit' | translate}}</button>
+    <button type="button" class="btn no-btn" (click)="deleteReview()">{{'csa.review.delete' | translate}}</button>
+</div>
+
+<div class="comment">
+
+</div>
+
+<ng-template #showCommenting>
+    <div class="comment">
+        <h5>{{'csa.review.answer' | translate}}</h5>
+        <form [formGroup]="replyFormGroup">
+            <mat-form-field class="mt-2">
+                <input matInput formControlName="replyComment" placeholder="{{'csa.review.enterComment' | translate}}">
+            </mat-form-field>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{'csa.review.post' | translate}}</button>
+            <button type="button" class="btn no-btn" (click)="onCancel()">{{'csa.review.cancel' | translate}}</button>
+        </form>
+    </div>
+</ng-template>

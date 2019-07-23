@@ -1,0 +1,31 @@
+@import "../../../../app.component.scss";
+
+.comment {
+    padding-left: 1rem;
+    border-left: 1px solid #ccc;
+}
+
+.time-ago {
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 0 10px;
+}
+
+.btn-secondary {
+
+    mat-icon {
+        vertical-align: text-bottom;
+        margin-right: 5px;
+    }
+}
+
+form {
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+h5 {
+    margin-bottom: 1.5rem;
+}

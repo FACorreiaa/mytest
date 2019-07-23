@@ -1,0 +1,102 @@
+@import "../../../../app.component.scss";
+
+.title {
+    margin-top: 3rem;
+    padding: 4rem 0 6rem 0;
+    text-align: center;
+}
+
+.review-menu {
+    float: right;
+    cursor: pointer;
+
+    .flip {
+        -o-transform: scaleX(-1);
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+}
+
+.remove-outline {
+    outline: none;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.star {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.filled {
+    color: #f9ae05;
+}
+
+.time-ago {
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+}
+
+.socialMedia {
+
+    img {
+        vertical-align: sub;
+        margin: 0 10px;
+        width: 1.2rem;    
+    }
+}
+
+.btn-secondary {
+
+    mat-icon {
+        vertical-align: text-bottom;
+        margin-right: 5px;
+    }
+}
+
+.container {
+    padding-bottom: 60px;
+    
+    .card-template {
+        padding: 30px;
+        background: white;
+        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+        0 1px 1px 0 rgba(0, 0, 0, 0.14),
+        0 1px 3px 0 rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+    }
+
+    .answers {
+
+        span {
+            display: block;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+mat-divider {
+    margin: 1rem 0;
+}
+
+button {
+    
+    mat-icon {
+        vertical-align: middle;
+    }
+}
+
+
