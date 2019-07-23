@@ -1,4 +1,5 @@
 import { KeycloakConfig } from 'keycloak-angular'
+import { EnvironmentInterface } from '@env/environment-interface'
 
 // DEV
 const keycloakConfig: KeycloakConfig = {
@@ -22,7 +23,7 @@ const keycloakConfig: KeycloakConfig = {
 }
 */
 
-export const environment = {
+export const environment: EnvironmentInterface = {
   appName: 'Claiming service',
   envName: 'PROD',
   production: true,
