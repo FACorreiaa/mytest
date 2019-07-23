@@ -29,7 +29,7 @@ export const environment: EnvironmentInterface = {
   production: true,
   test: false,
   i18nPrefix: '',
-  API_URL: 'https://backend-dot-hd-claimingfe-dev.appspot.com/api/v1',
+  API_URL: 'http://ubicus.dev.app.hd.digital/api/v1',
   TOKEN_PATH: 'CSA_Token',
   keycloak: keycloakConfig,
   testMode: false,
