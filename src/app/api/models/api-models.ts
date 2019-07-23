@@ -228,7 +228,6 @@ export interface UpdateBusinessData {
 export interface BusinessData {
   channels?: Channels[]
   id?: number
-  establishmentId?: string
   zipCode: string
   city: string
   street: string
