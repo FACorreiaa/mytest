@@ -1,0 +1,58 @@
+.content {
+    //padding-left: 15px;
+    padding-bottom: 5px;
+    text-align: left;
+    line-height: 3em;
+
+}
+
+.btnModal {
+    z-index: 1;
+    width: 100%;
+    background-color: #f3f3f3;
+    border: solid 1px #f3f3f3;
+    cursor: pointer;
+}
+
+/*.content {
+    padding: 20px;
+}
+
+.title {
+    z-index: 1;
+}
+
+mat-dialog-actions {
+
+
+    button {
+        .btnModal {
+            z-index: 1;
+            width: 100%;
+            background-color: #f3f3f3;
+            border: solid 1px #f3f3f3;
+            cursor: pointer;
+        }
+
+    }
+}*/
+
+.marginBottom_40 {
+    margin-bottom: 40px;
+}
+
+.marginTop_20 {
+    margin-top: 20px;
+}
+
+.labelTitle_xlarge {
+    font-size: x-large;
+    color: #055f66;
+    text-align: center;
+}
+
+.labelTitle_unset {
+    font-size: unset;
+    color: #055f66;
+    text-align: center;
+}

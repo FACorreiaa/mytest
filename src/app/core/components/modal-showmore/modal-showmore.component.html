@@ -1,0 +1,11 @@
+<h2 mat-dialog-title class="title">Pick your option</h2>
+
+<mat-dialog-content class="content">
+    <mat-checkbox *ngFor="let d of data.mockData" class="col-4">
+        {{d}}
+    </mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions class="actions">
+    <button class="mat-raised-button btnModal" (click)="close()">Show Less</button>
+</mat-dialog-actions>

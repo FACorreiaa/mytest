@@ -13,9 +13,10 @@
             </mat-checkbox>
 
 
-            <!--<button *ngIf="offering.value.length > 10" mat-button (click)="show = !show" type="button" class="btn optbutton 
-            ">
-                {{ (show ? 'csa.more' : 'csa.less') | translate}}</button>-->
+            <button *ngIf="offering.value.length > 10" mat-button (click)="show = !show" type="button"
+                class="btn optbutton" (click)="openDialog()">
+                {{ (show ? 'csa.more' : 'csa.more') | translate}}
+            </button>
         </div>
 
     </mat-button-toggle>
