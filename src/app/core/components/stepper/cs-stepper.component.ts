@@ -355,12 +355,12 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     })
 
     const claimData: BusinessData = {
-      userFirstName: '',
-      userLastName: '',
+      userFirstName: 'Nuno',
+      userLastName: 'Pinha',
       channels: null,
       name: firstForm.location,
       additional: '',
-      establishmentId: '44334',
+      establishmentId: '223232323',
       street: firstForm.address,
       zipCode: firstForm.postal,
       city: firstForm.city,
@@ -371,7 +371,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       contactPhoneNumber: firstForm.phone,
       openingTimes: this.buildOpenHoursModel(secondFormGroup.openHours),
       offers: this.selectedOffering,
-      description: '',
+      // description: 'test description',
       category: this.category,
       services: this.selectedServices,
       paymentMethods: this.selectedPayments,

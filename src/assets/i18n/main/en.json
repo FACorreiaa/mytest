@@ -188,5 +188,6 @@
 	"csa.update-fail": "Error during the update of this business!!",
 	"csa.update-discard": "All of your changes were discarded",
 	"csa.more": "Show more",
-	"csa.less": "Show less"
+	"csa.less": "Show less",
+	"csa.contact-info": "Contact Information"
 }

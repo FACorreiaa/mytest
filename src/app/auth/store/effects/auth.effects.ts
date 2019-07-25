@@ -43,7 +43,7 @@ export class AuthEffects {
     ofType(AuthActions.AuthActionTypes.MANAGE_BUSINESS_FAILURE),
     tap(payload => {
       this.store$.dispatch(new AuthActions.ErrorLayoutShow({ error: payload }))
-      this.router.navigate([AuthRoutes.ERROR])
+      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
@@ -80,7 +80,7 @@ export class AuthEffects {
     tap(payload => {
       console.log('error', payload)
       this.store$.dispatch(new AuthActions.ErrorLayoutShow({ error: payload }))
-      this.router.navigate([AuthRoutes.ERROR])
+      // this.router.navigate([AuthRoutes.ERROR])
     })
   )
 
