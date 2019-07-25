@@ -486,6 +486,13 @@ export interface Countries {
   name: string
 }
 
+export interface BusinessUnitCompleteness {
+  id?: string
+  establishmentId?: string
+  completeness: number
+  incomplete: string[]
+}
+
 export enum Role {
   user,
   admin,

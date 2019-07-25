@@ -47,6 +47,7 @@
 	"csa.close": "Close",
 	"csa.navmenu-welcome": "Welcome",
 	"csa.profile-completeness": "Profile Completeness",
+	"csa.profile-completed": "Congratulations! You have completed your profile",
 	"csa.to-complete": "to complete",
 	"csa.main.category": "Category",
 	"csa.your-restaurante": "Your Restaurant",
@@ -189,5 +190,9 @@
 	"csa.update-discard": "All of your changes were discarded",
 	"csa.more": "Show more",
 	"csa.less": "Show less",
-	"csa.contact-info": "Contact Information"
+	"csa.contact-info": "Contact Information",
+	"keywords": "Keywords",
+	"languages": "Languages",
+	"imprint": "Imprint",
+	"specialOpeningTimes": "Special Openingtimes"
 }
