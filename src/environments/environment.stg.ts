@@ -19,5 +19,5 @@ export const environment: EnvironmentInterface = {
   API_URL: 'http://ubicus.dev.app.hd.digital/api/v1',
   TOKEN_PATH: 'CSA_Token',
   keycloak: keycloakConfig,
-  testMode: true,
+  testMode: false,
 }
