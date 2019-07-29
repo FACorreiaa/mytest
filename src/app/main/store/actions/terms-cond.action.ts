@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { TermsConditionsGetResponse, TermsConditionsPostRequest } from '@app/api/models/api-models'
+import { TermsConditionsPostRequest, BootstrapResponse, TermsAndConditions } from '@app/api/models/api-models'
 import { HttpErrorResponse } from '@angular/common/http'
 
 export enum TermsActionTypes {
@@ -19,7 +19,7 @@ export class TermsConditionsAttempt implements Action {
 
 export class TermsConditionsSuccess implements Action {
   readonly type = TermsActionTypes.TERMS_CONDITIONS_SUCCESS
-  constructor(public payload: { response: TermsConditionsGetResponse }) {}
+  constructor(public payload: { response: BootstrapResponse }) {}
 }
 
 export class TermsConditionsFailure implements Action {
@@ -34,7 +34,7 @@ export class TermsConditionsUpdateAttempt implements Action {
 
 export class TermsConditionsUpdateSuccess implements Action {
   readonly type = TermsActionTypes.TERMS_CONDITIONS_UPDATE_SUCCESS
-  constructor(public payload: { update: TermsConditionsGetResponse }) {}
+  constructor(public payload: { update: TermsAndConditions }) {}
 }
 
 export class TermsConditionsUpdateFailure implements Action {

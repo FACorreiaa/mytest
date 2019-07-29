@@ -31,6 +31,11 @@ export const getLoading = createSelector(
 // Terms & Conditions
 export const getTermsConditionsState = createSelector(
   getModuleState,
+  (stateMain: MainState) => stateMain.termsConditions
+)
+
+export const getTermsConditions = createSelector(
+  getModuleState,
   (stateMain: MainState) => stateMain.termsConditions.termsConditions
 )
 

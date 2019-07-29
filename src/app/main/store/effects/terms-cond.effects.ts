@@ -8,7 +8,7 @@ import { Router } from '@angular/router'
 import * as TermsActions from '@app/main/store/actions/terms-cond.action'
 import { AppRoutes as AuthRoutes } from '../../../app.routing'
 import { IAuthorizationService } from '../../../api/interfaces/i.authorization.service'
-import { TermsConditionsGetResponse } from '@app/api/models/api-models'
+import { BootstrapResponse, TermsAndConditions } from '@app/api/models/api-models'
 
 @Injectable()
 export class TermsConditionsEffects {
@@ -19,8 +19,8 @@ export class TermsConditionsEffects {
   public termsConditions$ = this.actions$.pipe(
     ofType(TermsActions.TermsActionTypes.TERMS_CONDITIONS_ATTEMPT),
     mergeMap(() =>
-      this.auth.termsConditions().pipe(
-        map((payload: TermsConditionsGetResponse) => {
+      this.auth.bootstrap().pipe(
+        map((payload: BootstrapResponse) => {
           return payload === null ? new TermsActions.TermsConditionsFailure() : new TermsActions.TermsConditionsSuccess({ response: payload })
         }),
         catchError(error => of(new TermsActions.TermsConditionsFailure({ error })))
@@ -41,7 +41,7 @@ export class TermsConditionsEffects {
     ofType(TermsActions.TermsActionTypes.TERMS_CONDITIONS_UPDATE_ATTEMPT),
     mergeMap((action: TermsActions.TermsConditionsUpdateAttempt) =>
       this.auth.termsConditionsSave(action.payload.request).pipe(
-        map((payload: TermsConditionsGetResponse) => {
+        map((payload: TermsAndConditions) => {
           return payload === null ? new TermsActions.TermsConditionsUpdateFailure() : new TermsActions.TermsConditionsUpdateSuccess({ update: payload })
         }),
         catchError(error => of(new TermsActions.TermsConditionsUpdateFailure({ error })))

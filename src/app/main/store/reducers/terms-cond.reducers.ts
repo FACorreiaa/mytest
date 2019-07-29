@@ -1,13 +1,15 @@
 import { TermsActions, TermsActionTypes } from '../actions/terms-cond.action'
-import { TermsConditionsGetResponse } from '@app/api/models/api-models'
+import { TermsAndConditions, Establishment } from '@app/api/models/api-models'
 
 export interface TermsState {
-  termsConditions: TermsConditionsGetResponse
+  termsConditions: TermsAndConditions
+  establishments: Establishment[]
   loading: boolean
 }
 
 const initialState: TermsState = {
   termsConditions: null,
+  establishments: null,
   loading: false,
 }
 
@@ -19,7 +21,7 @@ export function TermsReducer(state: TermsState = initialState, action: TermsActi
     }
 
     case TermsActionTypes.TERMS_CONDITIONS_SUCCESS: {
-      return { ...state, loading: false, termsConditions: action.payload.response }
+      return { ...state, loading: false, termsConditions: action.payload.response.termsAndConditions, establishments: action.payload.response.establishments }
     }
 
     case TermsActionTypes.TERMS_CONDITIONS_UPDATE_SUCCESS: {

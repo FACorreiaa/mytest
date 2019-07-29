@@ -16,11 +16,10 @@ import { delay, takeUntil, startWith, tap } from 'rxjs/operators'
 import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
-import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
+import { BusinessData } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
-import { environment } from '@env/environment'
 
 @Component({
   selector: 'app-main',
