@@ -34,7 +34,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   token: any
   showNavBar$: boolean
   businessData$: Observable<BusinessData[]>
-  languages = ['en', 'pt', 'de']
+  languages = ['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs']
   myRole: Role
   Role = Role
   faBroom = faBroom
@@ -57,9 +57,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
 
     this.translate.setDefaultLang('en')
-    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+
+    console.log('languages', this.translate.langs)
+    this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
+    this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')
     this.selectedLang = this.translate.currentLang
     this.store.dispatch(new AuthActions.ChangeLanguage({ language: this.selectedLang }))
 
