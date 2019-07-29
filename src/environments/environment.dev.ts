@@ -14,7 +14,7 @@ const keycloakConfig: KeycloakConfig = {
 export const environment: EnvironmentInterface = {
   appName: 'Ubicus',
   envName: 'DEV',
-  production: false,
+  production: true,
   test: false,
   i18nPrefix: '',
   API_URL: 'http://ubicus.dev.app.hd.digital/api/v1',

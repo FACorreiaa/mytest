@@ -2,19 +2,18 @@ import { KeycloakConfig } from 'keycloak-angular'
 import { EnvironmentInterface } from '@env/environment-interface'
 
 const keycloakConfig: KeycloakConfig = {
-  /** HD Digital **/
-  url: 'http://dev.sso.app.hd.digital/auth',
-  realm: 'HDCustomers-nonprod',
-  clientId: 'localhost-8081',
+  url: 'https://stage.sso.app.hd.digital/auth',
+  realm: 'HD-SSO',
+  clientId: 'claimingservice',
   credentials: {
-    secret: '3018ccf8-1351-4fac-ad70-b0672d9cd66c',
+    secret: 'f50bbd0c-56fe-4069-9412-612673bf6d21',
   },
 }
 
 export const environment: EnvironmentInterface = {
   appName: 'Ubicus',
-  envName: 'DEV',
-  production: false,
+  envName: 'STG',
+  production: true,
   test: false,
   i18nPrefix: '',
   API_URL: 'http://ubicus.dev.app.hd.digital/api/v1',
