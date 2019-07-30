@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms'
 import { CustomValidators, ZipCodeValidation, EmailValidation, PasswordValidation, PhoneNumberValidation, PhoneNumberPrefixValidation } from '@app/core/validations'
-import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, ManageBusinessData, Countries } from '@app/api/models/api-models'
+import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, BusinessData, ManageBusinessData, Countries, Establishment } from '@app/api/models/api-models'
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
 import { ModalTermsConditionsComponent } from '../modal/model-term-conditions'
@@ -62,7 +62,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   show = false
 
   @Input() newBusiness: false
-  @Input() businessFromHydra: BusinessData
+  @Input() businessFromHydra: Establishment
   @Input() offerings: any[]
   @Input() services: any[]
   @Input() payments: any[]
@@ -95,27 +95,29 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
     }
 
-    if (this.businessFromHydra) {
+    console.log('this.businessFromHydra', this.businessFromHydra)
+
+    if (this.businessFromHydra[0]) {
       this.firstFormGroup = this.formBuilder.group({
-        location: [this.businessFromHydra.name, Validators.required],
-        address: [this.businessFromHydra.street, Validators.required],
-        postal: new FormControl(this.businessFromHydra.zipCode, ZipCodeValidation),
-        city: [this.businessFromHydra.city, Validators.required],
-        phone: [this.businessFromHydra.contactPhoneNumber, PhoneNumberValidation],
+        location: [this.businessFromHydra[0].name, Validators.required],
+        address: [this.businessFromHydra[0].street, Validators.required],
+        postal: new FormControl(this.businessFromHydra[0].postalCode, ZipCodeValidation),
+        city: [this.businessFromHydra[0].city, Validators.required],
+        phone: ['', PhoneNumberValidation],
         area: ['+49', PhoneNumberPrefixValidation],
-        country: ['Italy', Validators.required],
+        country: [this.businessFromHydra[0].countryCode, Validators.required],
       })
 
-      this.secondFormGroup.get('email').setValue(this.businessFromHydra.contactEmail)
-      this.secondFormGroup.get('website').setValue(
-        this.businessFromHydra.url
-          .replace('https://', '')
-          .replace('http://', '')
-          .replace('www.', '')
-      )
+      // this.secondFormGroup.get('email').setValue(this.businessFromHydra.contactEmail)
+      // this.secondFormGroup.get('website').setValue(
+      //   this.businessFromHydra.url
+      //     .replace('https://', '')
+      //     .replace('http://', '')
+      //     .replace('www.', '')
+      // )
 
-      const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(this.businessFromHydra.openingTimes)).value
-      this.secondFormGroup.get('openHours').setValue(formBuilder)
+      // const formBuilder = this.formBuilder.array(this.buildOpenHoursArray(this.businessFromHydra.openingTimes)).value
+      // this.secondFormGroup.get('openHours').setValue(formBuilder)
     }
   }
 

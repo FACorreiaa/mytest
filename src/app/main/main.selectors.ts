@@ -39,6 +39,11 @@ export const getTermsConditions = createSelector(
   (stateMain: MainState) => stateMain.termsConditions.termsConditions
 )
 
+export const getEstablisment = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.termsConditions.establishments
+)
+
 // Dashboard
 export const getDashboardState = createSelector(
   getModuleState,
@@ -49,6 +54,31 @@ export const getDashboardState = createSelector(
 export const getAuth = createSelector(
   getModuleState,
   (stateMain: MainState) => stateMain.auth.hasManageError
+)
+
+export const language = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.language
+)
+
+export const restaurantAssistent = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.restaurantAssistent
+)
+
+export const claimData = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.claimData
+)
+
+export const loading = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.loading
+)
+
+export const errorMessage = createSelector(
+  getModuleState,
+  (stateMain: MainState) => stateMain.auth.errorMessage
 )
 
 export const getNavBarState = createSelector(

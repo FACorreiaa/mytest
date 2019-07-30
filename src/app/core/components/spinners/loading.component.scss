@@ -1,16 +1,16 @@
 .overlay {
-    position: absolute;
-    z-index: 9999;
-    height: 100%;
-    width: 100%;
-    opacity: 0.5;
-    background-color: #ffffff;
+  position: absolute;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  background-color: #ffffff;
 
-    .loading {
-        width: 50%;
-        height: 30%;
-        margin-left: 40%;
-        margin-top: 12%;
-        text-align: left;
-    }
+  .loading {
+    width: 50%;
+    height: 30%;
+    margin-left: 40%;
+    margin-top: 12%;
+    text-align: left;
+  }
 }

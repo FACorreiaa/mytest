@@ -57,8 +57,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
 
     this.translate.setDefaultLang('en')
-
-    console.log('languages', this.translate.langs)
     this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
     this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')

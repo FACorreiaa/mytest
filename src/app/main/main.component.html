@@ -3,12 +3,10 @@
     <div *ngIf="!headerService.webview"
          class="toolbar">
       <mat-toolbar color="primary">
-        <a (click)="GoToMainPage()"
-           id="fullWidth">
+        <a id="fullWidth">
           <span style="color: white">{{'csa.title.short' | translate}}</span>
         </a>
-        <a (click)="GoToMainPage()"
-           id="mobileWidth">
+        <a id="mobileWidth">
           <span style="color: white">{{'csa.title.mobile' | translate}}</span>
         </a>
 
@@ -79,11 +77,11 @@
 
         <mat-sidenav-container class="sidenav-container">
 
-          <nav-bar *ngIf="this.showNavBar$"
+          <nav-bar *ngIf="this.showNavBar$ && !(this.loading$ | async)"
                    [business]="(this.businessData$ | async)"></nav-bar>
 
           <div *ngIf="(this.loading$ | async)"
-               style="display: flex; padding: 50px">
+               style="display: flex; padding-top: 25px; padding-bottom: 25px">
             <mat-card class="col">
               <mat-card-content>
                 <div class="row justify-content-center">
