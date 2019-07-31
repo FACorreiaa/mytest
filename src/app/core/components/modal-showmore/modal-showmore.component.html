@@ -1,11 +1,12 @@
 <h2 mat-dialog-title class="title">Pick your option</h2>
 
 <mat-dialog-content class="content">
-    <mat-checkbox *ngFor="let d of data.mockData" class="col-4">
-        {{d}}
+    <mat-checkbox *ngFor="let item of data.dataKey.value | slice:11:50; let i = index" class="col-4" [value]="item"
+        [checked]="offeringState[item]" [class.show]="show" (change)="onOfferingsChange($event, item)">
+        {{item | json}}
     </mat-checkbox>
 </mat-dialog-content>
-
+{{data.checked | json}}
 <mat-dialog-actions class="actions">
-    <button class="mat-raised-button btnModal" (click)="close()">Show Less</button>
+    <button class="mat-raised-button btnModal" (click)="close($event, item)">Show Less</button>
 </mat-dialog-actions>

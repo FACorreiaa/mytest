@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular/core'
 import { ICategoryDto } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { ModalShowmoreComponent } from '../modal-showmore/modal-showmore.component'
+import { X } from '@angular/cdk/keycodes'
 
 @Component({
   selector: 'collapsible-button',
@@ -15,48 +16,25 @@ export class CollapsibleButtonComponent implements OnInit {
   toggleState: boolean[]
   offeringState: { [key: string]: boolean }
   show = false
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private cdr: ChangeDetectorRef) {
     this.offeringState = {}
     this.toggleState = []
   }
-
-  openDialog(): void {
+  openDialog(index: number, item: string): void {
     const dialogRef = this.dialog.open(ModalShowmoreComponent, {
       width: '250px',
-      height: '450px',
+      height: '400px',
       data: {
-        mockData: [
-          'teste 1',
-          'teste 2',
-          'teste 3',
-          'teste 4',
-          'teste 5',
-          'teste 6',
-          'teste 7',
-          'teste 8',
-          'teste 9',
-          'teste 10',
-          'teste 11',
-          'teste 12',
-          'teste 13',
-          'teste 14',
-          'teste 15',
-          'teste 16',
-          'teste 17',
-          'teste 18',
-          'teste 19',
-          'teste 20',
-        ],
+        dataKey: this.offerings[index],
+        checked: this.offeringState[item],
       },
     })
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed')
-      console.log(result)
-      //this.animal = result;
-      data: {
-        myData: 'MY VAR'
-      }
+    //pass data from modal-showmore
+    dialogRef.componentInstance.offeringState = this.offeringState
+    dialogRef.componentInstance.toggleState.subscribe((item: any) => {
+      const itemAux = JSON.stringify(item)
+      this.offeringState[item]
     })
   }
 
@@ -82,5 +60,9 @@ export class CollapsibleButtonComponent implements OnInit {
    */
   onOfferingsChange(event, item: string) {
     this.offeringState[item] = !this.offeringState[item]
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges()
   }
 }

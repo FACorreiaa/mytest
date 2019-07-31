@@ -19,6 +19,7 @@ import { OpeningTimes, Day, IHours, OpenHoursArray, CategoriesArray, ICategory, 
 
 import { MatExpansionPanel, ErrorStateMatcher, MatDialog } from '@angular/material'
 import { ModalTermsConditionsComponent } from '../modal/model-term-conditions'
+import { ModalShowmoreonboardComponent } from '../modal-showmoreonboard/modal-showmoreonboard.component'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -253,6 +254,26 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         }
       )
     }
+  }
+
+  /**
+   * pass data to modal-showmoreonboard
+   * @param index
+   */
+  openDialog(index: number): void {
+    const dialogRef = this.dialog.open(ModalShowmoreonboardComponent, {
+      width: '250px',
+      height: '400px',
+      data: {
+        dataKey: this.offeringsArray.map(x => x.name),
+        dataSelected: this.offeringsArray.map(y => y.selected),
+      },
+    })
+
+    dialogRef.componentInstance.offeringsArray = this.offeringsArray
+    dialogRef.componentInstance.notify.subscribe((item: any) => {
+      item.selected
+    })
   }
 
   /**
