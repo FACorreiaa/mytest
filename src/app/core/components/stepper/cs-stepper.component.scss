@@ -148,4 +148,15 @@
     overflow: visible;
     height: auto;
   }
+
+  .btnMobility {
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  button.btnMobility {
+    display: none;
+    visibility: hidden;
+  }
 }

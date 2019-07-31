@@ -26,7 +26,8 @@ import { RouterModule } from '@angular/router'
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component'
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component'
 import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi-component'
-
+import { ModalShowmoreComponent } from './components/modal-showmore/modal-showmore.component'
+import { ModalShowmoreonboardComponent } from './components/modal-showmoreonboard/modal-showmoreonboard.component'
 @NgModule({
   imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, HttpModule, TranslateModule, RouterModule, NgbPopoverModule, NgbModalModule],
   exports: [
@@ -56,9 +57,11 @@ import { ModalOtherVerifiComponent } from './components/modal/modal-other-verifi
     ProgressBarComponent,
     ProgressSpinnerComponent,
     GooglePlacesDirective,
+    ModalShowmoreComponent,
+    ModalShowmoreonboardComponent,
   ],
   providers: [CategoriesService, CountriesService, NgbActiveModal],
-  entryComponents: [ModalOtherVerifiComponent],
+  entryComponents: [ModalOtherVerifiComponent, ModalShowmoreComponent, ModalShowmoreonboardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CoreModule {}

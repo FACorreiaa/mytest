@@ -5,18 +5,17 @@
             {{offering.category | translate}}
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
-        <!--toggle-checkbox -->
         <div *ngIf="toggleState[i]" class="toggle-checkbox">
-            <mat-checkbox *ngFor="let item of offering.value" class="col-4" [value]="item"
+            <mat-checkbox *ngFor="let item of offering.value | slice:0:10" class="col-4" [value]="item"
                 [checked]="offeringState[item]" (change)="onOfferingsChange($event, item)" [class.show]="show">
                 {{item | translate}}
             </mat-checkbox>
-
-
-            <!--<button *ngIf="offering.value.length > 10" mat-button (click)="show = !show" type="button" class="btn optbutton 
-            ">
-                {{ (show ? 'csa.more' : 'csa.less') | translate}}</button>-->
+            <button *ngIf="offering.value.length > 11" mat-button (click)="show = !show" type="button"
+                class="btn optbutton" (click)="openDialog(i)">
+                {{ (show ? 'csa.more' : 'csa.more') | translate}}
+            </button>
         </div>
 
     </mat-button-toggle>
+
 </mat-button-toggle-group>

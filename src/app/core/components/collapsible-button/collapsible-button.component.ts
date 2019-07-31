@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular/core'
 import { ICategoryDto } from '@app/api/models/api-models'
+import { MatDialog } from '@angular/material'
+import { ModalShowmoreComponent } from '../modal-showmore/modal-showmore.component'
+import { X } from '@angular/cdk/keycodes'
 
 @Component({
   selector: 'collapsible-button',
@@ -13,9 +16,26 @@ export class CollapsibleButtonComponent implements OnInit {
   toggleState: boolean[]
   offeringState: { [key: string]: boolean }
   show = false
-  constructor() {
+  constructor(public dialog: MatDialog, private cdr: ChangeDetectorRef) {
     this.offeringState = {}
     this.toggleState = []
+  }
+  openDialog(index: number, item: string): void {
+    const dialogRef = this.dialog.open(ModalShowmoreComponent, {
+      width: '250px',
+      height: '400px',
+      data: {
+        dataKey: this.offerings[index],
+        checked: this.offeringState[item],
+      },
+    })
+
+    //pass data from modal-showmore
+    dialogRef.componentInstance.offeringState = this.offeringState
+    dialogRef.componentInstance.toggleState.subscribe((item: any) => {
+      const itemAux = JSON.stringify(item)
+      this.offeringState[item]
+    })
   }
 
   ngOnInit() {
@@ -40,5 +60,9 @@ export class CollapsibleButtonComponent implements OnInit {
    */
   onOfferingsChange(event, item: string) {
     this.offeringState[item] = !this.offeringState[item]
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges()
   }
 }

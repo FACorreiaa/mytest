@@ -68,7 +68,7 @@
                   "name": "vendor",
                   "baseline": "800kb",
                   "warning": "250kb",
-                  "error": "400kb"
+                  "error": "800kb"
                 },
                 {
                   "type": "bundle",
@@ -81,8 +81,8 @@
                   "type": "bundle",
                   "name": "main",
                   "baseline": "100kb",
-                  "warning": "50kb",
-                  "error": "100kb"
+                  "warning": "150kb",
+                  "error": "1mb"
                 }
               ]
             },
