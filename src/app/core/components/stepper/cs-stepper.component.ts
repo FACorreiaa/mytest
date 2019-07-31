@@ -311,6 +311,11 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
     this.validateCategoriesSelection()
   }
 
+  filterOfferingsArray(offeringsArray: []) {
+    console.log(offeringsArray)
+    return window.screen.width > 575 ? this.offeringsArray : this.offeringsArray.slice(0, 10)
+  }
+
   /**
    * When users check/unckeck some service.
    * @param event click event

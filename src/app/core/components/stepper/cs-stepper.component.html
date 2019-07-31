@@ -276,7 +276,7 @@
 
                     <div>
                         <mat-checkbox [value]="item" [checked]="item.selected" class="col-sm-3 checkBox-display-inline"
-                            *ngFor="let item of this.offeringsArray | slice:0:10; let i = index"
+                            *ngFor="let item of filterOfferingsArray(offeringsArray); let i = index"
                             (change)="onOfferingsChange($event, item)">{{item.name | translate}}
                         </mat-checkbox>
 
