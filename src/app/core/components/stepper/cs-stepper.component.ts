@@ -312,7 +312,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   filterOfferingsArray(offeringsArray: []) {
-    console.log(offeringsArray)
     return window.screen.width > 575 ? this.offeringsArray : this.offeringsArray.slice(0, 10)
   }
 
