@@ -1,4 +1,4 @@
-<h2 mat-dialog-title class="title">{{csa.pickopt | translate}}</h2>
+<h2 mat-dialog-title class="title">{{'csa.pickopt' | translate}}</h2>
 
 <mat-dialog-content class="content">
     <mat-checkbox *ngFor="let item of data.dataKey.value | slice:11:50; let i = index" class="col-4" [value]="item"
@@ -8,5 +8,5 @@
 </mat-dialog-content>
 {{data.checked | json}}
 <mat-dialog-actions class="actions">
-    <button class="mat-raised-button btnModal" (click)="close($event, item)">{{csa.less | translate}}</button>
+    <button class="mat-raised-button btnModal" (click)="close($event, item)">{{'csa.less' | translate}}</button>
 </mat-dialog-actions>

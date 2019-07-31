@@ -34,7 +34,6 @@ import { CoreModule } from './core/core.module'
 import { initializer } from './core/utils/app-init'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { HeaderService } from './api/services/core/header.service'
-import { MatDialogModule } from '@angular/material'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(reducer)
@@ -58,7 +57,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
-    MatDialogModule,
     NgxPermissionsModule.forRoot(),
     // ngx-translate
     TranslateModule.forRoot({
