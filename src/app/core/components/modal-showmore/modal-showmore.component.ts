@@ -26,7 +26,7 @@ export class ModalShowmoreComponent {
   }
 
   close(item: string) {
-    //always false
+    // always false
     this.dialogRef.close({ data: this.offeringState[item] })
   }
 

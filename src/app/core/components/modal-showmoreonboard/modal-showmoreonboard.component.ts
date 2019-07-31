@@ -1,6 +1,5 @@
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-import { Component, Inject, EventEmitter, Output, ChangeDetectorRef, Input } from '@angular/core'
-import { CollapsibleButtonComponent } from '../collapsible-button/collapsible-button.component'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { Component, Inject, EventEmitter, Output, ChangeDetectorRef, Input, AfterViewInit } from '@angular/core'
 import { ICategory } from '@app/api/models/api-models'
 
 @Component({
@@ -8,18 +7,17 @@ import { ICategory } from '@app/api/models/api-models'
   templateUrl: 'modal-showmoreonboard.component.html',
   styleUrls: ['./modal-showmoreonboard.component.scss'],
 })
-export class ModalShowmoreonboardComponent {
-  constructor(public dialogRef: MatDialogRef<ModalShowmoreonboardComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private cdr: ChangeDetectorRef) {}
-
-  @Output() notify: EventEmitter<any> = new EventEmitter()
+export class ModalShowmoreonboardComponent implements AfterViewInit {
   @Input() offeringsArray: ICategory[] = []
-  ngOnInit() {}
+  @Output() notify: EventEmitter<any> = new EventEmitter()
+
+  constructor(public dialogRef: MatDialogRef<ModalShowmoreonboardComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
     this.cdr.detectChanges()
   }
 
-  close(item: string) {
+  close() {
     this.dialogRef.close({ data: this.offeringsArray })
   }
 
