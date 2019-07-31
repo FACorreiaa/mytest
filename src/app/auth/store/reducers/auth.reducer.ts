@@ -1,6 +1,5 @@
 import { AuthActions, AuthActionTypes } from '../actions/auth.action'
 import { ManageBusinessData, BusinessData, OpeningTimes, LocationData } from '@app/api/models/api-models'
-import { loading } from '@app/app.reducers'
 
 export interface AuthState {
   claimData: ManageBusinessData

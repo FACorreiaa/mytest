@@ -1,18 +1,25 @@
 import { Injectable, Injector } from '@angular/core'
-import { ManageBusinessData, TermsConditionsGetResponse, TermsConditionsPostRequest, LocationData } from '../../models/api-models'
+import { ManageBusinessData, TermsConditionsPostRequest, LocationData, BootstrapResponse, BusinessData } from '../../models/api-models'
 import { BaseApi } from '../base/baseapi'
 import { IAuthorizationService } from '../../interfaces/i.authorization.service'
 import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class AuthorizationService extends BaseApi implements IAuthorizationService {
+  private businessControllerRoute = 'businessUnit'
+
   private businessManageControllerRoute = 'businessUnit/manage'
   private businessRequestAdminControllerRoute = 'businessUnit/requestAdminRights'
 
   private termsandconditionsControllerRoute = 'termsandconditions'
+  private bootstrapControllerRoute = 'bootstrap'
 
   constructor(injector: Injector) {
     super(injector)
+  }
+
+  public businessData(): Observable<BusinessData> {
+    return this.getObjects(`${this.businessControllerRoute}/getAll`)
   }
 
   public manageBusiness(manageData: ManageBusinessData): Observable<any> {
@@ -24,8 +31,8 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
     return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}`)
   }
 
-  public termsConditions(): Observable<TermsConditionsGetResponse> {
-    return this.getObjects(`${this.termsandconditionsControllerRoute}/`)
+  public bootstrap(): Observable<BootstrapResponse> {
+    return this.getObjects(`${this.bootstrapControllerRoute}/`)
   }
 
   public termsConditionsSave(acceptance: TermsConditionsPostRequest): Observable<any> {

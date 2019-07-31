@@ -56,9 +56,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.translate.setDefaultLang('en')
-    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
+    this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')
 
     this.appStore
       .pipe(

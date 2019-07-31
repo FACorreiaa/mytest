@@ -22,7 +22,7 @@ export const getRouter = (state: AppState) => state.router
 
 export const getRouterPath = (state: AppState) => state.router.state.url
 
-// OnBoarding
+// // OnBoarding
 export const getAuthState = (state: AppState) => state.auth
 
 export const language = createSelector(

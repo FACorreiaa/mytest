@@ -11,7 +11,7 @@ mat-sidenav-container {
     display: flex;
     flex-direction: column;
 
-    >.toolbar {
+    > .toolbar {
       position: fixed;
       width: 100%;
       display: flex;
@@ -27,7 +27,6 @@ mat-sidenav-container {
       #fullWidth {
         visibility: visible;
         display: block;
-
       }
 
       #mobileWidth {
@@ -36,24 +35,25 @@ mat-sidenav-container {
       }
 
       a {
-
-
         cursor: pointer;
 
         span {
           font-size: 30px;
         }
-
-
       }
     }
-
 
     .example-spacer {
       flex: 1 1 auto;
     }
 
-    >.content {
+    mat-select {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      width: 60px;
+    }
+
+    > .content {
       flex: auto;
       overflow-y: auto;
       overflow-x: auto;
@@ -124,11 +124,10 @@ footer {
 
       &:after {
         color: #fff;
-        content: '|';
+        content: "|";
       }
 
       &:last-of-type {
-
         &:after {
           content: none;
         }
@@ -169,7 +168,7 @@ footer {
       display: flex;
       flex-direction: column;
 
-      >.toolbar {
+      > .toolbar {
         position: fixed;
         width: 100%;
         display: flex;
@@ -193,8 +192,6 @@ footer {
         }
 
         a {
-
-
           cursor: pointer;
 
           span {
@@ -207,7 +204,7 @@ footer {
         flex: 1 1 auto;
       }
 
-      >.content {
+      > .content {
         flex: auto;
         overflow-y: auto;
         overflow-x: auto;

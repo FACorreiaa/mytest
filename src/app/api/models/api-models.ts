@@ -22,15 +22,63 @@ export interface RequestAdminRightsBusinessData {
   zipCode: string
 }
 
-export interface TermsConditionsGetResponse {
+export interface TermsConditionsPostRequest {
+  accepted: boolean
+}
+
+export interface BootstrapResponse {
+  termsAndConditions: TermsAndConditions
+  establishments: Establishment[]
+  products: Product[]
+}
+
+export interface Establishment {
+  additional: string
+  assignOwner: boolean
+  city: string
+  company: Company
+  countryCode: string
+  establishmentId: string
+  name: string
+  phone: string
+  postalCode: string
+  state: string
+  street: string
+  type: string
+  websiteBuilderUrl: string
+  roles: string[]
+}
+export interface Company {
+  additional: string
+  city: string
+  countryCode: string
+  name: string
+  phone: string
+  postalCode: string
+  state: string
+  street: string
+  vatNumber: string
+}
+
+export interface TermsAndConditions {
   userId: string
   accepted: boolean
   createdAt: string
   updatedAt: string
 }
 
-export interface TermsConditionsPostRequest {
-  accepted: boolean
+export interface Product {
+  applicationCode: string
+  applicationDescription: string
+  applicationName: string
+  establishmentID: string
+  iconUrl: string
+  privacyUrl: string
+  productCode: string
+  productDescription: string
+  productName: string
+  tandcUrl: string
+  webViewUrl: string
 }
 
 export interface FetchVerificationRequest {

@@ -23,20 +23,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.translate.setDefaultLang('en')
-    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
-
-    // this.store
-    //   .pipe(
-    //     delay(0),
-    //     select(fromApp.language),
-    //     takeUntil(this.language$)
-    //   )
-    //   .subscribe(lang => {
-    //     lang = !lang ? 'en' : lang
-    //     this.translate.use(lang)
-    //     this.selectedLang = lang
-    //   })
+    this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')
   }
 }

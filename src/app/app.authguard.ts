@@ -38,7 +38,7 @@ export class AppAuthGuard extends KeycloakAuthGuard implements OnDestroy {
           takeUntil(this.unsubscribe$)
         )
         .subscribe(terms => {
-          if (terms && !terms.accepted) {
+          if (terms && terms.termsConditions && !terms.termsConditions.accepted) {
             this.navigateToTermsConditions()
             resolve(true)
           }

@@ -16,11 +16,10 @@ import { delay, takeUntil, startWith, tap } from 'rxjs/operators'
 import { HeaderService } from '@app/api/services/core/header.service'
 import { Router } from '@angular/router'
 import { KeycloakService } from 'keycloak-angular'
-import { TermsConditionsGetResponse, BusinessData } from '@app/api/models/api-models'
+import { BusinessData } from '@app/api/models/api-models'
 import { MatDialog } from '@angular/material'
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component'
 import { TransferGmbComponent } from './components/transfer-gmb/transfer-gmb.component'
-import { environment } from '@env/environment'
 
 @Component({
   selector: 'app-main',
@@ -35,7 +34,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   token: any
   showNavBar$: boolean
   businessData$: Observable<BusinessData[]>
-  languages = ['en', 'pt', 'de']
+  languages = ['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs']
   myRole: Role
   Role = Role
   faBroom = faBroom
@@ -58,9 +57,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mainStore.dispatch(new TermsActions.TermsConditionsAttempt())
 
     this.translate.setDefaultLang('en')
-    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
+    this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')
     this.selectedLang = this.translate.currentLang
     this.store.dispatch(new AuthActions.ChangeLanguage({ language: this.selectedLang }))
 

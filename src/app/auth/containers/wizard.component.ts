@@ -9,9 +9,9 @@ import { KeycloakService } from 'keycloak-angular'
 
 import * as AuthActions from '../store/actions/auth.action'
 import { AppRoutes as AuthRoutes } from '../../app.routing'
-import * as fromApp from '../../app.reducers'
+import * as fromMainApp from '../../main/main.selectors'
 import { CategoriesService } from '@app/core/services/categories.service'
-import { Countries, ICategory, ManageBusinessData } from '@app/api/models/api-models'
+import { Countries, ICategory, ManageBusinessData, Establishment } from '@app/api/models/api-models'
 import { CountriesService } from '@app/core/services/countries.service'
 
 @Component({
@@ -26,6 +26,7 @@ export class WizardComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>
   restaurant$: Observable<IHydraRestaurant>
   claimData$: Observable<ManageBusinessData>
+  establisments$: Observable<Establishment[]>
   offerings$: Observable<ICategory[]>
   services$: Observable<ICategory[]>
   payments$: Observable<ICategory[]>
@@ -33,14 +34,15 @@ export class WizardComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private store: Store<fromApp.AppState>,
+    private store: Store<fromMainApp.MainState>,
     private categoriesService: CategoriesService,
     private countriesService: CountriesService,
     private readonly translate: TranslateService
   ) {
-    this.loading$ = this.store.select(fromApp.loading)
-    this.restaurant$ = this.store.select(fromApp.restaurantAssistent)
-    this.claimData$ = this.store.select(fromApp.claimData)
+    this.loading$ = this.store.select(fromMainApp.loading)
+    this.restaurant$ = this.store.select(fromMainApp.restaurantAssistent)
+    this.claimData$ = this.store.select(fromMainApp.claimData)
+    this.establisments$ = this.store.select(fromMainApp.getEstablisment)
 
     this.store.dispatch(new AuthActions.NavMenuLayoutHide())
   }
@@ -53,13 +55,14 @@ export class WizardComponent implements OnInit, OnDestroy {
     // this.authorized = await this.keycloakService.isLoggedIn()
 
     this.translate.setDefaultLang('en')
-    this.translate.addLangs(['en', 'fr', 'de', 'pt'])
+    this.translate.addLangs(['en', 'fr', 'de', 'pt', 'es', 'hr', 'hu', 'it', 'nl', 'pl', 'ru', 'tr', 'uk', 'cs'])
     const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/en|fr|de|pt/) ? browserLang : 'en')
+    this.translate.use(browserLang.match(/en|fr|de|pt|es|hr|hu|it|nl|pl|ru|tr|uk|cs/) ? browserLang : 'en')
+
     this.store
       .pipe(
         delay(0),
-        select(fromApp.language),
+        select(fromMainApp.language),
         takeUntil(this.language$)
       )
       .subscribe(lang => this.translate.use(lang))

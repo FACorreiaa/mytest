@@ -9,22 +9,23 @@
                                         [payments]="this.payments$ | async"
                                         [countries]="this.countries$ | async"
                                         [newBusiness]="true"
-                                        [businessFromHydra]="false"
+                                        [businessFromHydra]="this.establisments$ | async"
                                         (registerEvent)="manageBusiness($event)"
                                         (goToProfileEvent)="GoToMainPage()"></app-cs-stepper>
                     </div>
-                    <div *ngIf="(this.loading$ | async)"
-                         style="display: flex">
-                        <mat-card class="col">
-                            <mat-card-content>
-                                <div class="row justify-content-center">
-                                    <cs-loading [show]="true"></cs-loading>
-                                </div>
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
+
                 </mat-sidenav-content>
             </mat-sidenav-container>
+
+            <div *ngIf="(this.loading$ | async)">
+                <mat-card class="col">
+                    <mat-card-content>
+                        <div class="row justify-content-center">
+                            <cs-loading [show]="true"></cs-loading>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>
