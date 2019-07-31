@@ -95,8 +95,6 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
       this.payments.map(x => this.paymentsArray.push({ name: x, selected: false }))
     }
 
-    console.log('this.businessFromHydra', this.businessFromHydra)
-
     if (this.businessFromHydra[0]) {
       this.firstFormGroup = this.formBuilder.group({
         location: [this.businessFromHydra[0].name, Validators.required],
@@ -108,6 +106,7 @@ export class CsStepperComponent implements OnInit, OnChanges, AfterViewChecked {
         country: [this.businessFromHydra[0].countryCode, Validators.required],
       })
 
+      // TODO: right now the service does not return any more information
       // this.secondFormGroup.get('email').setValue(this.businessFromHydra.contactEmail)
       // this.secondFormGroup.get('website').setValue(
       //   this.businessFromHydra.url
