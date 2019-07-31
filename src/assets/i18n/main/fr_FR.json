@@ -173,5 +173,9 @@
 	"csa.footer.cookies": "Cookie Settings",
 	"csa.update-success": "Business updated successfully!!",
 	"csa.update-fail": "Error during the update of this business!!",
-	"csa.update-discard": "All of your changes were discarded"
+	"csa.update-discard": "All of your changes were discarded",
+	"csa.more": "Show more",
+	"csa.less": "Show less",
+	"csa.accManagement.edit-user": "Edit profile at Dish",
+	"csa.pickopt": "Pick your option"
 }

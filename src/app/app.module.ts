@@ -34,8 +34,6 @@ import { CoreModule } from './core/core.module'
 import { initializer } from './core/utils/app-init'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { HeaderService } from './api/services/core/header.service'
-import { ModalShowmoreComponent } from './core/components/modal-showmore/modal-showmore.component'
-import { ModalShowmoreonboardComponent } from './core/components/modal-showmoreonboard/modal-showmoreonboard.component'
 import { MatDialogModule } from '@angular/material'
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -81,8 +79,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer]
           maxAge: 15,
         }),
   ],
-  entryComponents: [ModalShowmoreComponent, ModalShowmoreonboardComponent],
-  declarations: [AppComponent, ModalShowmoreComponent, ModalShowmoreonboardComponent],
+  declarations: [AppComponent],
   exports: [],
   providers: [
     HeaderService,

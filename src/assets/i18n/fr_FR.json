@@ -21,5 +21,8 @@
 	"csa.google.request-ownership": "Here you need to request ownership for the listing. Please make sure, that you request ownership as an owner in the options",
 	"csa.google.error": "Error",
 	"csa.google.error-description": "There was an error on your google authentication",
-	"csa.accManagement.edit-user": "Edit profile at Dish"
+	"csa.accManagement.edit-user": "Edit profile at Dish",
+	"csa.more": "Show more",
+	"csa.less": "Show less",
+	"csa.pickopt": "Pick your option"
 }
