@@ -16,6 +16,8 @@ import { IRestaurantAssistentService } from './interfaces/i.restaurant-assistent
 import { RestaurantAssistentService } from './services/core/restaurant-assistent.service'
 import { IReviewService } from './interfaces/i.reviews.service'
 import { ReviewService } from './services/core/reviews.service'
+import { IProfileCompletenessService } from './interfaces/i.profile-completeness.service'
+import { ProfileCompletenessService } from './services/core/profile-completeness.service'
 
 const rollbarConfig = {
   accessToken: '9138b9a5aa794f47b73712a51da0aca5',
@@ -72,6 +74,10 @@ export class ApiModule {
         {
           provide: IReviewService,
           useClass: ReviewService,
+        },
+        {
+          provide: IProfileCompletenessService,
+          useClass: ProfileCompletenessService,
         },
       ],
     }

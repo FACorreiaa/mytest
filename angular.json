@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "claiming-service": {
+    "ubicus": {
       "root": "",
       "sourceRoot": "/src",
       "projectType": "application",
@@ -68,7 +68,7 @@
                   "name": "vendor",
                   "baseline": "800kb",
                   "warning": "250kb",
-                  "error": "400kb"
+                  "error": "800kb"
                 },
                 {
                   "type": "bundle",
@@ -81,9 +81,33 @@
                   "type": "bundle",
                   "name": "main",
                   "baseline": "100kb",
-                  "warning": "50kb",
-                  "error": "100kb"
+                  "warning": "150kb",
+                  "error": "1mb"
                 }
+              ]
+            },
+            "acc": {
+              "fileReplacements": [
+                  {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.acc.ts"
+                  }
+              ]
+            },
+            "dev": {
+              "fileReplacements": [
+                  {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.dev.ts"
+                  }
+              ]
+            },
+            "stg": {
+              "fileReplacements": [
+                  {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.stg.ts"
+                  }
               ]
             }
           }
@@ -91,19 +115,28 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "claiming-service:build",
+            "browserTarget": "ubicus:build",
             "port": 8081
           },
           "configurations": {
             "production": {
-              "browserTarget": "claiming-service:build:production"
+              "browserTarget": "ubicus:build:production"
+            },
+            "stg": {
+              "browserTarget": "ubicus:build:stg"
+            },
+            "acc": {
+              "browserTarget": "ubicus:build:acc"
+            },
+            "dev": {
+              "browserTarget": "ubicus:build:dev"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "claiming-service:build"
+            "browserTarget": "ubicus:build"
           }
         },
         "lint": {
@@ -120,5 +153,5 @@
       }
     }
   },
-  "defaultProject": "claiming-service"
+  "defaultProject": "ubicus"
 }

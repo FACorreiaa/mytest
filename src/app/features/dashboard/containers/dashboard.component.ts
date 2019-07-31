@@ -12,7 +12,6 @@ import { delay, takeUntil } from 'rxjs/operators'
 import { KeycloakService } from 'keycloak-angular'
 import {
   FetchVerificationRequest,
-  InitVerificationRequest,
   CompleteVerificationRequest,
   BusinessData,
   FetchVerificationResponse,
@@ -35,7 +34,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   fecthOptions$: Observable<FetchVerificationResponse>
   userName: string
   userFirstLastName: string
-  percentageToComplete: string
   averageService: string
   services: string[] = ['All', 'Google', 'Other']
   currentRate = 4
@@ -79,18 +77,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userName = userProfile.firstName
     this.userFirstLastName = userProfile.firstName + ' ' + userProfile.lastName
 
-    this.percentageToComplete = '60%'
-
     this.listingStatus = false
-  }
-
-  setStatus() {
-    this.listingStatus = this.listingStatus = !this.listingStatus
   }
 
   ngOnDestroy() {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
+  }
+
+  setStatus() {
+    this.listingStatus = this.listingStatus = !this.listingStatus
   }
 
   updateDashboard() {

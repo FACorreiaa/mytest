@@ -437,11 +437,7 @@
         </div>
         <div class="col-md-12 col-lg-4 order-1 order-lg-3">
             <div class="card">
-                <h5>{{'csa.profile-completeness' | translate}}</h5>
-                <div class="percentage-complete">
-                    {{'csa.to-complete' | translate}}
-                </div>
-                <progress-bar></progress-bar>
+                <progress-bar [businessData$]="this.profileData"></progress-bar>
             </div>
         </div>
     </div>

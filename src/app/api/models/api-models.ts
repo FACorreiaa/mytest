@@ -235,7 +235,7 @@ export interface BusinessData {
   category: string
   name: string
   establishmentId: string
-  description: string
+  description?: string
   userFirstName?: string
   userLastName?: string
   country?: string
@@ -484,6 +484,13 @@ const Cuisines = [
 export interface Countries {
   code: string
   name: string
+}
+
+export interface BusinessUnitCompleteness {
+  id?: string
+  establishmentId?: string
+  completeness: number
+  incomplete: string[]
 }
 
 export enum Role {

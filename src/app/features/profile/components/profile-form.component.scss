@@ -1,4 +1,4 @@
-@import '../../../app.component.scss';
+@import "../../../app.component.scss";
 
 h4 {
   padding: 5px 0;
@@ -141,7 +141,7 @@ mat-button-toggle-group {
 @import "../../../../styles-variables.scss";
 
 .title {
-  margin-top: 0rem;
+  margin-top: 3rem;
   padding: 4rem 0 6rem 0;
 }
 
@@ -274,8 +274,6 @@ mat-button-toggle-group {
     // float: left;
 
     mat-button-toggle {
-
-
       button {
         //width: 95px;
         overflow: hidden;

@@ -15,12 +15,8 @@
 	</div>
 
 	<div class="row justify-content-center mb-5">
-		<div class="col col-md-12 card-template">
-			<h3>{{'csa.profile-completeness' | translate}}</h3>
-			<div class="percentage-complete">{{this.percentageToComplete}} {{'csa.to-complete' | translate}}</div>
-			<div class="col-12">
-				<progress-bar></progress-bar>
-			</div>
+		<div class="col-md-12 card-template">
+			<progress-bar [businessData$]="(this.businessList$ | async)"></progress-bar>
 		</div>
 	</div>
 	<business-comp [businessData$]="(this.businessList$ | async)"

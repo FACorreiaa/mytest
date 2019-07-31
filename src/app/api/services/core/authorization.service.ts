@@ -20,6 +20,7 @@ export class AuthorizationService extends BaseApi implements IAuthorizationServi
   }
 
   public requestAdminRights(locationData: LocationData): Observable<any> {
+    locationData.channel = locationData.businessUnit.channels[0]
     return this.getObjectsPOST_Text(locationData, `${this.businessRequestAdminControllerRoute}`)
   }
 

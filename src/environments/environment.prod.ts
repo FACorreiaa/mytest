@@ -1,7 +1,7 @@
 import { KeycloakConfig } from 'keycloak-angular'
 import { EnvironmentInterface } from '@env/environment-interface'
 
-// DEV
+// DEV - Temporary until we have PRD environment
 const keycloakConfig: KeycloakConfig = {
   url: 'https://dev.sso.app.hd.digital/auth',
   realm: 'HDCustomers-nonprod',
@@ -11,20 +11,18 @@ const keycloakConfig: KeycloakConfig = {
   },
 }
 
-// ACC
-/*
-const keycloakConfig: KeycloakConfig = {
-  url: 'https://acc.sso.app.hd.digital/auth',
-  realm: 'Acceptance',
-  clientId: 'claimingservice',
-  credentials: {
-    secret: '005accc6-2abb-49a9-bdae-c4e0228c9d67',
-  },
-}
-*/
+// PRD
+// const keycloakConfig: KeycloakConfig = {
+//   url: 'https://sso.dish.co/auth',
+//   realm: 'HD-SSO',
+//   clientId: 'claimingservice',
+//   credentials: {
+//     secret: 'c108deea-b47a-4f06-91f6-cc16f3e5cb9f',
+//   },
+// }
 
 export const environment: EnvironmentInterface = {
-  appName: 'Claiming service',
+  appName: 'Ubicus',
   envName: 'PROD',
   production: true,
   test: false,
