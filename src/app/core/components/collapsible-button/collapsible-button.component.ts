@@ -53,6 +53,10 @@ export class CollapsibleButtonComponent implements OnInit {
     this.toggleState[index] = !current
   }
 
+  filterOfferingsArray(offeringValue) {
+    return window.screen.width > 575 ? offeringValue : offeringValue.slice(0, 10)
+  }
+
   /**
    * When users check/unckeck some offering.
    * @param event click event

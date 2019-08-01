@@ -6,7 +6,7 @@
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <div *ngIf="toggleState[i]" class="toggle-checkbox">
-            <mat-checkbox *ngFor="let item of offering.value | slice:0:10" class="col-4" [value]="item"
+            <mat-checkbox *ngFor="let item of filterOfferingsArray(offering.value)" class="col-4" [value]="item"
                 [checked]="offeringState[item]" (change)="onOfferingsChange($event, item)" [class.show]="show">
                 {{item | translate}}
             </mat-checkbox>
