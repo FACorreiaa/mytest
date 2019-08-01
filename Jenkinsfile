@@ -32,4 +32,12 @@ pipeline {
       }
     }
   }
+  post {
+    failure {
+      mattermostSend(channel: '#hd-jenkins', color: '#ff0000', message: "FAILURE: ${currentBuild.fullDisplayName}" )
+    }
+    success {
+      mattermostSend(channel: '#hd-jenkins', color: 'good', message: "SUCCESS: ${currentBuild.fullDisplayName}" )
+    }
+  }
 }
